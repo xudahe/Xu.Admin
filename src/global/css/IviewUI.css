@@ -1,0 +1,10 @@
+.ivu-dropdown-item {
+    text-align: center !important;
+}
+.ivu-dropdown-menu {
+    min-width: 80px !important;
+}
+
+article, aside, footer, header, nav, section {
+    height: 100% !important;
+}

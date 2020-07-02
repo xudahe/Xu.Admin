@@ -1,0 +1,348 @@
+   
+    /*滚动条凹槽的颜色，还可以设置边框属性 */
+    ::-webkit-scrollbar-track-piece {
+        background: transparent;
+        -webkit-border-radius: 2em;
+        -moz-border-radius: 2em;
+        border-radius: 2em;
+    }
+    
+    /*滚动条的宽度*/
+    ::-webkit-scrollbar {
+        width: 4px;
+    }
+    
+    /*滚动条的设置*/
+    ::-webkit-scrollbar-thumb {
+        background: #039ea0;
+        background-clip: padding-box;
+        -webkit-border-radius: 2em;
+        -moz-border-radius: 2em;
+        border-radius: 2em;
+    }
+    
+    /*滚动条鼠标移上去*/
+    ::-webkit-scrollbar-thumb:hover {
+        background: #039ea0;
+    }
+
+    /*顶部进度条样式 */
+    #nprogress .bar {
+        background: green !important;  /* 自定义颜色 */
+    }
+    
+    
+    .fade-in-right1 {
+        -webkit-animation: fade-in-right 0.5s;
+                animation: fade-in-right 0.5s;
+        -webkit-animation-timing-function: ease-out;
+                animation-timing-function: ease-out;
+          animation-fill-mode: both;
+    }
+    .fade-in-right2 {
+        -webkit-animation: fade-in-right 0.5s;
+                animation: fade-in-right 0.5s;
+        -webkit-animation-timing-function: ease-out;
+                animation-timing-function: ease-out;
+          animation-fill-mode: both;
+          
+           -webkit-animation-delay:0.2s;  /**延迟动画**/
+           animation-delay:0.2s; 
+    }
+    .fade-in-right3 {
+        -webkit-animation: fade-in-right 0.5s;
+                animation: fade-in-right 0.5s;
+        -webkit-animation-timing-function: ease-out;
+                animation-timing-function: ease-out;
+          animation-fill-mode: both;
+          
+           -webkit-animation-delay:0.4s;  /**延迟动画**/
+           animation-delay:0.4s; 
+    }
+    .fade-in-right4 {
+        -webkit-animation: fade-in-right 0.5s;
+                animation: fade-in-right 0.5s;
+        -webkit-animation-timing-function: ease-out;
+                animation-timing-function: ease-out;
+          animation-fill-mode: both;
+          
+           -webkit-animation-delay:0.6s;  /**延迟动画**/
+           animation-delay:0.6s; 
+    }
+    @-webkit-keyframes fade-in-right {
+        0%
+        {
+            -webkit-transform: translateX(-100%);
+    
+            opacity: 0;
+        }
+        100%
+        {
+            -webkit-transform: translateX(0%);
+    
+            opacity: 1;
+        }
+    }
+    @keyframes fade-in-right {
+        0%
+        {
+            transform: translateX(-100%);
+    
+            opacity: 0;
+        }
+        100%
+        {
+            transform: translateX(0%);
+    
+            opacity: 1;
+        }
+    }
+
+
+    .fade-in-left1 {
+        -webkit-animation: fade-in-left 0.5s;
+                animation: fade-in-left 0.5s;
+        -webkit-animation-timing-function: ease-out;
+                animation-timing-function: ease-out;
+          animation-fill-mode: both;
+          
+    }
+    .fade-in-left2  {
+        -webkit-animation: fade-in-left 0.5s;
+                animation: fade-in-left 0.5s;
+        -webkit-animation-timing-function: ease-out;
+                animation-timing-function: ease-out;
+          animation-fill-mode: both;  /**动画开始之前先隐藏**/
+          
+           -webkit-animation-delay:0.2s;  /**延迟动画**/
+           animation-delay:0.2s; 
+    }
+    .fade-in-left3  {
+        -webkit-animation: fade-in-left 0.5s;
+                animation: fade-in-left 0.5s;
+        -webkit-animation-timing-function: ease-out;
+                animation-timing-function: ease-out;
+          animation-fill-mode: both;
+          
+           -webkit-animation-delay:0.4s;  /**延迟动画**/
+           animation-delay:0.4s; 
+    }
+    .fade-in-left4 {
+        -webkit-animation: fade-in-left 0.5s;
+                animation: fade-in-left 0.5s;
+        -webkit-animation-timing-function: ease-out;
+                animation-timing-function: ease-out;
+          animation-fill-mode: both;
+          
+           -webkit-animation-delay:0.6s;  /**延迟动画**/
+           animation-delay:0.6s; 
+    }
+    @-webkit-keyframes fade-in-left {
+        0%
+        {
+            -webkit-transform: translateX(100%);
+    
+            opacity: 0;
+        }
+        100%
+        {
+            -webkit-transform: translateX(0%);
+    
+            opacity: 1;
+        }
+    }
+    @keyframes fade-in-left {
+        0%
+        {
+            transform: translateX(100%);
+    
+            opacity: 0;
+        }
+        100%
+        {
+            transform: translateX(0%);
+    
+            opacity: 1;
+        }
+    }
+
+    .fade-in-up {
+        -webkit-animation: fade-in-up 0.5s;
+                animation: fade-in-up 0.5s;
+        -webkit-animation-timing-function: ease-out;
+                animation-timing-function: ease-out;
+    }
+    @-webkit-keyframes fade-in-up {
+        0%
+        {
+            -webkit-transform: translateY(100%);
+    
+            opacity: 0;
+        }
+        100%
+        {
+            -webkit-transform: translateY(0%);
+    
+            opacity: 1;
+        }
+    }
+    @keyframes fade-in-up {
+        0%
+        {
+            transform: translateY(100%);
+    
+            opacity: 0;
+        }
+        100%
+        {
+            transform: translateY(0%);
+    
+            opacity: 1;
+        }
+    }
+    .fade-out-right {
+        -webkit-animation: fade-out-right 1s;
+                animation: fade-out-right 1s;
+        -webkit-animation-timing-function: ease-out;
+                animation-timing-function: ease-out;
+    }
+    @-webkit-keyframes fade-out-right {
+        0%
+        {
+            -webkit-transform: translateX(0%);
+    
+            opacity: 1;
+        }
+        100%
+        {
+            -webkit-transform: translateX(100%);
+    
+            opacity: 0;
+        }
+    }
+    @keyframes fade-out-right {
+        0%
+        {
+            transform: translateX(0%);
+    
+            opacity: 1;
+        }
+        100%
+        {
+            transform: translateX(100%);
+    
+            opacity: 0;
+        }
+    }
+    .fade-out-left {
+        -webkit-animation: fade-out-left 1s;
+                animation: fade-out-left 1s;
+        -webkit-animation-timing-function: ease-out;
+                animation-timing-function: ease-out;
+    }
+    @-webkit-keyframes fade-out-left
+    {
+        0%
+        {
+            -webkit-transform: translateX(0%);
+    
+            opacity: 1;
+        }
+        100%
+        {
+            -webkit-transform: translateX(-100%);
+    
+            opacity: 0;
+        }
+    }
+    @keyframes fade-out-left {
+        0%
+        {
+            transform: translateX(0%);
+    
+            opacity: 1;
+        }
+        100%
+        {
+            transform: translateX(-100%);
+    
+            opacity: 0;
+        }
+    }
+
+    .scale-in1 {
+        -webkit-animation: scale-in 1s;
+                animation: scale-in 1s;
+          animation-fill-mode: both;
+          
+           -webkit-animation-delay:2.5s;  /**延迟动画**/
+           animation-delay:2.5s; 
+    }
+    .scale-in2 {
+        -webkit-animation: scale-in 1s;
+                animation: scale-in 1s;
+          animation-fill-mode: both;
+          
+           -webkit-animation-delay:3s;  /**延迟动画**/
+           animation-delay:3s; 
+    }
+    @keyframes scale-in {
+        0%
+        {
+            transform: scale(0);
+            opacity: 0;
+        }
+        100%
+        {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+    @-webkit-keyframes scale-in {
+        0%
+        {
+            -webkit-transform: scale(0);
+            opacity: 0;
+        }
+        100%
+        {
+            -webkit-transform: scale(1);
+            opacity: 1;
+        }
+    }
+    .rotate-in-y {
+        -webkit-animation: rotate-in-y 1s;
+                animation: rotate-in-y 1s;
+        -webkit-animation-timing-function: ease-in-out;
+                animation-timing-function: ease-in-out;
+    }
+    @keyframes rotate-in-y {
+        0%
+        {
+            transform: rotateY(-180deg);
+    
+            opacity: 0;
+        }
+        100%
+        {
+            transform: rotateY(0deg);
+    
+            opacity: 1;
+        }
+    }
+    @-webkit-keyframes rotate-in-y {
+        0%
+        {
+            -webkit-transform: rotateY(0deg);
+    
+            opacity: 0;
+        }
+        60%
+        {
+            opacity: 1;
+        }
+        100%
+        {
+            -webkit-transform: rotateY(360deg);
+        }
+    }

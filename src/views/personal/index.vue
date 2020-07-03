@@ -6,13 +6,13 @@
 					<div slot="header" class="header"><span>关于我</span></div>
 					<div class="avatar-box">
 						<div class="avatar">
-							<el-button icon="el-icon-upload" class="upload-button" circle ></el-button>
+							<el-button icon="el-icon-upload" class="upload-button" circle @click="$refs.avatarForm.dialogVisible = true"></el-button>
 							<el-avatar :size="120" src="" fit="cover"><img src="https://myinterface.xuanzai.top/getPicture?type=error" /></el-avatar>
 							<div class="hover-plus" @click="isShow = true"><svg-icon icon-class="add" class="add-avatar" /></div>
 						</div>
 						<div class="avatar-detail">
 							<div class="role">test</div>
-							<div class="name">1234562@qq.com</div>
+							<div class="date">注册日期：</div>
 						</div>
 					</div>
 					<div class="title">
@@ -20,20 +20,23 @@
 						<span class="word">个人信息</span>
 						<div class="border"></div>
 					</div>
-					<div style="margin: .5rem 0; font-size: .8rem;">
+					<div style="margin: .5rem 1.2rem; font-size: .8rem;">
 						<i class="el-icon-s-custom"></i>昵称：
 					</div>
-					<div style="margin: .5rem 0; font-size: .8rem;">
+					<div style="margin: .5rem 1.2rem; font-size: .8rem;">
 						<i class='el-icon-male' />性别：
 					</div>
-					<div style="margin: .5rem 0; font-size: .8rem;">
+					<div style="margin: .5rem 1.2rem; font-size: .8rem;">
 						<i class="el-icon-office-building" />部门：
 					</div>
-					<div style="margin: .5rem 0; font-size: .8rem;">
+					<div style="margin: .5rem 1.2rem; font-size: .8rem;">
 						<i class="el-icon-s-check"></i>岗位：
 					</div>
-					<div style="margin: .5rem 0; font-size: .8rem;">
+					<div style="margin: .5rem 1.2rem; font-size: .8rem;">
 						<i class="el-icon-phone"></i>电话：
+					</div>
+          <div style="margin: .5rem 1.2rem; font-size: .8rem;">
+						<i class="el-icon-phone"></i>邮箱：
 					</div>
 				</el-card>
 			</el-col>
@@ -85,7 +88,7 @@ export default {
       return {
         activeName: "first",
 		    isShow: false,
-		    user: this.$store.getters.role
+		    user: this.$store.getters.info.user
       }
     },
 	methods: {
@@ -169,8 +172,8 @@ export default {
   font-size: 1.1rem;
   font-weight: bold;
 }
-.name {
-  font-size: 1rem;
+.date {
+  // font-size: 0.08rem;
   color: #7d7d7d;
 }
 .title {

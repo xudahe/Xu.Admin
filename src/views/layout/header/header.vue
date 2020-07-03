@@ -8,7 +8,8 @@
       <ul class="personal">
         <li class="fullScreen" @click="fullScreen">
           <el-tooltip class="item" effect="dark" content="全屏" placement="bottom"><i
-            class="fa fa-arrows-alt fa-lg"></i></el-tooltip>
+            class="fa fa-arrows-alt fa-lg"></i>
+          </el-tooltip>
         </li>
         <li>
         	<div :key="index" v-for="(item,index) in  weathers" style="padding: 0.083rem">
@@ -18,6 +19,11 @@
 				  		<div class="weathers_text">{{item.txtInfo}}</div>
 						</div>
 					</div>
+        </li>
+        <li v-show="defaultConfig.errorLog && $store.getters.errorLogList.length">
+          <el-tooltip class="item" effect="dark" content="查看错误日志" placement="bottom">
+            <svg-icon class="bug" icon-class="bug" @click.native="$emit('showErrorLogBox')" />
+          </el-tooltip>
         </li>
         <li><colorPicker></colorPicker></li>
         <li>
@@ -118,7 +124,7 @@ export default {
                           for (let i = 0; i < 1; i++) {
                               this.weathers.push({
                                   txtInfo: rust[i].low.replace('低温', '').replace('℃', '') + '~' + rust[i].high.replace('高温 ', ''),
-                                  type: rust[i].type, //图片 <img class="weathers_img" :src="'../../static/weather/'+item.type+'.gif'" />
+                                  type: rust[i].type, //图片
                                   date: rust[i].date.substring(0, rust[i].date.length - 3)
                               })
                           }
@@ -220,6 +226,13 @@ export default {
       position: relative;
       font-size: 0.11rem;
       font-family: "eras medium itc";
+    }
+
+    .bug {
+      width: 24px!important; 
+      height: 24px!important; 
+      color: red;
+      vertical-align: middle;
     }
   }
 </style>

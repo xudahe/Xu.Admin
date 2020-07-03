@@ -13,17 +13,22 @@ NProgress.configure({ ease: 'ease', speed: 500 })
 router.beforeEach((to, from, next) => {
   NProgress.start(); //显示进度条
   
-  saveRefreshtime(); //刷新时间
+  saveRefreshtime(); //刷新Token时间
  
-  if (store.state.token) {
+  if (store.getters.token) {
     if (to.path === "/login") {
       next({path: "/"})
     } else {
-      if (!store.getters.info.role) {
+      if (!store.getters.info) {
         !(async function getAddRouters () {
-          // 省略 axios 请求代码 通过 token 向后台请求用户权限等信息，这里用假数据赋值
+          // 省略 axios 请求代码 通过 token 向后台请求用户权限等信息
+          let user = JSON.parse(window.localStorage.user ? window.localStorage.user : null);
+          let roles = JSON.parse(window.localStorage.role ? window.localStorage.role : null);
+          let menus = JSON.parse(window.localStorage.menu ? window.localStorage.menu : null);
+
           await store.dispatch("getInfo", {
-            role: "superAdmin",
+            user: [],
+            roles: [],
             menus: [
                   {
                     id:1, name: "系统管理", alone: false, hidden: false, iconCls: "fa fa-dashboard",
@@ -58,21 +63,12 @@ router.beforeEach((to, from, next) => {
                   }
             ]
           })
+          
           await store.dispatch("newRoutes", store.getters.info.role)
-          let newAddRouters = store.getters.addRouters
-          await router.addRoutes(newAddRouters)
+          router.addRoutes(store.getters.addRouters)  //动态添加路由
           next({path: to.path})
         }())
       } else {
-        let is404 = to.matched.some(record => {
-          if (record.meta.role) {
-            return record.meta.role.indexOf(store.getters.info.role) === -1
-          }
-        })
-        if (is404) {
-          next({path: "/404"})
-          return false
-        }
         next()
       }
     }

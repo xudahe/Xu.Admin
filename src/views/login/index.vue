@@ -1,29 +1,15 @@
 <!-- 应用系统登录 -->
 <template>
     <div class="login-container">
-        <el-form :model="loginForm" :rules="rules"
-         status-icon
-         ref="loginForm" 
-         label-position="left" 
-         label-width="0px" 
-         class="demo-ruleForm login-page">
+        <el-form :model="loginForm" :rules="rules" status-icon ref="loginForm" label-position="left" label-width="0px" class="demo-ruleForm login-page">
             <h3 class="title">系统登录</h3>
             <el-form-item prop="username">
-                <el-input type="text" 
-                    v-model="loginForm.username" 
-                    placeholder="用户名"
-                ></el-input>
+                <el-input type="text" v-model="loginForm.username" placeholder="用户名"></el-input>
             </el-form-item>
             <el-form-item prop="password">
-                <el-input type="password" 
-                    v-model="loginForm.password" 
-                    placeholder="密码"
-                ></el-input>
+                <el-input type="password" v-model="loginForm.password" placeholder="密码" ></el-input>
             </el-form-item>
-            <el-checkbox 
-                v-model="checkboxValue"
-                class="rememberme"
-            >记住密码</el-checkbox>
+            <el-checkbox v-model="checkboxValue" class="rememberme">记住密码</el-checkbox>
             <el-form-item style="width:100%;">
                 <el-button type="primary" style="width:100%;" @click.native="loginSubmit" :loading="logining">登录</el-button>
             </el-form-item>
@@ -94,7 +80,8 @@ export default {
 			// 	}).then(
 			// 		data => {
 			// 			if (data.success == true) {
-                            
+            //                   _this.logining = true;
+
             //                 var token = data.response.token;
             //                 _this.$store.commit("saveToken", token); // 保存token
 
@@ -121,22 +108,25 @@ export default {
 			// 		}
 			// 	);
         },
-        // 获取用户数据
+        // 获取用户
         getUserByToken(token) {
             var _this = this;
-       
-            this.$ajax(this.$apiSet.requestToken, {
+            
+            this.$ajax(this.$apiSet.GetUserByToken, {
 			     	token: token
 				}).then(
 					data => {
-						if (res.success == true) {
+                        if (!data.success) {
+                            _this.$message({
+                                message: data.msg,
+                                type: 'error'
+                            });
+                        } else {
                             _this.$notify({
                                 type: "success",
-                                message: `接收到用户数据，开始初始化项目...`,
+                                message: `接收到用户信息，初始化中...`,
                                 duration: 3000
                             });
-                            
-                            this.$router.push({path: "/"}) //登录成功之后重定向到首页
                             
                             let userinfo = JSON.stringify(data.response);
                             window.localStorage.user = userinfo
@@ -148,15 +138,10 @@ export default {
                                 Cookies.remove('username');
                                 Cookies.remove('password');
                             }
-
-                            _this.$notify({
-                                type: "success",
-                                message: `登录成功 \n 欢迎管理员：${userinfo.uRealName} ！Token 将在 ${window.localStorage.expires_in / 60} 分钟后过期！`,
-                                duration: 6000
-                            });
-                        }
-                        else{
-
+                           
+                            if (userinfo.Id > 0) {
+                                _this.getRoleData(userinfo)
+                            }
                         }
                     },
                 	error => {
@@ -164,6 +149,76 @@ export default {
 					}
 				);
         },
+        // 获取角色
+        getRoleData(userinfo) {
+            var _this = this;
+            
+            this.$ajax(this.$apiSet.GetRoleByIds, {
+			     	ids: userinfo.RoleIds
+				}).then(
+					data => {
+                        if (!data.success) {
+                            _this.$message({
+                                message: data.msg,
+                                type: 'error'
+                            });
+                        } else {
+                            _this.$notify({
+                                type: "success",
+                                message: `接收到角色信息，初始化中...`,
+                                duration: 3000
+                            });
+                            
+                            let roleinfo = JSON.stringify(data.response);
+                            window.localStorage.role = roleinfo
+                            
+                            let roleIds = roleinfo.map(item => item.Id);
+                            if (roleIds.length > 0) {
+                                _this.getMenuData(roleIds)
+                            }
+                        }
+                    },
+                	error => {
+						alert(error);
+					}
+				);
+        },
+        // 获取菜单
+        getMenuData(roleIds) {
+            var _this = this;
+
+            this.$ajax(this.$apiSet.GetMenuByIds, {
+			     	ids: roleIds.join(',')
+				}).then(
+                    data => {
+                        _this.logining = false;
+                        if (!data.success) {
+                            _this.$message({
+                                message: data.msg,
+                                type: 'error'
+                            });
+                        } else {
+                            _this.$message({
+                                message: "初始化成功",
+                                type: 'success'
+                            });
+        
+                            _this.$notify({
+                                type: "success",
+                                message: `登录成功 \n 欢迎管理员：${userinfo.uRealName} ！Token 将在 ${window.localStorage.expires_in / 60} 分钟后过期！`,
+                                duration: 6000
+                            });
+                            
+                            window.localStorage.menu = (JSON.stringify(data.response));
+        
+                            _this.$router.push({path: "/"}) //登录成功之后重定向到首页
+                        }
+                    },
+                    error => {
+						alert(error);
+					}
+                );
+        }
     },
     mounted(){
         window.localStorage.clear()

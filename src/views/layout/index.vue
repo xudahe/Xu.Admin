@@ -3,7 +3,7 @@
     <el-container  >
       <layoutAside></layoutAside>
       <el-container direction="vertical">
-        <layoutHeader></layoutHeader>
+        <layoutHeader @showErrorLogBox="$refs.errorLogBox.dialogVisible = true"></layoutHeader>
         <el-main id="elmain">
           <transition name="main" mode="out-in">
             <router-view></router-view>
@@ -15,6 +15,7 @@
         </el-footer> -->
       </el-container>
     </el-container>
+    <error-log ref="errorLogBox" />
   </div>
 </template>
 

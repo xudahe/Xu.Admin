@@ -1,4 +1,5 @@
-import moment from 'moment'
+import moment from 'moment'  //事件格式化第三方插件
+
 // 设置语言
 moment.locale('zh-cn')
 

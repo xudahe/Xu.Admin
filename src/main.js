@@ -50,9 +50,6 @@ req.keys().forEach(val => {
 import promise from 'es6-promise' //兼容IE
 promise.polyfill()
 
-import mixin from './mixin'  //混合机制
-Vue.mixin(mixin) //定义全局混入
-
 import echarts from 'echarts' 
 import './router/intercept.js' //路由拦截
 

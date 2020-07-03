@@ -5,16 +5,15 @@ import Vuex from 'vuex'
 Vue.use(Vuex);
 import layout from './modules/layout';
 import router from './modules/router';
-import role   from './modules/role';
+import user   from './modules/user';
 import error from './modules/error'
 
 const store=new Vuex.Store({
     state:{
-        theme: '001', //主题样式
-
         token: null,
         tokenExpire: null,
     },
+    // 执行同步操作改变state   this.$store.commit("saveToken", data)
     mutations: {
         saveToken(state, data) {   //保存 token 到 store和本地中
             state.token = data;
@@ -24,17 +23,6 @@ const store=new Vuex.Store({
             state.tokenExpire = data;
             window.localStorage.setItem("TokenExpire", data);
         },
-
-        templatesMu(state, val) {
-            try{
-                if (val) {
-                    state.theme = val;
-                }
-            }catch(e){
-
-            }
-        },
-        
     },
     mounted() {
         
@@ -42,9 +30,10 @@ const store=new Vuex.Store({
     modules: {
         layout,
         router,
-        role,
+        user,
         error
     },
+    // 执行异步操作改变state   this.$store.dispatch("saveToken", data);
     actions: {
         saveToken ({commit}, token) {
           return new Promise((resolve, reject) => {
@@ -54,11 +43,11 @@ const store=new Vuex.Store({
         }
     },
     getters: {
-        templates: state => state.theme,
+        token: state => state.token,
         addRouters: state => state.router.addRouters,
         routers: state => state.router.routers,
-        info: state => state.role.info,
-        menus: state=> state.role.info.menus,
+        info: state => state.user.info,
+        menus: state=> state.user.info.menus,
         logoShow: state => state.layout.logoShow,
         isCollapse: state => state.layout.isCollapse,
         uniquerouter: state => state.layout.uniquerouter,

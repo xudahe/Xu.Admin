@@ -50,7 +50,7 @@ axios.interceptors.response.use(response => {
             // 在用户操作的活跃期内
             if (window.localStorage.refreshtime && (curTime <= refreshtime)) {
               // 直接将整个请求 return 出去，不然的话，请求会晚于当前请求，无法达到刷新操作 
-              httpServer(apiSetting.requestLogin, {
+              httpServer(apiSetting.refreshToken, {
                 token: window.localStorage.Token
               }).then(res => {
                 if (res.success == true) {
@@ -203,16 +203,16 @@ const httpServer = (opts, data) => {
 
 //当执行操作时更新刷新时间，这个的作用主要是记录当前用户的操作活跃期，当在这个活跃期内，就可以滑动更新，如果超过了这个时期，就跳转到登录页
 export const saveRefreshtime = params => {
-
+   debugger
   let nowtime = new Date();
   let lastRefreshtime = window.localStorage.refreshtime ? new Date(window.localStorage.refreshtime) : new Date(-1); //最后刷新时间，当用户操作的时候，实时更新最后的刷新时间，保证用户活跃时间一直有效
   let expiretime = new Date(Date.parse(window.localStorage.TokenExpire))
   
-  //refreshCount 滑动系数：就是你自定义的用户的停止活跃时间段，比如你想用户最大的休眠时间是20分钟，说句人话就是，用户可以最多20分钟内不进行操作，
+  //refreshCount 滑动系数：就是你自定义的用户的停止活跃时间段，比如你想用户最大的休眠时间是20分钟，用户可以最多20分钟内不进行操作，
   //如果20分钟后，再操作，就跳转到登录页，如果20分钟内，继续操作，那继续更新时间，休眠时间还是以当前时间 + 20分钟。
   let refreshCount=1; 
   if (lastRefreshtime >= nowtime) {
-      lastRefreshtime=nowtime>expiretime ? nowtime:expiretime;
+      lastRefreshtime = nowtime>expiretime ? nowtime:expiretime;
       lastRefreshtime.setMinutes(lastRefreshtime.getMinutes() + refreshCount); 
       window.localStorage.refreshtime = lastRefreshtime;
   }else {

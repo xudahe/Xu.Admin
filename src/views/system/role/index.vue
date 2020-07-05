@@ -144,7 +144,7 @@ export default {
             menuIds: [],
             defaultProps: {
               children: "children",
-              label: "name"
+              label: "menuName"
             },
     
         }

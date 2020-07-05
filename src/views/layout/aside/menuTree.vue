@@ -1,17 +1,17 @@
 <template>
     <div>
-      <template v-for="(child,index) in menuData">
-        <el-submenu v-if="child.children.length > 0" :index="child.path">
+      <template v-for="(item,index) in menuData" v-if="!item.enabled">
+        <el-submenu v-if="item.children.length > 0" :index="index+''" :key="index">
           <template slot="title">
-            <i :class="child.iconCls?child.iconCls:[fa,fa-file]"></i>
-            <span slot="title">{{child.name }}</span>
+            <i :class="item.icon?item.icon:[fa,fa-file]"></i>
+            <span slot="title">{{item.menuName }}</span>
           </template>
-          <menu-tree :menuData="child.children"></menu-tree>
+          <menu-tree :menuData="item.children"></menu-tree>
         </el-submenu>
 
-        <el-menu-item v-else-if="!child.hidden" :index="child.path">
-          <i :class="child.iconCls?child.iconCls:[fa,fa-file]"></i>
-          <span slot="title">{{ child.name }}</span>
+        <el-menu-item v-else :index="item.className" :key="index">
+          <i :class="item.icon?item.icon:[fa,fa-file]"></i>
+          <span slot="title">{{ item.menuName }}</span>
         </el-menu-item>
       </template>
     </div>

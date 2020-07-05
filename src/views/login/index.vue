@@ -39,10 +39,10 @@ export default {
         cookies() {
 			let name = Cookies.get('username');
 			let psw = Cookies.get('password');
-			if (name && name != "null") {
+			if (name && name != undefined) {
 				this.loginForm.username = name;
 			}
-			if (psw && psw != "null") {
+			if (psw && psw != undefined) {
 				this.loginForm.password = psw;
 				this.checkboxValue = true;
 			}
@@ -51,6 +51,7 @@ export default {
 			}
 		},
         loginSubmit(){
+            let _this = this;
             if (!this.loginForm.username) {
 				this.$warnTip({
 					title: "请填写用户名"
@@ -63,50 +64,53 @@ export default {
 				return
             } 
             
-            this.$store.dispatch("saveToken", this.loginForm.username).then(() => {
-              this.$router.push({path: "/"}) //登录成功之后重定向到首页
-            }).catch(res => {
-              this.$message({
-                showClose: true,
-                message: res,
-                type: "error"
-              })
-            })
+            // this.$store.dispatch("saveToken", this.loginForm.username).then(() => {
+            //   this.$router.push({path: "/"}) //登录成功之后重定向到首页
+            // }).catch(res => {
+            //   this.$message({
+            //     showClose: true,
+            //     message: res,
+            //     type: "error"
+            //   })
+            // })
             
             //获取Token
-            // this.$ajax(this.$apiSet.requestToken, {
-			// 		name: this.loginForm.username,
-			// 		pass: this.loginForm.password
-			// 	}).then(
-			// 		data => {
-			// 			if (data.success == true) {
-            //                   _this.logining = true;
+            this.$ajax(this.$apiSet.requestToken, {
+					name: this.loginForm.username,
+					pass: this.loginForm.password
+				}).then(res => {
+                         if (!res.data.success) {
+                            _this.$message({
+                                message: res.data.message,
+                                type: 'error'
+                            });
+                        } else {
+                            _this.logining = true;
 
-            //                 var token = data.response.token;
-            //                 _this.$store.commit("saveToken", token); // 保存token
+                            var token = res.data.token;
+                            _this.$store.commit("saveToken", token); // 保存token
 
-            //                 var curTime = new Date();
-            //                 var expiredate = new Date(curTime.setSeconds(curTime.getSeconds() + data.response.expires_in)); // 定义过期时间
-            //                 _this.$store.commit("saveTokenExpire", expiredate); // 保存token过期时间
-
-            //                 window.localStorage.refreshtime = expiredate;  // 保存刷新时间，这里的和过期时间一致
-            //                 window.localStorage.expires_in = data.response.expires_in;
-
-            //                 _this.$notify({
-            //                     type: "success",
-            //                     message: `成功获取令牌，等待服务器返回用户信息...`,
-            //                     duration: 3000
-            //                 });
+                            var curTime = new Date();
+                            var expiredate = new Date(curTime.setSeconds(curTime.getSeconds() + res.data.expires_in)); // 定义过期时间
+                            _this.$store.commit("saveTokenExpire", expiredate); // 保存token过期时间
                             
-            //                 _this.getUserByToken(token)
+                            window.localStorage.refreshtime = expiredate;  // 保存刷新时间，这里的和过期时间一致
+                            window.localStorage.expires_in = res.data.expires_in;
 
-			// 			} else {
-			// 			}
-			// 		},
-			// 		error => {
-			// 			alert(error);
-			// 		}
-			// 	);
+                            _this.$notify({
+                                type: "success",
+                                message: `成功获取令牌，等待服务器返回用户信息...`,
+                                duration: 3000
+                            });
+                            
+                            _this.getUserByToken(token)
+
+						}
+					},
+					error => {
+						alert(error);
+					}
+				);
         },
         // 获取用户
         getUserByToken(token) {
@@ -114,32 +118,23 @@ export default {
             
             this.$ajax(this.$apiSet.GetUserByToken, {
 			     	token: token
-				}).then(
-					data => {
-                        if (!data.success) {
+				}).then(res => {
+                        if (!res.data.success) {
                             _this.$message({
-                                message: data.msg,
+                                message: res.data.message,
                                 type: 'error'
                             });
                         } else {
-                            _this.$notify({
-                                type: "success",
-                                message: `接收到用户信息，初始化中...`,
-                                duration: 3000
-                            });
                             
-                            let userinfo = JSON.stringify(data.response);
-                            window.localStorage.user = userinfo
+                            let userinfo = res.data.response;
+                            window.localStorage.user = JSON.stringify(userinfo)
 
                             if (this.checkboxValue == true) {
 								Cookies.set('username', this.loginForm.username);
 								Cookies.set('password', this.loginForm.password);
-							} else {
-                                Cookies.remove('username');
-                                Cookies.remove('password');
-                            }
+							}
                            
-                            if (userinfo.Id > 0) {
+                            if (userinfo.id > 0) {
                                 _this.getRoleData(userinfo)
                             }
                         }
@@ -154,27 +149,20 @@ export default {
             var _this = this;
             
             this.$ajax(this.$apiSet.GetRoleByIds, {
-			     	ids: userinfo.RoleIds
-				}).then(
-					data => {
-                        if (!data.success) {
+			     	ids: userinfo.roleIds
+				}).then(res => {
+                        if (!res.data.success) {
                             _this.$message({
-                                message: data.msg,
+                                message: res.data.message,
                                 type: 'error'
                             });
                         } else {
-                            _this.$notify({
-                                type: "success",
-                                message: `接收到角色信息，初始化中...`,
-                                duration: 3000
-                            });
+                            let roleinfo = res.data.response;
+                            window.localStorage.role = JSON.stringify(roleinfo)
                             
-                            let roleinfo = JSON.stringify(data.response);
-                            window.localStorage.role = roleinfo
-                            
-                            let roleIds = roleinfo.map(item => item.Id);
-                            if (roleIds.length > 0) {
-                                _this.getMenuData(roleIds)
+                            let menuIds = roleinfo.map(item => item.menuIds);
+                            if (menuIds.length > 0) {
+                                _this.getMenuData(menuIds)
                             }
                         }
                     },
@@ -184,34 +172,37 @@ export default {
 				);
         },
         // 获取菜单
-        getMenuData(roleIds) {
+        getMenuData(menuIds) {
             var _this = this;
 
             this.$ajax(this.$apiSet.GetMenuByIds, {
-			     	ids: roleIds.join(',')
-				}).then(
-                    data => {
+			     	ids: menuIds.join(',')
+				}).then(res => {
                         _this.logining = false;
-                        if (!data.success) {
+                        if (!res.data.success) {
                             _this.$message({
-                                message: data.msg,
+                                message: res.data.message,
                                 type: 'error'
                             });
                         } else {
+                            window.localStorage.menu = JSON.stringify(res.data.response)
+
+                            _this.$router.push({path: "/"}) //登录成功之后重定向到首页
+
                             _this.$message({
-                                message: "初始化成功",
+                                message: "登录成功",
                                 type: 'success'
                             });
-        
-                            _this.$notify({
-                                type: "success",
-                                message: `登录成功 \n 欢迎管理员：${userinfo.uRealName} ！Token 将在 ${window.localStorage.expires_in / 60} 分钟后过期！`,
-                                duration: 6000
-                            });
                             
-                            window.localStorage.menu = (JSON.stringify(data.response));
-        
-                            _this.$router.push({path: "/"}) //登录成功之后重定向到首页
+                            setTimeout(() => {
+                                let userinfo = JSON.parse(window.localStorage.user ? window.localStorage.user : null);
+                                
+                                _this.$notify({
+                                    type: "success",
+                                    message: `登录成功 \n 欢迎管理员：${userinfo.realName} ！Token 将在 ${window.localStorage.expires_in / 60} 分钟后过期！`,
+                                    duration: 6000
+                                });
+                            }, 1000);
                         }
                     },
                     error => {
@@ -223,7 +214,7 @@ export default {
     mounted(){
         window.localStorage.clear()
         // console.info('%c 本地缓存已清空!', "color:green")
-
+            
         this.cookies();
     },
     created(){

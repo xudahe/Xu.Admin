@@ -1,11 +1,8 @@
 <template>
   <el-dialog :visible.sync="dialogVisible" fullscreen append-to-body>
     <div class="error-box-title" slot="title">
-      <span>错误日志</span>
-      <el-button @click.native="() => {
-          this.removeAllErrorLog()
-          this.dialogVisible = false
-        }" type="danger" size="mini" icon="el-icon-delete">清空</el-button>
+      <span>错误日志</span> 
+      <el-button @click.native="remove" type="danger" size="mini" icon="el-icon-delete">清空</el-button>
     </div>
     <el-row>
       <el-col :span="24">
@@ -63,7 +60,11 @@ export default {
   methods: {
     ...mapMutations({
       removeAllErrorLog: 'REMOVE_ALL_ERROR_LOG'
-    })
+    }),
+    remove(){
+      this.removeAllErrorLog()
+      this.dialogVisible = false
+    },
   }
 };
 </script>

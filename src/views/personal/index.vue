@@ -42,7 +42,7 @@
 			</el-col>
 			<el-col :sm="24" :md="18">
 				<el-card class="box-card card-gutter-sm" shadow="hover">
-					<div slot="header" class="clearfix"><span class="header">基本资料</span></div>
+					<div slot="header" class="clearfix"><span class="header">基本信息</span></div>
 					<el-tabs>
 						<el-tab-pane label="基本资料">
               <keep-alive>

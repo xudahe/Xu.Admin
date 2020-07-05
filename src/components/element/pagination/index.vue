@@ -5,8 +5,8 @@
       @current-change="handleCurrentChange"
       :page-sizes="defaultPageSizes"
       :pager-count="5"
-      :small="this.defaultConfig.paginationSize"
-      :layout="this.defaultConfig.paginationLayout"
+      :small="$defaultConfig.paginationSize"
+      :layout="$defaultConfig.paginationLayout"
       :current-page.sync="currentPage"
       :total="total"
     ></el-pagination>

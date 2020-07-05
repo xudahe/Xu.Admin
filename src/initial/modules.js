@@ -1,15 +1,14 @@
 import Vue from 'vue'
-// 引入表单生成器
-import FormMaking from 'form-making'
-// 引入拖拽列表组件
-import draggable from 'vuedraggable'
+import Router from 'vue-router'
+
+// 为Vue应用添加页面间的转场特效
+import vueg from 'vueg'
+// import 'vueg/css/transition-min.css'
 // Markdown （mavonEditor）编辑器
 import mavonEditor  from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 // 引入前端错误日志
 import './error_log'
-// 引入滚动条
-import 'overlayscrollbars'
 // 引入icon组件
 import '@/icons'
 // 引入UI框架
@@ -21,16 +20,12 @@ import '@/global/css/IviewUI.css'
 import '@/api/iconfont/iconfont'
 import 'element-ui/lib/theme-chalk/index.css'
 import 'view-design/dist/styles/iview.css'
-import '@riophae/vue-treeselect/dist/vue-treeselect.css'
-import 'form-making/dist/FormMaking.css'
 // 引入css样式初始化
 import 'normalize.css/normalize.css'  
 // 引入第三方图标库
 import "font-awesome/css/font-awesome.css" 
 // 引入全局提示模块
 import Message from '@/api/message'
-// 引入树状选择器
-import Treeselect from '@riophae/vue-treeselect'
 // 引入二次封装的axios模块
 import axios from '@/api/axios/index'
 import apiSet from "@/api/axios/apiSetting" //请求接口
@@ -81,7 +76,7 @@ import exportExcel from '@/api/file/export_excel'
 // 引入导出图片模块
 import exportFile from '@/api/file/export_file'
 // 引入全局配置模块
-import DefaultConfig from '@/global/js/config'
+import defaultConfig from '@/global/js/config'
 //引入全局自定义样式
 import '@/global/css/index.css' 
 
@@ -361,14 +356,12 @@ Vue.prototype.$exportFile = exportFile
  * @author xuanzai
  * @description 全局通用配置
  */
-Vue.prototype.defaultConfig = DefaultConfig
-// 引入树状选择器组件
-Vue.component('treeselect', Treeselect)
-// 引入表单生成器
-Vue.use(FormMaking)
-// 引入拖拽列表组件
-Vue.component(draggable.name, draggable)
+Vue.prototype.$defaultConfig = defaultConfig
+
+// 传入实例化后的router，和插件的全局配置,`<router-view>`上添加v-transition="false"，可以禁用动画
+Vue.use(vueg, new Router(), defaultConfig.option) 
 // 引入mavonEditor编辑器
 Vue.use(mavonEditor)
 // 阻止显示生产模式的消息
 Vue.config.productionTip = false
+

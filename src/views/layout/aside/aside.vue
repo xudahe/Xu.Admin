@@ -6,30 +6,29 @@
         <p v-else>vue-Admin后台模板</p>
       </div>
       <el-menu :default-active="$route.path" class="el-menu-vertical"
-               @select="selectmenu"
-               :collapse="$store.getters.isCollapse"
-               background-color="#03152A"
-               text-color="rgba(255,255,255,.7)"
-               active-text-color="#ffffff"
-               :router="$store.getters.uniquerouter"
-               :unique-opened="$store.getters.uniquerouter"
-               :collapse-transition="true"
+        @select="selectmenu"
+        :collapse="$store.getters.isCollapse"
+        background-color="#03152A"
+        text-color="rgba(255,255,255,.7)"
+        active-text-color="#ffffff"
+        :router="$store.getters.uniquerouter"
+        :unique-opened="$store.getters.uniquerouter"
+        :collapse-transition="true"
       >
-        <template v-for="(item,index) in $store.getters.menus" v-if="!item.hidden">
-          <el-submenu v-if="!item.alone && item.children.length>0" :index="index+''" :key="index">
+        <!-- <template v-for="(item,index) in $store.getters.menus" v-if="!item.enabled">
+          <el-submenu v-if="item.children.length>0" :index="index+''" :key="index">
             <template slot="title">
-              <i :class="item.iconCls?item.iconCls:[fa,fa-server]"></i>
-              <span slot="title">{{ item.name }}</span>
+              <i :class="item.icon?item.icon:[fa,fa-server]"></i>
+              <span slot="title">{{ item.menuName }}</span>
             </template>
-
             <menu-tree :menuData="item.children"></menu-tree>
-
           </el-submenu>
-          <el-menu-item :index="item.path" v-else :key="item.path">
-            <i :class="item.iconCls?item.iconCls:[fa,fa-file]"/>
-            <span slot="title">{{ item.name }}</span>
+          <el-menu-item :index="item.className" v-else :key="item.className">
+            <i :class="item.icon?item.icon:[fa,fa-file]"/>
+            <span slot="title">{{ item.menuName }}</span>
           </el-menu-item>
-        </template>
+        </template> -->
+        <menu-tree :menuData="$store.getters.menus"></menu-tree>
 
       </el-menu>
     </el-aside>
@@ -123,7 +122,7 @@ export default {
       width: 200px;
       @extend %h100;
       overflow-y: scroll;
-      overflow-x: hidden;
+      overflow-x: enabled;
     }
     .el-menu {
       flex: 1;

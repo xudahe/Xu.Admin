@@ -1,6 +1,6 @@
 <template>
   <el-dialog
-    :visible.sync="dialogVisible" :width="defaultConfig.previewImageSize" :before-close="handleClose" append-to-body destroy-on-close >
+    :visible.sync="dialogVisible" :width="$defaultConfig.previewImageSize" :before-close="handleClose" append-to-body destroy-on-close >
     <div ref="box" class="box" v-loading="loading">
       <img :src="imageUrl" />
     </div>

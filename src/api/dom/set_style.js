@@ -1,4 +1,3 @@
-import defaultConfig from '@/global/js/config'
 /**
  * @author xuanzai
  * @description 设置样式（注意：设置的样式为内联样式，不会覆盖所有内联样式，而是通过追加的形式添加样式）

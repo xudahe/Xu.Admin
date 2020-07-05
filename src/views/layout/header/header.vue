@@ -2,9 +2,18 @@
   <div>
     <el-header id="header">
       <span class="hideAside" @click="collapse"><i class="fa fa-indent fa-lg"></i></span>
-      <!-- <template  v-for="(item,index) in  $store.getters.menus">
-          <span class="menu" @click="selectMenu(item)">{{item.name }}</span>
-      </template> -->
+      <el-menu  class="el-menu-demo"
+        mode="horizontal" 
+        @select="selectMenu" 
+        background-color="#f2f2f2" 
+        text-color="#222f3e" 
+        active-text-color="#409EFF"
+      >
+        <template  v-for="(item,index) in  $store.getters.menus">
+            <el-menu-item :index="item.menuName+''" :key="index">{{item.menuName}}</el-menu-item>
+        </template>
+      </el-menu>
+
       <ul class="personal">
         <li class="fullScreen" @click="fullScreen">
           <el-tooltip class="item" effect="dark" content="全屏" placement="bottom"><i
@@ -20,7 +29,7 @@
 						</div>
 					</div>
         </li>
-        <li v-show="defaultConfig.errorLog && $store.getters.errorLogList.length">
+        <li v-show="$defaultConfig.errorLog && $store.getters.errorLogList.length">
           <el-tooltip class="item" effect="dark" content="查看错误日志" placement="bottom">
             <svg-icon class="bug" icon-class="bug" @click.native="$emit('showErrorLogBox')" />
           </el-tooltip>
@@ -62,7 +71,6 @@ export default {
     return {
       isfullScreen: true,
       avatar: "./static/img/favicon.ico",
-      userId: "",
       weathers: [], //天气数据
     }
   },
@@ -70,8 +78,11 @@ export default {
     collapse () {
       this.$store.dispatch("collapse")
     },
-    selectMenu(item) {
-
+    selectMenu(val) {
+      let data = (this.$store.getters.menus).filter(function(item){
+        return item.menuName == val; 
+      })
+      debugger
     },
     // 退出登录
     logout() {
@@ -133,7 +144,7 @@ export default {
               }
           },
           error => {
-              this.$Message.error(error);
+              this.$message.error(error);
           }
         );
     },
@@ -233,6 +244,11 @@ export default {
       height: 24px!important; 
       color: red;
       vertical-align: middle;
+    }
+
+    .el-menu--horizontal>.el-menu-item{
+      height: 50px !important;
+      line-height: 50px !important;
     }
   }
 </style>

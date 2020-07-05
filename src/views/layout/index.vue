@@ -6,7 +6,7 @@
         <layoutHeader @showErrorLogBox="$refs.errorLogBox.dialogVisible = true"></layoutHeader>
         <el-main id="elmain">
           <transition name="main" mode="out-in">
-            <router-view></router-view>
+            <router-view v-transition></router-view>
           </transition>
           <back-top :options="{ target: '#elmain' , isMove: true }" />
         </el-main>

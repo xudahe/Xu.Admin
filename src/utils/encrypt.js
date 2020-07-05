@@ -1,10 +1,12 @@
 import { JSEncrypt } from 'jsencrypt'
 
+//非对称加密公钥
 const publicKey = `MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCiR+TyuZ0xfiBM0JuaQ49BG+pM
 jwJYzzeliGbHB0UAgf/G7Y5pMk9VbudyAWDZjinoRSgSTMWgK6X0rkpO4T1bsMzm
 MR0jgc6qQaRbzr2AHB9FsUIoRDjCekRK/ScmvSg80o361/jLo2grG7eUrjwyziuE
 1jLZgtEAoFZ+PaStjQIDAQAB`
 
+//非对称加密私钥
 const privateKey = `MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAN1CXyESb2fPfqvQ
 cDpTzdk9NZTrP6OPNlWb3cEf6hkEgEW8RGjXqmZB7hqmP78T31xI6Cvi9lP4Qejd
 SgNd0/HiZDO5xNnbDhUzbuyCqYOjUoLBTMkSgaIH/kgnXgIDLDYkBpAG+3zBvwUu

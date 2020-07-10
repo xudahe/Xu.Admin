@@ -47,8 +47,8 @@ async function getAddRouters () {
   let menus = JSON.parse(window.localStorage.menu ? window.localStorage.menu : null);
    
   await store.dispatch("getInfo", {
-    user: [],
-    roles: [],
+    user: user,
+    roles: roles,
     menus: [
           {
             id:1, menuName: "系统管理", enabled: false, icon: "fa fa-dashboard",

@@ -12,31 +12,31 @@
 						</div>
 						<div class="avatar-detail">
 							<div class="role">test</div>
-							<div class="date">注册日期：</div>
+							<div class="date">注册日期：{{$formatDate(new Date(), false)}}</div>
 						</div>
 					</div>
 					<div class="title">
-						<i class="el-icon-reading"></i>
+						<i class="el-icon-reading" style="font-size:0.15rem"></i>
 						<span class="word">个人信息</span>
 						<div class="border"></div>
 					</div>
-					<div style="margin: .5rem 1.2rem; font-size: .8rem;">
+					<div class="divTitle">
 						<i class="el-icon-s-custom"></i>昵称：
 					</div>
-					<div style="margin: .5rem 1.2rem; font-size: .8rem;">
+					<div class="divTitle">
 						<i class='el-icon-male' />性别：
 					</div>
-					<div style="margin: .5rem 1.2rem; font-size: .8rem;">
+					<div class="divTitle">
 						<i class="el-icon-office-building" />部门：
 					</div>
-					<div style="margin: .5rem 1.2rem; font-size: .8rem;">
+					<div class="divTitle">
 						<i class="el-icon-s-check"></i>岗位：
 					</div>
-					<div style="margin: .5rem 1.2rem; font-size: .8rem;">
+					<div class="divTitle">
 						<i class="el-icon-phone"></i>电话：
 					</div>
-          <div style="margin: .5rem 1.2rem; font-size: .8rem;">
-						<i class="el-icon-phone"></i>邮箱：
+          <div class="divTitle">
+            <i class="fa fa-envelope-square"></i>邮箱：
 					</div>
 				</el-card>
 			</el-col>
@@ -113,10 +113,10 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .header {
   position: relative;
-  font-size: 1rem;
+  font-size: 0.18rem;
   color: #2f3032;
 }
 .avatar-box {
@@ -147,10 +147,10 @@ export default {
 }
 .add-avatar {
   position: relative;
-  font-size: 2rem;
+  font-size: 0.18rem;
   color: #d6d6d6;
-  top: 50%;
-  margin-top: -1rem;
+  top: 45%;
+  // margin-top: -1rem;
 }
 .upload-button {
   position: absolute; 
@@ -169,33 +169,33 @@ export default {
 }
 .role {
   position: relative;
-  font-size: 1.1rem;
+  font-size: 0.18rem;
   font-weight: bold;
 }
 .date {
-  // font-size: 0.08rem;
+  font-size: 0.14rem;
   color: #7d7d7d;
 }
 .title {
   position: relative;
-  margin: 2rem 0 1rem 0;
+  margin: 0.1rem 0;
 }
 .word {
   position: relative;
-  padding-left: 0.3rem;
+  font-size: 0.15rem;
 }
 .content {
   position: relative;
-  font-size: 0.9rem;
+  font-size: 0.18rem;
 }
 .timeline-title {
   color: #7d7d7d;
 }
 .timeline-content {
-  font-size: 0.8rem;
+  font-size: 0.18rem;
 }
 .el-button--text {
-  font-size: 0.8rem;
+  font-size: 0.18rem;
   padding: 0;
 }
 .el-avatar {
@@ -203,4 +203,9 @@ export default {
 		width: 100%;
 	}
 }
+.divTitle {
+    margin: 0.05rem 0.2rem;
+    font-size: 0.14rem;
+}
+
 </style>

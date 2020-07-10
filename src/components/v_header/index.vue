@@ -37,7 +37,7 @@ export default {
     padding-left: 5px;
     margin-top: 5px;
     font-weight: bold;
-    font-size: 15px;
+    font-size: 0.15rem;
     color: #57a3f3;
     white-space: nowrap;
     // border-bottom: 2px solid #57a3f3;

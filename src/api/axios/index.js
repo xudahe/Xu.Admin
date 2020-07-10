@@ -12,7 +12,9 @@
 
 import axios from 'axios' //ajax请求
 import qs from 'qs'
+
 import store from "@/vuex/store"
+import router from '../../router/index'
 import apiSetting from "./apiSetting"
 
 //POST传参序列化(添加request请求拦截器)
@@ -39,6 +41,19 @@ axios.interceptors.response.use(response => {
   }
   return response
 }, error => {
+  // 超时请求处理
+  var originalRequest = error.config;
+  if(error.code == 'ECONNABORTED' && error.message.indexOf('timeout')!=-1 && !originalRequest._retry){
+    
+    Vue.prototype.$message({
+        message: '请求超时！',
+        type: 'error'
+    });
+  
+    originalRequest._retry = true
+    return null;
+  }
+    
   if (error && error.response) {
       switch (error.response.status) {
         case 400:
@@ -50,7 +65,7 @@ axios.interceptors.response.use(response => {
             // 在用户操作的活跃期内
             if (window.localStorage.refreshtime && (curTime <= refreshtime)) {
               // 直接将整个请求 return 出去，不然的话，请求会晚于当前请求，无法达到刷新操作 
-              httpServer(apiSetting.refreshToken, {
+              return httpServer(apiSetting.refreshToken, {
                 token: window.localStorage.Token
               }).then(res => {
                 if (res.success == true) {
@@ -68,23 +83,19 @@ axios.interceptors.response.use(response => {
                     error.config.__isRetryRequest = true;
                     error.config.headers.Authorization = 'Bearer ' + res.token;
                     return axios(error.config); //这里就是重新进行一次请求， error.config 包含了当前请求的所有信息             
-                  } else {
-                    // 刷新token失败 清除token信息
-                    store.commit("saveToken", "");
-                    store.commit("saveTokenExpire", "");
-                    error.message = '未授权，请重新登录';
+                } else {
+                    ToLogin() // 刷新token失败,清除token信息并跳转到登录页面
 		          		}
 		          	},
 		          	error => {
-		          		alert(error);
+		          		ToLogin() // 刷新token失败,清除token信息并跳转到登录页面
 		          	}
               );
            
             } else {
-              // 返回 401，并且不知用户操作活跃期内 清除token信息
-              store.commit("saveToken", "");
-              store.commit("saveTokenExpire", "");
+              // 返回 401，并且不知用户操作活跃期内 清除token信息并跳转到登录页面
               error.message = '未授权，请重新登录';
+              ToLogin()
             }
            
             break;
@@ -200,10 +211,21 @@ const httpServer = (opts, data) => {
   return promise
 }
 
+const ToLogin = params => {
+  store.commit("saveToken", "");
+  store.commit("saveTokenExpire", "");
+
+  router.replace({
+      path: "/login",
+      query: {redirect: router.currentRoute.fullPath}
+  });
+
+   window.location.reload()
+
+};
 
 //当执行操作时更新刷新时间，这个的作用主要是记录当前用户的操作活跃期，当在这个活跃期内，就可以滑动更新，如果超过了这个时期，就跳转到登录页
 export const saveRefreshtime = params => {
-   debugger
   let nowtime = new Date();
   let lastRefreshtime = window.localStorage.refreshtime ? new Date(window.localStorage.refreshtime) : new Date(-1); //最后刷新时间，当用户操作的时候，实时更新最后的刷新时间，保证用户活跃时间一直有效
   let expiretime = new Date(Date.parse(window.localStorage.TokenExpire))

@@ -38,7 +38,17 @@ export default {
     tabsDisable: false,           //值为true时，tabs间的转场没有动画，默认为false  
     shadow:true,                  //值为false，转场时没有阴影的层次效果
     disable: false,               //禁用转场动画，默认为false，嵌套路由默认为true  
-  }  
+  },
+  colors: [
+    "#00ffc6",
+    "#ffe300",
+    "#00d39f",				
+    "#9979ff",
+    "#2d4def",
+    "#5536d8",
+    "#2a75ff",
+    "#df18a7",
+  ],
 }
 
 

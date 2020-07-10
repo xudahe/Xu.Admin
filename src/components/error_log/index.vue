@@ -76,13 +76,13 @@ export default {
 }
 .error-box {
   position: relative;
-  margin: 1rem 0;
+  margin: 0.5rem 0;
 }
 .error-box-title {
   span {
     position: relative;
-    padding-right: 1rem;
-    font-size: 1.1rem;
+    padding-right: 0.05rem;
+    font-size: 0.16rem;
   }
   .el-button {
     position: relative;

@@ -149,7 +149,7 @@ export default {
 .correct-button-box {
   position: relative;
   text-align: center;
-  margin: 1rem 0;
+  margin: 0.1rem 0;
 }
 .ensure-button-box {
   position: relative;

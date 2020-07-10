@@ -1,5 +1,5 @@
 {
-  "name": "Xu-Admin",
+  "name": "xu-admin",
   "version": "1.0.0",
   "description": "A Vue.js project",
   "author": "",
@@ -57,7 +57,7 @@
     "clean-webpack-plugin": "^1.0.0",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.0",
-    "extract-text-webpack-plugin": "^3.0.0",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^1.1.4",
     "friendly-errors-webpack-plugin": "^1.6.1",
     "html-webpack-plugin": "^2.30.1",
@@ -95,5 +95,15 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "main": ".postcssrc.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xudahe/Xu.Admin.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xudahe/Xu.Admin/issues"
+  },
+  "homepage": "https://github.com/xudahe/Xu.Admin#readme"
 }

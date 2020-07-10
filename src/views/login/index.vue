@@ -64,15 +64,15 @@ export default {
 				return
             } 
             
-            // this.$store.dispatch("saveToken", this.loginForm.username).then(() => {
-            //   this.$router.push({path: "/"}) //登录成功之后重定向到首页
-            // }).catch(res => {
-            //   this.$message({
-            //     showClose: true,
-            //     message: res,
-            //     type: "error"
-            //   })
-            // })
+            this.$store.dispatch("saveToken", this.loginForm.username).then(() => {
+              this.$router.push({path: "/"}) //登录成功之后重定向到首页
+            }).catch(res => {
+              this.$message({
+                showClose: true,
+                message: res,
+                type: "error"
+              })
+            })
             
             //获取Token
             this.$ajax(this.$apiSet.requestToken, {

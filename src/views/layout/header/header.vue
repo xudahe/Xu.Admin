@@ -21,7 +21,7 @@
           </el-tooltip>
         </li>
         <li>
-        	<div :key="index" v-for="(item,index) in  weathers" style="padding: 0.083rem">
+        	<div :key="index" v-for="(item,index) in  weathers">
 						<div style="display:inline-flex;">
 							<img class="weathers_img" :src="'../../static/weather/'+item.type+'.gif'" />
 							<div class="weathers_type">{{item.type}} </div>
@@ -197,7 +197,7 @@ export default {
       flex-direction: row;
       li {
         @include set-value(margin, 13px);
-        font-size: 12px;
+        font-size: 0.12rem;
       }
       .fullScreen {
         @extend %cursor;
@@ -216,26 +216,25 @@ export default {
     }
 
     .weathers_img {
-      height: 0.30rem;
       position: relative;
-      top: 0.5rem;
-      width: 2rem;
-      height: 2rem;
+      top: 0.1rem;
+      width: 0.3rem;
+      height: 0.3rem;
     }
   
     .weathers_type {
       // color: #FFFFFF;
-      left: 0.2rem;
+      left: 0rem;
       position: relative;
-      font-size: 0.13rem;
+      font-size: 0.12rem;
       font-family: "eras medium itc";
     }
   
     .weathers_text {
       // color: #FFFFFF;
-      left: 0.5rem;
+      left: 0.05rem;
       position: relative;
-      font-size: 0.11rem;
+      font-size: 0.12rem;
       font-family: "eras medium itc";
     }
 

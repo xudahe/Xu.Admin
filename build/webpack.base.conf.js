@@ -13,9 +13,10 @@ function resolve(dir) {
 
 module.exports = {
   context: path.resolve(__dirname, '../'),
-  entry: {
-    app: './src/main.js' // 编译文件入口
-  },
+  entry: ['babel-polyfill', './src/main.js'], // 编译文件入口
+  // entry: {
+  //   app: './src/main.js' 
+  // },
   output: {
     path: config.build.assetsRoot, //使用chonfig/index.js中build的assetsRoot作为输出根路径
     filename: '[name].js',  //编译输入的文件名

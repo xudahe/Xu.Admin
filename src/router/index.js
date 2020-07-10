@@ -6,7 +6,7 @@ import Login from "@/views/login/index"
 import Layout from "@/views/layout/index"
 
 //使用动态的import()语法,不是必须加载的组件使用懒加载
-const 
+const
   Home = () => import('@/views/home/index'),
   personal = () => import('@/views/personal/index'),
   Error_500 = () => import('@/views/error/500'),
@@ -116,6 +116,17 @@ let addRouter = [
     children: system_routes.concat(tools_routes).concat(log_routes)
   }
 ];
+
+// 解决ElementUI导航栏中的vue-router在3.0版本以上重复点菜单报错问题
+const originalPush = Router.prototype.push
+Router.prototype.push = function push(location) {
+    return originalPush.call(this, location).catch(err => err)
+}
+  
+const originalReplace = Router.prototype.replace;
+Router.prototype.replace = function replace(location) {
+  return originalReplace.call(this, location).catch(err => err);
+};
 
 export default new Router({
     // mode: 'history',

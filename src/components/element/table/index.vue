@@ -12,7 +12,7 @@
     @sort-change="handleSortChange" 
     @selection-change="handleSelectionChange">
       <template v-for="(item,index) in tableLabel">
-        <el-table-column v-if="item.type" :type="item.type"></el-table-column>
+        <el-table-column v-if="item.type" :type="item.type" :key="index"></el-table-column>
         <el-table-column v-else
           :width="item.width ? item.width : ''" 
           :key="index" 
@@ -120,9 +120,15 @@ export default {
   },
   data() {
     return {
-      dataList: [],
+      currentPage: this.nowPage,
+      pageSize: this.nowSize,
       tableHeight: 0,
     }
+  },
+  computed:{
+      dataList(){
+        return this.tableData.slice((this.currentPage - 1) * this.pageSize, this.currentPage * this.pageSize);
+      },
   },
   methods: {
     handleButton(methods,row,index){  //监听按钮事件
@@ -139,7 +145,8 @@ export default {
     },
 
     initialPage(currentPage,pageSize) { //分页初始化
-			this.dataList = this.tableData.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+      this.currentPage = currentPage;
+      this.pageSize = pageSize;
     },
     handleSizeChange(val) {
       this.initialPage(val.currentPage,val.pageSize);

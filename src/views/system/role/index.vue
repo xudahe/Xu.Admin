@@ -180,7 +180,7 @@ export default {
               isHTML: true
             }).then(() => {
               
-            });
+            }).catch(()=>{});
         },
         // 初始化菜单选中
         initialMenuCheck(item) {

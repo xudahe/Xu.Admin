@@ -64,151 +64,139 @@ export default {
 				return
             } 
             
-            this.$store.dispatch("saveToken", this.loginForm.username).then(() => {
-              this.$router.push({path: "/"}) //登录成功之后重定向到首页
-            }).catch(res => {
-              this.$message({
-                showClose: true,
-                message: res,
-                type: "error"
-              })
-            })
+            // this.$store.dispatch("saveToken", this.loginForm.username).then(() => {
+            //   this.$router.push({path: "/"}) //登录成功之后重定向到首页
+            // }).catch(res => {
+            //   this.$message({
+            //     showClose: true,
+            //     message: res,
+            //     type: "error"
+            //   })
+            // })
             
             //获取Token
             this.$ajax(this.$apiSet.requestToken, {
 					name: this.loginForm.username,
 					pass: this.loginForm.password
 				}).then(res => {
-                         if (!res.data.success) {
-                            _this.$message({
-                                message: res.data.message,
-                                type: 'error'
-                            });
-                        } else {
-                            _this.logining = true;
+                     if (!res.data.success) {
+                        _this.$message({
+                            message: res.data.message,
+                            type: 'error'
+                        });
+                    } else {
+                        _this.logining = true;
 
-                            var token = res.data.token;
-                            _this.$store.commit("saveToken", token); // 保存token
+                        var token = res.data.token;
+                        _this.$store.commit("saveToken", token); // 保存token
 
-                            var curTime = new Date();
-                            var expiredate = new Date(curTime.setSeconds(curTime.getSeconds() + res.data.expires_in)); // 定义过期时间
-                            _this.$store.commit("saveTokenExpire", expiredate); // 保存token过期时间
-                            
-                            window.localStorage.refreshtime = expiredate;  // 保存刷新时间，这里的和过期时间一致
-                            window.localStorage.expires_in = res.data.expires_in;
+                        var curTime = new Date();
+                        var expiredate = new Date(curTime.setSeconds(curTime.getSeconds() + res.data.expires_in)); // 定义过期时间
+                        _this.$store.commit("saveTokenExpire", expiredate); // 保存token过期时间
+                        
+                        window.localStorage.refreshtime = expiredate;  // 保存刷新时间，这里的和过期时间一致
+                        window.localStorage.expires_in = res.data.expires_in;
 
-                            _this.$notify({
-                                type: "success",
-                                message: `成功获取令牌，等待服务器返回用户信息...`,
-                                duration: 3000
-                            });
-                            
-                            _this.getUserByToken(token)
-
-						}
-					},
-					error => {
-						alert(error);
-					}
-				);
+                        _this.$notify({
+                            type: "success",
+                            message: `成功获取令牌，等待服务器返回用户信息...`,
+                            duration: 3000
+                        });
+                        
+                        _this.getUserByToken(token)
+			    	}
+				}).catch(err => {
+     
+                })
         },
         // 获取用户
         getUserByToken(token) {
             var _this = this;
             
-            this.$ajax(this.$apiSet.GetUserByToken, {
+            this.$ajax(this.$apiSet.getUserByToken, {
 			     	token: token
 				}).then(res => {
-                        if (!res.data.success) {
-                            _this.$message({
-                                message: res.data.message,
-                                type: 'error'
-                            });
-                        } else {
-                            
-                            let userinfo = res.data.response;
-                            window.localStorage.user = JSON.stringify(userinfo)
-
-                            if (this.checkboxValue == true) {
-								Cookies.set('username', this.loginForm.username);
-								Cookies.set('password', this.loginForm.password);
-							}
-                           
-                            if (userinfo.id > 0) {
-                                _this.getRoleData(userinfo)
-                            }
+                    if (!res.data.success) {
+                        _this.$message({
+                            message: res.data.message,
+                            type: 'error'
+                        });
+                    } else {
+                        
+                        let userinfo = res.data.response;
+                        window.localStorage.user = JSON.stringify(userinfo)
+                        if (this.checkboxValue == true) {
+							Cookies.set('username', this.loginForm.username);
+							Cookies.set('password', this.loginForm.password);
+						}
+                       
+                        if (userinfo.id > 0) {
+                            _this.getRoleData(userinfo)
                         }
-                    },
-                	error => {
-						alert(error);
-					}
-				);
+                    }
+                }).catch(err => {
+
+                })
         },
         // 获取角色
         getRoleData(userinfo) {
             var _this = this;
             
-            this.$ajax(this.$apiSet.GetRoleByIds, {
+            this.$ajax(this.$apiSet.getRoleByIds, {
 			     	ids: userinfo.roleIds
 				}).then(res => {
-                        if (!res.data.success) {
-                            _this.$message({
-                                message: res.data.message,
-                                type: 'error'
-                            });
-                        } else {
-                            let roleinfo = res.data.response;
-                            window.localStorage.role = JSON.stringify(roleinfo)
-                            
-                            let menuIds = roleinfo.map(item => item.menuIds);
-                            if (menuIds.length > 0) {
-                                _this.getMenuData(menuIds)
-                            }
+                    if (!res.data.success) {
+                        _this.$message({
+                            message: res.data.message,
+                            type: 'error'
+                        });
+                    } else {
+                        let roleinfo = res.data.response;
+                        window.localStorage.role = JSON.stringify(roleinfo)
+                        
+                        let menuIds = roleinfo.map(item => item.menuIds);
+                        if (menuIds.length > 0) {
+                            _this.getMenuData(menuIds)
                         }
-                    },
-                	error => {
-						alert(error);
-					}
-				);
+                    }
+                }).catch(err => {
+
+                })
         },
         // 获取菜单
         getMenuData(menuIds) {
             var _this = this;
 
-            this.$ajax(this.$apiSet.GetMenuByIds, {
+            this.$ajax(this.$apiSet.getMenuByIds, {
 			     	ids: menuIds.join(',')
 				}).then(res => {
-                        _this.logining = false;
-                        if (!res.data.success) {
-                            _this.$message({
-                                message: res.data.message,
-                                type: 'error'
-                            });
-                        } else {
-                            window.localStorage.menu = JSON.stringify(res.data.response)
-
-                            _this.$router.push({path: "/"}) //登录成功之后重定向到首页
-
-                            _this.$message({
-                                message: "登录成功",
-                                type: 'success'
-                            });
+                    _this.logining = false;
+                    if (!res.data.success) {
+                        _this.$message({
+                            message: res.data.message,
+                            type: 'error'
+                        });
+                    } else {
+                        window.localStorage.menu = JSON.stringify(res.data.response)
+                        _this.$router.push({path: "/"}) //登录成功之后重定向到首页
+                        _this.$message({
+                            message: "登录成功",
+                            type: 'success'
+                        });
+                        
+                        setTimeout(() => {
+                            let userinfo = JSON.parse(window.localStorage.user ? window.localStorage.user : null);
                             
-                            setTimeout(() => {
-                                let userinfo = JSON.parse(window.localStorage.user ? window.localStorage.user : null);
-                                
-                                _this.$notify({
-                                    type: "success",
-                                    message: `登录成功 \n 欢迎管理员：${userinfo.realName} ！Token 将在 ${window.localStorage.expires_in / 60} 分钟后过期！`,
-                                    duration: 6000
-                                });
-                            }, 1000);
-                        }
-                    },
-                    error => {
-						alert(error);
-					}
-                );
+                            _this.$notify({
+                                type: "success",
+                                message: `登录成功 \n 欢迎管理员：${userinfo.realName} ！Token 将在 ${window.localStorage.expires_in / 60} 分钟后过期！`,
+                                duration: 6000
+                            });
+                        }, 1000);
+                    }
+                }).catch(err => {
+                
+                })
         }
     },
     mounted(){

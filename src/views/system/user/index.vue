@@ -31,7 +31,7 @@
             <el-col :sm="24" :md="6">
                 <el-card class="box-card card-gutter-sm" shadow="hover">
                   <div slot="header" class="clearfix">
-                    <span class="header">{{sels.LoginName}}&nbsp;-&nbsp;角色分配</span>
+                    <span class="header">{{sels.loginName}}&nbsp;-&nbsp;角色分配</span>
                     <el-button type="primary" style="float: right; padding: 5px 10px" :disabled="!showButton" @click.native="saveRole">
                         <i class="el-icon-check el-icon--left"></i>保存
                     </el-button>
@@ -48,45 +48,45 @@
             <el-form :model="userForm" label-width="80px" :rules="formUsers" ref="userForm">
                 <el-row style="padding:0 10px;">
                     <el-col :span="12">
-                        <el-form-item label="登录名" prop="LoginName">
-                            <el-input v-model="userForm.LoginName" auto-complete="off"></el-input>
+                        <el-form-item label="登录名" prop="loginName">
+                            <el-input v-model="userForm.loginName" auto-complete="off"></el-input>
                         </el-form-item>
-                        <el-form-item label="用户名" prop="RealName">
-                            <el-input v-model="userForm.RealName" auto-complete="off"></el-input>
+                        <el-form-item label="用户名" prop="realName">
+                            <el-input v-model="userForm.realName" auto-complete="off"></el-input>
                         </el-form-item>
                         <el-form-item label="出生日期">
-                            <el-date-picker type="date" placeholder="选择出生日期" v-model="userForm.Birth"></el-date-picker>
+                            <el-date-picker type="date" placeholder="选择出生日期" v-model="userForm.birth"></el-date-picker>
                         </el-form-item>
-                        <el-form-item label="联系方式" prop="Mobile">
-                            <el-input v-model="userForm.Mobile" placeholder="请填写联系方式" auto-complete="off"></el-input>
+                        <el-form-item label="联系方式" prop="mobile">
+                            <el-input v-model="userForm.mobile" placeholder="请填写联系方式" auto-complete="off"></el-input>
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
-                        <el-form-item label="密码" prop="LoginPwd">
-                            <el-input v-model="userForm.LoginPwd" show-password  auto-complete="off"></el-input>
+                        <el-form-item label="密码" prop="loginPwd">
+                            <el-input v-model="userForm.loginPwd" show-password  auto-complete="off" :disabled="formTitle=='编辑'?true:false"></el-input>
                         </el-form-item>
-                        <el-form-item label="部门" prop="DeptName">
-                            <el-select v-model="userForm.DeptName" placeholder="请选择所属部门">
+                        <el-form-item label="部门" prop="deptName">
+                            <el-select v-model="userForm.deptName" placeholder="请选择所属部门">
                                 <el-option label="财务部" value="1"></el-option>
                                 <el-option label="市场部" value="2"></el-option>
                             </el-select>
                         </el-form-item>
-                        <el-form-item label="性别" prop="Sex">
-                            <el-radio-group v-model="userForm.Sex">
+                        <el-form-item label="性别" prop="sex">
+                            <el-radio-group v-model="userForm.sex">
                                 <el-radio class="radio" :label="1">男</el-radio>
                                 <el-radio class="radio" :label="0">女</el-radio>
                             </el-radio-group>
                         </el-form-item>
-                        <el-form-item label="状态" prop="Enabled">
-                          <el-radio-group v-model="userForm.Enabled">
-                            <el-radio :label="1">正常</el-radio>
-                            <el-radio :label="0">禁用</el-radio>
+                        <el-form-item label="状态" prop="enabled">
+                          <el-radio-group v-model="userForm.enabled">
+                            <el-radio :label="false">正常</el-radio>
+                            <el-radio :label="true">禁用</el-radio>
                           </el-radio-group>
                         </el-form-item>
                     </el-col>
                     <el-col :span="24">
                         <el-form-item label="地址">
-                            <el-input v-model="userForm.Address" auto-complete="off"></el-input>
+                            <el-input v-model="userForm.address" auto-complete="off"></el-input>
                         </el-form-item>
                         <el-form-item label="备注" prop="Remark">
                           <el-input v-model="userForm.Remark" auto-complete="off" type="textarea"></el-input>
@@ -113,20 +113,20 @@ export default {
                 name: ''
             },
             tableData: [
-                {LoginName:'鱼',RealName:'张三',DeptName:'市场部',CreateTime:'',Enabled:true}
+                // {loginName:'鱼',realName:'张三',deptName:'市场部',createTime:'',enabled:true}
             ],
             tableLabel: [
-                { label: '登录名', param: 'LoginName'},
-                { label: '用户名', param: 'RealName' },
-                { label: '所属部门', param: 'DeptName',width:'200' },
-                { label: '创建时间', param: 'CreateTime', sortable: true,
+                { label: '登录名', param: 'loginName'},
+                { label: '用户名', param: 'realName' },
+                { label: '所属部门', param: 'deptName'},
+                { label: '创建时间', param: 'createTime', sortable: true, width:'160',
                     formatter: row => {
-                        return (!row.CreateTime || row.CreateTime == '') ? '':this.$formatDate(new Date(row.CreateTime), true);
+                        return (!row.createTime || row.createTime == '') ? '':this.$formatDate(new Date(row.createTime), true);
                     } 
                 },
-                { label: '状态', param: 'Enabled', 
+                { label: '状态', param: 'enabled', 
                     render: (h, params) => {
-                        if (params.row.Enabled){
+                        if (!params.row.enabled){
                             return h('el-tag', {
                                 props: {
                                     type: 'success',
@@ -166,31 +166,31 @@ export default {
             formTitle: '',
             formVisible: false, //界面是否显示
             formUsers: {
-                LoginName: [
+                loginName: [
                     {required: true, message: '请输入登录名', trigger: 'blur'}
                 ],
-                RealName: [
+                realName: [
                     {required: true, message: '请输入用户名', trigger: 'blur'}
                 ],
-                LoginPwd: [
+                loginPwd: [
                     {required: true, message: '请输入密码', trigger: 'blur'}
                 ],
-                Birth: [
+                birth: [
                     {required: true, message: '请填写生日', trigger: 'blur'}
                 ]
             },
             //界面数据
             userForm: {
                 id: 0,
-                LoginName: '',
-                LoginPwd: '',
-                RealName: '',
-                DeptName: '',
-                Mobile: '',
-                Sex: -1,
-                Birth: '',
-                Addres: '',
-                Enabled: 1,
+                loginName: '',
+                loginPwd: '',
+                realName: '',
+                deptName: '',
+                mobile: '',
+                sex: -1,
+                birth: '',
+                addres: '',
+                enabled: false,
                 remark: ''
             },
 
@@ -206,7 +206,21 @@ export default {
     methods: {
         //获取用户列表
         getData () {
-            // this.listLoading = true;
+            let _this = this;
+            this.listLoading = true;
+            this.$ajax(this.$apiSet.getUserInfo)
+                .then(res => {
+                    if (!res.data.success) {
+                        _this.$message({
+                            message: res.data.message,
+                            type: 'error'
+                        });
+                    } else {
+                        _this.logining = false;
+                        _this.tableData = res.data.response.data;
+					}
+                })
+                .catch(err => {})
         },
         handleButton (val) {
           if(val.methods == 'handleEdit') this.handleEdit(val.index,val.row)
@@ -225,13 +239,30 @@ export default {
         },
         //删除
         handleDelete (index, row) {
+            let _this = this;
             this.$showMsgBox({
-              msg: `<p>是否删除${row.RealName}用户?</p>`,
+              msg: `<p>是否删除${row.realName}用户?</p>`,
               type: 'warning',
               isHTML: true
             }).then(() => {
-              
-            });
+                _this.$ajax(this.$apiSet.getUserByDelete,{
+                        user: _this.userForm
+                    }) .then(res => {
+                        if (!res.data.success) {
+                            _this.$message({
+                                message: res.data.message,
+                                type: 'error'
+                            });
+                        } else {
+                            _this.$message({
+                                message: "删除成功",
+                                type: 'success'
+                            });
+                            _this.getData();
+				    	}
+                    })
+                    .catch(err => {})
+            }).catch(()=>{});
         },
         // 初始化角色选中
         initialRoleCheck(item) {
@@ -266,7 +297,7 @@ export default {
         handleEdit (index, row) {
             this.formTitle = "编辑";
             this.formVisible = true;
-            this.roleForm = row;
+            this.userForm = row;
         },
         //显示新增界面
         handleAdd() {
@@ -274,17 +305,34 @@ export default {
             this.formVisible = true;
             this.userForm = {
                 id: 0,
-                uLoginName: '',
-                uRealName: '',
-                uLoginPWD: '',
+                loginName: '',
+                loginPwd: '',
+                realName: '',
+                deptName: '',
+                mobile: '',
                 sex: -1,
                 birth: '',
-                address: '',
+                addres: '',
+                enabled: false,
                 remark: ''
             };
         },
         handleSubmit () {
-            
+            let _this = this;
+            this.$ajax(this.$apiSet.getUserByAdd,{
+                    user: _this.userForm
+                })
+                .then(res => {
+                    if (!res.data.success) {
+                        _this.$message({
+                            message: res.data.message,
+                            type: 'error'
+                        });
+                    } else {
+                        
+					}
+                })
+                .catch(err => {})
         },
     },
     mounted() {

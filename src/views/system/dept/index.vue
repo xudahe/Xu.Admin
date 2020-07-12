@@ -173,7 +173,7 @@ export default {
              isHTML: true
            }).then(() => {
              
-           });
+           }).catch(()=>{});
         },
         //显示编辑界面
         handleEdit(index, row) {

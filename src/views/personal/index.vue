@@ -12,7 +12,7 @@
 						</div>
 						<div class="avatar-detail">
 							<div class="role">test</div>
-							<div class="date">注册日期：{{$formatDate(new Date(), false)}}</div>
+							<div class="date">注册日期：{{$formatDate(user.createTime, false)}}</div>
 						</div>
 					</div>
 					<div class="title">
@@ -21,10 +21,10 @@
 						<div class="border"></div>
 					</div>
 					<div class="divTitle">
-						<i class="el-icon-s-custom"></i>昵称：
+						<i class="el-icon-s-custom"></i>昵称：{{user.loginName}}
 					</div>
 					<div class="divTitle">
-						<i class='el-icon-male' />性别：
+						<i class='el-icon-male' />性别：{{user.sex}}
 					</div>
 					<div class="divTitle">
 						<i class="el-icon-office-building" />部门：

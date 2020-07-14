@@ -132,6 +132,14 @@ export default {
                                     type: 'success',
                                     size: 'mini',
                                 },
+                                style: {
+									cursor: 'pointer'
+                                },
+                                on: {
+		              				click: () => {
+		              					this.disable(params)
+		              				}
+		              			}
                             },'正常')
                         }
                         else {
@@ -140,6 +148,14 @@ export default {
                                     type: 'danger',
                                     size: 'mini',
                                 },
+                                style: {
+									cursor: 'pointer'
+                                },
+                                on: {
+		              				click: () => {
+		              					this.disable(params)
+		              				}
+		              			}
                             },'禁用')
                         }
                     },
@@ -222,6 +238,7 @@ export default {
                 })
                 .catch(err => {})
         },
+      
         handleButton (val) {
           if(val.methods == 'handleEdit') this.handleEdit(val.index,val.row)
           if(val.methods == 'handleDelete') this.handleDelete(val.index,val.row)
@@ -237,6 +254,33 @@ export default {
         handleSelectionChange (val) {
             this.sels = val;
         },
+        disable(params){
+            let _this = this;
+            this.$showMsgBox({
+              msg: `<p>是否${params.row.enabled? `启用`:`禁用` + params.row.realName}用户?</p>`,
+              type: 'warning',
+              isHTML: true
+            }).then(() => {
+                _this.$ajax(this.$apiSet.disableUser,{
+                        id: params.row.id,
+                        falg: !params.row.enabled
+                    }) .then(res => {
+                        if (!res.data.success) {
+                            _this.$message({
+                                message: res.data.message,
+                                type: 'error'
+                            });
+                        } else {
+                            _this.getData();
+                            _this.$message({
+                                message: res.data.message,
+                                type: 'success'
+                            });
+				    	}
+                    })
+                    .catch(err => {})
+            }).catch(()=>{});
+        },
         //删除
         handleDelete (index, row) {
             let _this = this;
@@ -245,8 +289,8 @@ export default {
               type: 'warning',
               isHTML: true
             }).then(() => {
-                _this.$ajax(this.$apiSet.getUserByDelete,{
-                        user: _this.userForm
+                _this.$ajax(this.$apiSet.deleteUesr,{
+                        id: row.id
                     }) .then(res => {
                         if (!res.data.success) {
                             _this.$message({
@@ -254,11 +298,11 @@ export default {
                                 type: 'error'
                             });
                         } else {
+                            _this.getData();
                             _this.$message({
-                                message: "删除成功",
+                                message: res.data.message,
                                 type: 'success'
                             });
-                            _this.getData();
 				    	}
                     })
                     .catch(err => {})
@@ -318,8 +362,9 @@ export default {
             };
         },
         handleSubmit () {
+            let apiUrl = this.formTitle=='编辑' ? this.$apiSet.putUser:this.$apiSet.postUser;
             let _this = this;
-            this.$ajax(this.$apiSet.getUserByAdd, this.userForm)
+            this.$ajax(apiUrl, this.userForm)
                 .then(res => {
                     if (!res.data.success) {
                         _this.$message({
@@ -327,7 +372,13 @@ export default {
                             type: 'error'
                         });
                     } else {
-                        
+                        _this.formVisible = false;
+                        _this.getData();
+
+                        _this.$message({
+                            message: res.data.message,
+                            type: 'success'
+                        });
 					}
                 })
                 .catch(err => {})

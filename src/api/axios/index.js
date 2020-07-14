@@ -169,28 +169,13 @@ const httpServer = (opts, data) => {
     url: opts.url,
     timeout: 300000, //响应时间
     params: Object.assign(Public, data),
+    data: Object.assign(Public, data),
+    // data: qs.stringify(Object.assign(Public, data))
   }
-  if (opts.method == 'get') {
-    httpDefaultOpts.data = qs.stringify(Object.assign(Public, data))
+  
+  if(opts.method == 'get' || opts.method == 'delete') {
     delete httpDefaultOpts.data
-  } else if (opts.method == 'post') {
-    httpDefaultOpts.data = qs.stringify(data)
-    delete httpDefaultOpts.params
-  } else if (opts.method == 'other') {
-    httpDefaultOpts.method = 'post'
-    httpDefaultOpts.headers = {
-      "Accept": "application/json, text/javascript, */*; q=0.01",
-      "Content-Type": "application/json; charset=UTF-8"
-    }
-    httpDefaultOpts.data = JSON.stringify(data)
-    delete httpDefaultOpts.params
-  } else if (opts.method == 'tpl') {
-    httpDefaultOpts.method = 'post'
-    httpDefaultOpts.headers = {
-      "Accept": "application/json, text/javascript, */*; q=0.01",
-      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
-    }
-    httpDefaultOpts.data = data
+  } else if (opts.method == 'post' || opts.method == 'put') {
     delete httpDefaultOpts.params
   }
 

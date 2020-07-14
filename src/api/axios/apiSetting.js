@@ -22,19 +22,19 @@ const UserModule = {
     url: '/api/User/GetByIds',
     method: 'get'
   },
-  getUserByAdd: { //添加用户
+  postUser: { //添加用户
     url: '/api/User/Post',
     method: 'post'
   },
-  getUserByUpdate: { //更新用户
+  putUser: { //更新用户
     url: '/api/User/Put',
     method: 'put'
   },
-  getUserByDisable: { //禁用用户
+  disableUser: { //禁用用户
     url: '/api/User/Disable',
-    method: 'put'
+    method: 'delete'
   },
-  getUserByDelete: { //删除用户
+  deleteUesr: { //删除用户
     url: '/api/User/Delete',
     method: 'delete'
   },
@@ -49,19 +49,19 @@ const DeptModule = {
     url: '/api/Dept/GetByIds',
     method: 'get'
   },
-  getDeptByAdd: { //添加部门
+  postDept: { //添加部门
     url: '/api/Dept/Post',
     method: 'post'
   },
-  getDeptByUpdate: { //更新部门
+  putDept: { //更新部门
     url: '/api/Dept/Put',
     method: 'put'
   },
-  getDeptByDisable: { //禁用部门
+  disableDept: { //禁用部门
     url: '/api/Dept/Disable',
-    method: 'put'
+    method: 'delete'
   },
-  getDeptByDelete: { //删除部门
+  deleteDept: { //删除部门
     url: '/api/Dept/Delete',
     method: 'delete'
   },
@@ -76,19 +76,19 @@ const RoleModule = {
     url: '/api/Role/GetByIds',
     method: 'get'
   },
-  getRoleByAdd: { //添加角色
+  postRole: { //添加角色
     url: '/api/Role/Post',
     method: 'post'
   },
-  getRoleByUpdate: { //更新角色
+  putRole: { //更新角色
     url: '/api/Role/Put',
     method: 'put'
   },
-  getRoleByDisable: { //禁用角色
+  disableRole: { //禁用角色
     url: '/api/Role/Disable',
-    method: 'put'
+    method: 'delete'
   },
-  getRoleByDelete: { //删除角色
+  deleteRole: { //删除角色
     url: '/api/Role/Delete',
     method: 'delete'
   },
@@ -103,19 +103,19 @@ const MenuModule = {
     url: '/api/Menu/GetByIds',
     method: 'get'
   },
-  getMenuByAdd: { //添加菜单
+  postMenu: { //添加菜单
     url: '/api/Menu/Post',
     method: 'post'
   },
-  getMenuByUpdate: { //更新菜单
+  putMenu: { //更新菜单
     url: '/api/Menu/Put',
     method: 'put'
   },
-  getMenuByDisable: { //禁用菜单
+  disableMenu: { //禁用菜单
     url: '/api/Menu/Disable',
-    method: 'put'
+    method: 'delete'
   },
-  getMenuByDelete: { //删除菜单
+  deleteMenu: { //删除菜单
     url: '/api/Menu/Delete',
     method: 'delete'
   },

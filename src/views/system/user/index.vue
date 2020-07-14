@@ -319,9 +319,7 @@ export default {
         },
         handleSubmit () {
             let _this = this;
-            this.$ajax(this.$apiSet.getUserByAdd,{
-                    user: _this.userForm
-                })
+            this.$ajax(this.$apiSet.getUserByAdd, this.userForm)
                 .then(res => {
                     if (!res.data.success) {
                         _this.$message({

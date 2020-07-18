@@ -3,7 +3,7 @@
     <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      :page-sizes="defaultPageSizes"
+      :page-sizes.sync="defaultPageSizes"
       :pager-count="5"
       :small="$defaultConfig.paginationSize"
       :layout="$defaultConfig.paginationLayout"

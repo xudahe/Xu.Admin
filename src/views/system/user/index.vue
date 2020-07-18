@@ -88,8 +88,8 @@
                         <el-form-item label="地址">
                             <el-input v-model="userForm.address" auto-complete="off"></el-input>
                         </el-form-item>
-                        <el-form-item label="备注" prop="Remark">
-                          <el-input v-model="userForm.Remark" auto-complete="off" type="textarea"></el-input>
+                        <el-form-item label="备注" prop="remark">
+                          <el-input v-model="userForm.remark" auto-complete="off" type="textarea"></el-input>
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -233,7 +233,7 @@ export default {
                         });
                     } else {
                         _this.logining = false;
-                        _this.tableData = res.data.response.data;
+                        _this.tableData = res.data.response;
 					}
                 })
                 .catch(err => {})

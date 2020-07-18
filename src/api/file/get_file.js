@@ -3,14 +3,18 @@
  * @description 获取文件
  * @param {Number} limit 文件大小限制，默认为2MB
  * @returns {Promise}
- * 示例：this.$getFile(limit) .then(raw => {})   raw --文件对象
  */
-function getFile(limit = 2) {
+function getFile({ 
+	limit,
+	fileType
+}) {
+	!limit && (limit = 2)
   return new Promise((resolve, reject) => {
     let
       fileEle = document.createElement('input'),
       event = new MouseEvent('click')
     fileEle.type = "file"
+		fileEle.accept = fileType || ""
 		fileEle.style.display = 'none'
     fileEle.addEventListener('change', () => {
       const files = fileEle.files[0]

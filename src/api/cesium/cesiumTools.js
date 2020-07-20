@@ -29,16 +29,16 @@ export default {
             dataSources: new Cesium.DataSourceCollection(),
             clock: new Cesium.Clock(), //用于控制当前时间的时钟对象
             imageryProvider: new Cesium.SingleTileImageryProvider({
-                url: mapconfig.cesiumurl + "/earth_base.jpg"
+                url: "http://58.213.48.101:81/cesiumData/earth_base.jpg"
             })
             // imageryProvider: new Cesium.UrlTemplateImageryProvider({
-            //     url: mapconfig.cesiumDOM
+            //     url: "http://mt1.google.cn/vt/lyrs=s,h&gl=cn&x={x}&y={y}&z={z}&s=Gali"
             // })
         });
 
         viewer.scene.skyAtmosphere.show = true;
         viewer.scene.globe.depthTestAgainstTerrain = true; //开启深度监测
-        viewer._cesiumWidget._creditContainer.style.display = "none";
+        viewer._cesiumWidget._creditContainer.style.display = "none"; // 去除版权信息
 
         let options = {};
 
@@ -658,8 +658,8 @@ export default {
         }
         if (item.servicetype == '3DTileset') {
             var tileset = new Cesium.Cesium3DTileset({
-                url: item.serviceurl,
-                maximumScreenSpaceError: 8,
+                url: item.serviceurl,  // 数据路径
+                maximumScreenSpaceError: 8, // 最大的屏幕空间误差
                 totalMemoryUsageInBytes: 2048
             });
             if (item.color.conditions) {

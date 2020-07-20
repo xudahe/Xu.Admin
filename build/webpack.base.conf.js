@@ -23,7 +23,7 @@ module.exports = {
     filename: '[name].js',  //编译输入的文件名
     publicPath: process.env.NODE_ENV === 'production' ?  // 正式发布环境下编译输出的发布路径
       config.build.assetsPublicPath : config.dev.assetsPublicPath,
-    sourcePrefix: ' '
+    sourcePrefix: ' ' //正确缩进多行字符串
   },
   amd: {
     toUrlUndefined: true //添加amd模式支持
@@ -85,8 +85,8 @@ module.exports = {
         }
       }
     ],
-    unknownContextCritical: /^.\/.*$/,
-    unknownContextCritical: false // webpack打印载入特定库时候阻止依赖告警
+    unknownContextCritical: /^.\/.*$/,  //打印载入特定库时候的警告
+    unknownContextCritical: false   //解决Error: Cannot find module "."
   },
   node: {
     // prevent webpack from injecting useless setImmediate polyfill because Vue

@@ -3,6 +3,7 @@ const path = require('path') // 使用 NodeJS 自带的文件路径插件
 const utils = require('./utils') //封装了一些方法的工具
 const config = require('../config') //使用 config/index.js
 const vueLoaderConfig = require('./vue-loader.conf') //使用vue-loader.conf
+const cesiumSource = '../node_modules/cesium/Source';
 
 // 拼接我们的工作区路径为一个绝对路径
 function resolve(dir) {
@@ -21,13 +22,18 @@ module.exports = {
     path: config.build.assetsRoot, //使用chonfig/index.js中build的assetsRoot作为输出根路径
     filename: '[name].js',  //编译输入的文件名
     publicPath: process.env.NODE_ENV === 'production' ?  // 正式发布环境下编译输出的发布路径
-      config.build.assetsPublicPath : config.dev.assetsPublicPath
+      config.build.assetsPublicPath : config.dev.assetsPublicPath,
+    sourcePrefix: ' '
+  },
+  amd: {
+    toUrlUndefined: true //添加amd模式支持
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],   // 自动补全的扩展名,能够使用户在引入模块时不带扩展
     alias: {    // 默认路径代理，例如 import Vue from 'vue$'，会自动到 'vue/dist/vue.esm.js'中寻找
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
+      'cesium': path.resolve(__dirname, cesiumSource)
     }
   },
   module: {
@@ -78,7 +84,9 @@ module.exports = {
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
       }
-    ]
+    ],
+    unknownContextCritical: /^.\/.*$/,
+    unknownContextCritical: false // webpack打印载入特定库时候阻止依赖告警
   },
   node: {
     // prevent webpack from injecting useless setImmediate polyfill because Vue

@@ -57,6 +57,8 @@ const store=new Vuex.Store({
         top: state => state.layout.top,
         rightNav: state => state.layout.rightNav,
         errorLogList: state => state.error.errorLogList,
+        isCesium: 1,
+        G_MapActionFlag: 1,
       },
 })
 

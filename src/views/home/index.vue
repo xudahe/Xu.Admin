@@ -1,9 +1,10 @@
 <template>
   <div style="height:100%;width:100%;" class="home">
-    <swiper :imgList="imgList"></swiper>
+    <!-- <swiper :imgList="imgList"></swiper>
     <swiper :imgList="imgList" style="margin-top:5px;"></swiper>
-    <swiper :imgList="imgList" style="margin-top:5px;"></swiper>
+    <swiper :imgList="imgList" style="margin-top:5px;"></swiper> -->
     <!-- <echarts :options="options"></echarts> -->
+    <cesiumMap ref="cesiumMap" ></cesiumMap>
   </div>
 </template>
 

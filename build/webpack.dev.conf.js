@@ -9,6 +9,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin') // 使用 html-webpack-plugin 插件，这个插件可以帮我们自动生成 html 并且注入到 .html 文件中
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin') //https://www.npmjs.com/package/friendly-errors-webpack-plugin,可以识别某些类别的Webpack错误并进行清理，聚合和优先排序
 const portfinder = require('portfinder')
+const cesiumSource = 'node_modules/cesium/Source'; //定义 Cesium 源码路径
+const cesiumWorkers = '../Build/Cesium/Workers'; //定义 Cesium Workers 路径
 
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
@@ -74,8 +76,28 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         from: path.resolve(__dirname, '../static'),
         to: config.dev.assetsSubDirectory,
         ignore: ['.*']
+      },
+      {
+        from: path.join(cesiumSource, cesiumWorkers),
+        to: 'Workers'
+      },
+      {
+        from: path.join(cesiumSource, 'Assets'),
+        to: 'Assets'
+      },
+      {
+        from: path.join(cesiumSource, 'Widgets'),
+        to: 'Widgets'
+      },
+      {
+        from: path.join(cesiumSource, 'ThirdParty/Workers'),
+        to: 'ThirdParty/Workers'
       }
-    ])
+    ]),
+    new webpack.DefinePlugin({
+      //Cesium载入静态的资源的路径
+      CESIUM_BASE_URL: JSON.stringify('')
+    }),
   ]
 })
 

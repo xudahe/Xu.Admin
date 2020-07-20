@@ -1,0 +1,143 @@
+﻿{
+    "Providers": [{
+        "title": "现状数据",
+        "children": [{
+                "id": "YCONEMAP",
+                "title": "主城区2016年影像图",
+                "serviceurl": "http://10.10.10.76:6080/arcgis/rest/services/YCONEMAP/2016_img_WGS84/MapServer/export?bbox={westProjected},{southProjected},{eastProjected},{northProjected}&size={width}%2C{height}&f=image",
+                "servicetype": "ImageryLayer",
+                "isdefaultload": false,
+                "checked": false,
+                "color": {}
+            }, {
+                "id": "yc1",
+                "title": "盐城高新区倾斜摄影_1",
+                "serviceurl": "http://58.213.48.101:81/cesiumData/盐城倾斜V2/1/tileset.json",
+                "servicetype": "3DTileset",
+                "isdefaultload": true,
+                "checked": true,
+                "color": {}
+            },
+            {
+                "id": "yc2",
+                "title": "盐城高新区倾斜摄影_2",
+                "serviceurl": "http://58.213.48.101:81/cesiumData/盐城倾斜V2/2/tileset.json",
+                "servicetype": "3DTileset",
+                "isdefaultload": true,
+                "checked": true,
+                "color": {}
+            }, {
+                "id": "jzw500",
+                "title": "2013年地形图房屋白模_500",
+                "serviceurl": "http://58.213.48.101:81/cesiumData/jzw500/tileset.json",
+                "servicetype": "3DTileset",
+                "isdefaultload": false,
+                "checked": false,
+                "color": {}
+            },
+            {
+                "id": "jzw1000",
+                "title": "2013年地形图房屋白模_1000",
+                "serviceurl": "http://58.213.48.101:81/cesiumData/jzw1000/tileset.json",
+                "servicetype": "3DTileset",
+                "isdefaultload": false,
+                "checked": false,
+                "color": {}
+            }
+        ]
+    }, {
+        "title": "规划数据",
+        "children": [{
+            "id": "PLOTRGN",
+            "title": "控规用地一张图",
+            "serviceurl": "http://58.213.48.101:81/cesiumData/PLOTRGN/tileset.json",
+            "servicetype": "3DTileset",
+            "isdefaultload": false,
+            "checked": false,
+            "color": {
+                "conditions": [
+                    ["${mark} === 'G1'", "rgba(60,255,0, 0.5)"],
+                    ["${mark} === 'G1c'", "rgba(60,255,0, 0.5)"],
+                    ["${mark} === 'G2'", "rgba(60,255,0, 0.5)"],
+                    ["${mark} === 'G3'", "rgba(60,255,0, 0.5)"],
+                    ["${mark} === 'B1'", "rgba(255,0,0, 0.5)"],
+                    ["${mark} === 'B11'", "rgba(255,0,0, 0.5)"],
+                    ["${mark} === 'B12'", "rgba(255,0,0, 0.5)"],
+                    ["${mark} === 'B13'", "rgba(255,0,0, 0.5)"],
+                    ["${mark} === 'B14'", "rgba(255,0,0, 0.5)"],
+                    ["${mark} === 'B2'", "rgba(255,0,191, 0.5)"],
+                    ["${mark} === 'B21'", "rgba(255,0,191, 0.5)"],
+                    ["${mark} === 'B22'", "rgba(255,0,191, 0.5)"],
+                    ["${mark} === 'B29'", "rgba(255,0,191, 0.5)"],
+                    ["${mark} === 'E1'", "rgba(0,255,255, 0.5)"],
+                    ["${mark} === 'E2'", "rgba(102,204,102, 0.5)"],
+                    ["${mark} === 'R2'", "rgba(255,255,0, 0.5)"],
+                    ["${mark} === 'R21'", "rgba(255,255,0, 0.5)"],
+                    ["${mark} === 'R22'", "rgba(255,0,0, 0.5)"],
+                    ["${mark} === 'RB'", "rgba(255,191,127, 0.5)"],
+                    ["${mark} === 'A/B'", "rgba(45, 0, 75, 0.5)"],
+                    ["${mark} === 'A/B2'", "rgba(102, 71, 151, 0.5)"],
+                    ["${mark} === 'A1'", "rgba(170, 162, 204, 0.5)"],
+                    ["${mark} === 'A2'", "rgba(224, 226, 238, 0.5)"],
+                    ["${mark} === 'A2/A4'", "rgba(252, 230, 200, 0.5)"],
+                    ["${mark} === 'A2/B1'", "rgba(248, 176, 87, 0.5)"],
+                    ["${mark} === 'A2/G1'", "rgba(198, 106, 11, 0.5)"],
+                    ["${mark} === 'A32'", "rgba(255, 127, 191, 0.5)"],
+                    ["${mark} === 'M'", "rgba(127, 95, 63, 0.5)"],
+                    ["${mark} === 'M1'", "rgba(204, 127, 102, 0.5)"],
+                    ["${mark} === 'M2'", "rgba(153, 38, 0, 0.5)"],
+                    ["${mark} === 'W'", "rgba(153, 102, 204, 0.5)"],
+                    ["${mark} === 'W1'", "rgba(153, 102, 204, 0.5)"],
+                    ["${mark} === 'W2'", "rgba(153, 102, 204, 0.5)"],
+                    ["${mark} === 'W3'", "rgba(153, 102, 204, 0.5)"],
+                    ["${mark} === 'H2'", "rgba(192, 192, 192, 0.5)"],
+                    ["true", "rgba(255, 255, 255,0.5)"]
+                ]
+            }
+        }]
+    }, {
+        "title": "管理数据",
+        "children": [{
+                "id": "GDDK",
+                "title": "历史供地",
+                "serviceurl": "http://58.213.48.101:81/cesiumData/GDDK/tileset.json",
+                "servicetype": "3DTileset",
+                "isdefaultload": false,
+                "checked": false,
+                "color": {
+                    "conditions": [
+                        ["true", "rgba(255,215,0,0.6)"]
+                    ]
+                }
+            },
+            {
+                "id": "BPDK",
+                "title": "报批地块",
+                "serviceurl": "http://58.213.48.101:81/cesiumData/BPDK/tileset.json",
+                "servicetype": "3DTileset",
+                "isdefaultload": false,
+                "checked": false,
+                "color": {
+                    "conditions": [
+                        ["true", "rgba(255,165,0,0.6)"]
+                    ]
+                }
+            }
+        ]
+    }, {
+        "title": "上会地块",
+        "children": [{
+            "id": "5thProject",
+            "title": "第五次上会地块",
+            "serviceurl": "http://58.213.48.101:81/cesiumData/5thProject/tileset.json",
+            "servicetype": "3DTileset",
+            "isdefaultload": true,
+            "checked": true,
+            "color": {
+                "conditions": [
+                    ["true", "rgba(255, 0, 63,0.6)"]
+                ]
+            }
+        }]
+    }]
+}

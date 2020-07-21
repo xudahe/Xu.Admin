@@ -5,13 +5,19 @@ import {
     Drawer,
     Select,
     Option,
+    Tree,
+    Dropdown,
+    DropdownMenu,
   } from 'view-design'
-  
-  // 引入Icon 图标组件
+
+  // 引入Icon图标组件
   Vue.component('Icon', Icon)
   // 引入iview抽屉组件
   Vue.component('Drawer', Drawer)
-  // 引入iview下拉框组件
+  // 引入Select选择器组件
   Vue.component('Select', Select)
-  // 引入iview下拉框选项组件
+  // 引入Option下拉框选项组件
   Vue.component('Option', Option)
+  Vue.component('Tree', Tree)
+  Vue.component('Dropdown', Dropdown)
+  Vue.component('DropdownMenu', DropdownMenu)

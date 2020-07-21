@@ -1,7 +1,9 @@
-var Cesium = require('cesium/Cesium');
-var widgets = require('cesium/Widgets/widgets.css');
+// var Cesium = require('cesium/Cesium');
+// var widgets = require('cesium/Widgets/widgets.css');
+import * as Cesium from "cesium/Cesium";
+import * as widgets from "cesium/Widgets/widgets.css";
 
-//import CesiumNavigation from "cesium-navigation-es6";
+// import CesiumNavigation from "cesium-navigation-es6"; //导航插件
 import {cesiumInstance } from "./cesiumInstance";
 
 export default {
@@ -31,7 +33,7 @@ export default {
             imageryProvider: new Cesium.SingleTileImageryProvider({
                 url: "http://58.213.48.101:81/cesiumData/earth_base.jpg"
             })
-            // imageryProvider: new Cesium.UrlTemplateImageryProvider({
+            // imageryProvider: new Cesium.UrlTemplateImageryProvider({ //使用自定义数据源
             //     url: "http://mt1.google.cn/vt/lyrs=s,h&gl=cn&x={x}&y={y}&z={z}&s=Gali"
             // })
         });
@@ -43,7 +45,6 @@ export default {
         let options = {};
 
         // 用于在使用重置导航重置地图视图时设置默认视图控制。接受的值是Cesium.Cartographic 和 Cesium.Rectangle.
-
         options.defaultResetView = Cesium.Rectangle.fromDegrees(119.455, 32.584, 120.903, 34.472);
         // 用于启用或禁用罗盘。true是启用罗盘，false是禁用罗盘。默认值为true。如果将选项设置为false，则罗盘将不会添加到地图中。
         options.enableCompass = true;
@@ -54,7 +55,7 @@ export default {
         // 用于启用或禁用指南针外环。true是启用，false是禁用。默认值为true。如果将选项设置为false，则该环将可见但无效。
         options.enableCompassOuterRing = true;
 
-        //CesiumNavigation(viewer, options);
+        // CesiumNavigation(viewer, options);
 
         //let Cesium3DTilesInspector = new Cesium.Cesium3DTilesInspector("cesiumContainer", viewer.scene)
 
@@ -147,7 +148,7 @@ export default {
 
         // let local_provider_DOM_global7 = new Cesium.ImageryLayer(
         //   new Cesium.UrlTemplateImageryProvider({
-        //     url: mapconfig.cesiumurl + "/DOM_global7/{z}/{x}/{y}.png",
+        //     url: "http://58.213.48.101:81/cesiumData/DOM_global7/{z}/{x}/{y}.png",
         //     tilingScheme: new Cesium.WebMercatorTilingScheme(),
         //     minimumLevel: 0,
         //     maximumLevel: 7,
@@ -628,7 +629,7 @@ export default {
             }, Cesium.ScreenSpaceEventType.RIGHT_CLICK);
         }
     },
-    //飞行到视点
+    //飞行到视点,    x--经度；y--纬度，z--视距（m）
     flyTo(x, y, z) {
         cesiumInstance.viewer.scene.camera.flyTo({
             destination: new Cesium.Cartesian3.fromDegrees(x, y, z),

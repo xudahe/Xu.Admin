@@ -14,8 +14,8 @@
                 "title": "盐城高新区倾斜摄影_1",
                 "serviceurl": "http://58.213.48.101:81/cesiumData/盐城倾斜V2/1/tileset.json",
                 "servicetype": "3DTileset",
-                "isdefaultload": true,
-                "checked": true,
+                "isdefaultload": false,
+                "checked": false,
                 "color": {}
             },
             {
@@ -23,8 +23,8 @@
                 "title": "盐城高新区倾斜摄影_2",
                 "serviceurl": "http://58.213.48.101:81/cesiumData/盐城倾斜V2/2/tileset.json",
                 "servicetype": "3DTileset",
-                "isdefaultload": true,
-                "checked": true,
+                "isdefaultload": false,
+                "checked": false,
                 "color": {}
             }, {
                 "id": "jzw500",
@@ -131,8 +131,8 @@
             "title": "第五次上会地块",
             "serviceurl": "http://58.213.48.101:81/cesiumData/5thProject/tileset.json",
             "servicetype": "3DTileset",
-            "isdefaultload": true,
-            "checked": true,
+            "isdefaultload": false,
+            "checked": false,
             "color": {
                 "conditions": [
                     ["true", "rgba(255, 0, 63,0.6)"]

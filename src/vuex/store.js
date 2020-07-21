@@ -12,6 +12,8 @@ const store=new Vuex.Store({
     state:{
         token: null,
         tokenExpire: null,
+
+        G_MapActionFlag: 1,
     },
     // 执行同步操作改变state   this.$store.commit("saveToken", data)
     mutations: {
@@ -57,8 +59,6 @@ const store=new Vuex.Store({
         top: state => state.layout.top,
         rightNav: state => state.layout.rightNav,
         errorLogList: state => state.error.errorLogList,
-        isCesium: 1,
-        G_MapActionFlag: 1,
       },
 })
 

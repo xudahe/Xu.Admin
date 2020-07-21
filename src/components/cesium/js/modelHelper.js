@@ -1,4 +1,5 @@
-var Cesium = require('cesium/Cesium');
+// var Cesium = require('cesium/Cesium');
+import * as Cesium from "cesium/Cesium";
 
 export var modelHelper = {};
 modelHelper.VCesViewer = {}
@@ -250,7 +251,7 @@ modelHelper.param_meaArea = {
       
       
 
-//////////////////////量算计算//////////////////
+//量算计算
 var PolyLinePrimitive = (function () {
     function _(positions) {
       this.options = {

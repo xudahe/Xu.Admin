@@ -1,5 +1,5 @@
 <!-- 图层列表信息 -->
-<style>
+<style scoped>
 .icon_color {
   color: #2d8cf0;
   font-size: 18px;
@@ -64,59 +64,38 @@
 .itemclick {
   color: red !important;
 }
+
+.close:hover{
+  color: red
+}
 </style>
 <template>
   <div class="layercontrol">
     <div class="layerpannel_title">
       <font>图层管理</font>
-      <div class="layerpannel_btn">
-        <Button
-          size="small"
-          style="margin:5px;"
-          shape="circle"
-          @click="close()"
-        >
-          <Icon type="close"></Icon>
-        </Button>
+      <div class="layerpannel_btn" @click="close()">
+        <Icon type="ios-close-circle-outline" size="25" class="close" style="padding-top: 5px;"/>
       </div>
     </div>
-    <div
-      class="layerpanel gx-scrollbar"
-      style="overflow: auto; max-height: 300px;"
-    >
-      <Tree
-        :data="layerList"
-        show-checkbox
-        @on-check-change="setCheckNodes"
-      ></Tree>
+    <div class="layerpanel gx-scrollbar" style="overflow: auto; max-height: 300px;">
+      <Tree :data="layerList" show-checkbox @on-check-change="setCheckNodes"></Tree>
     </div>
   </div>
 </template>
 <script>
 
-import { cesiumInstance } from "../../../api/cesium/cesiumInstance";
-import cesiumTools from "../../../api/cesium/cesiumTools";
-var Cesium = require("cesium/Cesium");
-var widgets = require("cesium/Widgets/widgets.css");
+import { cesiumInstance } from "../js/cesiumInstance";
+import cesiumTools from "../js/cesiumTools";
+// var Cesium = require("cesium/Cesium");
+// var widgets = require("cesium/Widgets/widgets.css");
+
+import * as Cesium from "cesium/Cesium";
+import * as widgets from "cesium/Widgets/widgets.css";
+
 export default {
   data() {
     return {
       layerList: cesiumInstance.layers, //图层顺序叠加
-      treeSetting: {
-        data: {
-          key: {
-            title: "remark"
-          }
-        },
-        check: {
-          enable: true
-        },
-        view: {
-          showIcon: this.showIconForTree,
-          showLine: false,
-          fontCss: this.setFontCss
-        }
-      }
     };
   },
   methods: {
@@ -150,14 +129,14 @@ export default {
               if (child.id == "GDDK") {
                 if (!cesiumInstance.models["GDDK_Labels"]) {
                   let dataSource = new Cesium.GeoJsonDataSource();
-                  dataSource.load("./static/GDDK.geojson").then(function() {
+                  dataSource.load("./static/data/cesium/GDDK.geojson").then(function() {
                     let entities = dataSource.entities.values;
                     for (let i = 0; i < entities.length; i++) {
                       let entity = entities[i];
                       entity.billboard = undefined;
                       entity.label = {
                         text:
-                          "批准文号:" +
+                          "批准文号：" +
                           entity.properties.PZ_WH +
                           "\n" +
                           entity.properties.XM_MC +
@@ -165,11 +144,11 @@ export default {
                           "面积：" +
                           entity.properties.GD_ZMJ +
                           "\n" +
-                          "金额:" +
+                          "金额：" +
                           entity.properties.JE +
                           "万元" +
                           "\n" +
-                          "容积率:" +
+                          "容积率：" +
                           entity.properties.MIN_RJL,
                         scale: 0.5,
                         horizontalOrigin: Cesium.HorizontalOrigin.LEFT,

@@ -173,7 +173,7 @@ const httpServer = (opts, data) => {
     // data: qs.stringify(Object.assign(Public, data))
   }
   
-  if(opts.method == 'get' || opts.method == 'delete') {
+  if (opts.method == 'get' || opts.method == 'delete') {
     delete httpDefaultOpts.data
   } else if (opts.method == 'post' || opts.method == 'put') {
     delete httpDefaultOpts.params

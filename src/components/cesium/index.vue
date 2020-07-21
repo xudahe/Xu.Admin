@@ -11,8 +11,8 @@
 .toolbar_infos {
   z-index: 100;
   position: absolute;
-  left: 45px;
-  top: 10px;
+  /* left: 0px; */
+  top: 5px;
   height: 32px;
 }
 
@@ -33,40 +33,33 @@
 
 </style>
 <template>
-  <div id="cesiumContainer" style="height:100%;width:100%;float:right">
-    <div :class="classObject" id="cesiumToolBar">
-      <Button-group v-show="isshow!=0">
-        <Tooltip v-for="(child,index) in toolslist" :key="index" :content="child.title">
-          <Button size="small" style="height: 32px;width: 32px;" @click="toolbar(child.name)" :style='{"margin-left":index==0?"0px":"4px"}' @mouseenter.native="moveindex=index" @mouseleave.native="moveindex=-1">
-            <!-- <font-awesome-icon icon="print" size="lg" />-->
-            <img :src="moveindex==index?child.pathheightpng:child.pathpng" style="margin-top: 4px;" />
-          </Button>
-        </Tooltip>
-      </Button-group>
+  <div id="cesiumContainer" style="height:100%;width:100%;position: relative;">
+    <div class="toolbar_infos" id="cesiumToolBar">
+      <el-button-group>
+        <el-tooltip v-for="(child,index) in toolslist" :key="index" :content="child.title">
+          <el-button :title="child.title" size="small" style="height: 32px;width: 32px;margin-left:4px;" @click="toolbar(index,child.name)" @mouseenter.native="moveindex=index" @mouseleave.native="moveindex=-1">
+            <img :src="moveindex==index?child.pathheightpng:child.pathpng" style="margin-left: -8px;"/>
+          </el-button>
+        </el-tooltip>
+      </el-button-group>
     </div>
     <component :is="current_com" :ref="current_ref"></component>
   </div>
 </template>
+
 <script>
-import { cesiumInstance } from "../../api/cesium/cesiumInstance";
-import cesiumTools from "../../api/cesium/cesiumTools";
-import {modelHelper} from "../../api/cesium/modelHelper";
-import providercontrol from "./modules/providercontrol";
+import { cesiumInstance } from "./js/cesiumInstance";
+import cesiumTools from "./js/cesiumTools";
+import {modelHelper} from "./js/modelHelper";
+import providercontrol from "./child/providercontrol";
+
 export default {
   name: "cesiumMap",
   components: {
     providercontrol
   },
   computed: {
-    isshow() {
-      return this.$store.state.isCesium;
-    },
-    classObject() {
-      return {
-        toolbar_infos: this.$store.getters.isCesium == 1,
-        toolbar_inforight: this.$store.getters.isCesium == 2
-      };
-    }
+   
   },
   data() {
     return {
@@ -138,7 +131,7 @@ export default {
       modelHelper.VCesViewer=cesiumInstance.viewer;
       modelHelper.InitEarthEvent(this);
     },
-    toolbar(type) {
+    toolbar(index,type) {
       switch (type) {
         case "clear":
           this.$store.state.G_MapActionFlag = 0;
@@ -153,8 +146,9 @@ export default {
           // cesiumTools.measureAreaSpace(cesiumInstance.viewer, null);
           break;
         case "layermanage":
-          this.current_com = "providercontrol";
-          this.current_ref = "providercontrol";
+          this.getLayers();
+          this.current_com = this.current_com !='' ? "":"providercontrol";
+          this.current_ref = this.current_com !='' ? "":"providercontrol";
           break;
         case "identify":
           cesiumTools.pick(cesiumInstance.viewer);
@@ -162,9 +156,8 @@ export default {
       }
     },
     getLayers() {
-      this.$http.get("./static/3dlayer.json").then(response => {
-        let data = response.data.Providers;
-        debugger
+      this.$http.get("../../../static/data/cesium/3Dlayer.json").then(res => {
+        let data = res.data.Providers;
         cesiumInstance.layers = data;
       });
     }

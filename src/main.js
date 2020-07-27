@@ -7,7 +7,7 @@ import router from './router'
 import store from "./vuex/store"
 
 //全局注册事件eventBus
-Vue.prototype.$eventBus = new Vue();
+// Vue.prototype.$eventBus = new Vue();
 
 //api模块初始化。引用第三方插件
 import '@/initial/modules'

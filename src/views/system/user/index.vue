@@ -257,7 +257,7 @@ export default {
         disable(params){
             let _this = this;
             this.$showMsgBox({
-              msg: `<p>是否${params.row.enabled? `启用`:`禁用` + params.row.realName}用户?</p>`,
+              msg: `<p>是否${params.row.enabled? `启用`:`禁用` + `【` + params.row.realName}】用户?</p>`,
               type: 'warning',
               isHTML: true
             }).then(() => {
@@ -285,7 +285,7 @@ export default {
         handleDelete (index, row) {
             let _this = this;
             this.$showMsgBox({
-              msg: `<p>是否删除${row.realName}用户?</p>`,
+              msg: `<p>是否删除【${row.realName}】用户?</p>`,
               type: 'warning',
               isHTML: true
             }).then(() => {

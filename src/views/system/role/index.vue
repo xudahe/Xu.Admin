@@ -21,7 +21,7 @@
       <el-col :sm="24" :md="6">
         <el-card class="box-card card-gutter-sm" shadow="hover">
           <div slot="header" class="clearfix">
-            <span class="header">{{sels.RoleName}}&nbsp;-&nbsp;菜单分配</span>
+            <span class="header">{{sels.roleName}}&nbsp;-&nbsp;菜单分配</span>
             <el-button type="primary" style="float: right; padding: 5px 10px" :disabled="!showButton" @click.native="saveMenu">
               <i class="el-icon-check el-icon--left"></i>保存
             </el-button>
@@ -38,21 +38,21 @@
       <el-form :model="roleForm" label-width="80px" :rules="formRules" ref="roleForm">
         <el-row>
           <el-col :span="12">
-            <el-form-item label="角色名称" prop="RoleName">
-              <el-input v-model="roleForm.RoleName" auto-complete="off"></el-input>
+            <el-form-item label="角色名称" prop="roleName">
+              <el-input v-model="roleForm.roleName" auto-complete="off"></el-input>
             </el-form-item>
-            <el-form-item label="备注" prop="Remark">
-              <el-input v-model="roleForm.Remark" auto-complete="off" type="textarea"></el-input>
+            <el-form-item label="备注" prop="remark">
+              <el-input v-model="roleForm.remark" auto-complete="off" type="textarea"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="角色编码" prop="RoleCode">
-              <el-input v-model="roleForm.RoleCode" auto-complete="off"></el-input>
+            <el-form-item label="角色编码" prop="roleCode">
+              <el-input v-model="roleForm.roleCode" auto-complete="off"></el-input>
             </el-form-item>
-            <el-form-item label="状态" prop="Enabled">
-              <el-radio-group v-model="roleForm.Enabled">
-                <el-radio :label="1">正常</el-radio>
-                <el-radio :label="0">禁用</el-radio>
+            <el-form-item label="状态" prop="enabled">
+              <el-radio-group v-model="roleForm.enabled">
+                <el-radio :label="false">正常</el-radio>
+                <el-radio :label="true">禁用</el-radio>
               </el-radio-group>
             </el-form-item>
           </el-col>
@@ -76,22 +76,19 @@ export default {
             filters: {
                 name: ""
             },
-            tableData: [
-              {RoleCode:'GLY1',RoleName:'管理员1',CreateTime:new Date(),Enabled:true},
-              {RoleCode:'GLY2',RoleName:'管理员2',CreateTime:new Date(),Enabled:true}
-            ],
+            tableData: [],
             tableLabel: [
-              // { label: '角色编码', param: 'RoleCode'},
-              { label: '角色名称', param: 'RoleName'},
-              // { label: '备注', param: 'Remark' },
-              { label: '创建时间', param: 'CreateTime', sortable: true,
+              // { label: '角色编码', param: 'roleCode'},
+              { label: '角色名称', param: 'roleName'},
+              // { label: '备注', param: 'remark' },
+              { label: '创建时间', param: 'createTime', sortable: true,
                 formatter: row => {
-                  return (!row.CreateTime || row.CreateTime == '') ? '':this.$formatDate(new Date(row.CreateTime), true);
+                  return (!row.createTime || row.createTime == '') ? '':this.$formatDate(new Date(row.createTime), true);
                 } 
               },
-              { label: '状态', param: 'Enabled', 
+              { label: '状态', param: 'enabled', 
                     render: (h, params) => {
-                        if (params.row.Enabled){
+                        if (!params.row.enabled){
                             return h('el-tag', {
                                 props: {
                                     type: 'success',
@@ -128,15 +125,15 @@ export default {
             formTitle: '',
             formVisible: false, //界面是否显示
             formRules: {
-              RoleName: [{ required: true, message: "请输入角色名", trigger: "blur" }],
+              roleName: [{ required: true, message: "请输入角色名", trigger: "blur" }],
             },
             //界面数据
             roleForm: {
-                Id: 0,
-                RoleName: "",
-                RoleCode: "",
-                Remark: '',
-                Enabled: 1
+                id: 0,
+                roleName: "",
+                roleCode: "",
+                remark: '',
+                enabled: false
             },
 
             showButton: false, //菜单配置保存按钮
@@ -151,10 +148,22 @@ export default {
     },
     methods: {
         //获取角色列表
-        getData() {
+        getData () {
           let _this = this;
-          // this.listLoading = true;
-  
+          this.listLoading = true;
+          this.$ajax(this.$apiSet.getRoleInfo)
+            .then(res => {
+                if (!res.data.success) {
+                    _this.$message({
+                        message: res.data.message,
+                        type: 'error'
+                    });
+                } else {
+                    _this.logining = false;
+                    _this.tableData = res.data.response;
+				       	}
+            })
+            .catch(err => {})
         },
         handleButton (val) {
           if(val.methods == 'handleEdit') this.handleEdit(val.index,val.row)
@@ -166,21 +175,37 @@ export default {
           this.initialMenuCheck(val);
         },
         handleSortChange (val) {
-
+          
         },
         handleSelectionChange (val) {
           this.sels = val;
-
         },
         //删除
         handleDelete(index, row) {
+          let _this = this;
           this.$showMsgBox({
-              msg: `<p>是否删除${row.RoleName}角色?</p>`,
-              type: 'warning',
-              isHTML: true
-            }).then(() => {
-              
-            }).catch(()=>{});
+            msg: `<p>是否删除【${row.roleName}】角色?</p>`,
+            type: 'warning',
+            isHTML: true
+          }).then(() => {
+            _this.$ajax(this.$apiSet.deleteRole,{
+                  id: row.id
+              }) .then(res => {
+                  if (!res.data.success) {
+                      _this.$message({
+                          message: res.data.message,
+                          type: 'error'
+                      });
+                  } else {
+                      _this.getData();
+                      _this.$message({
+                          message: res.data.message,
+                          type: 'success'
+                      });
+				         	}
+              })
+              .catch(err => {})
+          }).catch(()=>{});
         },
         // 初始化菜单选中
         initialMenuCheck(item) {
@@ -199,17 +224,24 @@ export default {
         },
         //菜单绑定
         saveMenu() {
-          const role = { id: this.roleId, menus: [] };
+          let menuIds = [];
           // 得到半选的父节点数据，保存起来
           this.$refs.menu.getHalfCheckedNodes().forEach(function(data, index) {
-            const permission = { id: data.id };
-            role.menus.push(permission);
+            debugger
+            menuIds.push({id: data.id});
           });
           // 得到已选中的 key 值
           this.$refs.menu.getCheckedKeys().forEach(function(data, index) {
-            const permission = { id: data };
-            role.menus.push(permission);
+            debugger
+            menuIds.push({id: data.id});
           });
+          
+          console.log(menuIds)
+          this.roleForm = this.sels
+          this.roleForm.menuIds = menuIds.join(',')
+          
+          this.formTitle = "编辑"
+          this.handleSubmit()
         },
         //显示编辑界面
         handleEdit(index, row) {
@@ -223,15 +255,34 @@ export default {
             this.formVisible = true;
   
             this.roleForm = {
-              CreateBy: "",
-              Name: "",
-              Remark: '',
-              Enabled: ""
+              id: 0,
+              roleName: "",
+              roleCode: "",
+              remark: '',
+              enabled: false
             };
         },
-        handleSubmit: function() {
-            let _this = this;
-          
+        handleSubmit() {
+          let _this = this;
+          let apiUrl = this.formTitle=='编辑' ? this.$apiSet.putRole:this.$apiSet.postRole;
+          this.$ajax(apiUrl, this.roleForm)
+              .then(res => {
+                if (!res.data.success) {
+                    _this.$message({
+                        message: res.data.message,
+                        type: 'error'
+                    });
+                } else {
+                    _this.formVisible = false;
+                    _this.getData();
+
+                    _this.$message({
+                        message: res.data.message,
+                        type: 'success'
+                    });
+					      }
+              })
+              .catch(err => {})
         },
     },
     mounted() {

@@ -14,7 +14,7 @@ const UserModule = {
     url: '/api/User/GetInfoByToken',
     method: 'get'
   },
-  getUserInfo: { //获取全部角色并分页
+  getUserInfo: { //获取全部用户
     url: '/api/User/Get',
     method: 'get'
   }, 
@@ -41,7 +41,7 @@ const UserModule = {
 }
 
 const DeptModule = {
-  getDeptInfo: { //获取全部部门并分页
+  getDeptInfo: { //获取全部部门
     url: '/api/Dept/Get',
     method: 'get'
   },
@@ -68,7 +68,7 @@ const DeptModule = {
 }
 
 const RoleModule = {
-  getRoleInfo: { //获取全部角色并分页
+  getRoleInfo: { //获取全部角色
     url: '/api/Role/Get',
     method: 'get'
   },
@@ -95,7 +95,7 @@ const RoleModule = {
 }
 
 const MenuModule = {
-  getMenuInfo: { //获取全部菜单并分页
+  getMenuInfo: { //获取全部菜单
     url: '/api/Menu/Get',
     method: 'get'
   },

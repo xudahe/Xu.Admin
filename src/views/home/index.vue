@@ -4,7 +4,7 @@
     <swiper :imgList="imgList" style="margin-top:5px;"></swiper>
     <swiper :imgList="imgList" style="margin-top:5px;"></swiper> -->
     <!-- <echarts :options="options"></echarts> -->
-    <cesiumMap ref="cesiumMap" ></cesiumMap>
+    <!-- <cesiumMap ref="cesiumMap" ></cesiumMap> -->
   </div>
 </template>
 

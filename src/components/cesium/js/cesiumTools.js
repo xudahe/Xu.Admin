@@ -4,10 +4,10 @@ import * as Cesium from "cesium/Cesium";
 import * as widgets from "cesium/Widgets/widgets.css";
 
 // import CesiumNavigation from "cesium-navigation-es6"; //导航插件
-import {cesiumInstance } from "./cesiumInstance";
+import { cesiumInstance } from "./cesiumInstance";
 
 export default {
-    //创建三维视图
+    //创建三维视图(容器)
     createScene() {
         let viewer = new Cesium.Viewer("cesiumContainer", {
             animation: false, //是否创建动画小器件，左下角仪表
@@ -26,16 +26,20 @@ export default {
             showRenderLoopErrors: false, //如果设为true，将在一个HTML面板中显示错误信息
             automaticallyTrackDataSourceClocks: true, //自动追踪最近添加的数据源的时钟设置
             contextOptions: undefined, //传递给Scene对象的上下文参数（scene.options）
-            sceneMode: Cesium.SceneMode.SCENE3D, //初始场景模式
+            sceneMode: Cesium.SceneMode.SCENE3D, //设定3维地图的默认场景模式: SCENE2D、SCENE3D、MORPHING
             mapProjection: new Cesium.WebMercatorProjection(), //地图投影体系
-            dataSources: new Cesium.DataSourceCollection(),
+            dataSources: new Cesium.DataSourceCollection(), //需要进行可视化的数据源的集合  
             clock: new Cesium.Clock(), //用于控制当前时间的时钟对象
-            imageryProvider: new Cesium.SingleTileImageryProvider({
-                url: "http://58.213.48.101:81/cesiumData/earth_base.jpg"
+            // imageryProvider: new Cesium.SingleTileImageryProvider({ //选用默认背景地图
+            //     url: "http://58.213.48.101:81/cesiumData/earth_base.jpg"
+            // }),
+            imageryProvider: new Cesium.UrlTemplateImageryProvider({
+                url: "https://mt1.google.cn/vt/lyrs=s&hl=zh-CN&x={x}&y={y}&z={z}&s=Gali"
+            }),
+            terrainProvider : new Cesium.CesiumTerrainProvider({ //地形
+                url : Cesium.IonResource.fromAssetId(3956),
+                requestVertexNormals : true
             })
-            // imageryProvider: new Cesium.UrlTemplateImageryProvider({ //使用自定义数据源
-            //     url: "http://mt1.google.cn/vt/lyrs=s,h&gl=cn&x={x}&y={y}&z={z}&s=Gali"
-            // })
         });
 
         viewer.scene.skyAtmosphere.show = true;
@@ -62,100 +66,137 @@ export default {
         //viewer.extend(Cesium.viewerCesium3DTilesInspectorMixin);
         //var inspectorViewModel = viewer.cesium3DTilesInspector.viewModel;
 
-        let initialPosition = new Cesium.Cartesian3.fromDegrees(120.183639, 33.37464, 10000);
-
+         // 初始定位
+        let initialPosition = new Cesium.Cartesian3.fromDegrees(120.183639, 33.37464, 10000000);
         let homeCameraView = {
-
             destination: initialPosition,
-
         };
-
         viewer.scene.camera.setView(homeCameraView);
 
+        cesiumInstance.viewer = viewer;
+        
+        // silhouette的效果可以理解为物体轮廓、描边，相当于把物体的外轮廓线勾勒出来
         // var silhouette = viewer.scene.postProcessStages.add(
         //     Cesium.PostProcessStageLibrary.createSilhouetteStage()
         // );
         // silhouette.enabled = true;
         // silhouette.uniforms.color = Cesium.Color.RED;
-        // console.log(silhouette.name)
-        //silhouette.name = Cesium.createGuid();
+        // silhouette.name = Cesium.createGuid();
+        
 
+        
+        // 鼠标事件
         let handler3D = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
+        // 监听的是鼠标滑动事件(MOUSE_MOVE)
+        handler3D.setInputAction(function (movement) {
+            var mesDom = document.getElementById('mes');
+            mesDom.style.display = "block";
+            
+            let pick = new Cesium.Cartesian2(
+                movement.endPosition.x,
+                movement.endPosition.y
+            );
+            if (pick) {
+                // 二维屏幕坐标系到三维坐标系的转换
+                let cartesian = viewer.scene.globe.pick(
+                    viewer.camera.getPickRay(pick),
+                    viewer.scene
+                );
+                if (cartesian) {
+                    ///将笛卡尔三维坐标转为地图坐标（弧度）  
+                    let cartographic = viewer.scene.globe.ellipsoid.cartesianToCartographic(
+                        cartesian
+                    );
+                    if (cartographic) {
+                        //海拔
+                        let height = viewer.scene.globe.getHeight(cartographic);
+                        //视角海拔高度
+                        let he = Math.sqrt(
+                            viewer.scene.camera.positionWC.x *
+                            viewer.scene.camera.positionWC.x +
+                            viewer.scene.camera.positionWC.y *
+                            viewer.scene.camera.positionWC.y +
+                            viewer.scene.camera.positionWC.z *
+                            viewer.scene.camera.positionWC.z
+                        );
+                        let he2 = Math.sqrt(
+                            cartesian.x * cartesian.x +
+                            cartesian.y * cartesian.y +
+                            cartesian.z * cartesian.z
+                        );
+                        //地理坐标（弧度）转经纬度坐标
+                        let point = [
+                            (cartographic.longitude / Math.PI) * 180,
+                            (cartographic.latitude / Math.PI) * 180
+                        ];
+                        if (!height) {
+                            height = 0;
+                        }
+                        if (!he) {
+                            he = 0;
+                        }
+                        if (!he2) {
+                            he2 = 0;
+                        }
+                        if (!point) {
+                            point = [0, 0];
+                        }
+                        let str =
+                            '<div style="line-height:30px;color:#FFF;mar"><strong>视角海拔高度: ' +
+                            (he - he2).toFixed(2) +
+                            "米</strong><strong>&nbsp;&nbsp;&nbsp;经度：" +
+                            point[0].toFixed(6) +
+                            "</strong><strong>&nbsp;&nbsp;&nbsp;纬度：" +
+                            point[1].toFixed(6) +
+                            "</strong></div>";
 
-        // handler3D.setInputAction(function (movement) {
-        //     let pick = new Cesium.Cartesian2(
-        //         movement.endPosition.x,
-        //         movement.endPosition.y
-        //     );
-        //     if (pick) {
-        //         let cartesian = viewer.scene.globe.pick(
-        //             viewer.camera.getPickRay(pick),
-        //             viewer.scene
-        //         );
-        //         if (cartesian) {
-        //             //世界坐标转地理坐标（弧度）
-        //             let cartographic = viewer.scene.globe.ellipsoid.cartesianToCartographic(
-        //                 cartesian
-        //             );
-        //             if (cartographic) {
-        //                 //海拔
-        //                 let height = viewer.scene.globe.getHeight(cartographic);
-        //                 //视角海拔高度
-        //                 let he = Math.sqrt(
-        //                     viewer.scene.camera.positionWC.x *
-        //                     viewer.scene.camera.positionWC.x +
-        //                     viewer.scene.camera.positionWC.y *
-        //                     viewer.scene.camera.positionWC.y +
-        //                     viewer.scene.camera.positionWC.z *
-        //                     viewer.scene.camera.positionWC.z
-        //                 );
-        //                 let he2 = Math.sqrt(
-        //                     cartesian.x * cartesian.x +
-        //                     cartesian.y * cartesian.y +
-        //                     cartesian.z * cartesian.z
-        //                 );
-        //                 //地理坐标（弧度）转经纬度坐标
-        //                 let point = [
-        //                     (cartographic.longitude / Math.PI) * 180,
-        //                     (cartographic.latitude / Math.PI) * 180
-        //                 ];
-        //                 if (!height) {
-        //                     height = 0;
-        //                 }
-        //                 if (!he) {
-        //                     he = 0;
-        //                 }
-        //                 if (!he2) {
-        //                     he2 = 0;
-        //                 }
-        //                 if (!point) {
-        //                     point = [0, 0];
-        //                 }
-        //                 let str =
-        //                     '<div style="line-height:30px;color:#FFF;mar"><strong>视角海拔高度: ' +
-        //                     (he - he2).toFixed(2) +
-        //                     "米</strong><strong>&nbsp;&nbsp;&nbsp;经度：" +
-        //                     point[0].toFixed(6) +
-        //                     "</strong><strong>&nbsp;&nbsp;&nbsp;纬度：" +
-        //                     point[1].toFixed(6) +
-        //                     "</strong></div>";
-        //                 //bus.$emit("showCoord", str);
-        //             }
+                        mesDom.innerHTML= str;
+                        mesDom.style.display = "block";
+                        
+                    }
+                }
+            }
+        }, Cesium.ScreenSpaceEventType.MOUSE_MOVE); 
+        
+        // let local_provider_DOM_global7 = new Cesium.ImageryLayer(
+        //     new Cesium.UrlTemplateImageryProvider({
+        //       maximumLevel:18,//最大缩放级别
+        //       url : 'https://webst02.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}',
+        //       style: "default",
+        //       format: "image/png",
+        //       tileMatrixSetID: "GoogleMapsCompatible"
+        //     })
+        //   );
+        // viewer.imageryLayers.add(local_provider_DOM_global7);
+  
+        //高德标注
+        viewer.imageryLayers.addImageryProvider(
+            new Cesium.UrlTemplateImageryProvider({
+                maximumLevel:18,//最大缩放级别
+                url : 'https://wprd02.is.autonavi.com/appmaptile?x={x}&y={y}&z={z}&lang=zh_cn&size=1&scl=2&style=8&ltype=11',
+                style: "default",
+                format: "image/png",
+                tileMatrixSetID: "GoogleMapsCompatible"
+            })
+        );
+  
+        
+
+        //自定义logo
+        // var mapDom = document.getElementById("cesiumContainer"); 
+        // var viewportQuad = new Cesium.ViewportQuad();
+        // viewportQuad.rectangle = new Cesium.BoundingRectangle(mapDom.clientWidth - 85, 5, 80, 80 );
+        // viewer.scene.primitives.add(viewportQuad);
+        // viewportQuad.material = new Cesium.Material({
+        //     fabric: {
+        //         type: "Image",
+        //         uniforms: {
+        //             color: new Cesium.Color(1.0, 1.0, 1.0, 1.0),
+        //             image: "图片路径"
         //         }
         //     }
-        // }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
-        cesiumInstance.viewer = viewer;
-
-        // let local_provider_DOM_global7 = new Cesium.ImageryLayer(
-        //   new Cesium.UrlTemplateImageryProvider({
-        //     url: "http://58.213.48.101:81/cesiumData/DOM_global7/{z}/{x}/{y}.png",
-        //     tilingScheme: new Cesium.WebMercatorTilingScheme(),
-        //     minimumLevel: 0,
-        //     maximumLevel: 7,
-        //     show: true
-        //   })
-        // );
-        // viewer.imageryLayers.add(local_provider_DOM_global7);
+        // });
+    
 
         if (cesiumInstance.layers.length > 0) {
 
@@ -191,7 +232,7 @@ export default {
             // cartesian = viewer.scene.pickPosition(movement.endPosition);
             let ray = viewer.camera.getPickRay(movement.endPosition);
             cartesian = viewer.scene.globe.pick(ray, viewer.scene);
-            //cartesian = viewer.scene.camera.pickEllipsoid(movement.endPosition, viewer.scene.globe.ellipsoid);
+            //cartesian = viewer.scene.camera.pickEllipsoid(movement.endPosition, viewer.scene.globe.ellipsoid); // 捕获椭球体，将笛卡尔二维平面坐标转为椭球体的笛卡尔三维坐标，返回球体表面的点  
             if (positions.length >= 2) {
                 if (!Cesium.defined(poly)) {
                     poly = new PolyLinePrimitive(positions);
@@ -311,7 +352,7 @@ export default {
         let cartesian = null;
         let floatingPoint; //浮动点
         // tooltip.style.display = "block";
-
+        
         handler.setInputAction(function (movement) {
             // tooltip.style.left = movement.endPosition.x + 3 + "px";
             // tooltip.style.top = movement.endPosition.y - 25 + "px";
@@ -331,7 +372,7 @@ export default {
                 // tooltip.innerHTML='<p>'+distance+'米</p>';
             }
         }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
-
+        
         handler.setInputAction(function (movement) {
             // tooltip.style.display = "none";
             // cartesian = viewer.scene.pickPosition(movement.position); 
@@ -422,7 +463,6 @@ export default {
                 let dis_temp2 = distance(positions[j], positions[k]);
                 res += dis_temp1 * dis_temp2 * Math.abs(Math.sin(totalAngle));
             }
-
 
             return (res / 1000000.0).toFixed(4);
         }
@@ -685,3 +725,32 @@ export default {
         }
     }
 }
+
+///////////////////////////坐标转换 //////////////////////////////
+//参考资料：https://www.cnblogs.com/shoufengwei/p/7998468.html
+
+// 2.4.1 坐标系
+// new Cesium.Cartesian2(1,1) //表示一个二维笛卡尔坐标系，也就是直角坐标系（屏幕坐标系）
+// new Cesium.Cartesian3(1,1,1) //表示一个三维笛卡尔坐标系，也是直角坐标系(就是真实世界的坐标系)
+
+// 2.4.2 二维屏幕坐标系到三维坐标系的转换
+// var pick1= scene.globe.pick(viewer.camera.getPickRay(pt1), scene) //其中pt1为一个二维屏幕坐标。
+
+// 2.4.3 三维坐标到地理坐标的转换
+// var geoPt1= scene.globe.ellipsoid.cartesianToCartographic(pick1) //其中pick1是一个Cesium.Cartesian3对象。
+
+// 2.4.4 地理坐标到经纬度坐标的转换
+// var point1=[geoPt1.longitude / Math.PI * 180,geoPt1.latitude / Math.PI * 180]; //其中geoPt1是一个地理坐标。
+
+// 2.4.5 经纬度坐标转地理坐标（弧度）
+// var cartographic = Cesium.Cartographic.fromDegree(point) //point是经纬度值
+// var coord_wgs84 = Cesium.Cartographic.fromDegrees(lng, lat, alt);//单位：度，度，米
+
+// 2.4.6 经纬度坐标转世界坐标
+// var cartesian = Cesium.Cartesian3.fromDegree(point)
+
+// 2.4.7 计算两个三维坐标系之间的距离
+// var d = Cesium.Cartesian3.distance(
+//     new Cesium.Cartesian3(pick1.x, pick1.y, pick1.z), 
+//     new Cesium.Cartesian3(pick3.x, pick3.y, pick3.z)
+// ); //pick1、pick3都是三维坐标系

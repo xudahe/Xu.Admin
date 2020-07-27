@@ -33,6 +33,7 @@
 
 </style>
 <template>
+  <!-- Cesium 容器 -->
   <div id="cesiumContainer" style="height:100%;width:100%;position: relative;">
     <div class="toolbar_infos" id="cesiumToolBar">
       <el-button-group>
@@ -44,10 +45,15 @@
       </el-button-group>
     </div>
     <component :is="current_com" :ref="current_ref"></component>
+    <span id="mes" style="position: absolute; top: 95%; left: 5px;z-index: 2;color: white;"></span>
   </div>
 </template>
 
 <script>
+/**
+ * @description  3dmap 球体封装
+ */
+
 import { cesiumInstance } from "./js/cesiumInstance";
 import cesiumTools from "./js/cesiumTools";
 import {modelHelper} from "./js/modelHelper";

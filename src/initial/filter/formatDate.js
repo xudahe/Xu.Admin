@@ -11,11 +11,12 @@ const transfer = (val) => {
 }
 
 /**
- * @author xuanzai
+ * @author xu
  * @description 日期格式化
  * @param {String} val
  * @param {String} format
  * @returns {String} result
+ * @description  <!--使用过滤器--> {{ dateStr | formatDate }}
  */
 const formatDate = (val, format) => {
   if(isEmpty(val)) return

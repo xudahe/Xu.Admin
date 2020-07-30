@@ -1,13 +1,16 @@
 import Vue from 'vue'
 // 引入iview框架
-import {
+  import {
     Icon, 
     Drawer,
     Select,
+    Button,
     Option,
     Tree,
     Dropdown,
     DropdownMenu,
+    CheckboxGroup,
+    Checkbox,
   } from 'view-design'
 
   // 引入Icon图标组件
@@ -18,6 +21,9 @@ import {
   Vue.component('Select', Select)
   // 引入Option下拉框选项组件
   Vue.component('Option', Option)
+  Vue.component('Button', Button)
   Vue.component('Tree', Tree)
   Vue.component('Dropdown', Dropdown)
   Vue.component('DropdownMenu', DropdownMenu)
+  Vue.component('CheckboxGroup', CheckboxGroup)
+  Vue.component('Checkbox', Checkbox)

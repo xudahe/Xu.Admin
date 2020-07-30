@@ -13,20 +13,6 @@ export function isPhone(s) {
 	return /^([0-9]{3,4}-)?[0-9]{7,8}$/.test(s)
 }
 /**
- * @description 验证是否为手机号码
- * @param {String} s 
- */
-export function isMobile(s) {
-	return /^1[0-9]{10}$/.test(s)
-}
-/**
- * @description 验证是否为身份证号码
- * @param {String} s
- */
-export function isId(e) {
-	return /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(s)
-}
-/**
  * @description 验证是否为网络地址
  * 校验规则：
  *    以https://、http://、ftp://、rtsp://、mms://开头、或者没有这些开头
@@ -153,7 +139,7 @@ export function isDigit(value) {
 	}
 }
 /**
- * @description 判断吗是否手机号码
+ * @description 验证是否为手机号码
  * @param {String} s
  */
 export function isMobileNumber(e) {

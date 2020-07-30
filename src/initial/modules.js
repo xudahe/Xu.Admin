@@ -9,7 +9,7 @@ import vueg from 'vueg'
 import mavonEditor  from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 // 引入前端错误日志
-import './error_log'
+import './other/error_log'
 // 引入icon组件
 import '@/icons'
 // 引入UI框架

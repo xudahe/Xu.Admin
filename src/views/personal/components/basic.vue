@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { isMobile, isEmail } from "@/utils/validate";
+import { isMobileNumber, isEmail } from "@/utils/validate";
 import { mapState } from 'vuex'
 export default {
   data() {
@@ -35,7 +35,7 @@ export default {
 		const validPhone = (rule, value, callback) => {
 		  if (!value) {
 		    callback(new Error("请输入手机号码"));
-		  } else if (!isMobile(value)) {
+		  } else if (!isMobileNumber(value)) {
 		    callback(new Error("请输入正确的11位手机号码"));
 		  } else {
 		    callback();

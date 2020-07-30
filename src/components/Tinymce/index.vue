@@ -9,7 +9,6 @@
     import plugins from './js/plugins';
     import toolbar from './js/toolbar';
 
-    import convertHttp from '@/utils/convertHttp.js';
     import tinymce from 'tinymce/tinymce'
     import Editor from '@tinymce/tinymce-vue'
     import 'tinymce/themes/silver'
@@ -91,7 +90,7 @@
 			        		// 		}
 			        		// 	})
 			        		// 	.then(result => {
-			        		// 		callback(convertHttp(result.data.url));
+			        		// 		callback(result.data.url);
 			        		// 	});
 			        	});
 			        },
@@ -105,7 +104,7 @@
 						//     	data: formData
 						//     })
 						//     .then(result => {
-						//     	success(convertHttp(result.data.url)); // 图片上传成功以后调用success,图片就可以在富文本编辑器中显示
+						//     	success(result.data.url); // 图片上传成功以后调用success,图片就可以在富文本编辑器中显示
 						//     }).catch(e => {
 						//     	failure(e)
 						//     });

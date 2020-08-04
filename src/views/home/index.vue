@@ -1,18 +1,24 @@
 <template>
   <div style="height:100%;width:100%;" class="home">
-    <!-- <swiper :imgList="imgList"></swiper>
-    <swiper :imgList="imgList" style="margin-top:5px;"></swiper>
-    <swiper :imgList="imgList" style="margin-top:5px;"></swiper> -->
-    <!-- <echarts :options="options"></echarts> -->
+    <!-- <swiper :imgList="imgList"></swiper> -->
     <!-- <cesiumMap ref="cesiumMap" ></cesiumMap> -->
+    <el-button @click.native="showdialog">弹出框</el-button>
+    <dialogtt  ref="dialog" v-model="dialog.show" :title="dialog.title" :buttons="dialog.buttons" :bodyshow="dialog.bodyshow" >
+		<div style="width: 500px;height: 300px;">
+            <!--通过@hook:updated监听组件的updated生命钩子函数(外部监听生命周期函数)-->
+            <!--组件的所有生命周期钩子都可以通过@hook:钩子函数名 来监听触发-->
+		    <echarts :options="options" @hook:updated="handleEchartUpdated"></echarts>
+		</div>
+    </dialogtt>
   </div>
 </template>
 
 <script>
 
+import dialogtt from "../../components/dialog/index"
 export default {
   components: {
-    
+    dialogtt
   },
   data() {
     return {
@@ -22,7 +28,16 @@ export default {
         {img: './static/img/home/b2.png'},
         {img: './static/img/home/b3.png'},
         {img: './static/img/home/b4.png'},
-      ]
+      ],
+
+       dialog: {
+        show: false,
+        title: {
+          text: '分析',
+          className: 'xa-bg-blue' //标题样式类名，包含`background`、`color`即可
+        },
+        bodyshow: true
+      },
     };
   },
   mounted(){
@@ -178,6 +193,13 @@ export default {
           }
         ]
       }
+    },
+    showdialog(){
+        this.dialog.show = true;
+        this.$refs.dialog.retresize();
+    },
+    handleEchartUpdated(){
+        console.log('echarts组件的updated钩子函数被触发')
     },
   }
 };

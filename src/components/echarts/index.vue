@@ -56,7 +56,14 @@ export default {
     },
     mounted (){
         this.initChart(); // 初始化echarts表格
-       	window.addEventListener("resize", this.events, false);
+
+        // 监听窗口发生变化，resize组件 （内部监听生命周期函数）
+        window.addEventListener("resize", this.events, false);
+   
+        // 通过hook监听组件销毁钩子函数，并取消监听事件
+        this.$once('hook:beforeDestroy', () => {
+          window.removeEventListener('resize',  this.events, false)
+        })
     },
     methods: {
         initChart() {
@@ -67,7 +74,7 @@ export default {
         },
     },
     beforeDestroy(){
-        window.removeEventListener('resize', this.events, false)
+        // window.removeEventListener('resize', this.events, false)
     }
 }
 </script>

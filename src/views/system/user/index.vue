@@ -68,7 +68,8 @@
                         <el-form-item label="部门" prop="deptName">
                             <el-select v-model="userForm.deptName" placeholder="请选择所属部门">
                                 <el-option label="财务部" value="1"></el-option>
-                                <el-option label="市场部" value="2"></el-option>
+                                <el-option label="技术部" value="2"></el-option>
+                                <el-option label="市场部" value="3"></el-option>
                             </el-select>
                         </el-form-item>
                         <el-form-item label="性别" prop="sex">
@@ -124,7 +125,7 @@ export default {
                         return (!row.createTime || row.createTime == '') ? '':this.$formatDate(new Date(row.createTime), true);
                     } 
                 },
-                { label: '状态', param: 'enabled', 
+                { label: '状态', param: 'enabled', width:'80', 
                     render: (h, params) => {
                         if (!params.row.enabled){
                             return h('el-tag', {
@@ -136,8 +137,9 @@ export default {
 									cursor: 'pointer'
                                 },
                                 on: {
-		              				click: () => {
-		              					this.disable(params)
+		              				click: e => {
+                                        e.stopPropagation(); //阻止row-click事件冒泡
+		              					this.disable(params.row)
 		              				}
 		              			}
                             },'正常')
@@ -152,8 +154,9 @@ export default {
 									cursor: 'pointer'
                                 },
                                 on: {
-		              				click: () => {
-		              					this.disable(params)
+		              				click: e => {
+                                        e.stopPropagation(); //阻止row-click事件冒泡
+		              					this.disable(params.row)
 		              				}
 		              			}
                             },'禁用')
@@ -173,11 +176,8 @@ export default {
             nowPage: 1, // 当前页数
             nowSize: 10, // 当前页条数
     
-            listLoading: false,
+            loading: false,
             sels: [],//列表选中列
-            
-            roleFormVisible: false, //绑定页面是否显示
-            roleLoading: false,
             
             formTitle: '',
             formVisible: false, //界面是否显示
@@ -223,7 +223,7 @@ export default {
         //获取用户列表
         getData () {
             let _this = this;
-            this.listLoading = true;
+            this.loading = true;
             this.$ajax(this.$apiSet.getUserInfo)
                 .then(res => {
                     if (!res.data.success) {
@@ -232,7 +232,7 @@ export default {
                             type: 'error'
                         });
                     } else {
-                        _this.logining = false;
+                        _this.loading = false;
                         _this.tableData = res.data.response;
 					}
                 })
@@ -254,16 +254,16 @@ export default {
         handleSelectionChange (val) {
             this.sels = val;
         },
-        disable(params){
+        disable(row){
             let _this = this;
             this.$showMsgBox({
-              msg: `<p>是否${params.row.enabled? `启用`:`禁用` + `【` + params.row.realName}】用户?</p>`,
+              msg: `<p>是否${row.enabled ? `启用`:`禁用` + `【` + row.realName}】用户?</p>`,
               type: 'warning',
               isHTML: true
             }).then(() => {
                 _this.$ajax(this.$apiSet.disableUser,{
-                        id: params.row.id,
-                        falg: !params.row.enabled
+                        id: row.id,
+                        falg: !row.enabled
                     }) .then(res => {
                         if (!res.data.success) {
                             _this.$message({

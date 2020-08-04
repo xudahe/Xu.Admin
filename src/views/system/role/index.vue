@@ -78,34 +78,52 @@ export default {
             },
             tableData: [],
             tableLabel: [
-              // { label: '角色编码', param: 'roleCode'},
+              { label: '角色编码', param: 'roleCode'},
               { label: '角色名称', param: 'roleName'},
               // { label: '备注', param: 'remark' },
-              { label: '创建时间', param: 'createTime', sortable: true,
+              { label: '创建时间', param: 'createTime', sortable: true, width:'160',
                 formatter: row => {
                   return (!row.createTime || row.createTime == '') ? '':this.$formatDate(new Date(row.createTime), true);
                 } 
               },
-              { label: '状态', param: 'enabled', 
-                    render: (h, params) => {
-                        if (!params.row.enabled){
-                            return h('el-tag', {
-                                props: {
-                                    type: 'success',
-                                    size: 'mini',
-                                },
-                            },'正常')
-                        }
-                        else {
-                            return h('el-tag', {
-                                props: {
-                                    type: 'danger',
-                                    size: 'mini',
-                                },
-                            },'禁用')
-                        }
-                    },
+              { label: '状态', param: 'enabled', width:'80',
+                render: (h, params) => {
+                  if (!params.row.enabled){
+                    return h('el-tag', {
+                      props: {
+                        type: 'success',
+                        size: 'mini',
+                      },
+                      style: {
+							          cursor: 'pointer'
+                      },
+                      on: {
+		            	    	click: e => {
+                          e.stopPropagation(); //阻止row-click事件冒泡
+		            	    		this.disable(params.row)
+		            	    	}
+		            	    }
+                    },'正常')
+                  }
+                  else {
+                    return h('el-tag', {
+                      props: {
+                        type: 'danger',
+                        size: 'mini',
+                      },
+                      style: {
+							         	cursor: 'pointer'
+                      },
+                      on: {
+		            	    	click: e => {
+                          e.stopPropagation(); //阻止row-click事件冒泡
+		            	    		this.disable(params.row)
+		            	    	}
+		            	    }
+                    },'禁用')
+                  }
                 },
+              },
             ],
             tableOption: {
               label: '操作',
@@ -119,7 +137,7 @@ export default {
             nowPage: 1, // 当前页数
             nowSize: 10, // 当前页条数
    
-            listLoading: false,
+            loading: false,
             sels: [], //列表选中列
     
             formTitle: '',
@@ -129,11 +147,11 @@ export default {
             },
             //界面数据
             roleForm: {
-                id: 0,
-                roleName: "",
-                roleCode: "",
-                remark: '',
-                enabled: false
+              id: 0,
+              roleName: "",
+              roleCode: "",
+              remark: '',
+              enabled: false
             },
 
             showButton: false, //菜单配置保存按钮
@@ -150,7 +168,7 @@ export default {
         //获取角色列表
         getData () {
           let _this = this;
-          this.listLoading = true;
+          this.loading = true;
           this.$ajax(this.$apiSet.getRoleInfo)
             .then(res => {
                 if (!res.data.success) {
@@ -159,7 +177,7 @@ export default {
                         type: 'error'
                     });
                 } else {
-                    _this.logining = false;
+                    _this.loading = false;
                     _this.tableData = res.data.response;
 				       	}
             })
@@ -179,6 +197,33 @@ export default {
         },
         handleSelectionChange (val) {
           this.sels = val;
+        },
+        disable(row){
+          let _this = this;
+          this.$showMsgBox({
+            msg: `<p>是否${row.enabled ? `启用`:`禁用` + `【` + row.roleName}】角色?</p>`,
+            type: 'warning',
+            isHTML: true
+          }).then(() => {
+            _this.$ajax(this.$apiSet.disableRole,{
+                id: row.id,
+                falg: !row.enabled
+            }).then(res => {
+                if (!res.data.success) {
+                    _this.$message({
+                        message: res.data.message,
+                        type: 'error'
+                    });
+                } else {
+                    _this.getData();
+                    _this.$message({
+                        message: res.data.message,
+                        type: 'success'
+                    });
+				  	    }
+            })
+            .catch(err => {})
+          }).catch(()=>{});
         },
         //删除
         handleDelete(index, row) {

@@ -22,27 +22,27 @@
       <el-form :model="deptForm" label-width="80px" :rules="formRules" ref="deptForm">
         <el-row>
           <el-col :span="12">
-            <el-form-item label="部门名称" prop="DeptName">
-              <el-input v-model="deptForm.DeptName" auto-complete="off"></el-input>
+            <el-form-item label="部门名称" prop="deptName">
+              <el-input v-model="deptForm.deptName" auto-complete="off"></el-input>
             </el-form-item>
             <el-form-item label="负责人" prop="DeptManager">
               <el-input v-model="deptForm.DeptManager" auto-complete="off"></el-input>
             </el-form-item>
-            <el-form-item label="备注" prop="Remark">
-              <el-input v-model="deptForm.Remark" auto-complete="off" type="textarea"></el-input>
+            <el-form-item label="备注" prop="remark">
+              <el-input v-model="deptForm.remark" auto-complete="off" type="textarea"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="部门编码" prop="DeptCode">
-              <el-input v-model="deptForm.DeptCode" auto-complete="off"></el-input>
+            <el-form-item label="部门编码" prop="deptCode">
+              <el-input v-model="deptForm.deptCode" auto-complete="off"></el-input>
             </el-form-item>
             <el-form-item label="上级部门" prop="ParentDept">
               <el-input v-model="deptForm.ParentDept" auto-complete="off"></el-input>
             </el-form-item>
-            <el-form-item label="状态" prop="Enabled">
-              <el-radio-group v-model="deptForm.Enabled">
-                <el-radio :label="1">正常</el-radio>
-                <el-radio :label="0">禁用</el-radio>
+            <el-form-item label="状态" prop="enabled">
+              <el-radio-group v-model="deptForm.enabled">
+                <el-radio :label="false">正常</el-radio>
+                <el-radio :label="true">禁用</el-radio>
               </el-radio-group>
             </el-form-item>
           </el-col>
@@ -67,53 +67,54 @@ export default {
             filters: {
                 name: ""
             },
-            tableData: [
-              {DeptCode:'鱼',DeptName:'king',DeptUser:'市场部',Remark:"",CreateTime: new Date(),Enabled:true},
-              {DeptCode:'猫',DeptName:'tangmu',DeptUser:'市场部',Remark:"",CreateTime: new Date(),Enabled:false},
-              {DeptCode:'鼠',DeptName:'tuoni',DeptUser:'市场部',Remark:"",CreateTime: new Date(),Enabled:false},
-              {DeptCode:'鼠',DeptName:'tuoni',DeptUser:'市场部',Remark:"",CreateTime: new Date(),Enabled:false},
-              {DeptCode:'鼠',DeptName:'tuoni',DeptUser:'市场部',Remark:"",CreateTime: new Date(),Enabled:false},
-              {DeptCode:'鼠',DeptName:'tuoni',DeptUser:'市场部',Remark:"",CreateTime: new Date(),Enabled:false},
-              {DeptCode:'鼠',DeptName:'tuoni',DeptUser:'市场部',Remark:"",CreateTime: new Date(),Enabled:false},
-              {DeptCode:'鼠',DeptName:'tuoni',DeptUser:'市场部',Remark:"",CreateTime: new Date(),Enabled:false},
-              {DeptCode:'鼠',DeptName:'tuoni',DeptUser:'市场部',Remark:"",CreateTime: new Date(),Enabled:false},
-              {DeptCode:'鼠',DeptName:'tuoni',DeptUser:'市场部',Remark:"",CreateTime: new Date(),Enabled:false},
-              {DeptCode:'鼠',DeptName:'tuoni',DeptUser:'市场部',Remark:"",CreateTime: new Date(),Enabled:false},
-              {DeptCode:'鼠',DeptName:'tuoni',DeptUser:'市场部',Remark:"",CreateTime: new Date(),Enabled:false},
-              {DeptCode:'鼠',DeptName:'tuoni',DeptUser:'市场部',Remark:"",CreateTime: new Date(),Enabled:false},
-              {DeptCode:'鼠',DeptName:'tuoni',DeptUser:'市场部',Remark:"",CreateTime: new Date(),Enabled:false},
-              {DeptCode:'鼠',DeptName:'tuoni',DeptUser:'市场部',Remark:"",CreateTime: new Date(),Enabled:false},
-              {DeptCode:'鼠',DeptName:'tuoni',DeptUser:'市场部',Remark:"",CreateTime: new Date(),Enabled:false},
-            ],
+            tableData: [],
             tableLabel: [
-              { label: '部门编码', param: 'DeptCode'},
-              { label: '部门名称', param: 'DeptName'},
-              { label: '部门负责人', param: 'DeptUser'},
-              { label: '备注', param: 'Remark' },
-              { label: '创建时间', param: 'CreateTime', sortable: true,
+              { label: '部门编码', param: 'deptCode'},
+              { label: '部门名称', param: 'deptName'},
+              { label: '部门负责人', param: 'deptUser'},
+              { label: '备注', param: 'remark' },
+              { label: '创建时间', param: 'createTime', sortable: true, width:'160',
                 formatter: row => {
-                  return (!row.CreateTime || row.CreateTime == '') ? '':this.$formatDate(new Date(row.CreateTime), true);
+                  return (!row.createTime || row.createTime == '') ? '':this.$formatDate(new Date(row.createTime), true);
                 } 
               },
-              { label: '状态', param: 'Enabled', 
-                    render: (h, params) => {
-                        if (params.row.Enabled){
-                            return h('el-tag', {
-                                props: {
-                                    type: 'success',
-                                    size: 'mini',
-                                },
-                            },'正常')
-                        }
-                        else {
-                            return h('el-tag', {
-                                props: {
-                                    type: 'danger',
-                                    size: 'mini',
-                                },
-                            },'禁用')
-                        }
-                    },
+              { label: '状态', param: 'enabled', width:'80', 
+                render: (h, params) => {
+                  if (!params.row.enabled){
+                    return h('el-tag', {
+                      props: {
+                        type: 'success',
+                        size: 'mini',
+                      },
+                      style: {
+							          cursor: 'pointer'
+                      },
+                      on: {
+		            	    	click: e => {
+                          e.stopPropagation(); //阻止row-click事件冒泡
+		            	    		this.disable(params.row)
+		            	    	}
+		            	    }
+                    },'正常')
+                  }
+                  else {
+                    return h('el-tag', {
+                      props: {
+                        type: 'danger',
+                        size: 'mini',
+                      },
+                      style: {
+							         	cursor: 'pointer'
+                      },
+                      on: {
+		            	    	click: e => {
+                          e.stopPropagation(); //阻止row-click事件冒泡
+		            	    		this.disable(params.row)
+		            	    	}
+		            	    }
+                    },'禁用')
+                  }
+                },
               },
             ],
             tableOption: {
@@ -128,23 +129,23 @@ export default {
             nowPage: 1, // 当前页数
             nowSize: 10, // 当前页条数
         
-            listLoading: false,
+            loading: false,
             sels: [], //列表选中列
     
             formTitle: '',
             formVisible: false, //界面是否显示
             formRules: {
-              DeptName: [{ required: true, message: "请输入部门名称", trigger: "blur" }],
+              deptName: [{ required: true, message: "请输入部门名称", trigger: "blur" }],
             },
             //界面数据
             deptForm: {
-                Id: 0,
-                DeptCode: "",
-                DeptName: "",
+                id: 0,
+                deptCode: "",
+                deptName: "",
                 DeptManager: "",
                 ParentDept: "",
-                Remark: '',
-                Enabled: 1
+                remark: '',
+                enabled: false
             }
     
         }
@@ -152,8 +153,21 @@ export default {
     methods: {
         //获取部门列表
         getData() {
-            let _this = this;
-            // this.listLoading = true;
+          let _this = this;
+          this.loading = true;
+          this.$ajax(this.$apiSet.getDeptInfo)
+            .then(res => {
+                if (!res.data.success) {
+                    _this.$message({
+                        message: res.data.message,
+                        type: 'error'
+                    });
+                } else {
+                    _this.loading = false;
+                    _this.tableData = res.data.response;
+				       	}
+            })
+            .catch(err => {})
         },
         handleButton (val) {
           if(val.methods == 'handleEdit') this.handleEdit(val.index,val.row)
@@ -165,10 +179,37 @@ export default {
         handleSelectionChange (val) {
           this.sels = sels;
         },
+        disable(row){
+          let _this = this;
+          this.$showMsgBox({
+            msg: `<p>是否${row.enabled ? `启用`:`禁用` + `【` + row.deptName}】部门?</p>`,
+            type: 'warning',
+            isHTML: true
+          }).then(() => {
+            _this.$ajax(this.$apiSet.disableDept,{
+                id: row.id,
+                falg: !row.enabled
+            }).then(res => {
+                if (!res.data.success) {
+                    _this.$message({
+                        message: res.data.message,
+                        type: 'error'
+                    });
+                } else {
+                    _this.getData();
+                    _this.$message({
+                        message: res.data.message,
+                        type: 'success'
+                    });
+				  	    }
+            })
+            .catch(err => {})
+          }).catch(()=>{});
+        },
         //删除
         handleDelete(index, row) {
           this.$showMsgBox({
-             msg: `<p>是否删除${row.DeptName}?</p>`,
+             msg: `<p>是否删除【${row.deptName}】部门?</p>`,
              type: 'warning',
              isHTML: true
            }).then(() => {
@@ -187,12 +228,13 @@ export default {
             this.formVisible = true;
   
             this.deptForm = {
-              CreateBy: "",
-              DeptCode: "",
-              DeptName: "",
-              DeptUser: "",
-              Remark: '',
-              Enabled: ""
+              id: 0,
+              deptCode: "",
+              deptName: "",
+              DeptManager: "",
+              ParentDept: "",
+              remark: '',
+              enabled: false
             };
         },
         handleSubmit: function() {

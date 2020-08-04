@@ -22,13 +22,13 @@
       <el-form :model="menuForm" label-width="80px" :rules="formRules" ref="menuForm">
         <el-row>
           <el-col :span="12">
-            <el-form-item label="菜单类名" prop="ClassName">
-              <el-input v-model="menuForm.ClassName" auto-complete="off"></el-input>
+            <el-form-item label="菜单类名" prop="className">
+              <el-input v-model="menuForm.className" auto-complete="off"></el-input>
             </el-form-item>
-            <el-form-item label="系统名称" prop="SystemName">
-              <el-select v-model="menuForm.SystemName" placeholder="请选择系统名称">
-                <el-option label="应用系统" value="应用系统"></el-option>
-                <el-option label="大屏系统" value="大屏系统"></el-option>
+            <el-form-item label="系统名称" prop="systemName">
+              <el-select v-model="menuForm.systemName" placeholder="请选择系统名称">
+                <el-option label="应用" value="应用"></el-option>
+                <el-option label="大屏" value="大屏"></el-option>
               </el-select>
             </el-form-item>
             <el-form-item label="图标" prop="Icon">
@@ -49,27 +49,27 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="菜单名称" prop="MenuName">
-              <el-input v-model="menuForm.MenuName" auto-complete="off"></el-input>
+            <el-form-item label="菜单名称" prop="menuName">
+              <el-input v-model="menuForm.menuName" auto-complete="off"></el-input>
             </el-form-item>
-            <el-form-item label="父级菜单" prop="ParentName">
-              <el-select v-model="menuForm.ParentName" placeholder="请选择父级菜单">
+            <el-form-item label="父级菜单" prop="parentName">
+              <el-select v-model="menuForm.parentName" placeholder="请选择父级菜单">
                 <el-option label="无" value="无"></el-option>
               </el-select>
             </el-form-item>
             <el-form-item label="序号" prop="Index">
               <el-input v-model="menuForm.Index" auto-complete="off" placeholder="请填写序号"></el-input>
             </el-form-item>
-            <el-form-item label="状态" prop="Enabled">
-              <el-radio-group v-model="menuForm.Enabled">
-                <el-radio :label="1">正常</el-radio>
-                <el-radio :label="0">禁用</el-radio>
+            <el-form-item label="状态" prop="enabled">
+              <el-radio-group v-model="menuForm.enabled">
+                <el-radio :label="false">正常</el-radio>
+                <el-radio :label="true">禁用</el-radio>
               </el-radio-group>
             </el-form-item>
           </el-col>
           <el-col :span="24">
-            <el-form-item label="备注" prop="Remark">
-              <el-input v-model="menuForm.Remark" auto-complete="off" type="textarea"></el-input>
+            <el-form-item label="备注" prop="remark">
+              <el-input v-model="menuForm.remark" auto-complete="off" type="textarea"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
@@ -94,35 +94,53 @@ export default {
             },
             tableData: [],
             tableLabel: [
-              { label: '系统名称', param: 'SystemName'},
-              { label: '菜单类名', param: 'ClassName'},
-              { label: '菜单名称', param: 'MenuName'},
-              { label: '父级菜单', param: 'ParentName'},
-              { label: '备注', param: 'Remark' },
-              { label: '创建时间', param: 'CreateTime', sortable: true,
+              { label: '系统名称', param: 'systemName'},
+              { label: '菜单类名', param: 'className'},
+              { label: '菜单名称', param: 'menuName'},
+              { label: '父级菜单', param: 'parentName'},
+              { label: '备注', param: 'remark' },
+              { label: '创建时间', param: 'createTime', sortable: true, width:'160',
                 formatter: row => {
-                  return (!row.CreateTime || row.CreateTime == '') ? '':this.$formatDate(new Date(row.CreateTime), true);
+                  return (!row.createTime || row.createTime == '') ? '':this.$formatDate(new Date(row.createTime), true);
                 } 
               },
-              { label: '状态', param: 'Enabled', 
-                    render: (h, parms) => {
-                        if (params.row.Enabled == true){
-                            return h('el-tag', {
-                                props: {
-                                    type: 'success',
-                                    size: 'mini',
-                                },
-                            }, '正常')
-                        }
-                        else {
-                            return h('el-tag', {
-                                props: {
-                                    type: 'danger',
-                                    size: 'mini',
-                                },
-                            }, '禁用')
-                        }
-                    },
+              { label: '状态', param: 'enabled', width:'80',
+                render: (h, params) => {
+                  if (!params.row.enabled){
+                    return h('el-tag', {
+                      props: {
+                        type: 'success',
+                        size: 'mini',
+                      },
+                      style: {
+							          cursor: 'pointer'
+                      },
+                      on: {
+		            	    	click: e => {
+                          e.stopPropagation(); //阻止row-click事件冒泡
+		            	    		this.disable(params.row)
+		            	    	}
+		            	    }
+                    },'正常')
+                  }
+                  else {
+                    return h('el-tag', {
+                      props: {
+                        type: 'danger',
+                        size: 'mini',
+                      },
+                      style: {
+							         	cursor: 'pointer'
+                      },
+                      on: {
+		            	    	click: e => {
+                          e.stopPropagation(); //阻止row-click事件冒泡
+		            	    		this.disable(params.row)
+		            	    	}
+		            	    }
+                    },'禁用')
+                  }
+                },
               },
             ],
             tableOption: {
@@ -134,7 +152,7 @@ export default {
               ]
             },
     
-            listLoading: false,
+            loading: false,
             sels: [], //列表选中列
 
             nowPage: 1, // 当前页数
@@ -143,31 +161,42 @@ export default {
             formTitle: '',
             formVisible: false, //界面是否显示
             formRules: {
-              ClassName: [{ required: true, message: "请输入菜单类名", trigger: "blur" }],
-              MenuName: [{ required: true, message: "请输入菜单名称", trigger: "blur" }],
+              className: [{ required: true, message: "请输入菜单类名", trigger: "blur" }],
+              menuName: [{ required: true, message: "请输入菜单名称", trigger: "blur" }],
             },
             //界面数据
             menuForm: {
-                Id: 0,
-                SystemName: "应用系统",
-                ClassName: '',
-                MenuName: '',
-                Icon: '',
-                ParentName: '',
-                LoadWay: '',
-                Index: '',
-                Enabled: 1,
-                Remark: '',
+              id: 0,
+              systemName: '',
+              className: '',
+              menuName: '',
+              icon: '',
+              parentName: '',
+              loadWay: '',
+              index: '',
+              enabled: false,
+              remark: '',
             }
-    
         }
     },
     methods: {
         //获取菜单列表
         getData() {
-            let _this = this;
-            // this.listLoading = true;
-  
+          let _this = this;
+          this.loading = true;
+          this.$ajax(this.$apiSet.getMenuInfo)
+            .then(res => {
+                if (!res.data.success) {
+                    _this.$message({
+                        message: res.data.message,
+                        type: 'error'
+                    });
+                } else {
+                    _this.loading = false;
+                    _this.tableData = res.data.response;
+				       	}
+            })
+            .catch(err => {})
         },
         handleButton (val) {
           if(val.methods == 'handleEdit') this.handleEdit(val.index,val.row)
@@ -179,10 +208,37 @@ export default {
         handleSelectionChange (val) {
           this.sels = val;
         },
+        disable(row){
+          let _this = this;
+          this.$showMsgBox({
+            msg: `<p>是否${row.enabled ? `启用`:`禁用` + `【` + row.menuName}】菜单?</p>`,
+            type: 'warning',
+            isHTML: true
+          }).then(() => {
+            _this.$ajax(this.$apiSet.disableMenu,{
+                id: row.id,
+                falg: !row.enabled
+            }).then(res => {
+                if (!res.data.success) {
+                    _this.$message({
+                        message: res.data.message,
+                        type: 'error'
+                    });
+                } else {
+                    _this.getData();
+                    _this.$message({
+                        message: res.data.message,
+                        type: 'success'
+                    });
+				  	    }
+            })
+            .catch(err => {})
+          }).catch(()=>{});
+        },
         //删除
         handleDelete(index, row) {
           this.$showMsgBox({
-             msg: `<p>是否删除${row.MenuName}菜单?</p>`,
+             msg: `<p>是否删除【${row.menuName}】菜单?</p>`,
              type: 'warning',
              isHTML: true
            }).then(() => {
@@ -199,6 +255,19 @@ export default {
         handleAdd() {
             this.formTitle = "新增";
             this.formVisible = true;
+
+            this.roleForm = {
+              id: 0,
+              systemName: '应用',
+              className: '',
+              menuName: '',
+              icon: '',
+              parentName: '',
+              loadWay: '',
+              index: '',
+              enabled: false,
+              remark: '',
+            };
         },
         // 选择icon
         selected(name) {

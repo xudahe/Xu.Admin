@@ -29,7 +29,7 @@ var drag = (dragBox, moveBox = dragBox) => {
     document.onmousemove = e => {
       e.preventDefault();
       var l = e.clientX - disX;
-      var t = e.clientY - disY; //'appComponts'
+      var t = e.clientY - disY;
 
       var x = domview.clientWidth - moveBox.offsetWidth;
       var y = domview.clientHeight - moveBox.offsetHeight;

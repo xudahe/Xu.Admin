@@ -9,10 +9,10 @@
       label-width="80px"
     >
       <el-form-item label="昵称" prop="nickname">
-        <el-input v-model="userForm.nickname" style="width: 360px;" />
+        <el-input v-model="userForm.nickname" style="width: 360px;" clearable/>
       </el-form-item>
       <el-form-item label="手机" prop="phone">
-        <el-input v-model="userForm.phone" style="width: 360px;" />
+        <el-input v-model="userForm.phone" style="width: 360px;" clearable/>
       </el-form-item>
 			<el-form-item label="性别" prop="enabled">
 			  <el-radio v-model="userForm.sex" label="1">男</el-radio>

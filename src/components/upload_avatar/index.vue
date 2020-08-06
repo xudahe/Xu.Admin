@@ -24,11 +24,7 @@
           <el-button @click.native="$refs.cropper.changeScale(1)" size="medium" icon="el-icon-plus"></el-button>
           <el-button @click.native="$refs.cropper.changeScale(-1)" size="medium" icon="el-icon-minus"></el-button>
           <el-button @click.native="$refs.cropper.rotateLeft()" size="medium" icon="el-icon-refresh-left"></el-button>
-          <el-button
-            @click.native="$refs.cropper.rotateRight()"
-            size="medium"
-            icon="el-icon-refresh-right"
-          ></el-button>
+          <el-button @click.native="$refs.cropper.rotateRight()" size="medium" icon="el-icon-refresh-right"></el-button>
         </div>
       </div>
       <div class="avatar-box">
@@ -153,7 +149,7 @@ export default {
 }
 .ensure-button-box {
   position: relative;
-  top: 3.4rem;
+  margin: 0.45rem 0;
 }
 .dialog-footer {
   position: relative;

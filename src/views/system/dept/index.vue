@@ -25,8 +25,8 @@
             <el-form-item label="部门名称" prop="deptName">
               <el-input v-model="deptForm.deptName" auto-complete="off"></el-input>
             </el-form-item>
-            <el-form-item label="负责人" prop="DeptManager">
-              <el-input v-model="deptForm.DeptManager" auto-complete="off"></el-input>
+            <el-form-item label="负责人" prop="deptManager">
+              <el-input v-model="deptForm.deptManager" auto-complete="off"></el-input>
             </el-form-item>
             <el-form-item label="备注" prop="remark">
               <el-input v-model="deptForm.remark" auto-complete="off" type="textarea"></el-input>
@@ -36,8 +36,8 @@
             <el-form-item label="部门编码" prop="deptCode">
               <el-input v-model="deptForm.deptCode" auto-complete="off"></el-input>
             </el-form-item>
-            <el-form-item label="上级部门" prop="ParentDept">
-              <el-input v-model="deptForm.ParentDept" auto-complete="off"></el-input>
+            <el-form-item label="上级部门" prop="parentDept">
+              <el-input v-model="deptForm.parentDept" auto-complete="off"></el-input>
             </el-form-item>
             <el-form-item label="状态" prop="enabled">
               <el-radio-group v-model="deptForm.enabled">
@@ -71,7 +71,7 @@ export default {
             tableLabel: [
               { label: '部门编码', param: 'deptCode'},
               { label: '部门名称', param: 'deptName'},
-              { label: '部门负责人', param: 'deptUser'},
+              { label: '部门负责人', param: 'deptManager'},
               { label: '备注', param: 'remark' },
               { label: '创建时间', param: 'createTime', sortable: true, width:'160',
                 formatter: row => {
@@ -142,8 +142,8 @@ export default {
                 id: 0,
                 deptCode: "",
                 deptName: "",
-                DeptManager: "",
-                ParentDept: "",
+                deptManager: "",
+                parentDept: "",
                 remark: '',
                 enabled: false
             }
@@ -208,12 +208,29 @@ export default {
         },
         //删除
         handleDelete(index, row) {
+          let _this = this
           this.$showMsgBox({
              msg: `<p>是否删除【${row.deptName}】部门?</p>`,
              type: 'warning',
              isHTML: true
            }).then(() => {
-             
+              _this.$ajax(this.$apiSet.deleteDept,{
+                id: row.id
+              }) .then(res => {
+                if (!res.data.success) {
+                  _this.$message({
+                    message: res.data.message,
+                    type: 'error'
+                  });
+                } else {
+                  _this.getData();
+                  _this.$message({
+                    message: res.data.message,
+                    type: 'success'
+                  });
+				        }
+              })
+              .catch(err => {})
            }).catch(()=>{});
         },
         //显示编辑界面
@@ -231,15 +248,32 @@ export default {
               id: 0,
               deptCode: "",
               deptName: "",
-              DeptManager: "",
-              ParentDept: "",
+              deptManager: "",
+              parentDept: "",
               remark: '',
               enabled: false
             };
         },
         handleSubmit: function() {
-            let _this = this;
-          
+          let apiUrl = this.formTitle=='编辑' ? this.$apiSet.putDept:this.$apiSet.postDept;
+          let _this = this;
+          this.$ajax(apiUrl, this.deptForm)
+            .then(res => {
+              if (!res.data.success) {
+                _this.$message({
+                  message: res.data.message,
+                  type: 'error'
+                });
+              } else {
+                _this.formVisible = false;
+                _this.getData();
+                _this.$message({
+                  message: res.data.message,
+                  type: 'success'
+                });
+					    }
+            })
+            .catch(err => {})
         },
     },
     mounted() {

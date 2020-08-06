@@ -162,6 +162,7 @@ export default {
       }
     },
     getLayers() {
+      // axios.get("../../../static/data/cesium/3Dlayer.json").then(res => {
       this.$http.get("../../../static/data/cesium/3Dlayer.json").then(res => {
         let data = res.data.Providers;
         cesiumInstance.layers = data;

@@ -31,18 +31,18 @@
                 <el-option label="大屏" value="大屏"></el-option>
               </el-select>
             </el-form-item>
-            <el-form-item label="图标" prop="Icon">
+            <el-form-item label="图标" prop="icon">
               <el-popover placement="bottom-start" width="400" trigger="click" @show="$refs['iconSelect'].reset()">
                 <IconSelect ref="iconSelect" @selected="selected" />
-                <el-input slot="reference" v-model="menuForm.Icon" placeholder="点击选择图标" readonly>
-                  <svg-icon v-if="menuForm.Icon" slot="prefix" :icon-class="menuForm.Icon" class="el-input__icon" style="height: 32px;width: 16px;" />
+                <el-input slot="reference" v-model="menuForm.icon" placeholder="点击选择图标" readonly>
+                  <svg-icon v-if="menuForm.icon" slot="prefix" :icon-class="menuForm.icon" class="el-input__icon" style="height: 32px;width: 16px;" />
                   <i v-else slot="prefix" class="el-icon-search el-input__icon" />
-                  <i slot="suffix" class="el-icon-circle-close el-input__icon" v-if="menuForm.Icon" style="cursor: pointer" @click="menuForm.Icon=''"/>
+                  <i slot="suffix" class="el-icon-circle-close el-input__icon" v-if="menuForm.icon" style="cursor: pointer" @click="menuForm.icon=''"/>
                 </el-input>
               </el-popover>
             </el-form-item>
-            <el-form-item label="加载方式" prop="LoadWay">
-              <el-select v-model="menuForm.LoadWay" placeholder="请选择系统名称">
+            <el-form-item label="加载方式" prop="loadWay">
+              <el-select v-model="menuForm.loadWay" placeholder="请选择系统名称">
                 <el-option label="右侧" value="右侧"></el-option>
                 <el-option label="顶部" value="顶部"></el-option>
               </el-select>
@@ -237,12 +237,29 @@ export default {
         },
         //删除
         handleDelete(index, row) {
+          let _this = this
           this.$showMsgBox({
-             msg: `<p>是否删除【${row.menuName}】菜单?</p>`,
-             type: 'warning',
-             isHTML: true
+            msg: `<p>是否删除【${row.menuName}】菜单?</p>`,
+            type: 'warning',
+            isHTML: true
            }).then(() => {
-             
+              _this.$ajax(this.$apiSet.deleteMenu,{
+                id: row.id
+              }) .then(res => {
+                if (!res.data.success) {
+                  _this.$message({
+                    message: res.data.message,
+                    type: 'error'
+                  });
+                } else {
+                  _this.getData();
+                  _this.$message({
+                    message: res.data.message,
+                    type: 'success'
+                  });
+				        }
+              })
+              .catch(err => {})
            }).catch(()=>{});
         },
         //显示编辑界面
@@ -271,11 +288,28 @@ export default {
         },
         // 选择icon
         selected(name) {
-          this.menuForm.Icon = name;
+          this.menuForm.icon = name;
         },
         handleSubmit: function() {
-            let _this = this;
-          
+          let apiUrl = this.formTitle=='编辑' ? this.$apiSet.putMenu:this.$apiSet.postMenu;
+          let _this = this;
+          this.$ajax(apiUrl, this.menuForm)
+            .then(res => {
+              if (!res.data.success) {
+                _this.$message({
+                  message: res.data.message,
+                  type: 'error'
+                });
+              } else {
+                _this.formVisible = false;
+                _this.getData();
+                _this.$message({
+                  message: res.data.message,
+                  type: 'success'
+                });
+					    }
+            })
+            .catch(err => {})
         },
     },
     mounted() {

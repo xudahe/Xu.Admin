@@ -9,13 +9,13 @@
       label-width="80px"
     >
       <el-form-item label="旧密码" prop="oldPass">
-        <el-input v-model="userForm.oldPass" type="password" style="width: 360px;" />
+        <el-input v-model="userForm.oldPass" type="password" style="width: 360px;" clearable/>
       </el-form-item>
       <el-form-item label="新密码" prop="newPass">
-        <el-input v-model="userForm.newPass" type="password" style="width: 360px;" />
+        <el-input v-model="userForm.newPass" type="password" style="width: 360px;" clearable/>
       </el-form-item>
       <el-form-item label="确认密码" prop="checkPass">
-        <el-input v-model="userForm.checkPass" type="password" style="width: 360px;" />
+        <el-input v-model="userForm.checkPass" type="password" style="width: 360px;" clearable/>
       </el-form-item>
 			<el-form-item>
 			  <el-button @click.native="resetForm" size="small">重置</el-button>

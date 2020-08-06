@@ -9,10 +9,10 @@
       label-width="80px"
     >
       <el-form-item label="邮箱" prop="email">
-        <el-input v-model="userForm.email" style="width: 360px;" />
+        <el-input v-model="userForm.email" style="width: 360px;" clearable/>
       </el-form-item>
       <el-form-item label="密码" prop="password">
-        <el-input type="password" v-model="userForm.password" style="width: 360px;" />
+        <el-input type="password" v-model="userForm.password" style="width: 360px;" clearable/>
       </el-form-item>
 			<el-form-item>
 			  <el-button @click.native="resetForm" size="small">重置</el-button>

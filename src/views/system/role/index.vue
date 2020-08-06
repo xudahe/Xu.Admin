@@ -234,22 +234,22 @@ export default {
             isHTML: true
           }).then(() => {
             _this.$ajax(this.$apiSet.deleteRole,{
-                  id: row.id
-              }) .then(res => {
-                  if (!res.data.success) {
-                      _this.$message({
-                          message: res.data.message,
-                          type: 'error'
-                      });
-                  } else {
-                      _this.getData();
-                      _this.$message({
-                          message: res.data.message,
-                          type: 'success'
-                      });
-				         	}
-              })
-              .catch(err => {})
+              id: row.id
+            }) .then(res => {
+              if (!res.data.success) {
+                  _this.$message({
+                      message: res.data.message,
+                      type: 'error'
+                  });
+              } else {
+                  _this.getData();
+                  _this.$message({
+                      message: res.data.message,
+                      type: 'success'
+                  });
+				      }
+            })
+            .catch(err => {})
           }).catch(()=>{});
         },
         // 初始化菜单选中
@@ -311,23 +311,23 @@ export default {
           let _this = this;
           let apiUrl = this.formTitle=='编辑' ? this.$apiSet.putRole:this.$apiSet.postRole;
           this.$ajax(apiUrl, this.roleForm)
-              .then(res => {
-                if (!res.data.success) {
-                    _this.$message({
-                        message: res.data.message,
-                        type: 'error'
-                    });
-                } else {
-                    _this.formVisible = false;
-                    _this.getData();
+            .then(res => {
+              if (!res.data.success) {
+                  _this.$message({
+                      message: res.data.message,
+                      type: 'error'
+                  });
+              } else {
+                  _this.formVisible = false;
+                  _this.getData();
 
-                    _this.$message({
-                        message: res.data.message,
-                        type: 'success'
-                    });
-					      }
-              })
-              .catch(err => {})
+                  _this.$message({
+                      message: res.data.message,
+                      type: 'success'
+                  });
+					    }
+            })
+            .catch(err => {})
         },
     },
     mounted() {

@@ -82,7 +82,7 @@ export default {
       let data = (this.$store.getters.menus).filter(function(item){
         return item.menuName == val; 
       })
-      debugger
+      console.log(data)
     },
     // 退出登录
     logout() {

@@ -18,8 +18,6 @@
             <el-button type="primary" @click="submitCard">登录</el-button>
             <el-button type="primary" @click="getLogs">查询</el-button>
         </div>
-
-
     </section>
 </template>
 
@@ -34,7 +32,7 @@
                 filters: {
                     LinkUrl: ''
                 },
-                listLoading: true,
+                loading: true,
                 tableData: [],
                 userName: "Tom",
                 userMessage: "123",
@@ -44,19 +42,18 @@
             }
         },
         methods: {
-            //获取用户列表
             getRoles() {
-                let thisvue=this;
+                let _this=this;
                 let para = {
                     page: this.page,
                     key: this.filters.LinkUrl
                 };
-                this.listLoading = true;
+                this.loading = true;
 
                 // getLogs(para).then((res) => {
                     // 开始通讯，并成功呼叫服务器
-                    thisvue.connection.start().then(() => {
-                        thisvue.connection.invoke('GetLatestCount', 1).catch(function (err) {
+                    _this.connection.start().then(() => {
+                        _this.connection.invoke('GetLatestCount', 1).catch(function (err) {
                             return console.error(err);
                         });
 
@@ -71,29 +68,33 @@
                 }
             },
             getLogs: function () {
-                this.listLoading = true;
+                this.loading = true;
                 this.connection.invoke('GetLatestCount', 1).catch(function (err) {
                     return console.error(err);
                 });
             }
         },
         created: function () {
-            let thisVue = this;
+            let _this = this;
             //参考案列：https://www.cnblogs.com/laozhang-is-phi/p/netcore-vue-signalr.html#autoid-4-1-0
             //1、首先我们实例化一个连接器
-            thisVue.connection = new signalR.HubConnectionBuilder()
-                .withUrl(`http://localhost:1082/api/chatHub`)  //然后配置通道路由
+            _this.connection = new signalR.HubConnectionBuilder()
+                .withUrl(`http://localhost:1082/api/chatHub`,{
+                    skipNegotiation: true,
+                    transport: signalR.HttpTransportType.WebSockets
+                })  //然后配置通道路由
                 .configureLogging(signalR.LogLevel.Information) //日志信息
                 .build(); //创建
 
-            thisVue.connection.on('ReceiveMessage', function (user, message) {
-                thisVue.messages.push({user, message});
+            _this.connection.on('ReceiveMessage', function (user, message) {
+                 console.info(message)
+                _this.messages.push({user, message});
             });
 
-            thisVue.connection.on('ReceiveUpdate', function (update) {
+            _this.connection.on('ReceiveUpdate', function (update) {
                 console.info('update success!')
-                thisVue.listLoading = false;
-                thisVue.tableData = update;
+                _this.loading = false;
+                _this.tableData = update;
                 window.clearInterval(this.t)
             })
         },

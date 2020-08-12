@@ -310,32 +310,25 @@ export default {
         },
         // 初始化角色选中
         initialRoleCheck(item) {
-          item.roles.forEach((val, ind) => {
-            let add = true;
-            for (let i = 0; i < item.roles.length; i++) {
-              if (val.id === item.roles[i].parentId) {
-                add = false;
-                break;
-              }
-            }
-            if (add) {
-              this.roleIds.push(val.id);
-            }
-          });
+            this.roleIds = item.roleIds.split(',')
         },
         //角色绑定
         saveRole() {
-          const role = { id: this.roleId, roles: [] };
+          let roleIds = [];
           // 得到半选的父节点数据，保存起来
           this.$refs.role.getHalfCheckedNodes().forEach(function(data, index) {
-            const permission = { id: data.id };
-            role.roles.push(permission);
+            roleIds.push(data.id);
           });
           // 得到已选中的 key 值
           this.$refs.role.getCheckedKeys().forEach(function(data, index) {
-            const permission = { id: data };
-            role.roles.push(permission);
+            roleIds.push(data);
           });
+          
+          this.userForm = this.sels
+          this.userForm.roleIds = roleIds.join(',')
+          
+          this.formTitle = "编辑"
+          this.handleSubmit()
         },
         //显示编辑界面
         handleEdit (index, row) {

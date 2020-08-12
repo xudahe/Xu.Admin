@@ -62,7 +62,6 @@ export default {
     // 弹框适配屏幕居中
     autosize() {
       this.$nextTick(() => {
-        debugger
         var dom = this.$refs.popup;
         var CHeight = document.documentElement.clientHeight;
         var CWidth = document.documentElement.clientWidth;

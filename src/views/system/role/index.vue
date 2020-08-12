@@ -254,34 +254,24 @@ export default {
         },
         // 初始化菜单选中
         initialMenuCheck(item) {
-          item.menus.forEach((val, ind) => {
-            let add = true;
-            for (let i = 0; i < item.menus.length; i++) {
-              if (val.id === item.menus[i].parentId) {
-                add = false;
-                break;
-              }
-            }
-            if (add) {
-              this.menuIds.push(val.id);
-            }
-          });
+          let _this = this
+          _this.menuIds = []
+          setTimeout(() => {
+             _this.menuIds = item.menuIds.split(',')
+          }, 2000);
         },
         //菜单绑定
         saveMenu() {
           let menuIds = [];
           // 得到半选的父节点数据，保存起来
           this.$refs.menu.getHalfCheckedNodes().forEach(function(data, index) {
-            debugger
-            menuIds.push({id: data.id});
+            menuIds.push(data.id);
           });
           // 得到已选中的 key 值
           this.$refs.menu.getCheckedKeys().forEach(function(data, index) {
-            debugger
-            menuIds.push({id: data.id});
+            menuIds.push(data);
           });
           
-          console.log(menuIds)
           this.roleForm = this.sels
           this.roleForm.menuIds = menuIds.join(',')
           

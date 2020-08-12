@@ -51,7 +51,7 @@ async function getAddRouters () {
     roles: roles,
     menus: [
           {
-            id:1, menuName: "系统管理", enabled: false, icon: "fa fa-dashboard",
+            id:0, menuName: "系统管理", enabled: false, icon: "fa fa-dashboard",
             children: [
               { id:1, menuName: "用户管理", className: "/user_manager", icon:"el-icon-edit-outline", enabled:false, children:[]},
               { id:2, menuName: "部门管理", className: "/dept_manager", icon:"el-icon-edit-outline", enabled:false, children:[]},

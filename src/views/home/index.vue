@@ -2,7 +2,7 @@
   <div style="height:100%;width:100%;" class="home">
     <!-- <swiper :imgList="imgList"></swiper> -->
     <!-- <cesiumMap ref="cesiumMap" ></cesiumMap> -->
-    <el-button @click.native="showdialog">弹出框</el-button>
+    <!-- <el-button @click.native="showdialog">弹出框</el-button> -->
     <dialogtt  ref="dialog" v-model="dialog.show" :title="dialog.title" :buttons="dialog.buttons" :bodyshow="dialog.bodyshow" >
 		<div style="width: 500px;height: 300px;">
             <!--通过@hook:updated监听组件的updated生命钩子函数(外部监听生命周期函数)-->
@@ -34,7 +34,7 @@ export default {
         show: false,
         title: {
           text: '分析',
-          className: 'xa-bg-blue' //标题样式类名，包含`background`、`color`即可
+          className: 'xa-bg-blue' //标题样式类名
         },
         bodyshow: true
       },

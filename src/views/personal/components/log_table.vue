@@ -1,5 +1,6 @@
 <template>
     <section>
+      <el-card class="box-card">
         <!--工具条-->
         <v-header icon="md-podium" text="日志列表">
           <div slot="content"></div>
@@ -12,6 +13,7 @@
         </v-header>
         <!--列表-->
         <e-table :table-data="tableData" :table-label="tableLabel" :now-page="nowPage" :now-size="nowSize"></e-table>
+      </el-card>
     </section>
 </template>
 
@@ -20,32 +22,48 @@ export default {
 	data() {
 		return {
 			nowPage: 1,
-			nowSize: 10,
+			nowSize: 7,
 
       filters: {
           name: ""
       },
-		  tableData: [
-        {description:'GLY1',requestIp:'管理员1',address:'',CreateTime:new Date(),time:''},
-        {description:'GLY2',requestIp:'管理员2',address:'',CreateTime:new Date(),time:''}
-      ],
+		  tableData: [],
       tableLabel: [
-        { label: '行为', param: 'description'},
-        { label: 'IP', param: 'requestIp'},
+        { label: '操作人', param: 'user'},
+        { label: '行为', param: 'api'},
+        { label: 'IP', param: 'ip'},
         { label: 'IP来源', param: 'address' },
-        { label: '请求耗时', param: 'time' },
-        { label: '创建时间', param: 'CreateTime', sortable: true,
+        { label: '请求耗时', param: 'opTime' },
+        { label: '请求时间', param: 'beginTime', sortable: true,
           formatter: row => {
-            return (!row.CreateTime || row.CreateTime == '') ? '':this.$formatDate(new Date(row.CreateTime), true);
+            return (!row.beginTime || row.beginTime == '') ? '':this.$formatDate(new Date(row.beginTime), true);
           } 
         },
       ],
 		};
 	},
 	methods: {
+	  getAccessLogs(){
+      let _this = this;
+      this.$ajax(this.$apiSet.getAccessLogs)
+        .then(res => {
+            if (!res.data.success) {
+                _this.$message({
+                    message: res.data.message,
+                    type: 'error'
+                });
+            } else {
+                _this.loading = false;
+                _this.tableData = res.data.response;
+			     	}
+        })
+        .catch(err => {})
+    }
 	
-	
-	}
+  },
+  mounted(){
+    this.getAccessLogs();
+  }
 };
 </script>
 

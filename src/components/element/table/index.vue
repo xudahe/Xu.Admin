@@ -122,7 +122,7 @@ export default {
     return {
       currentPage: this.nowPage,
       pageSize: this.nowSize,
-      tableHeight: 0,
+      tableHeight: 350,
     }
   },
   computed:{
@@ -157,13 +157,15 @@ export default {
   },
   created(){
     let _this = this;
-
+    
     setTimeout(() => {
-      _this.tableHeight = document.getElementsByClassName("el-card")[0].offsetHeight - 105;
+      let docm = document.getElementsByClassName("el-card")
+      _this.tableHeight = docm != undefined ? docm[docm.length-1].offsetHeight - 105: _this.tableHeight;
     }, 100);
     
     window.addEventListener("resize", function() { 
-      _this.tableHeight = document.getElementsByClassName("el-card")[0].offsetHeight - 105;
+      let docm1 = document.getElementsByClassName("el-card")
+      _this.tableHeight = docm1 != undefined ? docm1[docm1.length-1].offsetHeight - 105: _this.tableHeight;
     });
   }
 }

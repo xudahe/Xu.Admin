@@ -121,12 +121,20 @@ const MenuModule = {
   },
 }
 
+const logModule = {
+  getAccessLogs: {
+    url: '/api/Monitor/GetAccessLogs',
+    method: 'get'
+  },
+}
+
 const ApiSetting = {
   ...LoginModule,
   ...UserModule,
   ...DeptModule,
   ...RoleModule,
   ...MenuModule,
+  ...logModule,
 }
 
 export default ApiSetting

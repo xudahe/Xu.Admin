@@ -254,11 +254,7 @@ export default {
         },
         // 初始化菜单选中
         initialMenuCheck(item) {
-          let _this = this
-          _this.menuIds = []
-          setTimeout(() => {
-             _this.menuIds = item.menuIds.split(',')
-          }, 2000);
+          this.menuIds = item.menuIds.split(',')
         },
         //菜单绑定
         saveMenu() {

@@ -52,9 +52,10 @@
             <el-form-item label="菜单名称" prop="menuName">
               <el-input v-model="menuForm.menuName" auto-complete="off"></el-input>
             </el-form-item>
-            <el-form-item label="父级菜单" prop="parentName">
-              <el-select v-model="menuForm.parentName" placeholder="请选择父级菜单">
-                <el-option label="无" value="无"></el-option>
+            <el-form-item label="父级菜单" prop="parentId">
+              <el-select v-model="menuForm.parentId" placeholder="请选择父级菜单">
+                <el-option label="无" value=""></el-option>
+                <el-option :label="item.menuName" :value="item.id" :key="index" v-for="(item,index) in tableData"></el-option>
               </el-select>
             </el-form-item>
             <el-form-item label="序号" prop="Index">
@@ -97,7 +98,7 @@ export default {
               { label: '系统名称', param: 'systemName'},
               { label: '菜单类名', param: 'className'},
               { label: '菜单名称', param: 'menuName'},
-              { label: '父级菜单', param: 'parentName'},
+              { label: '父级菜单', param: 'parentId'},
               { label: '备注', param: 'remark' },
               { label: '创建时间', param: 'createTime', sortable: true, width:'160',
                 formatter: row => {
@@ -171,7 +172,7 @@ export default {
               className: '',
               menuName: '',
               icon: '',
-              parentName: '',
+              parentId: '',
               loadWay: '',
               index: '',
               enabled: false,
@@ -279,7 +280,7 @@ export default {
               className: '',
               menuName: '',
               icon: '',
-              parentName: '',
+              parentId: '',
               loadWay: '',
               index: '',
               enabled: false,

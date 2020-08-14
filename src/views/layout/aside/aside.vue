@@ -15,20 +15,8 @@
         :unique-opened="$store.getters.uniquerouter"
         :collapse-transition="true"
       >
-        <!-- <template v-for="(item,index) in $store.getters.menus" v-if="!item.enabled">
-          <el-submenu v-if="item.children.length>0" :index="index+''" :key="index">
-            <template slot="title">
-              <i :class="item.icon?item.icon:[fa,fa-server]"></i>
-              <span slot="title">{{ item.menuName }}</span>
-            </template>
-            <menu-tree :menuData="item.children"></menu-tree>
-          </el-submenu>
-          <el-menu-item :index="item.className" v-else :key="item.className">
-            <i :class="item.icon?item.icon:[fa,fa-file]"/>
-            <span slot="title">{{ item.menuName }}</span>
-          </el-menu-item>
-        </template> -->
-        <menu-tree :menuData="$store.getters.menus"></menu-tree>
+
+        <menu-tree :menuData="$store.getters.info.menuinfo"></menu-tree>
 
       </el-menu>
     </el-aside>

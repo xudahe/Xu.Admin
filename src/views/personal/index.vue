@@ -3,12 +3,14 @@
 		<el-row :gutter="10">
 			<el-col :sm="24" :md="6">
 				<el-card class="box-card" shadow="hover">
-					<div slot="header" class="header"><span>关于我</span></div>
+					<div slot="header" class="header"><span>{{user.loginName}}</span></div>
 					<div class="avatar-box">
 						<div class="avatar">
 							<el-button icon="el-icon-upload" class="upload-button" circle @click="$refs.avatarForm.dialogVisible = true"></el-button>
-							<el-avatar :size="120" src="" fit="cover"><img src="https://myinterface.xuanzai.top/getPicture?type=error" /></el-avatar>
-							<div class="hover-plus" @click="isShow = true"><svg-icon icon-class="add" class="add-avatar" /></div>
+							<el-avatar :size="120" src="" fit="cover">
+                <!-- <img src="https://myinterface.xuanzai.top/getPicture?type=error"/> -->
+              </el-avatar>
+							<div class="hover-plus" @click="isShow = true"><svg-icon icon-class="add" class="add-avatar"/></div>
 						</div>
 						<div class="avatar-detail">
 							<div class="role">test</div>
@@ -21,13 +23,13 @@
 						<div class="border"></div>
 					</div>
 					<div class="divTitle">
-						<i class="el-icon-s-custom"></i>昵称：{{user.loginName}}
+						<i class="el-icon-s-custom"></i>姓名：{{user.realName}}
 					</div>
 					<div class="divTitle">
-						<i class='el-icon-male' />性别：{{user.sex}}
+						<i class='el-icon-male'/>性别：{{user.sex}}
 					</div>
 					<div class="divTitle">
-						<i class="el-icon-office-building" />部门：
+						<i class="el-icon-office-building"/>部门：
 					</div>
 					<div class="divTitle">
 						<i class="el-icon-s-check"></i>岗位：
@@ -88,7 +90,7 @@ export default {
       return {
         activeName: "first",
 		    isShow: false,
-		    user: this.$store.getters.info.user
+		    user: this.$store.getters.info.userinfo
       }
     },
 	methods: {

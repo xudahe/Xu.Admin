@@ -42,14 +42,14 @@ router.afterEach(() => {
 
 async function getAddRouters () {
   // 省略 axios 请求代码 通过 token 向后台请求用户权限等信息
-  let user = JSON.parse(window.localStorage.user ? window.localStorage.user : null);
-  let roles = JSON.parse(window.localStorage.role ? window.localStorage.role : null);
-  let menus = JSON.parse(window.localStorage.menu ? window.localStorage.menu : null);
+  let userInfo = JSON.parse(window.localStorage.userInfo ? window.localStorage.userInfo : null);
+  let roleInfo = JSON.parse(window.localStorage.roleInfo ? window.localStorage.roleInfo : null);
+  let menuInfo = JSON.parse(window.localStorage.menuInfo ? window.localStorage.menuInfo : null);
    
   await store.dispatch("getInfo", {
-    user: user,
-    roles: roles,
-    menus: [
+    userinfo: userInfo,
+    roleinfo: roleInfo,
+    menuinfo: [
           {
             id:0, menuName: "系统管理", enabled: false, icon: "fa fa-dashboard",
             children: [
@@ -84,7 +84,7 @@ async function getAddRouters () {
     ]
   })
   
-  await store.dispatch("newRoutes", store.getters.info.role)
+  await store.dispatch("newRoutes", store.getters.info.roleinfo)
   router.addRoutes(store.getters.addRouters)  //动态添加路由
 }
 

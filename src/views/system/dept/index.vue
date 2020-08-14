@@ -25,8 +25,11 @@
             <el-form-item label="部门名称" prop="deptName">
               <el-input v-model="deptForm.deptName" auto-complete="off"></el-input>
             </el-form-item>
-            <el-form-item label="负责人" prop="deptManager">
-              <el-input v-model="deptForm.deptManager" auto-complete="off"></el-input>
+            <el-form-item label="负责人" prop="deptUser">
+              <el-select v-model="deptForm.deptUser" placeholder="请选择父级菜单">
+                <el-option label="无" value=""></el-option>
+                <el-option :label="item.realName" :value="item.id" :key="index" v-for="(item,index) in userData"></el-option>
+              </el-select>
             </el-form-item>
             <el-form-item label="备注" prop="remark">
               <el-input v-model="deptForm.remark" auto-complete="off" type="textarea"></el-input>
@@ -71,7 +74,7 @@ export default {
             tableLabel: [
               { label: '部门编码', param: 'deptCode'},
               { label: '部门名称', param: 'deptName'},
-              { label: '部门负责人', param: 'deptManager'},
+              { label: '部门负责人', param: 'deptUser'},
               { label: '备注', param: 'remark' },
               { label: '创建时间', param: 'createTime', sortable: true, width:'160',
                 formatter: row => {
@@ -142,11 +145,12 @@ export default {
                 id: 0,
                 deptCode: "",
                 deptName: "",
-                deptManager: "",
+                deptUser: "",
                 parentDept: "",
                 remark: '',
                 enabled: false
-            }
+            },
+            userData: [],
     
         }
     },
@@ -166,6 +170,21 @@ export default {
                     _this.loading = false;
                     _this.tableData = res.data.response;
 				       	}
+            })
+            .catch(err => {})
+        },
+        getUserData () {
+          let _this = this;
+          this.$ajax(this.$apiSet.getUserInfo)
+            .then(res => {
+              if (!res.data.success) {
+                _this.$message({
+                  message: res.data.message,
+                  type: 'error'
+                });
+              } else {
+                  _this.userData = res.data.response;
+				      }
             })
             .catch(err => {})
         },
@@ -248,7 +267,7 @@ export default {
               id: 0,
               deptCode: "",
               deptName: "",
-              deptManager: "",
+              deptUser: "",
               parentDept: "",
               remark: '',
               enabled: false
@@ -278,6 +297,7 @@ export default {
     },
     mounted() {
         this.getData();
+        this.getUserData();
   
     }
 };

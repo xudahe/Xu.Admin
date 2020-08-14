@@ -14,14 +14,10 @@ const UserModule = {
     url: '/api/User/GetInfoByToken',
     method: 'get'
   },
-  getUserInfo: { //获取全部用户
+  getUserInfo: { //获取用户数据
     url: '/api/User/Get',
     method: 'get'
   }, 
-  getUserByIds: { //根据用户Ids查询用户列表
-    url: '/api/User/GetByIds',
-    method: 'get'
-  },
   postUser: { //添加用户
     url: '/api/User/Post',
     method: 'post'
@@ -41,12 +37,8 @@ const UserModule = {
 }
 
 const DeptModule = {
-  getDeptInfo: { //获取全部部门
+  getDeptInfo: { //获取部门数据
     url: '/api/Dept/Get',
-    method: 'get'
-  },
-  getDeptByIds: { //根据部门Ids查询部门列表
-    url: '/api/Dept/GetByIds',
     method: 'get'
   },
   postDept: { //添加部门
@@ -68,12 +60,8 @@ const DeptModule = {
 }
 
 const RoleModule = {
-  getRoleInfo: { //获取全部角色
+  getRoleInfo: { //获取角色数据
     url: '/api/Role/Get',
-    method: 'get'
-  },
-  getRoleByIds: { //根据角色Ids查询角色列表
-    url: '/api/Role/GetByIds',
     method: 'get'
   },
   postRole: { //添加角色
@@ -95,11 +83,11 @@ const RoleModule = {
 }
 
 const MenuModule = {
-  getMenuInfo: { //获取全部菜单
+  getMenuInfo: { //获取菜单数据(列表)
     url: '/api/Menu/Get',
     method: 'get'
   },
-  getMenuByIds: { //根据菜单Ids查询菜单列表
+  getMenuByIds: { //根据菜单数据(树状)
     url: '/api/Menu/GetByIds',
     method: 'get'
   },

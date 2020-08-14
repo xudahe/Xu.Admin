@@ -37,7 +37,7 @@
                     </el-button>
                   </div>
                   <div class="tree-box"> 
-                    <el-tree ref="role" :data="roles" :default-checked-keys="roleIds" :props="defaultProps" default-expand-all show-checkbox node-key="id" />
+                    <el-tree ref="role" :data="roleData" :default-checked-keys="roleIds" :props="defaultProps" default-expand-all show-checkbox node-key="id" />
                   </div>
                 </el-card>
             </el-col>
@@ -113,9 +113,7 @@ export default {
             filters: {
                 name: ''
             },
-            tableData: [
-                // {loginName:'鱼',realName:'张三',deptName:'市场部',createTime:'',enabled:true}
-            ],
+            tableData: [],
             tableLabel: [
                 { label: '登录名', param: 'loginName'},
                 { label: '用户名', param: 'realName' },
@@ -211,11 +209,11 @@ export default {
             },
 
             showButton: false, //菜单配置保存按钮
-            roles: [],
+            roleData: [],
             roleIds: [],
             defaultProps: {
               children: "children",
-              label: "name"
+              label: "roleName"
             },
         }
     },
@@ -238,7 +236,21 @@ export default {
                 })
                 .catch(err => {})
         },
-      
+        getRoleData() {
+          let _this = this;
+          this.$ajax(this.$apiSet.getRoleInfo)
+            .then(res => {
+                if (!res.data.success) {
+                    _this.$message({
+                        message: res.data.message,
+                        type: 'error'
+                    });
+                } else {
+                    _this.roleData = res.data.response;
+				}
+            })
+            .catch(err => {})
+        },
         handleButton (val) {
           if(val.methods == 'handleEdit') this.handleEdit(val.index,val.row)
           if(val.methods == 'handleDelete') this.handleDelete(val.index,val.row)
@@ -315,10 +327,7 @@ export default {
         //角色绑定
         saveRole() {
           let roleIds = [];
-          // 得到半选的父节点数据，保存起来
-          this.$refs.role.getHalfCheckedNodes().forEach(function(data, index) {
-            roleIds.push(data.id);
-          });
+          
           // 得到已选中的 key 值
           this.$refs.role.getCheckedKeys().forEach(function(data, index) {
             roleIds.push(data);
@@ -379,6 +388,7 @@ export default {
     },
     mounted() {
         this.getData();
+        this.getRoleData();
     }
 }
 

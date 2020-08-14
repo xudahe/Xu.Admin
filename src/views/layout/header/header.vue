@@ -9,7 +9,7 @@
         text-color="#222f3e" 
         active-text-color="#409EFF"
       >
-        <template  v-for="(item,index) in  $store.getters.menus">
+        <template  v-for="(item,index) in  $store.getters.info.menuinfo">
             <el-menu-item :index="item.menuName+''" :key="index">{{item.menuName}}</el-menu-item>
         </template>
       </el-menu>
@@ -38,7 +38,7 @@
         <li>
           <el-dropdown size="large" class="avatar-dropdown">
             <span class="el-dropdown-link">
-              夏洛克
+              {{user.loginName}}
             </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item @click.native="$router.push('/home')">
@@ -69,6 +69,7 @@ export default {
   components: {tabNav},
   data () {
     return {
+      user: this.$store.getters.info.userinfo,
       isfullScreen: true,
       avatar: "./static/img/favicon.ico",
       weathers: [], //天气数据
@@ -79,7 +80,7 @@ export default {
       this.$store.dispatch("collapse")
     },
     selectMenu(val) {
-      let data = (this.$store.getters.menus).filter(function(item){
+      let data = (this.$store.getters.info.menuinfo).filter(function(item){
         return item.menuName == val; 
       })
       console.log(data)

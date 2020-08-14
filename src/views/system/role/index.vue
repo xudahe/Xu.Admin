@@ -27,7 +27,7 @@
             </el-button>
           </div>
           <div class="tree-box"> 
-            <el-tree ref="menu" :data="menus" :default-checked-keys="menuIds" :props="defaultProps" default-expand-all show-checkbox node-key="id" />
+            <el-tree ref="menu" :data="menuData" :default-checked-keys="menuIds" :props="defaultProps" default-expand-all show-checkbox node-key="id" />
           </div>
         </el-card>
       </el-col>
@@ -155,7 +155,7 @@ export default {
             },
 
             showButton: false, //菜单配置保存按钮
-            menus: this.$store.getters.menus,
+            menuData: [],
             menuIds: [],
             defaultProps: {
               children: "children",
@@ -179,6 +179,21 @@ export default {
                 } else {
                     _this.loading = false;
                     _this.tableData = res.data.response;
+				       	}
+            })
+            .catch(err => {})
+        },
+        getMenuData() {
+          let _this = this;
+          this.$ajax(this.$apiSet.getMenuByIds)
+            .then(res => {
+                if (!res.data.success) {
+                    _this.$message({
+                        message: res.data.message,
+                        type: 'error'
+                    });
+                } else {
+                    _this.menuData = res.data.response;
 				       	}
             })
             .catch(err => {})
@@ -259,10 +274,7 @@ export default {
         //菜单绑定
         saveMenu() {
           let menuIds = [];
-          // 得到半选的父节点数据，保存起来
-          this.$refs.menu.getHalfCheckedNodes().forEach(function(data, index) {
-            menuIds.push(data.id);
-          });
+          
           // 得到已选中的 key 值
           this.$refs.menu.getCheckedKeys().forEach(function(data, index) {
             menuIds.push(data);
@@ -318,6 +330,7 @@ export default {
     },
     mounted() {
       this.getData();
+      this.getMenuData();
     }
 };
 </script>

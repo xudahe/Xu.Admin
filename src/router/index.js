@@ -4,6 +4,10 @@ Vue.use(Router)
 
 import Login from "@/views/login/index"
 import Layout from "@/views/layout/index"
+import BigScreen from "@/components/bigScreen/view/home"
+import homePage from "@/components/bigScreen/view/homePage"
+import application1 from "@/components/bigScreen/view/application1"
+import application2 from "@/components/bigScreen/view/application2"
 
 //使用动态的import()语法,不是必须加载的组件使用懒加载
 const
@@ -101,6 +105,41 @@ let defaultRouter = [
     component: Error_500,
     children: []
   },
+  {
+    path: '/bigScreen',
+    name: 'bigScreen',
+    meta: {
+      title: "大屏"
+    },
+    hidden: true,
+    component: BigScreen,
+    children: [
+      {
+        path: '/homePage',
+        name: 'homePage',
+        meta: {
+          title: "综合"
+        },
+        hidden: true,
+        component: homePage,
+        children: []
+      },
+      {
+        path: '/application1',
+        name: 'application1',
+        hidden: true,
+        component: application1,
+        children: []
+      },
+      {
+        path: '/application2',
+        name: 'application2',
+        hidden: true,
+        component: application2,
+        children: []
+      }
+    ]
+  }
 ]
 
 //异步挂载的路由

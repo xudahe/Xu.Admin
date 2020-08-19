@@ -1,0 +1,555 @@
+<template>
+	<div class="appDiv2">
+		<div class="appMenu1">
+
+      <!-- 左侧菜单 -->
+			<div class="appMenu push-in-right">
+				<div :key="index" v-for="(item,index) in menuData" style="margin-top:0.24rem;"
+				 @click="changeMenu(item,index)" :class="[menuFlag == index ? 'menuCont menuSel' : 'menuCont menuNor']">
+					<div :class="[menuFlag == index ? 'menuImg' : 'menuImgF']">
+						<img :src="menuFlag == index ? item.imgT : item.imgF" class="menuContImg" />
+					</div>
+					<img :class="index==menuFlag ?'divImgSel':'divImgNor'" :src="index==menuFlag ?optionImgUrl1:optionImgUrl2"/>
+					<div class="menuContText"><span :class="menuFlag==index? 'actives':''">{{item.menuname}}</span></div>
+				</div>
+			</div>
+      
+			<div id="appComponts" class="appComponts" :style="{height: 'calc(100%)',width:'calc(100% - 1.65rem)'}">
+				
+        <div style="float: left;height: 100%" :style="{width:leftwidth+'rem'}">
+
+          <!-- 左侧列表框 -->
+					<div id="leftMenu" class="appCompontsContLeft fade-in-right" v-show="isLeftMenu">
+					
+						<div class="appCompontsContLeftDiv" :style="{width: fwidth + 'rem'}">
+							<div class="titleCont titleContImg" :style="{width: fwidth + 'rem'}">
+								<div class="titleContText">{{titleName}}</div>
+								<div style="position: absolute; top: 24%; bottom: 0;right: 0.2rem;">
+									<img class="closeImg" :src="closeImg" v-on:mouseover="changeImg(1,1)" v-on:mouseout="changeImg(1,2)" @click="detailclose('leftMenu')" />
+								</div>
+							</div>
+							<div style="height: calc(100% - 0.7rem);margin-top: 0.7rem;">
+								<component :is="componentName" v-bind:detailData="detailData"></component>
+							</div>
+						</div>
+					</div>
+          <!-- 左侧详情框 -->
+					<div class="appCompontsContLeft fade-in-right" v-show="isDetailDataLeft">
+						<div class="appCompontsContLeftDiv">
+							<div class="titleCont titleContImg">
+								<div class="titleContText">{{titleLeftName}}</div>
+								<div style="position: absolute;top: 0.14rem;right: 0.2rem;">
+									<img class="closeImg" :src="closeImg1" v-on:mouseover="changeImg(2,1)" v-on:mouseout="changeImg(2,2)" @click="detailclose('leftdetail')" />
+								</div>
+							</div>
+							<div :style="{height: 'calc(100% - 0.7rem)',marginTop: '0.7rem'}">
+								<component :is="componentLeftDetail" v-bind:detailData="leftDetailData"></component>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- 全屏框 -->
+				<div style="float: left;height: 100%;" :style="{width: '100%',marginRight: '0.1rem'}" v-show="isFullScreen">
+					<div class="appCompontsContLeftT">
+						<div class="appCompontsContLeftDivT scale-in">
+							<div class="titleCont titleContImgT" style="width:100%">
+								<div class="titleContText">{{titleScreenName}}</div>
+								<div style="position: absolute; top: 24%; bottom: 0;  right: 0.2rem;">
+									<img class="closeImg" :src="closeImg" v-on:mouseover="changeImg(1,1)" v-on:mouseout="changeImg(1,2)" @click="detailclose('leftMenu')" />
+								</div>
+							</div>
+							<div style="height: calc(100% - 0.7rem);margin-top: 0.7rem;">
+								<component :is="componentScreenName" v-bind:detailData="screenDetailData"></component>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div style="position:absolution" :class="isLeftMenu ? isDetailDataLeft?'appCompontsContRightTT': 'appCompontsContRightT':'appCompontsContRightF'"
+				 :style="{width: '100%'}">
+					<div v-show="isMapvisible" class="scale-in" :class="isbotDetail ? 'appCompontsContMapT':'appCompontsContMapF'">
+						<div class="appCompontsContMapDiv">
+							<!-- <newMap ref="newMap"></newMap> -->
+						</div>
+					</div>
+					<!-- 底部详情框 -->
+					<div  class="appCompontsContDetail fade-in-up" v-show="isDetailDataBot">
+						<div class="appCompontsContDetailDiv">
+							<div class="titleCont titleContImg" style="width: 100%;">
+								<div class="titleContText">{{titleBotmName}}	</div>
+								<div style="position: absolute;top: 24%;right: 0.2rem;">
+									<img class="closeImg" :src="closeImg1" v-on:mouseover="changeImg(2,1)" v-on:mouseout="changeImg(2,2)" @click="detailclose('botmdetail')" />
+								</div>
+							</div>
+							<div :style=" {height: 'calc(100% - 0.55rem)',marginTop: '0.55rem'}">
+								<component :is="componentBotmDetail" v-bind:detailData="botmDetailData"></component>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- 右侧详情框 -->
+				<div class="appCompontsContLeft fade-in-left1" v-show="isDetailDataRight">
+					<div class="appCompontsContLeftDiv">
+						<div class="titleCont titleContImg">
+							<div class="titleContText">{{titleRightName}}</div>
+							<div style="position: absolute;top: 0.14rem;right: 0.2rem;">
+								<img class="closeImg" :src="closeImg1" v-on:mouseover="changeImg(2,1)" v-on:mouseout="changeImg(2,2)" @click="detailclose('rightdetail')" />
+							</div>
+						</div>
+						<div style="height: calc(100% - 0.7rem);margin-top: 0.7rem;">
+							<component :is="componentRightDetail" v-bind:detailData="rightDetailData"></component>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</template>
+
+
+<script>
+  import bus from "../../../eventBus.js";
+	
+	export default {
+		name: "application2",
+		components: {
+		},
+		watch: {
+			// 监测路由变化,只要变化了就获取路由参数重新加载菜单
+			$route(to, from) {
+				var _this = this;
+				// to为跳转之后的路由
+				_this.oldindex = -1;
+
+				var menuid = this.$route.query.id
+				_this.getMenus(menuid);
+				_this.detailclose("leftMenu");
+				_this.menuFlag = -1;
+				_this.currentindex = -1;
+			}
+		},
+		props: {},
+		data() {
+			return {
+				fwidth:4.4,
+
+				currentindex:-1,
+				optionImgUrl1:'../../../../static/img/newhome/Leftbarbackgroud_s.png',
+				optionImgUrl2:'../../../../static/img/newhome/Leftbarbackgroud_n.png',
+
+				menuFlag: -1,
+				menuData: [],
+				componentName: "",
+				componentBotmDetail: "", //底部详情
+        componentLeftDetail: "", //左侧详情
+        componentRightDetail: "",//右侧详情
+        componentScreenName: "",
+
+				isDetailDataLeft: false,
+				titleName: "",
+				titleLeftName: "",
+        titleBotmName: "",
+        titleRightName: "",
+        titleScreenName: "",
+				isbotDetail: false,
+				closeImg: require("../../../../static/img/newhome/Btn_Close_n.png"),
+				closeImg1: require("../../../../static/img/newhome/Btn_Close_n.png"),
+				isLeftMenu: false,
+        detailData: {},
+        
+        botmDetailData: {},
+        rightDetailData: {},
+        leftDetailData: {},
+        screenDetailData: {},
+
+				leftwidth: 0,
+
+				oldindex: -1,
+        
+        isDetailDataLeft: false,
+        isDetailDataBot: false,
+        isDetailDataRight: false,
+        isFullScreen: false,
+        
+				isMapvisible:true,
+			};
+		},
+		methods: {
+			changeMenu(item, index) {
+				var _this = this;
+				_this.currentindex = index;
+				if (this.oldindex == index) {
+					return;
+				}
+
+				_this.isLeftMenu = true;
+				_this.leftwidth = 4.43 + 0.22;
+				_this.fwidth = 4.4;//左侧列表头部宽度
+				_this.isMapvisible = true; //地图显示
+				_this.oldindex = index
+				_this.menuFlag = index;
+
+
+				_this.componentName = item.jumpName;
+
+				_this.titleName = item.name;
+				_this.detailclose("leftdetail");
+				_this.detailclose("botmdetail");
+			
+			},
+			detailclose(type) {
+				var _this = this;
+				_this.isMapvisible = true; //关闭组件时，将地图显示出来
+
+				if (type == "leftMenu") {
+					this.oldindex = -1;
+					this.isLeftMenu = false;
+					this.isDetailDataLeft = false;
+					this.isbotDetail = false;
+					this.leftwidth = 0;
+				}
+				if (type == "leftdetail") {
+					this.leftwidth = 4.43 + 0.22;
+					this.isDetailDataLeft = false;
+					this.isbotDetail = false;
+				}
+				if (type == "botmdetail") {
+					this.isbotDetail = false;
+				}
+				if (type == "leftdetailNew") {
+					this.leftwidth = 4.43 * 1.5;
+					this.isbotDetail = false;
+				}
+				if (type == "rightdetail") {  //右侧详情框
+				}
+				this.closeImg = this.closeImg1 = "../../../../static/img/newapp/Btn_Close_n.png";
+			},
+			changeImg(type, flag) {
+				if (type == "1")
+					this.closeImg = flag == 1 ? "../../../../static/img/newapp/Btn_Close_h.png" : "../../../../static/img/newapp/Btn_Close_n.png"
+				if (type == "2")
+					this.closeImg1 = flag == 1 ? "../../../../static/img/newapp/Btn_Close_h.png" : "../../../../static/img/newapp/Btn_Close_n.png"
+			},
+			getMenus(menuid) {
+				var _this = this;
+				_this.menuData = [];
+			
+				for (let l = 0; l < children.length; l++) {
+					_this.menuData.push({
+						classname: children[l].classname,
+						id: children[l].id,
+						img: children[l].img,
+						menulocation: children[l].menulocation.split(','),
+						menuname: children[l].menuname,
+						menusize: children[l].menusize.split(','),
+						seq: children[l].seq,
+						systemid: children[l].systemid,
+						bgImgT: "../../static/img/newapp/Leftbar backgroud_s.png",
+						bgImgF: "../../static/img/newapp/Leftbar backgroud_n.png",
+						imgT: '',
+						imgF: '',
+						name: children[l].menuname,
+						jumpName: children[l].classname
+					})
+				}
+							
+			},
+		},
+		mounted() {
+			let _this = this;
+
+			bus.$off("detail-app");
+			bus.$on("detail-app", function(value, item, title) {
+				_this.isbotDetail = true;
+				_this.botmDetailData = item;
+				_this.componentBotmDetail = value;
+				_this.titleBotmName = title;
+      });
+      
+			//左侧详情页
+			bus.$off("isleftDetail");
+			bus.$on("isleftDetail", function(value, data, title) {
+
+				_this.componentLeftDetail = value;
+      });
+      
+			// 返回列表页
+			bus.$off("showLeftMenu");
+			bus.$on("showLeftMenu", function() {
+				_this.isLeftMenu = true;
+				_this.isDetailDataLeft = false;
+      });
+      
+			// 右侧详情页
+			bus.$off("detail-RightApp");
+			bus.$on("detail-RightApp", function(value, item, title) {
+
+				_this.rightDetailData = item;
+				_this.componentLeftDetail = value;
+				_this.titleRightName = title;
+			});
+
+      //关闭详情框
+			bus.$off("detailclose");
+			bus.$on("detailclose", function(value) {
+				_this.detailclose(value);
+      });
+      
+			var menuid = this.$route.query.id; //序号（id）
+			_this.getMenus(menuid);
+
+			_this.detailclose("leftMenu");
+			_this.menuFlag = -1;
+
+		},
+	}
+</script>
+
+<style lang="less">
+.appDiv2 {
+    width: calc(100% - 0.05rem);
+    height: calc(100% - 0.70rem);
+    position: relative;
+    padding: 0.05rem;
+
+    .appMenu{
+      width: 1.6rem;
+      height: 100%;
+      // background-color: #013282;
+      border-right: none;
+      float: left;
+      overflow-y: auto;
+      background-image: url("../../../../static/img/newhome/bg_left.png");
+      background-size: 100% 100%;
+    }
+    .appMenu1{
+        width: 100%;
+        height: 100%;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        position: absolute;
+    }
+    .menuCont{
+      position: relative;
+      cursor: pointer;
+      padding-top: 0.1rem;
+    }
+    .menuSel {
+        background-image: url("../../../../static/img/newhome/bg_选项_sel.png");
+        background-size: 100% 100%;
+        margin: 0.2rem;
+        height: 0.5rem;
+    }
+    .menuNor {
+        background-image: url("../../../../static/img/newhome/bg_选项_nor.png");
+        background-size: 100% 100%;
+        margin: 0.2rem;
+        height: 0.5rem;
+    }
+    .menuImg{
+    width: 0.3rem;
+    position: relative;
+    left: 0.15rem;
+    background-image: url("../../../../static/img/newhome/bg_btn_sel.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 0.3rem;
+    float: left;
+    }
+    .menuImgF{
+    width: 0.3rem;
+    position: relative;
+    left: 0.15rem;
+    background-image: url("../../../../static/img/newhome/bg_btn_nor.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 0.3rem;
+    float: left;
+    }
+    .menuContImg{
+    position: absolute;
+    width: 0.3rem;
+    left: 0rem;
+    top: 0rem;
+    }
+    .menuContText{
+    font-size: 0.16rem;
+    color: #9db8e5ba;
+    font-weight: bold;
+    text-align: left;
+    padding-top: 0.05rem;
+    padding-left: 0.6rem;
+    }
+    .menuContText .actives{
+       color: #ffffff; 
+    }
+    .appComponts{
+      float: left;
+      width: 16.9rem;
+      height: 100%;
+      position: relative;
+    .appCompontsContLeft{
+      width: 4.65rem;
+      height: 100%;
+      float: left;
+      padding-top: 0rem;
+      padding-bottom: 0rem;
+    }
+    .appCompontsContLeftDiv{
+      border-radius: 0.2rem;
+      background: none;
+      width: 4.43rem;
+      height: 100%;
+      margin-left: 0.10rem;
+      float: left;
+      position: relative;
+      background-image: url("../../../../static/img/newhome/底部bg-06.png");
+      background-size: 100% 100%;
+    }
+    .appCompontsContLeftT{
+      width:100%;
+      height: 100%;
+      float: left;
+      padding-top: 0rem;
+    }
+    .appCompontsContLeftDivT{
+      border: 1px solid #285fa3;
+      border-radius: 0.2rem;
+      background: #0d4381;
+      width: 100%;
+      height: 100%;
+      margin-left: 0.10rem;
+      float: left;
+      position: relative;
+    }
+
+    .appCompontsContRightT {
+      width: 13.51rem;
+      height: 100%;
+      float: left;
+    }
+    .appCompontsContRightTT {
+      width: 8.86rem;
+      height: 100%;
+      float: left;
+    }
+    .appCompontsContRightF {
+      height: 100%;
+      width: 18.16rem;
+      float: left;
+    }
+    
+    .appCompontsContMapT{
+      width: 100%;
+      height: 50%;
+      padding-top: 0.140556rem;
+    }
+    .appCompontsContMapF{
+      width: 100%;
+      height: 100%;
+      padding-top: 0.0rem;
+    }
+    .appCompontsContMapDiv{
+      border: 1px solid #01bfc2;
+      border-radius: 0.2rem;
+      // background: #0f336a;
+      height: 100%;
+      margin-left: 0.10rem;
+      position: relative;
+    }
+    .appCompontsContDetail{
+      width: 100%;
+      height: 50%;
+      padding-top: 0.140556rem;
+    }
+    .appCompontsContDetailF{
+      width: 100%;
+      height: 35%;
+      padding-top: 0.140556rem;
+    }
+    .appCompontsContDetailDiv{
+      // background: #0f336a;
+      height: 100%;
+      border: 1px solid rgba(255,0,0,0);
+      border-radius: 0.2rem;
+      margin-left: 0.10rem;
+      position: relative;
+      background: url("../../../../static/img/newhome/底部bg.png");
+      background-repeat: no-repeat;
+      background-size: 101% 100%;
+    }
+    
+    .titleCont {
+      position: absolute;
+    }
+    
+    .titleContImg {
+      width: 4.40rem;
+      height: 0.55rem;
+      line-height: 0.6rem;
+      border-radius: 10px 10px 0px 0px;
+      border-bottom: 1px solid #0161ba;
+    }
+    .titleContImgT {
+      height: 0.55rem;
+      line-height: 0.6rem;
+      background: #0052b0;
+      border-radius: 10px 10px 0px 0px;
+      border-bottom: 1px solid #0161ba;
+    }
+    
+    .titleContText {
+      position: absolute;
+      top: 0;
+      line-height: 0.6rem;
+      font-size: 0.10rem;
+      color: #ffffff;
+      font-weight: bold;
+      left: 0.210834rem;
+      float: left;
+    }
+    
+    .closeImg {
+      height: 0.31rem;
+      float: right;
+    }
+  }
+}
+
+    .scale-in
+    {
+        -webkit-animation: scale-in 1.5s;
+                animation: scale-in 1.5s;
+    }
+    
+    @keyframes scale-in
+    {
+        0%
+        {
+            transform: scale(0);
+            opacity: 0;
+        }
+        100%
+        {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+    @-webkit-keyframes scale-in
+    {
+        0%
+        {
+            -webkit-transform: scale(0);
+            opacity: 0;
+        }
+        100%
+        {
+            -webkit-transform: scale(1);
+            opacity: 1;
+        }
+    }
+
+</style>

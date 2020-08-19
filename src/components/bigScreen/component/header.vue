@@ -1,0 +1,288 @@
+<template>
+	<div class="header" style="z-index: 99;">
+	
+		<div class="homePageTitle">
+			<div style="height: 100%;">
+
+				<div class="left-div" style="width:33.3%;float: left;height: 100%;">
+          <div class="leftTool">
+
+					</div>
+				  <div :key="index" :class="[ismeunNumLeft == item.id ? 'menuDiv menuDivL' : 'menuDiv']" v-for="(item,index) in menuDataLeft" @click="changeMenu_left(item.id)">
+						<a :href="'#/'+item.classname+'?id='+item.id">
+							<div style="height: 100%">
+								<img class="menuImg menuImgLeft" :src="ismeunNumLeft == item.id ? item.imgT : item.imgF" />
+								<div class="homeMenu homeMenuLeft" :class="[ismeunNumLeft == item.id ? 'homeMenuTextT' : 'homeMenuTextF']">
+									{{item.menuname}}
+								</div>
+							</div>
+						</a>
+					</div>
+				</div>
+
+				<div class="center-div" style="width:33.3%;float: left;text-align: center;height: 100%;" >
+					<div style="display: inline-block;height: 100%;cursor: pointer;" @click="goHomepage()">
+						<div class="ptname">{{ptTitle}}</div>
+					</div>
+				</div>
+
+				<div class="right-div" style="width:33.3%;float: left;height: 100%;">
+					<div :key="index" :class="[ismeunNumRight == item.id ? 'menuDiv menuDivR' : 'menuDiv']" v-for="(item,index) in menuDataRight" @click="changeMenu_Right(item.id)">
+				    <a :href="'#/'+item.classname+'?id='+item.id">
+				    	<div style="height: 100%">
+				    		<img class="menuImg menuImgRight" :src="ismeunNumRight == item.id ? item.imgT : item.imgF" />
+				    		<div class="homeMenu homeMenuRight" :class="[ismeunNumRight == item.id ? 'homeMenuTextT' : 'homeMenuTextF']">
+				    			{{item.menuname}}
+				    		</div>
+				    	</div>
+				    </a>
+			  	</div>
+          <div class="rightTool">
+
+					</div>
+	    	</div>
+
+    	</div>
+    </div>
+
+  </div>
+</template>
+
+<script>
+	import bus from "../../../eventBus.js";
+
+export default {
+    data() {
+      return {
+        ptTitle: '某某某某',
+		  	
+		  	ismeunNumLeft: null,
+        ismeunNumRight: null,
+        
+		  	menuDataLeft: [],
+		  	menuDataRight: [],
+		  	menuList: [
+          {classname:'application1',menuname:'菜单1',id:1,children:[]},
+          {classname:'application2',menuname:'菜单2',id:2,children:[]},
+          {classname:'application1',menuname:'菜单3',id:3,children:[]},
+          {classname:'application2',menuname:'菜单4',id:4,children:[]},
+          {classname:'application1',menuname:'菜单5',id:5,children:[]},
+          {classname:'application2',menuname:'菜单6',id:6,children:[]},
+        ],
+      };
+    },
+		watch: {
+			$route(to, from) {
+				var _this = this;
+				// to为跳转之后的路由
+				this.ismeunNumLeft = null;
+				this.ismeunNumRight = null;
+				var menuid = this.$route.query.id
+				for (let i = 0; i < this.menuDataLeft.length; i++) {
+					if(menuid == this.menuDataLeft[i].id){
+						this.ismeunNumLeft = menuid;
+					}
+				}
+				for (let j = 0; j < this.menuDataRight.length; j++) {
+					if(menuid == this.menuDataRight[j].id){
+						this.ismeunNumRight = menuid;
+					}
+				}
+			}
+		},
+		methods: {
+				// 返回综合
+				goHomepage(){
+					this.$router.push({
+						name: 'homePage',
+            query: {
+			      	id: 11
+			      }
+					});
+				},
+				getSysList() {
+
+				  this.menuDataLeft = [];
+				  this.menuDataRight = [];
+			    
+					if (this.menuList.length > 0) {
+						var len = this.menuList.length % 2 == 0 ? this.menuList.length / 2 : parseInt(this.menuList.length / 2 + 1);
+	
+						for (let k = 0; k < len; k++) {
+							this.menuDataLeft.push({
+								classname: this.menuList[k].classname,
+								id: this.menuList[k].id,
+								bgImgT: '../../static/img/newhome/BG_navigation_s.png',
+								bgImgF: '', 
+								imgT: '../../static/img/newhome/icon_inspection_n.png',
+								imgF: '../../static/img/newhome/icon_inspection_s.png',
+								menuname: this.menuList[k].menuname,
+								children: this.menuList[k].children
+							})
+						}
+						for (let l = len; l < this.menuList.length; l++) {
+							this.menuDataRight.push({
+								classname: this.menuList[l].classname,
+								id: this.menuList[l].id,
+								bgImgT: '../../static/img/newhome/BG_navigation_s.png',
+								bgImgF: '', 
+								imgT: '../../static/img/newhome/icon_inspection_n.png',
+								imgF: '../../static/img/newhome/icon_inspection_s.png',
+								menuname: this.menuList[l].menuname,
+								children: this.menuList[l].children
+							})
+						}
+					}
+	  	},
+			changeMenu_left(id) {
+				this.ismeunNumRight = null;
+				this.ismeunNumLeft = id;
+
+        _this.$router.push({
+          name: 'application1',
+          query: {
+            id: id
+          }
+        });
+			},
+			changeMenu_Right(id) {
+				this.ismeunNumLeft = null;
+				this.ismeunNumRight = id;
+        
+        _this.$router.push({
+          name: 'application2',
+          query: {
+            id: id
+          }
+        });
+			},
+		},
+		mounted() {
+			var _this = this;
+			this.getSysList();
+		},
+	}
+</script>
+
+<style lang="less" scoped>
+
+.header {
+  width: 100%;
+
+	.Title {
+		font-family: 'login';
+		color: #fff;
+		font-size: 0.46rem;
+		position: relative;
+		background-image: -webkit-gradient(linear, 0 0, 0 bottom, from(#ffffff), to(#b5e4e4));
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		text-align: center;
+	}
+
+  .homePageTitle{
+    height: 0.6rem;
+    width: 100%;
+    background-image: url("../../../../static/img/newhome/标题.png");
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    animation: loadFromTop 2s linear;
+    -webkit-animation: loadFromTop 2s linear;
+    -webkit-animation-timing-function: ease;
+    animation-timing-function: ease;
+  }
+
+  .dateTime_time {
+    line-height: 1;
+    font-family: "eras medium itc";
+    color: #fff;
+    font-size: 0.16rem;
+    position: relative;
+      text-align: center;
+  }
+  .dateTime_day {
+    line-height: 1;
+    font-size: 0.16rem;
+    color: #FFFFFF;
+    position: relative;
+  }
+  .menuDiv{
+      float: left;
+      position: relative;
+      top: 0.098389rem;
+      width: 20%;;
+      height: 100%;
+      height: 0.493616rem;
+    }
+    .menuDivL{
+        background-image: url("../../../../static/img/newhome/BG_navigation_s.png");
+        background-repeat: no-repeat;
+        background-size: contain;
+        height: 100%;
+    }
+    .menuDivR{
+        background-image: url("../../../../static/img/newhome/BG_navigation_s.png");
+        background-repeat: no-repeat;
+        background-size: contain;
+        height: 100%;
+    }
+  
+    .menuDivRight{
+      margin-left: 0.252342rem;
+    }
+    .homeMenuLeft{
+      left: 0.40rem;
+    }
+    .homeMenuRight{
+      left: 0.40rem;
+    }
+    .homeMenuTextT{
+      font-size: 0.16rem;
+      top: 0.12rem;
+      color: #FFFFFF;
+    }
+    .homeMenuTextF{
+      font-size: 0.16rem;
+      top: 0.18rem;
+      color: rgba(255,255,255,0.53);
+    }
+    .homeMenu{
+      position: absolute;
+      width: max-content;
+      font-weight: bold;
+    }
+    .menuDiv a{
+      outline:none;
+    }
+    .menuBgImg{
+      width: 1.8rem;
+    }
+    .menuImgLeft{
+      left: 0.12rem;
+    }
+    .menuImg{
+      width: 0.25rem;
+      position: absolute;
+      top: 0.15rem;
+    }
+    .menuImgRight{
+      left: 0.12rem;
+    }
+
+    .leftTool{
+      float: left;
+      position: relative;
+      top: 0.098389rem;
+      width: 40%;
+      height: 100%;
+    }
+
+    .rightTool{
+      float: left;
+      position: relative;
+      top: 0.098389rem;
+      width: 40%;
+      height: 100%;
+    }
+}
+</style>

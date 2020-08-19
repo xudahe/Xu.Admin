@@ -1,0 +1,19 @@
+drainet:
+  - title: 排水管网
+    name: components
+    type: components
+    groups:
+      - title: bigScreen
+        name: bigScreen
+        items:
+          - title: component
+            name: component
+            details:
+              - title: test1
+                name: test1
+              - title: test2
+                name: test2
+              - title: test3
+                name: test3
+     
+      

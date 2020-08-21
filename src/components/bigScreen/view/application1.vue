@@ -4,15 +4,15 @@
 			<div class="appComponts">
         
 				<!-- 左侧列表 -->
-				<div v-if="listFlag" class="appCompontsContLeft fade-in-right4" style="margin-left: 0px;" :style="{'margin-right': (listWidth != 0.162225?0:0.4) +'rem !important'}">
+				<div class="appCompontsContLeft fade-in-right4" style="margin-left: 0px;" :style="{'margin-right': (listWidth != 0.15?0:0.4) +'rem !important'}">
 					<div class="UnitFrame fade-in-right1" style="height: 100%;padding: 0">
-            <div :class="listWidth != 0.162225 ? 'appCompontsContLeftlistF':'appCompontsContLeftlistT'" v-show="listWidth != 0.162225"  >
+            <div :class="listWidth != 0.15 ? 'appCompontsContLeftlistF':'appCompontsContLeftlistT'" v-show="listWidth != 0.15"  >
               <div class="UnitDivBigtitle">{{panelName}}</div>
 			        <div style="height: calc(100% - 0.55rem);">
 			        	<menuListPage></menuListPage>
 			        </div>
 						</div>
-            <div  :class="listWidth != 0.162225? 'imgF':'imgT'">
+            <div  :class="listWidth != 0.15? 'imgF':'imgT'">
             	<div style="position: relative;top: 43%;">
 	              <Icon @click="listShow" :type="listIcon" size='32' color="#fff" style="cursor: pointer;opacity: 0;" />
             	</div>
@@ -86,7 +86,7 @@ export default {
       panelName:"",
       leftwidth: 3,
       rightwidth: 3,
-      listWidth: 0.162225,
+      listWidth: 0.15,
       listIcon:'ios-arrow-forward',
       leftTitleName: "",
       botmTitleName: "",
@@ -96,7 +96,6 @@ export default {
       rightComponentName: "",
       detailData: {},
       
-      listFlag: false,
       botFlag: false,
       leftFlag: true,
       rightFlag: true,
@@ -119,16 +118,15 @@ export default {
       _this.botmTitleName = "";
 	    _this.panelName = "";
       _this.botFlag = false;
-      _this.listFlag = false;
       
     },
     // 箭头收缩
     listShow(){
-      if(this.listWidth == 0.162225){ //收缩状态
-        this.listWidth = 3.162225;
+      if(this.listWidth == 0.15){ //收缩状态
+        this.listWidth = 3.15;
         this.listIcon = "ios-arrow-back";
       }else{
-        this.listWidth = 0.162225; //展开状态
+        this.listWidth = 0.15; //展开状态
         this.listIcon = "ios-arrow-forward";
       }
       setTimeout(function(){
@@ -218,7 +216,7 @@ export default {
             background-repeat: no-repeat;
             background-size:100% 100%;
             height: 100%;
-            width: 3.18rem;
+            width: 2.00rem;
         }
     
         .appCompontsContLeftDivJn{
@@ -267,11 +265,10 @@ export default {
     }
 
     .UnitDivBigtitle{
-        height: 0.55rem;
-        width: 2.92rem;
-        line-height: 0.6rem;
+        height: 0.4rem;
+        width: 2.0rem;
+        line-height: 0.4rem;
         border-radius: 10px 10px 0px 0px;
-        line-height: 0.6rem;
         font-size: 0.22rem;
         color: #ffffff;
         font-weight: bold;

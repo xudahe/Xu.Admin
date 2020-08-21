@@ -10,7 +10,7 @@
 						<img :src="menuFlag == index ? item.imgT : item.imgF" class="menuContImg" />
 					</div>
 					<img :class="index==menuFlag ?'divImgSel':'divImgNor'" :src="index==menuFlag ?optionImgUrl1:optionImgUrl2"/>
-					<div class="menuContText"><span :class="menuFlag==index? 'actives':''">{{item.menuname}}</span></div>
+					<div class="menuContText"><span :class="menuFlag==index? 'actives':''">{{item .menuname}}</span></div>
 				</div>
 			</div>
       

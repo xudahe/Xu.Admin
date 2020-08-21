@@ -13,38 +13,25 @@
     <div id="homePage_Div" style="width: 100%;height: 100%;">
       <!-- 中间主体部分 -->
       <div class="homePageDiv" style="height: 100%;position: relative;overflow-y: hidden;width: 100%;">
-        <div style="height: 100%;position: relative">
-          <div class="homeMiddleMenuList scale-in" style="top: 0.3rem;right: 5.4rem;">
-          </div>
-          <div style="height: 100%;">
-            <Carousel v-model="overviewPage">
-              <CarouselItem :key="inde" v-for="(item,inde) in maxPage" style="height:100%">
-                 <!-- <component :is="item.classname"></component> -->
-              </CarouselItem>
-            </Carousel>
-          </div>
-        </div>
+          <Carousel v-model="overviewPage">
+            <CarouselItem :key="inde" v-for="(item,inde) in maxPage">
+               <!-- <component :is="item.classname"></component> -->
+              <carouselPage1></carouselPage1>
+            </CarouselItem>
+          </Carousel>
       </div>
     </div>
 
   </div>
 </template>
 <script>
-  import bus from "../../../eventBus.js";
+import bus from "../../../eventBus.js";
 
-  import homeLeft from "../component/newcompt/homeLeft.vue";
-  import homeMiddleBot from "../component/newcompt/homeMiddleBot.vue";
-  import homeMiddleTop from "../component/newcompt/homeMiddleTop.vue";
-  import homeRight from "../component/newcompt/homeRight.vue";
-  import meunPage from "../component/publics/meunPage";
+import carouselPage1 from "../component/publics/carouselPage1.vue";
 
 export default {
     components: {
-      homeLeft,
-      homeMiddleBot,
-      homeMiddleTop,
-      homeRight,
-      meunPage,
+      carouselPage1
     },
     data() {
       return {
@@ -122,29 +109,32 @@ export default {
 </script>
 
 <style lang="less" scoped>
+  @deep: ~'>>>';
+
+  @{deep}.ivu-carousel {
+    height: 100% !important;
+    width: 100% !important;
+  }
+  @{deep}.ivu-carousel-list {
+    height: 100% !important;
+  }
+  @{deep}.ivu-carousel-track {
+    height: 100% !important;
+  }
+  @{deep}.ivu-carousel-arrow {
+    background-color: rgb(83, 133, 152) !important;
+  }
+  @{deep}.ivu-carousel-arrow :hover {
+    background-color: rgb(83, 133, 152) !important;
+  }
+  @{deep}.ivu-carousel-item{
+    height: 100% !important;
+  }
 
   .homepage {
     position: relative;
 
-    .ivu-carousel {
-      height: 100% !important;
-    }
-
-    .ivu-carousel-list {
-      height: 100% !important;
-    }
-
-    .ivu-carousel-track {
-      height: 100% !important;
-    }
-
-    .ivu-carousel-arrow {
-      background-color: rgb(83, 133, 152) !important;
-    }
-
-    .ivu-carousel-arrow :hover {
-      background-color: rgb(83, 133, 152) !important;
-    }
+   
 
     .watherDiv {
       position: absolute;
@@ -166,7 +156,4 @@ export default {
     }
   }
 
-.transitionTop{
-  transition: top 1000ms ease-in-out;
-}
 </style>

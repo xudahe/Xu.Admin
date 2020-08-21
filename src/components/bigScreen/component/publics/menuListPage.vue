@@ -1,12 +1,12 @@
 <template>
-	<div style="height: 100%;padding: 0">
-		<div style="padding:0.112445rem;width: 2.90rem">
+	<div style="height: 100%;">
+		<div style="padding:0.10rem;width: 2.00rem">
 			<div v-if="list.length > 0" :key="index" v-for="(item, index) in list" @click="expandlist(index, item)" style="padding-top: 0.1rem;">
                 
                 <img :class="index==currentindex ?'divImgSel':'divImgNor'" :src="index==currentindex ? optionImgUrl1:optionImgUrl2"/>
 				
                 <div :key="index" class="navtrans-type-nav" :class="index == currentindex ? 'bgActive-ja' : 'bgActiveF-ja'">
-					<div class="navtrans-navlist-title" style="position: absolute;float: left; line-height: 0.743338rem;color: #495060;padding: 0 0.212445rem;">
+					<div class="navtrans-navlist-title" style="position: absolute;float: left; line-height: 0.74rem;color: #495060;padding: 0 0.2rem;">
 						<span class="last labelname_color" style="float: left;">{{ item.name }}</span>
 					</div>
 				</div>
@@ -23,7 +23,11 @@ export default {
 	props: {},
 	data() {
 		return {
-			list: [],
+			list: [
+                {id: 23, name: '数据1'},
+                {id: 22, name: '数据2'},
+                {id: 24, name: '数据3'},
+            ],
 			optionImgUrl1: require('../../../../../static/img/newhome/bg_选项_sel.png'),
 			optionImgUrl2: require('../../../../../static/img/newhome/bg_选项_nor.png'),
 			currentindex: -1,
@@ -48,20 +52,17 @@ export default {
 
 <style lang="less" scoped>
     .divImgSel{
-        width: 1.35rem;
-        margin-left: 0.1rem;
+        width: 1.6rem;
         cursor: pointer;
         position: initial;
-        height: 0.5rem;
+        height: 0.4rem;
         z-index: -2;
-        left: 2.76rem;
     }
     .divImgNor{
-        width: 1.35rem;
-        margin-left: 0.1rem;
+        width: 1.6rem;
         cursor: pointer;
         position: relative;
-        height: 0.5rem;
+        height: 0.4rem;
         z-index: -2;
     }
     .navtrans-navlist-title {

@@ -346,3 +346,32 @@
             -webkit-transform: rotateY(360deg);
         }
     }
+
+    /* 中心点旋转 */
+    .middle-rotate{
+        animation: rotastes 6s linear infinite;
+        transform-origin:50% 50%;
+         
+        -webkit-animation: rotastes 6s linear infinite;
+        -webkit-transform-origin:50% 50%;
+    }
+    @keyframes rotastes{
+        0%{
+            transform: rotate(0deg);
+        }
+        100%{
+            transform: rotate(360deg);
+        }
+    }
+
+    .transitionTop{
+        transition: top 1000ms ease-in-out;
+    }
+
+    .active{
+        opacity: 0;
+        transform: translate(100%) scale(0);
+        transform-origin: 100% 100%;
+        transition-duration: 2.5s;
+    }
+    

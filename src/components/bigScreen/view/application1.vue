@@ -61,7 +61,7 @@
 
 
 <script>
-  import bus from "../../../eventBus.js";
+import bus from "../../../eventBus.js";
 import menuListPage from "../component/publics/menuListPage";
 
 export default {
@@ -135,16 +135,12 @@ export default {
     },
     
   },
-
   mounted() {
     let _this = this;
     var menuid = this.$route.query.id; //序号（id）
 
   },
-  beforeDestroy() {
-  },
-  destroyed(){
-  }
+
 };
 
 </script>
@@ -160,7 +156,7 @@ export default {
         display: inline-block;
         position:  absolute;
         height: 100%;
-        background-image:url("../../../../static/img/newhome/侧边展开.png");
+        background-image:url("../../../../static/img/newhome/02/侧边展开.png");
         background-repeat: no-repeat;
         background-size:100% 100%;
         left: 0rem;
@@ -171,7 +167,7 @@ export default {
         position:  absolute;
         top: 0rem;
         height: 100%;
-        left: 2.76rem;
+        left: 1.76rem;
         z-index: 99;
     }
 
@@ -202,7 +198,7 @@ export default {
         .appCompontsContLeftlistT{
             display: inline-block;
             overflow-y:auto;
-            background-image: url("../../../../static/img/newhome/bg_left.png"); 
+            background-image: url("../../../../static/img/newhome/02/bg_left.png"); 
             background-repeat: no-repeat;
             background-size:90% 100%;
             height: 100%;
@@ -212,7 +208,7 @@ export default {
         .appCompontsContLeftlistF{
             display: inline-block;
             overflow-y:auto;
-            background-image: url("../../../../static/img/newhome/侧边收缩.png"); 
+            background-image: url("../../../../static/img/newhome/02/侧边收缩.png"); 
             background-repeat: no-repeat;
             background-size:100% 100%;
             height: 100%;
@@ -266,7 +262,7 @@ export default {
 
     .UnitDivBigtitle{
         height: 0.4rem;
-        width: 2.0rem;
+        width: 1.83rem;
         line-height: 0.4rem;
         border-radius: 10px 10px 0px 0px;
         font-size: 0.22rem;

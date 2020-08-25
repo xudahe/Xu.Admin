@@ -2,7 +2,7 @@
   <div>
     <div class="tabnavBox">
       <transition-group name="list" tag="ul">
-        <li v-for="(item, index) in $store.getters.tabnavBox" @contextmenu.prevent="openMenu(item,$event,index)" :key="item.title + index" class="tabnav" :class="{ active: $route.path === item.path }">
+        <li v-for="(item, index) in $store.getters.tabnavBox" @contextmenu.prevent="openMenu(item,$event,index)" :key="item.title + index" class="tabnav" :class="{ active_cls: $route.path === item.path }">
           <router-link :to="item.path">{{ item.title }}</router-link>
           <i @click="removeTab(item)" class="el-icon-error" v-if="index !== 0"></i>
         </li>
@@ -159,7 +159,7 @@ export default {
           }
         }
       }
-      li.active {
+      .active_cls {
         background: #409eff;
         color: #ffffff;
         a {

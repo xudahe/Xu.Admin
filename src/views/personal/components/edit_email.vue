@@ -63,23 +63,23 @@ export default {
       } catch (e) {}
     },
     doSubmit() {
-      this.$refs.userForm.validate(valid => {
-        if (valid) {
-          this.$http_json({
-            url: "/api/user/updateMail",
-            method: "post",
-            data: {
-							email: this.userForm.email,
-							password: encrypt(this.userForm.password)
-						}
-          }).then(() => {
-            this.$successMsg("修改成功");
-            this.$emit("updateUserInfo");
-          });
-        } else {
-          return false;
-        }
-      });
+      // this.$refs.userForm.validate(valid => {
+      //   if (valid) {
+      //     this.$http_json({
+      //       url: "/api/user/updateMail",
+      //       method: "post",
+      //       data: {
+			// 				email: this.userForm.email,
+			// 				password: encrypt(this.userForm.password)
+			// 			}
+      //     }).then(() => {
+      //       this.$successMsg("修改成功");
+      //       this.$emit("updateUserInfo");
+      //     });
+      //   } else {
+      //     return false;
+      //   }
+      // });
     }
   }
 };

@@ -93,6 +93,7 @@
 
             _this.connection.on('ReceiveUpdate', function (update) {
                 console.info('update success!')
+                console.info(update)
                 _this.loading = false;
                 _this.tableData = update;
                 window.clearInterval(this.t)

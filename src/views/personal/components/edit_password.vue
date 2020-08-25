@@ -62,24 +62,24 @@ export default {
       } catch (e) {}
     },
     doSubmit() {
-      this.$refs.userForm.validate(valid => {
-        if (valid) {
-          this.$http_json({
-            url: "/api/user/updatePassword",
-            method: "post",
-            data: {
-              oldPass: encrypt(this.userForm.oldPass),
-              newPass: encrypt(this.userForm.newPass)
-            }
-          }).then(() => {
-            this.$successMsg("修改成功，请重新登录");
-            this.$setMemoryPmt("token", "");
-            this.$router.push({ path: "/login" });
-          });
-        } else {
-          return false;
-        }
-      });
+      // this.$refs.userForm.validate(valid => {
+      //   if (valid) {
+      //     this.$http_json({
+      //       url: "/api/user/updatePassword",
+      //       method: "post",
+      //       data: {
+      //         oldPass: encrypt(this.userForm.oldPass),
+      //         newPass: encrypt(this.userForm.newPass)
+      //       }
+      //     }).then(() => {
+      //       this.$successMsg("修改成功，请重新登录");
+      //       this.$setMemoryPmt("token", "");
+      //       this.$router.push({ path: "/login" });
+      //     });
+      //   } else {
+      //     return false;
+      //   }
+      // });
     }
   }
 };

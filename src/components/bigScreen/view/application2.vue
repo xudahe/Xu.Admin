@@ -14,7 +14,7 @@
 				</div>
 			</div>
       
-			<div id="appComponts" class="appComponts" :style="{height: 'calc(100%)',width:'calc(100% - 1.65rem)'}">
+			<div id="appComponts" class="appComponts" :style="{height: 'calc(100%)',width:'calc(100% - 1.85rem)'}">
 				
         <div style="float: left;height: 100%" :style="{width:leftwidth+'rem'}">
 
@@ -68,13 +68,13 @@
 
 				<div style="position:absolution" :class="isLeftMenu ? isDetailDataLeft?'appCompontsContRightTT': 'appCompontsContRightT':'appCompontsContRightF'"
 				 :style="{width: '100%'}">
-					<div v-show="isMapvisible" class="scale-in" :class="isbotDetail ? 'appCompontsContMapT':'appCompontsContMapF'">
+					<div v-show="isMapvisible" class="scale-in" :class="isDetailDataBotm ? 'appCompontsContMapT':'appCompontsContMapF'">
 						<div class="appCompontsContMapDiv">
 							<!-- <newMap ref="newMap"></newMap> -->
 						</div>
 					</div>
 					<!-- 底部详情框 -->
-					<div  class="appCompontsContDetail fade-in-up" v-show="isDetailDataBot">
+					<div  class="appCompontsContDetail fade-in-up" v-show="isDetailDataBotm">
 						<div class="appCompontsContDetailDiv">
 							<div class="titleCont titleContImg" style="width: 100%;">
 								<div class="titleContText">{{titleBotmName}}	</div>
@@ -122,13 +122,11 @@
 			$route(to, from) {
 				var _this = this;
 				// to为跳转之后的路由
-				_this.oldindex = -1;
 
 				var menuid = this.$route.query.id
 				_this.getMenus(menuid);
 				_this.detailclose("leftMenu");
 				_this.menuFlag = -1;
-				_this.currentindex = -1;
 			}
 		},
 		props: {},
@@ -136,7 +134,6 @@
 			return {
 				fwidth:4.4,
 
-				currentindex:-1,
 				optionImgUrl1:'../../../../static/img/newhome/Leftbarbackgroud_s.png',
 				optionImgUrl2:'../../../../static/img/newhome/Leftbarbackgroud_n.png',
 
@@ -154,9 +151,9 @@
         titleBotmName: "",
         titleRightName: "",
         titleScreenName: "",
-				isbotDetail: false,
-				closeImg: require("../../../../static/img/newhome/Btn_Close_n.png"),
-				closeImg1: require("../../../../static/img/newhome/Btn_Close_n.png"),
+
+				closeImg: require("../../../../static/img/newhome/btn_Close_n.png"),
+				closeImg1: require("../../../../static/img/newhome/btn_Close_n.png"),
 				isLeftMenu: false,
         detailData: {},
         
@@ -166,11 +163,9 @@
         screenDetailData: {},
 
 				leftwidth: 0,
-
-				oldindex: -1,
         
         isDetailDataLeft: false,
-        isDetailDataBot: false,
+        isDetailDataBotm: false,
         isDetailDataRight: false,
         isFullScreen: false,
         
@@ -180,18 +175,13 @@
 		methods: {
 			changeMenu(item, index) {
 				var _this = this;
-				_this.currentindex = index;
-				if (this.oldindex == index) {
-					return;
-				}
+        _this.menuFlag = index;
 
 				_this.isLeftMenu = true;
 				_this.leftwidth = 4.43 + 0.22;
 				_this.fwidth = 4.4;//左侧列表头部宽度
 				_this.isMapvisible = true; //地图显示
-				_this.oldindex = index
-				_this.menuFlag = index;
-
+				
 
 				_this.componentName = item.jumpName;
 
@@ -205,10 +195,7 @@
 				_this.isMapvisible = true; //关闭组件时，将地图显示出来
 
 				if (type == "leftMenu") {
-					this.oldindex = -1;
 					this.isLeftMenu = false;
-					this.isDetailDataLeft = false;
-					this.isbotDetail = false;
 					this.leftwidth = 0;
 				}
 				if (type == "leftdetail") {
@@ -217,21 +204,18 @@
 					this.isbotDetail = false;
 				}
 				if (type == "botmdetail") {
-					this.isbotDetail = false;
+					this.isDetailDataBotm = false;
 				}
-				if (type == "leftdetailNew") {
-					this.leftwidth = 4.43 * 1.5;
-					this.isbotDetail = false;
+        if (type == "rightdetail") {
+          this.isDetailDataRight = false;
 				}
-				if (type == "rightdetail") {  //右侧详情框
-				}
-				this.closeImg = this.closeImg1 = "../../../../static/img/newapp/Btn_Close_n.png";
+				this.closeImg = this.closeImg1 = "../../../../static/img/newapp/btn_Close_n.png";
 			},
 			changeImg(type, flag) {
 				if (type == "1")
-					this.closeImg = flag == 1 ? "../../../../static/img/newapp/Btn_Close_h.png" : "../../../../static/img/newapp/Btn_Close_n.png"
+					this.closeImg = flag == 1 ? "../../../../static/img/newapp/btn_Close_h.png" : "../../../../static/img/newapp/btn_Close_n.png"
 				if (type == "2")
-					this.closeImg1 = flag == 1 ? "../../../../static/img/newapp/Btn_Close_h.png" : "../../../../static/img/newapp/Btn_Close_n.png"
+					this.closeImg1 = flag == 1 ? "../../../../static/img/newapp/btn_Close_h.png" : "../../../../static/img/newapp/btn_Close_n.png"
 			},
 			getMenus(menuid) {
 				var _this = this;
@@ -260,33 +244,36 @@
 		},
 		mounted() {
 			let _this = this;
-
-			bus.$off("detail-app");
-			bus.$on("detail-app", function(value, item, title) {
-				_this.isbotDetail = true;
-				_this.botmDetailData = item;
-				_this.componentBotmDetail = value;
-				_this.titleBotmName = title;
-      });
       
-			//左侧详情页
-			bus.$off("isleftDetail");
-			bus.$on("isleftDetail", function(value, data, title) {
-
-				_this.componentLeftDetail = value;
-      });
-      
-			// 返回列表页
+      // 返回列表页
 			bus.$off("showLeftMenu");
 			bus.$on("showLeftMenu", function() {
 				_this.isLeftMenu = true;
 				_this.isDetailDataLeft = false;
       });
+
+      //左侧详情页
+			bus.$off("leftDetail");
+			bus.$on("leftDetail", function(value, item, title) {
+        _this.isDetailDataLeft = true;
+        _this.leftDetailData = item;
+        _this.componentLeftDetail = value;
+        _this.titleLeftName = title;
+      });
+
+      //底部详情页
+			bus.$off("botmDetail");
+			bus.$on("botmDetail", function(value, item, title) {
+				_this.isDetailDataBotm = true;
+				_this.botmDetailData = item;
+				_this.componentBotmDetail = value;
+				_this.titleBotmName = title;
+      });
       
 			// 右侧详情页
-			bus.$off("detail-RightApp");
-			bus.$on("detail-RightApp", function(value, item, title) {
-
+			bus.$off("rightDetail");
+			bus.$on("rightDetail", function(value, item, title) {
+        _this.isDetailDataRight = true;
 				_this.rightDetailData = item;
 				_this.componentLeftDetail = value;
 				_this.titleRightName = title;
@@ -316,13 +303,13 @@
     padding: 0.05rem;
 
     .appMenu{
-      width: 1.6rem;
+      width: 1.8rem;
       height: 100%;
       // background-color: #013282;
       border-right: none;
       float: left;
       overflow-y: auto;
-      background-image: url("../../../../static/img/newhome/bg_left.png");
+      background-image: url("../../../../static/img/newhome/02/bg_left.png");
       background-size: 100% 100%;
     }
     .appMenu1{
@@ -338,13 +325,13 @@
       padding-top: 0.1rem;
     }
     .menuSel {
-        background-image: url("../../../../static/img/newhome/bg_选项_sel.png");
+        background-image: url("../../../../static/img/newhome/02/bg_选项_sel.png");
         background-size: 100% 100%;
         margin: 0.2rem;
         height: 0.5rem;
     }
     .menuNor {
-        background-image: url("../../../../static/img/newhome/bg_选项_nor.png");
+        background-image: url("../../../../static/img/newhome/02/bg_选项_nor.png");
         background-size: 100% 100%;
         margin: 0.2rem;
         height: 0.5rem;
@@ -353,7 +340,7 @@
     width: 0.3rem;
     position: relative;
     left: 0.15rem;
-    background-image: url("../../../../static/img/newhome/bg_btn_sel.png");
+    background-image: url("../../../../static/img/newhome/02/bg_btn_sel.png");
     background-repeat: no-repeat;
     background-size: contain;
     height: 0.3rem;
@@ -363,7 +350,7 @@
     width: 0.3rem;
     position: relative;
     left: 0.15rem;
-    background-image: url("../../../../static/img/newhome/bg_btn_nor.png");
+    background-image: url("../../../../static/img/newhome/02/bg_btn_nor.png");
     background-repeat: no-repeat;
     background-size: contain;
     height: 0.3rem;
@@ -406,7 +393,7 @@
       margin-left: 0.10rem;
       float: left;
       position: relative;
-      background-image: url("../../../../static/img/newhome/底部bg-06.png");
+      background-image: url("../../../../static/img/newhome/02/底部bg-06.png");
       background-size: 100% 100%;
     }
     .appCompontsContLeftT{
@@ -477,7 +464,7 @@
       border-radius: 0.2rem;
       margin-left: 0.10rem;
       position: relative;
-      background: url("../../../../static/img/newhome/底部bg.png");
+      background: url("../../../../static/img/newhome/02/底部bg-2.png");
       background-repeat: no-repeat;
       background-size: 101% 100%;
     }

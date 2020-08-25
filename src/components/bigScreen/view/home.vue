@@ -82,5 +82,8 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-
+ #homemain{
+	background-image: url("../../../../static/img/newhome/02/bg2-1.png");
+	background-size: 100% 100%;
+ }
 </style>

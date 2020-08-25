@@ -63,10 +63,10 @@ export default {
 		  	menuDataRight: [],
 		  	menuList: [
           {classname:'application1',menuname:'菜单1',id:1,children:[]},
-          {classname:'application2',menuname:'菜单2',id:2,children:[]},
+          {classname:'application1',menuname:'菜单2',id:2,children:[]},
           {classname:'application1',menuname:'菜单3',id:3,children:[]},
           {classname:'application2',menuname:'菜单4',id:4,children:[]},
-          {classname:'application1',menuname:'菜单5',id:5,children:[]},
+          {classname:'application2',menuname:'菜单5',id:5,children:[]},
           {classname:'application2',menuname:'菜单6',id:6,children:[]},
         ],
       };
@@ -112,10 +112,8 @@ export default {
 							this.menuDataLeft.push({
 								classname: this.menuList[k].classname,
 								id: this.menuList[k].id,
-								bgImgT: '../../static/img/newhome/BG_navigation_s.png',
-								bgImgF: '', 
-								imgT: '../../static/img/newhome/icon_inspection_n.png',
-								imgF: '../../static/img/newhome/icon_inspection_s.png',
+								imgT: '../../static/img/newhome/icon_inspection_s.png',
+								imgF: '../../static/img/newhome/icon_inspection_n.png',
 								menuname: this.menuList[k].menuname,
 								children: this.menuList[k].children
 							})
@@ -124,10 +122,8 @@ export default {
 							this.menuDataRight.push({
 								classname: this.menuList[l].classname,
 								id: this.menuList[l].id,
-								bgImgT: '../../static/img/newhome/BG_navigation_s.png',
-								bgImgF: '', 
-								imgT: '../../static/img/newhome/icon_inspection_n.png',
-								imgF: '../../static/img/newhome/icon_inspection_s.png',
+								imgT: '../../static/img/newhome/icon_inspection_s.png',
+								imgF: '../../static/img/newhome/icon_inspection_n.png',
 								menuname: this.menuList[l].menuname,
 								children: this.menuList[l].children
 							})
@@ -183,7 +179,7 @@ export default {
   .homePageTitle{
     height: 0.6rem;
     width: 100%;
-    background-image: url("../../../../static/img/newhome/标题.png");
+    background-image: url("../../../../static/img/newhome/02/topTitle.png");
     background-repeat: no-repeat;
     background-size: 100% auto;
     animation: loadFromTop 2s linear;
@@ -209,19 +205,19 @@ export default {
   .menuDiv{
       float: left;
       position: relative;
-      top: 0.098389rem;
+      // top: 0.098389rem;
       width: 20%;;
       height: 100%;
       height: 0.493616rem;
     }
     .menuDivL{
-        background-image: url("../../../../static/img/newhome/BG_navigation_s.png");
+        background-image: url("../../../../static/img/newhome/02/BG_navigation_s.png");
         background-repeat: no-repeat;
         background-size: contain;
         height: 100%;
     }
     .menuDivR{
-        background-image: url("../../../../static/img/newhome/BG_navigation_s.png");
+        background-image: url("../../../../static/img/newhome/02/BG_navigation_s.png");
         background-repeat: no-repeat;
         background-size: contain;
         height: 100%;
@@ -238,7 +234,7 @@ export default {
     }
     .homeMenuTextT{
       font-size: 0.16rem;
-      top: 0.12rem;
+      top: 0.18rem;
       color: #FFFFFF;
     }
     .homeMenuTextF{

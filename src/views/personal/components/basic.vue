@@ -85,20 +85,20 @@ export default {
       } catch (e) {}
     },
     doSubmit() {
-      this.$refs.userForm.validate(valid => {
-        if (valid) {
-          this.$http_json({
-            url: "/api/user/center",
-            method: "post",
-            data: this.userForm
-          }).then(() => {
-            this.$successMsg("修改成功");
-            this.$emit("updateUserInfo");
-          });
-        } else {
-          return false;
-        }
-      });
+      // this.$refs.userForm.validate(valid => {
+      //   if (valid) {
+      //     this.$http_json({
+      //       url: "/api/user/center",
+      //       method: "post",
+      //       data: this.userForm
+      //     }).then(() => {
+      //       this.$successMsg("修改成功");
+      //       this.$emit("updateUserInfo");
+      //     });
+      //   } else {
+      //     return false;
+      //   }
+      // });
     }
   }
 };

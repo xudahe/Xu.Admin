@@ -32,6 +32,9 @@ import Message from '@/api/message'
 // 引入二次封装的axios模块
 import axios from '@/api/axios/index'
 import apiSet from "@/api/axios/apiSetting" //请求接口
+// 结合 promise 封装原生ajax
+import http from '@/api/axios/http' 
+Vue.use(http)
 // 引入websocket模块
 import Socket from '@/api/websocket'
 // 引入时间格式化函数

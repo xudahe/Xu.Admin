@@ -40,12 +40,12 @@ export default {
   data() {
     return {
       yhList: [
-        {id:1,name:'测试数据1111111'},
-        {id:2,name:'测试数据2222222'},
-        {id:3,name:'测试数据3333333'},
-        {id:4,name:'测试数据4444444'},
-        {id:5,name:'测试数据5555555'},
-        {id:6,name:'测试数据6666666'},
+        {id:1,name:'测试数据1'},
+        {id:2,name:'测试数据2'},
+        {id:3,name:'测试数据3'},
+        {id:4,name:'测试数据4'},
+        {id:5,name:'测试数据5'},
+        {id:6,name:'测试数据6'},
       ],
 
       timersb: {},

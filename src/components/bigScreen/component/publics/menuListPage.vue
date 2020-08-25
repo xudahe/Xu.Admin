@@ -28,8 +28,8 @@ export default {
                 {id: 22, name: '数据2'},
                 {id: 24, name: '数据3'},
             ],
-			optionImgUrl1: require('../../../../../static/img/newhome/bg_选项_sel.png'),
-			optionImgUrl2: require('../../../../../static/img/newhome/bg_选项_nor.png'),
+			optionImgUrl1: require('../../../../../static/img/newhome/02/bg_选项_sel.png'),
+			optionImgUrl2: require('../../../../../static/img/newhome/02/bg_选项_nor.png'),
 			currentindex: -1,
 		};
 	},

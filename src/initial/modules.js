@@ -29,7 +29,7 @@ import 'normalize.css/normalize.css'
 import "font-awesome/css/font-awesome.css" 
 // 引入全局提示模块
 import Message from '@/api/message'
-// 引入二次封装的axios模块
+// 引入二次封装的axios模块d
 import axios from '@/api/axios/index'
 import apiSet from "@/api/axios/apiSetting" //请求接口
 // 结合 promise 封装原生ajax
@@ -67,16 +67,10 @@ import ReadFile from '@/api/file/get_file'
 import getTxt from '@/api/file/get_txt'
 // 引入文件预览模块
 import PreviewFile from '@/api/file/preview_file'
-// 引入base64转file模块
-import dataUrlToFile from '@/api/file/url_to_file'
-// 引入json美化模块
-import JsonPretty from '@/api/json'
 // 引入图片加载动画模块
 import ImageLoad from '@/api/other/image_load'
 // 引入数组模块
 import ArrayMethod from '@/api/array'
-// 引入控制流量模块
-import control from '@/api/control'
 // 引入导出excel模块
 import exportExcel from '@/api/file/export_excel'
 // 引入导出图片模块
@@ -94,14 +88,14 @@ import '@/global/css/index.css'
 Vue.prototype.$ajax = axios
 Vue.prototype.$apiSet = apiSet;
 /**
- * @author xuanzai
+ * @author xu
  * @description 创建websocket实例
  * @param {Object} option 
  * @returns {WebSocket}
  */
 Vue.prototype.$createSokect = Socket
 /**
- * @author xuanzai
+ * @author xu
  * @description 引入全局提示
  * @param {String} msg 提示内容
  */
@@ -109,7 +103,7 @@ Vue.prototype.$successMsg = Message.successMsg
 Vue.prototype.$warnMsg = Message.warnMsg
 Vue.prototype.$errorMsg = Message.errorMsg
 /**
- * @author xuanzai
+ * @author xu
  * @description 引入全局通知
  * @param {String} msg 通知内容
  * @param {String} title 标题
@@ -118,7 +112,7 @@ Vue.prototype.$successTip = Message.successTip
 Vue.prototype.$warnTip = Message.warnTip
 Vue.prototype.$errorTip = Message.errorTip
 /**
- * @author xuanzai
+ * @author xu
  * @description 引入全局弹框
  * @param {String} title 标题
  * @param {String} msg 内容
@@ -126,7 +120,7 @@ Vue.prototype.$errorTip = Message.errorTip
  */
 Vue.prototype.$showMsgBox = Message.showMsgBox
 /**
- * @author xuanzai
+ * @author xu
  * @description 引入全局弹框
  * @param {String} title 标题
  * @param {String} msg 内容
@@ -134,19 +128,19 @@ Vue.prototype.$showMsgBox = Message.showMsgBox
  */
 Vue.prototype.$showTipDiy = Message.showTipDiy
 /**
- * @author xuanzai
+ * @author xu
  * @description 引入时间格式化函数
  * @param {String | Date} date 日期格式化
  */
 Vue.prototype.$formatDate = Date.formatDate
 /**
-  * @author xuanzai
+  * @author xu
   * @description 获取url后的参数
   * @returns {Object}
   */
 Vue.prototype.$urlQuery = UrlQuery
 /**
- * @author xuanzai
+ * @author xu
  * @description 日期差(date_2 - date_1)
  * @param {String | Date} date_1
  * @param {String | Date} date_2
@@ -154,7 +148,7 @@ Vue.prototype.$urlQuery = UrlQuery
  */
 Vue.prototype.$dateDiff = Date.dateDiff
 /**
- * @author xuanzai
+ * @author xu
  * @description 获取指定日期
  */
 Vue.prototype.$setDay = Date.setDay
@@ -163,7 +157,7 @@ Vue.prototype.$setYear = Date.setYear
 Vue.prototype.$setDate = Date.setDate
 Vue.prototype.$fromNow = Date.fromNow
 /**
- * @author xuanzai
+ * @author xu
  * @description 给元素设置样式
  * @param {DOM Object} ele DOM元素
  * @param {String} ruleName CSS属性
@@ -171,14 +165,14 @@ Vue.prototype.$fromNow = Date.fromNow
  */
 Vue.prototype.$setStyle = SetStyle.setStyle
 /**
- * @author xuanzai
+ * @author xu
  * @description 给元素设置内联样式（温馨提示：会覆盖原有样式）
  * @param {DOM Object} ele DOM元素
  * @param {String} rule CSS写法
  */
 Vue.prototype.$setCssText = SetStyle.setCssText
 /**
- * @author xuanzai
+ * @author xu
  * @description 设置全局样式
  * @param {String} css css代码
  * @param {String} className 类名
@@ -186,14 +180,14 @@ Vue.prototype.$setCssText = SetStyle.setCssText
 Vue.prototype.$createStyle = SetStyle.createStyle
 
 /**
- * @author xuanzai
+ * @author xu
  * @description 设置全屏函数与取消全屏函数
  * @param {DOM Object} element DOM元素
  */
 Vue.prototype.$setFullScreen = FullScreen.requestFullScreen
 Vue.prototype.$cancelFullScreen = FullScreen.cancelFullScreen
 /**
- * @author xuanzai
+ * @author xu
  * @description 添加与删除类
  * @param {DOM Object} element DOM元素
  * @param {String} className DOM元素
@@ -201,13 +195,13 @@ Vue.prototype.$cancelFullScreen = FullScreen.cancelFullScreen
 Vue.prototype.$addClass = SetClass.addClass
 Vue.prototype.$removeClass = SetClass.removeClass
 /**
- * @author xuanzai
+ * @author xu
  * @description 获取类名
  * @param {DOM Object} element DOM元素
  */
 Vue.prototype.$getClassName = SetClass.getClassName
 /**
- * @author xuanzai
+ * @author xu
  * @description 设置存储值
  * @param {String} key 存储键
  * @param {Any} value 存储值
@@ -215,7 +209,7 @@ Vue.prototype.$getClassName = SetClass.getClassName
 Vue.prototype.$setMemorySes = Memory.setMemorySes
 Vue.prototype.$setMemoryPmt = Memory.setMemoryPmt
 /**
- * @author xuanzai
+ * @author xu
  * @description 获取存储值
  * @param {String} key 存储值
  * @return {Any} 返回值
@@ -223,45 +217,39 @@ Vue.prototype.$setMemoryPmt = Memory.setMemoryPmt
 Vue.prototype.$getMemorySes = Memory.getMemorySes
 Vue.prototype.$getMemoryPmt = Memory.getMemoryPmt
 /**
- * @author xuanzai
+ * @author xu
  * @description 清空浏览器存储的数据
  */
 Vue.prototype.$clearMemorySes = Memory.clearMemorySes
 Vue.prototype.$clearMemoryPmt = Memory.clearMemoryPmt
 /**
- * @author xuanzai
+ * @author xu
  * @description 获取图片文件地址与文件信息
  * @param {Number} limit 限制图片大小/MB
  * @returns {Promise}
  */
 Vue.prototype.$getImgFile = ReadImg.getImgFile
 /**
- * @author xuanzai
+ * @author xu
  * @description 获取文件地址与文件信息
  * @param {Number} limit 限制文件大小/MB
  * @returns {Promise}
  */
 Vue.prototype.$getFile = ReadFile
 /**
- * @author xuanzai
+ * @author xu
  * @description 获取txt内容
  * @returns {Promise}
  */
 Vue.prototype.$getTxt = getTxt
 /**
- * @author xuanzai
+ * @author xu
  * @description 获取图片文件地址与文件信息
  * @param {String} url 文件地址
  */
 Vue.prototype.$previewFile = PreviewFile
 /**
- * @description base64转file
- * @param {String} dataurl base64字符串
- * @param {String} filename 文件名称
- */
-Vue.prototype.$dataUrlToFile = dataUrlToFile
-/**
- * @author xuanzai
+ * @author xu
  * @description 下载文件
  * @param {String} url 下载路径
  * @param {String} fileName 文件名称
@@ -269,34 +257,27 @@ Vue.prototype.$dataUrlToFile = dataUrlToFile
  */
 Vue.prototype.$download = Download
 /**
- * @author xuanzai
+ * @author xu
  * @description 文本复制
  * @param {DOM | String} obj 要复制的内容或DOM文本节点
  * @returns {Promise}
  */
 Vue.prototype.$copyText = Copy
 /**
- * @author xuanzai
+ * @author xu
  * @description 插入元素
  * @param {DOM Object} newEle 新元素
  * @param {DOM Object} nowEle 旧元素
  */
 Vue.prototype.$insertAfter = InsertAfter
 /**
- * @author xuanzai
- * @description json美化(配合pre标签使用)
- * @param {JSON | Object} json json字符串或对象
- * @returns {JSON} 返回美化好的JSON 
- */
-Vue.prototype.$jsonPretty = JsonPretty
-/**
- * @author xuanzai
+ * @author xu
  * @description 图片加载模块
  * @param {String} url
  */
 Vue.prototype.$imageLoad = ImageLoad
 /**
- * @author xuanzai
+ * @author xu
  * @description 排序（只排字段值为数字和日期）
  * @param {Array} list 需要排序的数组
  * @param {Boolean} isDes 是否倒序
@@ -305,7 +286,7 @@ Vue.prototype.$imageLoad = ImageLoad
  */
 Vue.prototype.$sortList = ArrayMethod.sortList
 /**
- * @author xuanzai
+ * @author xu
  * @description 排序
  * @param {Array} list 需要排序的数组
  * @param {Boolean} isDes 是否倒序
@@ -314,7 +295,7 @@ Vue.prototype.$sortList = ArrayMethod.sortList
  */
 Vue.prototype.$searchResult = ArrayMethod.searchResult
 /**
- * @author xuanzai
+ * @author xu
  * @description 去重
  * @param {Array} arr 需要去重的数组
  * @param {String} key 数组元素为对象，可传入key值进行排序（对象键值为一层）
@@ -322,44 +303,27 @@ Vue.prototype.$searchResult = ArrayMethod.searchResult
  */
 Vue.prototype.$removeRepeat = ArrayMethod.removeRepeat
 /**
- * @author xuanzai
+ * @author xu
  * @description 打印功能
  * @param {String}
  */
 Vue.prototype.$print = Print
 /**
- * @author xuanzai
- * @description 防抖函数
- * @param {Function} callback 回调函数
- * @param {Number} time 单位ms
- * @param {Boolean} immediate 第一次是否调用
- * @returns {Function}
- */
-Vue.prototype.$debounce = control.debounce
-/**
- * @author xuanzai
- * @description 节流函数
- * @param {Function} callback 回调函数
- * @param {Number} wait 单位ms
- * @returns {Function}
- */
-Vue.prototype.$throttled = control.throttled
-/**
- * @author xuanzai
+ * @author xu
  * @description 导出excel
  * @param {DOM} obj 
  * @param {String} name 
  */
 Vue.prototype.$exportExcel = exportExcel
 /**
- * @author xuanzai
+ * @author xu
  * @description 导出图片
  * @param {Array} fileList 文件地址数组
  * @param {fileName} fileName 压缩文件名称
  */
 Vue.prototype.$exportFile = exportFile
 /**
- * @author xuanzai
+ * @author xu
  * @description 全局通用配置
  */
 Vue.prototype.$defaultConfig = defaultConfig

@@ -13,7 +13,7 @@ function getFile(url) {
   })
 }
 /**
- * @author xuanzai
+ * @author xu
  * @description 批量导出文件
  * @param {Array} fileList 文件地址列表
  * @param {fileName} fileName 压缩文件名称

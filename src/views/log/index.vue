@@ -14,6 +14,8 @@
             <ul v-for="(item, index) in messages" v-bind:key="index + 'itemMessage'">
                 <li><b>Name: </b>{{item.user}}</li>
                 <li><b>Message: </b>{{item.message}}</li>
+                <li><b>：</b>{{item.item1}}</li>
+                <li><b>：</b>{{item.item2}}</li>
             </ul>
             <el-button type="primary" @click="submitCard">登录</el-button>
             <el-button type="primary" @click="getLogs">查询</el-button>
@@ -22,7 +24,8 @@
 </template>
 
 <script>
-
+    
+    import {encrypt,decrypt} from "@/utils/encrypt.js"
     import * as signalR from "@aspnet/signalr";
 
     export default {
@@ -88,7 +91,7 @@
 
             _this.connection.on('ReceiveMessage', function (user, message) {
                  console.info(message)
-                _this.messages.push({user, message});
+                _this.messages.push({user, message, item1: encrypt(user),item2: decrypt(encrypt(user))});
             });
 
             _this.connection.on('ReceiveUpdate', function (update) {

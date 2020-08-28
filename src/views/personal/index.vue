@@ -8,7 +8,7 @@
 						<div class="avatar">
 							<el-button icon="el-icon-upload" class="upload-button" circle @click="$refs.avatarForm.dialogVisible = true"></el-button>
 							<el-avatar :size="120" src="" fit="cover">
-                <!-- <img src="https://myinterface.xuanzai.top/getPicture?type=error"/> -->
+                <!-- <img src="https://myinterface.xu.top/getPicture?type=error"/> -->
               </el-avatar>
 							<div class="hover-plus" @click="isShow = true"><svg-icon icon-class="add" class="add-avatar"/></div>
 						</div>

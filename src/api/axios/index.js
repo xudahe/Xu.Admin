@@ -159,6 +159,7 @@ function successState(res) {
 }
 
 
+//参考：https://blog.csdn.net/qq_42553082/article/details/84072301
 const httpServer = (opts, data) => {
   let Public = { //公共参数  
   }
@@ -176,6 +177,10 @@ const httpServer = (opts, data) => {
   if (opts.method == 'get' || opts.method == 'delete') {
     delete httpDefaultOpts.data
   } else if (opts.method == 'post' || opts.method == 'put') {
+    httpDefaultOpts.headers = {
+      "Accept": "application/json, text/javascript, */*; q=0.01",
+      "Content-Type": "application/json; charset=UTF-8"
+    }
     delete httpDefaultOpts.params
   }
 

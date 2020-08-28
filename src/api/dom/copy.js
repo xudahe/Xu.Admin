@@ -1,9 +1,9 @@
 /**
- * @author xuanzai
+ * @author xu
  * @description 复制文本
  * @param {DOM | String} obj   要复制的DOM元素文本或纯文本
  * @returns {Promise}
- * 示例：this.$copyText("xuanzai")
+ * 示例：this.$copyText("xu")
  * 示例：this.$copyText(this.$refs.contentBox)
  */
 function copyText(obj) {

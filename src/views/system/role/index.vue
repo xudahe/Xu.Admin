@@ -15,13 +15,13 @@
             </div>
           </v-header>
           <!--列表-->
-          <e-table :table-data="tableData" :table-label="tableLabel" :table-option="tableOption" :now-page="nowPage" :now-size="nowSize" @handleRowClick="handleRowClick"  @handleButton="handleButton" @handleSortChange="handleSortChange" @handleSelectionChange="handleSelectionChange"></e-table>
+          <e-table :table-data="tableData" :table-label="tableLabel" :table-option="tableOption" :now-page="nowPage" :now-size="nowSize" @handleRowClick="handleRowClick"  @handleButton="handleButton" @handleSelectionChange="handleSelectionChange"></e-table>
         </el-card>
       </el-col>
       <el-col :sm="24" :md="6">
         <el-card class="box-card card-gutter-sm" shadow="hover">
           <div slot="header" class="clearfix">
-            <span class="header">{{sels.roleName}}&nbsp;-&nbsp;菜单分配</span>
+            <span class="header">{{sels.roleName}}&nbsp;--&nbsp;菜单分配</span>
             <el-button type="primary" style="float: right; padding: 5px 10px" :disabled="!showButton" @click.native="saveMenu">
               <i class="el-icon-check el-icon--left"></i>保存
             </el-button>
@@ -169,7 +169,9 @@ export default {
         getData () {
           let _this = this;
           this.loading = true;
-          this.$ajax(this.$apiSet.getRoleInfo)
+          this.$ajax(this.$apiSet.getRoleInfo,{
+              roleName: this.filters.name
+            })
             .then(res => {
                 if (!res.data.success) {
                     _this.$message({
@@ -206,9 +208,6 @@ export default {
           this.sels = val;
           this.showButton = true;
           this.initialMenuCheck(val);
-        },
-        handleSortChange (val) {
-          
         },
         handleSelectionChange (val) {
           this.sels = val;

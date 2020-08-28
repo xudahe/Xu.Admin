@@ -14,7 +14,7 @@
       </v-header>
   
       <!--列表-->
-      <e-table :table-data="tableData" :table-label="tableLabel" :table-option="tableOption" :now-page="nowPage" :now-size="nowSize" @handleButton="handleButton" @handleSortChange="handleSortChange" @handleSelectionChange="handleSelectionChange"></e-table>
+      <e-table :table-data="tableData" :table-label="tableLabel" :table-option="tableOption" :now-page="nowPage" :now-size="nowSize" @handleButton="handleButton" @handleSelectionChange="handleSelectionChange"></e-table>
     </el-card>
       
     <!--弹出界面-->
@@ -185,7 +185,9 @@ export default {
         getData() {
           let _this = this;
           this.loading = true;
-          this.$ajax(this.$apiSet.getMenuInfo)
+          this.$ajax(this.$apiSet.getMenuInfo,{
+              menuName: this.filters.name
+            })
             .then(res => {
                 if (!res.data.success) {
                     _this.$message({
@@ -202,9 +204,6 @@ export default {
         handleButton (val) {
           if(val.methods == 'handleEdit') this.handleEdit(val.index,val.row)
           if(val.methods == 'handleDelete') this.handleDelete(val.index,val.row)
-        },
-        handleSortChange (val) {
-
         },
         handleSelectionChange (val) {
           this.sels = val;

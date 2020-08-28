@@ -6,7 +6,7 @@ function removePrintHeader(page) {
 }
 
 /**
- * @author xuanzai
+ * @author xu
  * @description 打印（注意：该API不兼容IE）
  * @param { HTML } page 
  */

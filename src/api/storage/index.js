@@ -1,5 +1,5 @@
 /**
- * @author xuanzai
+ * @author xu
  * @description 会话缓存
  * @param {String} key
  * @param {Any} data 
@@ -13,7 +13,7 @@ function getMemorySes(key) { //会话存储，读取
 }
 
 /**
- * @author xuanzai
+ * @author xu
  * @description 长久缓存
  * @param {String} key
  * @param {Number | Boolean | String | Object} data 

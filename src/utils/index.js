@@ -5,11 +5,6 @@
  * Description: 全局工具方法
  */
 
-import CryptoJS from "crypto-js"
-
-const encryptKey = "WfJTKO9S4eLkrPz2JKrAnzdb"
-const encryptIV = "D076D35C"
-
 // 深度复制
 export function deepClone (obj) {
   let result = Array.isArray(obj) ? [] : {}
@@ -23,30 +18,6 @@ export function deepClone (obj) {
     }
   }
   return result
-}
-
-// 3DES加密
-export function desEncrypt (str, key = encryptKey, iv = encryptIV) {
-  var cryptoKey = CryptoJS.enc.Utf8.parse(key)
-  var cryptoIv = CryptoJS.enc.Utf8.parse(iv.substr(0, 8))
-  var encodeStr = CryptoJS.TripleDES.encrypt(str, cryptoKey, {
-    iv: cryptoIv,
-    mode: CryptoJS.mode.CBC,
-    padding: CryptoJS.pad.Pkcs7
-  })
-  return encodeStr.toString()
-}
-
-// 3DES解密
-export function desDecrypt (str, key = encryptKey, iv = encryptIV) {
-  var cryptoKey = CryptoJS.enc.Utf8.parse(key)
-  var cryptoIv = CryptoJS.enc.Utf8.parse(iv.substr(0, 8))
-  var decryptStr = CryptoJS.TripleDES.decrypt(str, cryptoKey, {
-    iv: cryptoIv,
-    mode: CryptoJS.mode.CBC,
-    padding: CryptoJS.pad.Pkcs7
-  })
-  return decryptStr.toString(CryptoJS.enc.Utf8)
 }
 
 // 随机生成由字母+数字的字符串
@@ -67,29 +38,6 @@ export function randomWord (randomFlag, min, max) {
     str += arr[pos]
   }
   return str
-}
-
-// 判断数组中是否存在相同值
-export function hasRepeatValue (arr, key = null) {
-  if (key) arr = arr.map(d => d[key])
-  if (arr.length) {
-    let nameNum = arr.reduce((pre, cur) => {
-      if (cur in pre) {
-        pre[cur]++
-      } else {
-        pre[cur] = 1
-      }
-      return pre
-    }, {})
-    return Object.values(nameNum).findIndex(d => d > 1) < 0
-  }
-  return true
-}
-
-// 获取cookie值
-export function getCookie (name, defaultValue) {
-  const result = new RegExp("(^| )" + name + "=([^;]*)(;|$)")
-  return result[0] === document.cookie.match(result[1]) ? unescape(result[0][2]) : defaultValue
 }
 
 // base64ToFile
@@ -145,54 +93,6 @@ export function getImgToBase64 (url, callback, outputFormat) {
   img.src = url
 }
 
-// 转换级联下拉数据
-export function loopOptions (list, option = {}) {
-  option = {
-    value: "id",
-    label: "name",
-    children: "children",
-    ...option
-  }
-  if (list instanceof Array && list.length) {
-    return list.map((d, i) => {
-      d.value = d[option.value] || i + 1
-      d.label = d[option.label]
-      if (d[option.children]) {
-        d[option.children] = loopOptions(d[option.children], option)
-      }
-      return d
-    })
-  }
-  return []
-}
-
-// 通过Id获取级联数据id数组
-export function getTreeIds (tree, currentId, key = "id") {
-  let parent = {}
-  let pid = {}
-  const loop = (list, level) => {
-    if (list instanceof Array && list.length) {
-      for (let index = 0; index < list.length; index++) {
-        const d = list[index]
-        parent[level] = d.id
-        if (d[key] === currentId) {
-          for (let idx = 1; idx <= level; idx++) {
-            pid[idx] = parent[idx]
-          }
-          break
-        } else if (d.children) {
-          loop(d.children, level + 1)
-        }
-      }
-    }
-  }
-  loop(tree, 1)
-  let result = []
-  Object.keys(pid).sort((a, b) => a - b).forEach(k => {
-    result.push(pid[k])
-  })
-  return result
-}
 
 // 秒转换时分秒
 export function transverterMss (result) {

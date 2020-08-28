@@ -121,7 +121,7 @@ export default {
   
     getWeather() {
         this.$ajax({
-            url: 'http://wthrcdn.etouch.cn/weather_mini?city=%E5%8D%97%E4%BA%AC',
+            url: 'http://wthrcdn.etouch.cn/weather_mini?city=南京',
             dataType: 'jsonp',
             headers: {
                 'Accept-Encoding': 'gzip'

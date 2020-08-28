@@ -1,5 +1,5 @@
 /**
- * @author xuanzai
+ * @author xu
  * @description 创建websocket实例
  * @param {Object} option 
  * @returns {WebSocket}

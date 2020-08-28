@@ -1,5 +1,5 @@
 /**
- * @author xuanzai
+ * @author xu
  * @description 获取文件
  * @param {Number} limit 文件大小限制，默认为2MB
  * @returns {Promise}

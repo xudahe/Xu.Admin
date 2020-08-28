@@ -1,4 +1,13 @@
    
+    
+    /* 液晶字体*/
+    @font-face {
+        font-family: 'DFW';
+        src: url('../../../static/fonts/digifaceWide.ttf');
+        font-weight: bold;
+        font-style: normal;
+    }
+
     /*滚动条凹槽的颜色，还可以设置边框属性 */
     ::-webkit-scrollbar-track-piece {
         background: transparent;

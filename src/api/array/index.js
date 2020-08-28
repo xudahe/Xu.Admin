@@ -1,5 +1,5 @@
 /**
- * @author xuanzai
+ * @author xu
  * @description 排序（注意：只对值为日期、数字、字符串为数字的字段进行排序。原数组会改变。）
  * @param {Array} list 需要排序的数组
  * @param {Boolean} isDes 是否倒序
@@ -54,7 +54,7 @@ function searchResult(list, keys, value) {
 }
 
 /**
- * @author xuanzai
+ * @author xu
  * @description 去重(注意：如果数组元素为对象，仅对key值为第一层的对象进行去重)
  * @param {Array} arr 需要去重的数组
  * @param {String} key 数组元素为对象，可传入key值进行排序（对象键值为一层）

@@ -1,5 +1,5 @@
 /**
- * @author xuanzai
+ * @author xu
  * @description 将新元素插入到旧元素前面
  * @param {DOM} newEle 
  * @param {DOM} nowEle 

@@ -118,7 +118,7 @@ export default {
             //获取Token
             this.$ajax(this.$apiSet.requestToken, {
 					name: this.loginForm.username,
-					pass: this.loginForm.password
+					pass: encrypt(this.loginForm.password)
 				}).then(res => {
                      if (!res.data.success) {
                         _this.$message({

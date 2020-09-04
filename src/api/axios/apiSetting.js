@@ -109,6 +109,37 @@ const MenuModule = {
   },
 }
 
+const TasksQzModule = {
+  getTasksQzInfo: { //获取全部定时任务数据
+    url: '/api/TasksQz/Get',
+    method: 'get'
+  },
+  postTasksQz: { //添加定时任务
+    url: '/api/TasksQz/Post',
+    method: 'post'
+  },
+  putTasksQz: { //更新定时任务
+    url: '/api/TasksQz/Put',
+    method: 'put'
+  },
+  getReCovery: { //重启定时任务
+    url: '/api/TasksQz/ReCovery',
+    method: 'get'
+  },
+  getStartJob: { //启动定时任务
+    url: '/api/TasksQz/StartJob',
+    method: 'get'
+  },
+  getStopJob: { //停止定时任务
+    url: '/api/TasksQz/StopJob',
+    method: 'get'
+  },
+  deleteTask: { //删除定时任务
+    url: '/api/TasksQz/Delete',
+    method: 'delete'
+  },
+}
+
 const logModule = {
   getAccessLogs: {
     url: '/api/Monitor/GetAccessLogs',
@@ -122,6 +153,7 @@ const ApiSetting = {
   ...DeptModule,
   ...RoleModule,
   ...MenuModule,
+  ...TasksQzModule,
   ...logModule,
 }
 

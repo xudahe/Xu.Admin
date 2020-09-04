@@ -1,6 +1,6 @@
 <template>
-  <div class="homepage" style="width: 100%;height: calc(100% - 0.6rem);">
-    <marquee :width="wit" direction="left" align="middle" class="watherDiv">
+  <div class="homepage" style="width: 100%;height: calc(100% - 0.5rem);">
+    <marquee :width="wit" direction="left" align="middle" class="cementDiv">
       {{date}} 多云 27℃ 西北风2到3级!
     </marquee>
     <div class="warnDiv" style="height: 18px;overflow: hidden;">
@@ -109,7 +109,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  @deep: ~'>>>';
+  @deep: ~'>>>';  //深度选择器
 
   @{deep}.ivu-carousel {
     height: 100% !important;
@@ -136,12 +136,13 @@ export default {
 
    
 
-    .watherDiv {
+    .cementDiv {
       position: absolute;
       color: #ffde76;
       top: -0.1rem;
       left: 0.1rem;
       font-weight: bold;
+      font-size: 0.12rem;
     }
 
     .warnDiv {
@@ -150,6 +151,7 @@ export default {
       top: -0.08rem;
       right: 0.1rem;
       font-weight: bold;
+      font-size: 0.12rem;
     }
     .liquidWarnRoad{
       color: #fced32;

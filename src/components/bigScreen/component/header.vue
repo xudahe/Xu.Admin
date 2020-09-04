@@ -165,19 +165,8 @@ export default {
 .header {
   width: 100%;
 
-	.Title {
-		font-family: 'login';
-		color: #fff;
-		font-size: 0.46rem;
-		position: relative;
-		background-image: -webkit-gradient(linear, 0 0, 0 bottom, from(#ffffff), to(#b5e4e4));
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		text-align: center;
-	}
-
   .homePageTitle{
-    height: 0.6rem;
+    height: 0.5rem;
     width: 100%;
     background-image: url("../../../../static/img/newhome/02/topTitle.png");
     background-repeat: no-repeat;
@@ -188,20 +177,6 @@ export default {
     animation-timing-function: ease;
   }
 
-  .dateTime_time {
-    line-height: 1;
-    font-family: "eras medium itc";
-    color: #fff;
-    font-size: 0.16rem;
-    position: relative;
-      text-align: center;
-  }
-  .dateTime_day {
-    line-height: 1;
-    font-size: 0.16rem;
-    color: #FFFFFF;
-    position: relative;
-  }
   .menuDiv{
       float: left;
       position: relative;
@@ -250,9 +225,7 @@ export default {
     .menuDiv a{
       outline:none;
     }
-    .menuBgImg{
-      width: 1.8rem;
-    }
+
     .menuImgLeft{
       left: 0.12rem;
     }

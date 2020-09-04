@@ -149,7 +149,7 @@ export default {
   background-color: transparent !important;
   box-shadow: none !important;
   border-radius: 5px;
-  background-image: url("../../../static/img/中.png");
+  // background-image: url("../../../static/img/中.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
   padding: 0.2rem;

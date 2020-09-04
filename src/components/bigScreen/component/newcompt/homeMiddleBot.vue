@@ -1,23 +1,26 @@
 <template>
-  <div class="bgDiv" style="height: 100%; width: 100%;">
-    <div class="bottomDiv" style="height: 100%;float: left;width: 50%;">
-      <div class="jxTitle">
-        <span class="titleText">压力动态</span>
-      </div>
-      <div style="height: calc(100% - 0.8rem);margin-top: -0.1rem;">
-        <div style="position: relative;width: 100%;overflow: hidden;padding:0 0.05rem" 
-        :style="{top: noticeTopsb + 'px'}" :class="{transitionTop: isActivesb}" >
-          <div :key="index" v-for="(item,index) in yhList" class="pressureDiv" style="cursor: pointer;line-height:0.35rem;">
-            <div style="font-size: 0.16rem;color: #2d8cf0;font-weight: bolder;text-align: left;">
-              <span>时间:</span>
-              <span class="span2" style="margin-right: 0rem;">2020-08-20</span>
-              <span>信息:</span>
-              <span class="span3" style="color: #fff65a">{{item.name}}</span>
+  <div class="homeMiddleBot" style="height: 100%; width: 100%;">
+    <div class="UnitFrame rotate-in-x" style="height: 100%;float: left;width: 50%;">
+			<div class="UnitDiv">
+        <div style="height: calc(100%);margin-top: 0rem;">
+          <div style="position: relative;width: 100%;overflow: hidden;padding:0 0.05rem" :style="{top: noticeTopsb + 'px'}" :class="{transitionTop: isActivesb}" >
+            <div :key="index" v-for="(item,index) in yhList" class="pressureDiv" style="cursor: pointer;line-height:0.35rem;">
+              <div style="font-size: 0.16rem;color: #2d8cf0;font-weight: bolder;text-align: left;">
+                <span>时间:</span>
+                <span class="span2" style="margin-right: 0rem;">2020-08-20</span>
+                <span>信息:</span>
+                <span class="span3" style="color: #fff65a">{{item.name}}</span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+			</div>
+    </div>
 
+    <div class="UnitFrame rotate-in-x" style="height: 100%;float: left;width: 50%;">
+			<div class="UnitDiv">
+        
+			</div>
     </div>
   </div>
 </template>
@@ -101,88 +104,31 @@ export default {
 </script>
 
 <style lang="less" scoped>
-
-  .jxTitle {
-    height: 0.5rem;
-    text-align: left;
-    padding: 0.1rem 0 0 0.25rem;
-    .titleText {
-      font-size: 0.16rem;
-      font-weight: bolder;
-      color: #ffffff;
-    }
-  }
-  .childTitle {
-    height: 0.5rem;
-    text-align: left;
-    .titleText {
-      font-size: 0.16rem;
-      font-weight: bolder;
-      color: #00fbff;
-      margin-left: 0.3rem;
-    }
+.homeMiddleBot {
+  .UnitFrame{
+    padding-bottom:0.05rem;
+	}
+	
+  .UnitDiv {
+    position: relative;
+    height: 100%;
+    background: url("../../../../../static/img/newhome/04/6.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
   }
 
   .bottomDiv {
     position: relative;
     height: 100%;
-    background: url("../../../../../static/img/newhome/xian/县-下.png");
+    background: url("../../../../../static/img/newhome/04/6.png");
     background-size: 100% 100%;
     background-repeat: no-repeat;
   }
-  .leftImg {
-    height: 0.4rem;
-  }
-  .spanUnit {
-    display: block;
-    font-size: 0.16rem;
-    color: #ffffff;
-    font-weight: bolder;
-  }
-  .spanValue {
-    display: block;
-    margin-top: -0.05rem;
-    font-size: 0.16rem;
-    color: #00ff00;
-    font-weight: bolder;
-  }
-  .span1 {
-    font-size: 0.16rem;
-    font-weight: normal;
-    color: orange;
-  }
-  .span2 {
-    font-size: 0.16rem;
-    font-weight: bolder;
-    color: #ffffff;
-  }
-  .span3 {
-    font-size: 0.16rem;
-    font-weight: normal;
-    color: #2d8cf0;
-  }
-  .div1 {
-    position: absolute;
-    top: 0.41rem;
-    margin-left: 0.15rem;
-  }
-  .div2 {
-    display: inline-block;
-    margin-left: 0.1rem;
-  }
-  .div3 {
-    text-align: left;
-    line-height: 0.25rem;
-  }
-  .split-line1 {
-    width: 89%;
-    border-bottom: 1px dashed rgba(87, 163, 243, 0.5);
-    margin-left: 25px;
-  }
-  .yhDiv:hover {
-    background: rgba(51, 151, 235, 0.15);
-  }
+
   .pressureDiv:hover {
     background: rgba(51, 151, 235, 0.15);
   }
+
+}
+
 </style>

@@ -71,7 +71,7 @@ async function getAddRouters () {
             id:11, menuName: "系统工具", enabled: false, icon: "fa fa-dashboard",
             children: [
               { id:12, menuName: "图片管理", className: "/picture_manager", icon:"el-icon-edit-outline", enabled:false, children:[]},
-              { id:13, menuName: "定时任务", className: "/mission_manager", icon:"el-icon-edit-outline", enabled:false, children:[]},
+              { id:13, menuName: "定时任务", className: "/task_manager", icon:"el-icon-edit-outline", enabled:false, children:[]},
             ]
           },
           {

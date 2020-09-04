@@ -1,6 +1,21 @@
 <template>
-	<div style="width: 100%;height: 100%;">
-		<component :is="componentdiv"></component>
+	<div class="homeRight" style="width: 100%;height: 100%;">
+        <div class="UnitFrame fade-in-left1" style="height: 25%;float: left;width: 100%;">
+			<div class="UnitDiv">
+
+			</div>
+        </div>
+		<div class="UnitFrame fade-in-left1" style="height: 25%;float: left;width: 100%;">
+			<div class="UnitDiv">
+
+			</div>
+        </div>
+		<div class="UnitFrame fade-in-left1" style="height: 50%;float: left;width: 100%;">
+			<div class="UnitDiv">
+
+			</div>
+        </div>
+	</div>
 	</div>
 </template>
 
@@ -10,11 +25,7 @@
 	export default {
 		name: "homeRight",
 		components: {
-			// riverRight,
-			// pipeRight,
-			// purificationRight,
-			// dispatchRight,
-			// overviewRight
+			
 		},
 		props: {
 			typename: {
@@ -27,29 +38,6 @@
 		data() {
 			return {};
 		},
-		computed: {
-			componentdiv() {
-				let divname = "";
-				// switch (this.typename) {
-				// 	case "河道":
-				// 		divname = riverRight;
-				// 		break;
-				// 	case "管网":
-				// 		divname = pipeRight;
-				// 		break;
-				// 	case "净水站":
-				// 		divname = purificationRight;
-				// 		break;
-				// 	case "泵站":
-				// 		divname = dispatchRight;
-				// 		break;
-				// 	case "总览":
-				// 		divname = overviewRight;
-				// 		break;
-				// }
-				return divname;
-			}
-		},
 		methods: {},
 		mounted() {
 			var _this = this;
@@ -58,4 +46,17 @@
 </script>
 
 <style lang="less" scoped>
+.homeRight {
+    .UnitFrame{
+        padding: 0 0.05rem 0.05rem 0.05rem;
+	}
+	
+    .UnitDiv {
+      position: relative;
+      height: 100%;
+      background: url("../../../../../static/img/newhome/04/6.png");
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+    }
+}
 </style>

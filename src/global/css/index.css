@@ -40,7 +40,13 @@
         background: green !important;  /* 自定义颜色 */
     }
     
-    
+    .fade-in-right {
+        -webkit-animation: fade-in-right 1s;
+        animation: fade-in-right 1s;
+        -webkit-animation-timing-function: ease-out;
+                animation-timing-function: ease-out;
+          animation-fill-mode: both;
+    }
     .fade-in-right1 {
         -webkit-animation: fade-in-right 0.5s;
                 animation: fade-in-right 0.5s;
@@ -278,7 +284,11 @@
             opacity: 0;
         }
     }
-
+    .scale-in
+    {
+        -webkit-animation: scale-in 1s;
+                animation: scale-in 1s;
+    }
     .scale-in1 {
         -webkit-animation: scale-in 1s;
                 animation: scale-in 1s;

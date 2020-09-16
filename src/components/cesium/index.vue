@@ -1,48 +1,77 @@
 <style scoped>
+
+#cesiumContainer {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: whitesmoke;
+  border: 1px solid rgba(223, 226, 235, 0.8);
+}
+
 .toolbar_btn {
   position: absolute;
   left: 10px;
   top: 10px;
   z-index: 999;
-  height: 33px;
-  width: 40px;
 }
 
-.toolbar_infos {
-  z-index: 100;
-  position: absolute;
-  /* left: 0px; */
-  top: 5px;
-  height: 32px;
-}
-
-.toolbar_inforight {
+.toolbar_info {
   z-index: 999;
   position: absolute;
-  right: 20px;
+  left: 58px;
   top: 10px;
   height: 32px;
 }
-#cesiumContainer {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
+
+.toolbar_btn {
+  height: 33px;
+  width: 40px;
 }
 
 </style>
 <template>
   <!-- Cesium 容器 -->
-  <div id="cesiumContainer" style="height:100%;width:100%;position: relative;">
-    <div class="toolbar_infos" id="cesiumToolBar">
-      <el-button-group>
-        <el-tooltip v-for="(child,index) in toolslist" :key="index" :content="child.title">
-          <el-button :title="child.title" size="small" style="height: 32px;width: 32px;margin-left:4px;" @click="toolbar(index,child.name)" @mouseenter.native="moveindex=index" @mouseleave.native="moveindex=-1">
-            <img :src="moveindex==index?child.pathheightpng:child.pathpng" style="margin-left: -8px;"/>
-          </el-button>
-        </el-tooltip>
-      </el-button-group>
+  <div id="cesiumContainer">
+    <div class='toolbar_info' v-show='isshow' id='toolbar_info'>
+      <Button-group size="large">
+        <Tooltip content="清除">
+          <Button @click='toolbar("clear")'>
+            <font-awesome-icon icon="eraser" size="lg" />
+          </Button>
+        </Tooltip>
+        <Tooltip content="距离测量">
+          <Button @click='toolbar("measureLine")'>
+            <font-awesome-icon icon="ruler-horizontal" size="lg" />
+          </Button>
+        </Tooltip>
+        <Tooltip content="面积测量">
+          <Button @click='toolbar("measureArea")'>
+            <font-awesome-icon icon="ruler-combined" size="lg" />
+          </Button>
+        </Tooltip>
+        <Tooltip content="信息查询">
+          <Button @click='toolbar("identify")'>
+            <font-awesome-icon :icon="['far', 'hand-point-up']" size="lg" />
+          </Button>
+        </Tooltip>
+        <Tooltip content="书签管理">
+          <Button @click='toolbar("bookmark")'>
+            <font-awesome-icon icon="bookmark" size="lg" />
+          </Button>
+        </Tooltip>
+        <Tooltip content="图层管理">
+          <Button @click='toolbar("layerManage")'>
+            <font-awesome-icon icon="map" size="lg" />
+          </Button>
+        </Tooltip>
+      </Button-group>
+    </div>
+    <div class='toolbar_btn' id='toolbar_btn'>
+      <Tooltip :content="info" placement="right">
+        <Button @click='clickToolbar'>
+          <font-awesome-icon icon="angle-left" size="lg" />
+        </Button>
+      </Tooltip>
     </div>
     <component :is="current_com" :ref="current_ref"></component>
     <span id="mes" style="position: absolute; top: 95%; left: 5px;z-index: 2;color: white;"></span>
@@ -54,59 +83,32 @@
  * @description  3dmap 球体封装
  */
 
-import { cesiumInstance } from "./js/cesiumInstance";
+import {cesiumInstance} from "./js/cesiumInstance";
 import cesiumTools from "./js/cesiumTools";
 import {modelHelper} from "./js/modelHelper";
-import providercontrol from "./child/providercontrol";
+import layerManage from "./child/layerManage";
 
 export default {
   name: "cesiumMap",
   components: {
-    providercontrol
+    layerManage
   },
   computed: {
    
   },
   data() {
     return {
-      toolslist: [
-        {
-          name: "identify",
-          title: "拾取模型",
-          icon: "信息查询.png",
-          pathpng: require("../../assets/img/menuimg/信息查询.png"),
-          pathheightpng: require("../../assets/img/menulightimg/信息查询.png")
-        },
-        {
-          name: "measureDistance",
-          title: "距离测量",
-          icon: "距离测量.png",
-          pathpng: require("../../assets/img/menuimg/距离测量.png"),
-          pathheightpng: require("../../assets/img/menulightimg/距离测量.png")
-        },
-        {
-          name: "measureArea",
-          title: "面积测量",
-          icon: "面积测量.png",
-          pathpng: require("../../assets/img/menuimg/面积测量.png"),
-          pathheightpng: require("../../assets/img/menulightimg/面积测量.png")
-        },
-        {
-          name: "layermanage",
-          title: "图层控制",
-          icon: "图层控制.png",
-          pathpng: require("../../assets/img/menuimg/图层控制.png"),
-          pathheightpng: require("../../assets/img/menulightimg/图层控制.png")
-        },
-        {
-          name: "clear",
-          title: "清除",
-          icon: "清空.png",
-          pathpng: require("../../assets/img/menuimg/清空.png"),
-          pathheightpng: require("../../assets/img/menulightimg/清空.png")
-        }
-      ],
-      moveindex: -1,
+      querylist: false,
+      icon: 'chevron-left',
+      numb: 0,
+      isshow: true,
+      info: '展开工具栏',
+      MouseMove: false,
+      queryData: [],
+      queryValue: '',
+      queryAuto: false,
+      queryBtn: true,
+      SearchResult: [],
 
       cesiumInstance: {},
       camera: {
@@ -137,13 +139,34 @@ export default {
       modelHelper.VCesViewer=cesiumInstance.viewer;
       modelHelper.InitEarthEvent(this);
     },
-    toolbar(index,type) {
+    clickToolbar() {
+      var divwith = document.getElementById('toolbar_info')
+      var but = document.getElementById('toolbar_btn')
+      var _this = this
+      this.queryAuto = false
+      this.queryBtn = true
+      if (_this.numb == 1) {
+        _this.numb = 0
+        _this.icon = 'chevron-left'
+        _this.isshow = true
+        _this.info = '关闭工具栏'
+        _this.queryValue = ''
+        _this.SearchResult = []
+        MapControl.setMapClear()
+      } else {
+        _this.numb = 1
+        _this.icon = 'settings'
+        _this.isshow = false
+        _this.info = '展开工具栏'
+      }
+    },
+    toolbar(type) {
       switch (type) {
         case "clear":
           this.$store.state.G_MapActionFlag = 0;
           cesiumTools.clearEntities(cesiumInstance.viewer);
           break;
-        case "measureDistance":
+        case "measureLine":
           this.$store.state.G_MapActionFlag = 3;
           //cesiumTools.measureLineSpace(cesiumInstance.viewer, null);
           break;
@@ -151,10 +174,13 @@ export default {
           this.$store.state.G_MapActionFlag = 4;
           // cesiumTools.measureAreaSpace(cesiumInstance.viewer, null);
           break;
-        case "layermanage":
+        case "layerManage":
           this.getLayers();
-          this.current_com = this.current_com !='' ? "":"providercontrol";
-          this.current_ref = this.current_com !='' ? "":"providercontrol";
+          this.current_com = this.current_com !='' ? "":layerManage;
+          this.current_ref = this.current_com !='' ? "":layerManage;
+          break;
+        case "bookmark":
+       
           break;
         case "identify":
           cesiumTools.pick(cesiumInstance.viewer);

@@ -14,6 +14,8 @@
   top: 60px;
   background-color: rgba(255, 255, 255, 1);
   border: solid 1px #ddd;
+  width: 250px;
+  max-height: 500px;
 }
 
 .layerpannel_title {
@@ -61,24 +63,27 @@
   left: 0px;
   overflow: auto;
 }
-.itemclick {
-  color: red !important;
-}
-
-.close:hover{
-  color: red
+.layerTree {
+  height: 450px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-left: 10px;
 }
 </style>
 <template>
   <div class="layercontrol">
     <div class="layerpannel_title">
-      <font>图层管理</font>
-      <div class="layerpannel_btn" @click="close()">
-        <Icon type="ios-close-circle-outline" size="25" class="close" style="padding-top: 5px;"/>
+      <font>图层控制</font>
+      <div class="layerpannel_btn">
+        <Button size="small" style="margin:5px;" shape="circle" @click="close()">
+          <font-awesome-icon icon="times" size="lg"/>
+        </Button>
       </div>
     </div>
-    <div class="layerpanel gx-scrollbar" style="overflow: auto; max-height: 300px;">
-      <Tree :data="layerList" show-checkbox @on-check-change="setCheckNodes"></Tree>
+    <div class="layerpanel gx-scrollbar">
+      <div class="layerTree">
+        <Tree :data="layerList" show-checkbox multiple @on-check-change="setCheckNodes"></Tree>
+      </div>
     </div>
   </div>
 </template>
@@ -115,6 +120,7 @@ export default {
     },
     close() {
       this.$parent.current_com = "";
+      this.$parent.current_ref = "";
     },
     setCheckNodes(data) {
       let viewer = cesiumInstance.viewer;

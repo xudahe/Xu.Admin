@@ -6,8 +6,7 @@ import Login from "@/views/login/index"
 import Layout from "@/views/layout/index"
 import BigScreen from "@/components/bigScreen/view/home"
 import homePage from "@/components/bigScreen/view/homePage"
-import application1 from "@/components/bigScreen/view/application1"
-import application2 from "@/components/bigScreen/view/application2"
+import application from "@/components/bigScreen/view/application"
 
 //使用动态的import()语法,不是必须加载的组件使用懒加载
 const
@@ -125,19 +124,12 @@ let defaultRouter = [
         children: []
       },
       {
-        path: '/application1',
-        name: 'application1',
+        path: '/application',
+        name: 'application',
         hidden: true,
-        component: application1,
+        component: application,
         children: []
       },
-      {
-        path: '/application2',
-        name: 'application2',
-        hidden: true,
-        component: application2,
-        children: []
-      }
     ]
   }
 ]

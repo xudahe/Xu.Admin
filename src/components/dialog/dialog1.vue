@@ -129,7 +129,6 @@ export default {
         if (that.$parent.dialog) that.$parent.dialog.show = true;
       }
     });
-    // bus.$
     this.$nextTick(() => {
       drag(this.$refs.title, this.$refs.popup);
     });

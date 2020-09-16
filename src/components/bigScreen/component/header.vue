@@ -6,7 +6,9 @@
 
 				<div class="left-div" style="width:33.3%;float: left;height: 100%;">
           <div class="leftTool">
-
+            <div style="padding-left:12%;color:rgb(75 236 214);">
+              <newDate></newDate>
+            </div>
 					</div>
 				  <div :key="index" :class="[ismeunNumLeft == item.id ? 'menuDiv menuDivL' : 'menuDiv']" v-for="(item,index) in menuDataLeft" @click="changeMenu_left(item.id)">
 						<a :href="'#/'+item.classname+'?id='+item.id">
@@ -62,12 +64,12 @@ export default {
 		  	menuDataLeft: [],
 		  	menuDataRight: [],
 		  	menuList: [
-          {classname:'application1',menuname:'菜单1',id:1,children:[]},
-          {classname:'application1',menuname:'菜单2',id:2,children:[]},
-          {classname:'application1',menuname:'菜单3',id:3,children:[]},
-          {classname:'application2',menuname:'菜单4',id:4,children:[]},
-          {classname:'application2',menuname:'菜单5',id:5,children:[]},
-          {classname:'application2',menuname:'菜单6',id:6,children:[]},
+          {classname:'application',menuname:'菜单1',id:1,children:[]},
+          {classname:'application',menuname:'菜单2',id:2,children:[]},
+          {classname:'application',menuname:'菜单3',id:3,children:[]},
+          {classname:'application',menuname:'菜单4',id:4,children:[]},
+          {classname:'application',menuname:'菜单5',id:5,children:[]},
+          {classname:'application',menuname:'菜单6',id:6,children:[]},
         ],
       };
     },
@@ -135,7 +137,7 @@ export default {
 				this.ismeunNumLeft = id;
 
         _this.$router.push({
-          name: 'application1',
+          name: 'application',
           query: {
             id: id
           }
@@ -146,7 +148,7 @@ export default {
 				this.ismeunNumRight = id;
         
         _this.$router.push({
-          name: 'application2',
+          name: 'application',
           query: {
             id: id
           }
@@ -166,7 +168,7 @@ export default {
   width: 100%;
 
   .homePageTitle{
-    height: 0.5rem;
+    height: 0.6rem;
     width: 100%;
     background-image: url("../../../../static/img/newhome/02/topTitle.png");
     background-repeat: no-repeat;
@@ -208,12 +210,12 @@ export default {
       left: 0.40rem;
     }
     .homeMenuTextT{
-      font-size: 0.16rem;
+      font-size: 0.14rem;
       top: 0.18rem;
       color: #FFFFFF;
     }
     .homeMenuTextF{
-      font-size: 0.16rem;
+      font-size: 0.14rem;
       top: 0.18rem;
       color: rgba(255,255,255,0.53);
     }

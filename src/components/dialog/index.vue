@@ -158,8 +158,6 @@ export default {
 
 .xa-popup .popup {
   min-width: 300px;
-  /* height: 290px; */
-  /* background: #fff; */
   background-color: #064598  !important;
   z-index: 1001;
   position: fixed;
@@ -167,8 +165,6 @@ export default {
   top: 15%;
   box-shadow: 0 0 10px #888;
   border-radius: 5px;
-  /* max-width: 520px;  */
-  /* overflow: hidden; */
 }
 
 .xa-popup .popup>.title {
@@ -210,8 +206,6 @@ export default {
 }
 
 .xa-popup .popup>.title>.close:hover {
-  /* background: rgba(255, 255, 255, 0.1); */
-  /* background-color: rgba(23, 75, 160, 0.7); */
   background-color: rgba(0, 120, 189, 0.85) !important;
 }
 
@@ -219,7 +213,6 @@ export default {
   overflow-y: auto;
   overflow-x: hidden;
   max-height: 600px;
-  /* margin-right: 0px; */
 }
 
 .xa-popup .popup>.buttons {
@@ -273,11 +266,8 @@ export default {
 
 .xa-bg-blue,
 .xa-bg-blue-click {
-  /* background: linear-gradient(white, #f4f4f4); */
-  /* color: #333; */
   background: transparent;
   color: #fff;
-  /* border-bottom: 2px #e4e4e4 solid; */
   border-bottom: 1px rgb(26, 51, 118) solid;
 }
 

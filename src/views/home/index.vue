@@ -2,23 +2,28 @@
   <div style="height:100%;width:100%;" class="home">
     <!-- <swiper :imgList="imgList"></swiper> -->
     <!-- <cesiumMap ref="cesiumMap" ></cesiumMap> -->
-    <!-- <el-button @click.native="showdialog">弹出框</el-button> -->
+    <centermap ref="map"></centermap>
+    <!-- <el-button @click.native="showdialog1">弹出框</el-button>
+    <el-button @click.native="showdialog2">弹出框</el-button>
     <dialogtt  ref="dialog" v-model="dialog.show" :title="dialog.title" :buttons="dialog.buttons" :bodyshow="dialog.bodyshow" >
-		<div style="width: 500px;height: 300px;">
-            <!--通过@hook:updated监听组件的updated生命钩子函数(外部监听生命周期函数)-->
-            <!--组件的所有生命周期钩子都可以通过@hook:钩子函数名 来监听触发-->
+		<div style="height: 300px;">
 		    <echarts :options="options" @hook:updated="handleEchartUpdated"></echarts>
 		</div>
     </dialogtt>
+    <dialogtt2 ref="dragdialog" v-show="showDialog"></dialogtt2> -->
   </div>
 </template>
 
 <script>
 
+import centermap from "../../components/map/MapControl"
 import dialogtt from "../../components/dialog/index"
+import dialogtt2 from "../../components/dialog/dialog2"
 export default {
   components: {
-    dialogtt
+    dialogtt,
+    dialogtt2,
+    centermap
   },
   data() {
     return {
@@ -38,6 +43,7 @@ export default {
         },
         bodyshow: true
       },
+      showDialog: false,
     };
   },
   mounted(){
@@ -194,9 +200,13 @@ export default {
         ]
       }
     },
-    showdialog(){
+    showdialog1(){
         this.dialog.show = true;
         this.$refs.dialog.retresize();
+    },
+    showdialog2(){
+        this.showDialog = true
+        this.$store.state.drag_com = "case_statistics"
     },
     handleEchartUpdated(){
         console.log('echarts组件的updated钩子函数被触发')

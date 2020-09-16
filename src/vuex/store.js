@@ -12,7 +12,8 @@ const store=new Vuex.Store({
     state:{
         token: null,
         tokenExpire: null,
-
+        drag_com: "",
+        drag_ref: "",
         G_MapActionFlag: 1,
     },
     // 执行同步操作改变state   this.$store.commit("saveToken", data)

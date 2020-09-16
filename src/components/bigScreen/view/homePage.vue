@@ -1,5 +1,5 @@
 <template>
-  <div class="homepage" style="width: 100%;height: calc(100% - 0.5rem);">
+  <div class="homepage" style="width: 100%;height: calc(100% - 0.6rem);">
     <marquee :width="wit" direction="left" align="middle" class="cementDiv">
       {{date}} 多云 27℃ 西北风2到3级!
     </marquee>
@@ -134,12 +134,10 @@ export default {
   .homepage {
     position: relative;
 
-   
-
     .cementDiv {
       position: absolute;
       color: #ffde76;
-      top: -0.1rem;
+      top: -0.15rem;
       left: 0.1rem;
       font-weight: bold;
       font-size: 0.12rem;
@@ -148,7 +146,7 @@ export default {
     .warnDiv {
       position: absolute;
       color: #ea4808;
-      top: -0.08rem;
+      top: -0.15rem;
       right: 0.1rem;
       font-weight: bold;
       font-size: 0.12rem;

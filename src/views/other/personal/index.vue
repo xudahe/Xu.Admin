@@ -38,7 +38,7 @@
 						<i class="el-icon-phone"></i>电话：
 					</div>
           <div class="divTitle">
-            <i class="fa fa-envelope-square"></i>邮箱：
+            <i class="fa fa-envelope-o"></i>邮箱：
 					</div>
 				</el-card>
 			</el-col>

@@ -12,7 +12,7 @@
             <i class="el-icon-arrow-right"/>
         </div>
         <div class="swiper-dots" v-if="dots">
-          <button v-for="(item,index) in imgList.length" :key="index" :class="{active:index==dotsIndex}" @click="toDots(index)">{{item}}</button>
+          <button v-for="(item,index) in imgList.length" :key="index" :class="{actives:index==dotsIndex}" @click="toDots(index)">{{item}}</button>
         </div>
     </div>
 </template>
@@ -167,62 +167,62 @@ export default {
 </script>
 
 <style lang="less">
-      #swiper{
-          position: relative;
-          overflow: hidden;
-          width: 600px;
-          height: 300px;
-          background: #fff;
-      }
+#swiper{
+    position: relative;
+    overflow: hidden;
+    width: 600px;
+    height: 300px;
+    background: #fff;
 
-      .swiper-font {
+    .swiper-font {
+      position: absolute;
+      top:50%;
+      display: inline-block;
+      transform: translateY(-50%);
+      background: transparent;
+      color: #fff;
+      border-radius: 50%;
+      text-align: center;
+      cursor: pointer;
+    }
+    .swiper-font:hover {
+      background: rgba(51, 50, 50, 0.5);
+    }
+    .swiper-left{
+        left:0;
+        padding: 5px 6px 5px 5px;
+        left: 2px;
+    }
+    .swiper-right{
+        right:0;
+        padding: 5px 5px 5px 6px;
+        right: 2px;
+    }
+    .swiper-dots{
         position: absolute;
-        top:50%;
-        display: inline-block;
-        transform: translateY(-50%);
-        background: transparent;
-        color: #fff;
-        /* font-size: 20px; */
-        border-radius: 50%;
+        bottom:20px;
         text-align: center;
+        left:50%;
+        transform: translateX(-50%);
+    }
+    .swiper-dots button{
+        width: 20px;
+        height: 20px;
+        background: rgba(127, 124, 124, 0.5);
+        display: inline-block;
+        margin: 0 10px;
+        border-radius: 50%;
+        color:#000;
+        font-weight: normal;
+        border: none;
+        outline: none;
+        transition: all .2s;
         cursor: pointer;
-      }
-      .swiper-font:hover {
-        background: rgba(51, 50, 50, 0.5);
-      }
-      .swiper-left{
-          left:0;
-          padding: 5px 6px 5px 5px;
-          left: 2px;
-      }
-      .swiper-right{
-          right:0;
-          padding: 5px 5px 5px 6px;
-          right: 2px;
-      }
-      .swiper-dots{
-          position: absolute;
-          bottom:20px;
-          text-align: center;
-          left:50%;
-          transform: translateX(-50%);
-      }
-      .swiper-dots button{
-          width: 20px;
-          height: 20px;
-          background: rgba(127, 124, 124, 0.5);
-          display: inline-block;
-          margin: 0 10px;
-          border-radius: 50%;
-          color:#000;
-          font-weight: normal;
-          border: none;
-          outline: none;
-          transition: all .2s;
-          cursor: pointer;
-      }
-      .swiper-dots button:hover,.swiper-dots button.active{
-          background: rgba(51, 122, 183,0.8);
-          color: #fff;
-      }
+    }
+    .swiper-dots button:hover,.swiper-dots button.actives{
+        background: rgba(191, 205, 218, 0.8);
+        color: #fff;
+    }
+}
+
 </style>

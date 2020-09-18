@@ -1,6 +1,7 @@
 <!-- 应用系统登录 -->
 <template>
     <div class="login-container">
+        <loading :visible="visible"></loading>
         <el-form :model="loginForm" :rules="rules" status-icon ref="loginForm" label-position="left" label-width="0px" class="demo-ruleForm login-page">
             <h3 class="title">系统登录</h3>
             <el-form-item prop="username">
@@ -35,6 +36,7 @@ import { encrypt } from '@/utils/encrypt' //密码加密
 export default {
     data(){
         return {
+            visible: false,
             timeCode: null,
             timeCount: 60,
             timeSum: 0,
@@ -114,6 +116,7 @@ export default {
             //     type: "error"
             //   })
             // })
+            this.visible = true;
             
             //获取Token
             this.$ajax(this.$apiSet.requestToken, {
@@ -223,11 +226,12 @@ export default {
                         
                         setTimeout(() => {
                             let userinfo = JSON.parse(window.localStorage.userInfo ? window.localStorage.userInfo : null);
-                            
+                            _this.visible = false;
+
                             _this.$notify({
                                 type: "success",
                                 message: `登录成功 \n 欢迎管理员：${userinfo.realName} ！Token 将在 ${window.localStorage.expires_in / 60} 分钟后过期！`,
-                                duration: 6000
+                                duration: 4000
                             });
                         }, 1000);
                     }

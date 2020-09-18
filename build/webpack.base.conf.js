@@ -3,7 +3,6 @@ const path = require('path') // 使用 NodeJS 自带的文件路径插件
 const utils = require('./utils') //封装了一些方法的工具
 const config = require('../config') //使用 config/index.js
 const vueLoaderConfig = require('./vue-loader.conf') //使用vue-loader.conf
-const cesiumSource = '../node_modules/cesium/Source';
 
 // 拼接我们的工作区路径为一个绝对路径
 function resolve(dir) {
@@ -33,7 +32,6 @@ module.exports = {
     alias: {    // 默认路径代理，例如 import Vue from 'vue$'，会自动到 'vue/dist/vue.esm.js'中寻找
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
-      'cesium': path.resolve(__dirname, cesiumSource)
     }
   },
   module: {

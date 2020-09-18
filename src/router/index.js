@@ -11,10 +11,26 @@ import application from "@/components/bigScreen/view/application"
 //使用动态的import()语法,不是必须加载的组件使用懒加载
 const
   Home = () => import('@/views/home/index'),
-  personal = () => import('@/views/personal/index'),
-  Error_500 = () => import('@/views/error/500'),
-  Error_403 = () => import('@/views/error/403'),
-  Error_404 = () => import('@/views/error/404')
+  personal = () => import('@/views/other/personal/index'),
+  Error_500 = () => import('@/views/other/error/500'),
+  Error_403 = () => import('@/views/other/error/403'),
+  Error_404 = () => import('@/views/other/error/404')
+  
+//异步挂载的路由
+const operation_routes = getRoutes(require.context('@/views/operation', true, /\.vue$/));
+const system_routes = getRoutes(require.context('@/views/system', true, /\.vue$/));
+const tools_routes = getRoutes(require.context('@/views/tools', true, /\.vue$/));
+const log_routes = getRoutes(require.context('@/views/other/log', true, /\.vue$/));
+
+let addRouter = [
+  {
+    path: "/",
+    iconCls: "el-icon-tickets", // 图标样式class
+    name: "系统设置",
+    component: Layout,
+    children: operation_routes.concat(system_routes).concat(tools_routes).concat(log_routes)
+  }
+];
 
 //自动注册路由
 function getRoutes(req) { 
@@ -133,20 +149,6 @@ let defaultRouter = [
     ]
   }
 ]
-
-//异步挂载的路由
-const system_routes = getRoutes(require.context('@/views/system', true, /index\.vue$/));
-const tools_routes = getRoutes(require.context('@/views/tools', true, /index\.vue$/));
-const log_routes = getRoutes(require.context('@/views/log', true, /index\.vue$/));
-let addRouter = [
-  {
-    path: "/",
-    iconCls: "el-icon-tickets", // 图标样式class
-    name: "系统设置",
-    component: Layout,
-    children: system_routes.concat(tools_routes).concat(log_routes)
-  }
-];
 
 // 解决ElementUI导航栏中的vue-router在3.0版本以上重复点菜单报错问题
 const originalPush = Router.prototype.push

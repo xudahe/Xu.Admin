@@ -7,7 +7,7 @@
 <script>
 
 export default {
-    name: 'v-tinymce',
+    name: 't-tinymce',
     data(){
         return {
             initContent: '',

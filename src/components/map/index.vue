@@ -47,48 +47,48 @@
       <Button-group size="large">
         <Tooltip content="放大" :transfer="true">
           <Button @click='toolbar("zoomin")'>
-            <font-awesome-icon icon="search-plus" size="lg" />
+            <i class="fa fa-plus"></i>
           </Button>
         </Tooltip>
         <Tooltip content="缩小">
           <Button @click='toolbar("zoomout")'>
-            <font-awesome-icon icon="search-minus" size="lg" />
+            <i class="fa fa-minus"></i>
           </Button>
         </Tooltip>
         <Tooltip content="平移">
           <Button @click='toolbar("pan")'>
-            <font-awesome-icon icon="hand-paper" size="lg" />
+            <i class="fa fa-arrows"></i>
           </Button>
         </Tooltip>
         <Tooltip content="清除">
           <Button @click='toolbar("clear")'>
-            <font-awesome-icon icon="eraser" size="lg" />
+            <i class="fa fa-eraser"></i>
           </Button>
         </Tooltip>
         <Tooltip content="距离测量">
           <Button @click='toolbar("polyline")'>
-            <font-awesome-icon icon="ruler-horizontal" size="lg" />
+            <i class="fa fa-compress"></i>
           </Button>
         </Tooltip>
         <Tooltip content="面积测量">
           <Button @click='toolbar("polygon")'>
-            <font-awesome-icon icon="ruler-combined" size="lg" />
+            <i class="fa fa-square-o"></i>
           </Button>
         </Tooltip>
         <Tooltip content="信息查询">
           <Button @click='toolbar("idenfity")'>
-            <font-awesome-icon :icon="['far', 'hand-point-up']" size="lg" />
+            <i class="fa fa-hand-o-up"></i>
           </Button>
         </Tooltip>
         <Tooltip content="书签管理">
           <Button @click='toolbar("bookmark")'>
-            <font-awesome-icon icon="bookmark" size="lg" />
+            <i class="fa fa-bookmark-o"></i>
           </Button>
         </Tooltip>
         </Tooltip>
         <Tooltip content="图层管理">
           <Button @click='toolbar("layermanage")'>
-            <font-awesome-icon icon="map" size="lg" />
+            <i class="fa fa-map-o"></i>
           </Button>
         </Tooltip>
       </Button-group>
@@ -96,7 +96,8 @@
     <div class='toolbar_btn' id='toolbar_btn'>
       <Tooltip :content="info" placement="right">
         <Button @click='clickToolbar'>
-          <font-awesome-icon icon="angle-left" size="lg" />
+          <i class="fa fa-angle-left" v-if='isshow'></i>
+          <i class="fa fa-angle-right" v-else></i>
         </Button>
       </Tooltip>
     </div>
@@ -114,11 +115,11 @@ import bottombar from "../map/child/bottombar";
 
 var map, navToolbar
 export default {
+  name: 'baseMap',
   components: {
     layermanage,
     bottombar
   },
-  name: 'baseMap',
   props: {
     mapId: {
       type: String,

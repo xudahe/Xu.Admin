@@ -3,7 +3,6 @@
     <div v-show="visible" class="loading-container">
         <div class="loading-mask"></div>
         <div class="loading-content">
-           <!-- <i class="custom-spinner-icon"></i> -->
            <div id="animate" class="loading-animate"></div>
            <div class="loading-text">{{ text }}</div>
         </div>
@@ -41,7 +40,7 @@ export default {
         bottom: 0;
         left: 0;
         right: 0;
-        background-color: rgba(0, 0, 0, .5);
+        background-color: rgba(0, 0, 0, .1);
     }
     .loading-content{
         position: fixed;

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-//使用方式：this.$http.get("../../../static/data/cesium/3Dlayer.json").then(res => {});
+//VueResource使用方式：this.$http.get("../../../static/data/layer.json").then(res => {});
 import VueResource from 'vue-resource'
 // 为Vue应用添加页面间的转场特效
 import vueg from 'vueg'
@@ -26,15 +26,8 @@ import 'element-ui/lib/theme-chalk/index.css'
 import 'view-design/dist/styles/iview.css'
 // 引入css样式初始化
 import 'normalize.css/normalize.css'  
-
-import {library} from '@fortawesome/fontawesome-svg-core';
-import {fas} from '@fortawesome/free-solid-svg-icons';
-import {far} from '@fortawesome/free-regular-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import '@fortawesome/fontawesome-free/css/all.min.css'
-library.add(far, fas)
-Vue.component('font-awesome-icon', FontAwesomeIcon)
-
+// 引入第三方图标库
+import "font-awesome/css/font-awesome.css" 
 // 引入全局提示模块
 import Message from '@/api/message'
 // 引入二次封装的axios模块d

@@ -1,29 +1,24 @@
 <template>
   <div style="height:100%;width:100%;" class="home">
-    <!-- <swiper :imgList="imgList"></swiper> -->
-    <!-- <cesiumMap ref="cesiumMap" ></cesiumMap> -->
-    <centermap ref="map"></centermap>
-    <!-- <el-button @click.native="showdialog1">弹出框</el-button>
+    
+    <el-button @click.native="showdialog1">弹出框</el-button>
     <el-button @click.native="showdialog2">弹出框</el-button>
-    <dialogtt  ref="dialog" v-model="dialog.show" :title="dialog.title" :buttons="dialog.buttons" :bodyshow="dialog.bodyshow" >
+    <v-dialog  ref="dialog" v-model="dialog.show" :title="dialog.title" :buttons="dialog.buttons" :bodyshow="dialog.bodyshow" >
 		<div style="height: 300px;">
 		    <echarts :options="options" @hook:updated="handleEchartUpdated"></echarts>
 		</div>
-    </dialogtt>
-    <dialogtt2 ref="dragdialog" v-show="showDialog"></dialogtt2> -->
+    </v-dialog>
+    <dialog1 ref="dragdialog" v-show="showDialog"></dialog1>
+    <!-- <swiper :imgList="imgList"></swiper> -->
   </div>
 </template>
 
 <script>
 
-import centermap from "../../components/map/MapControl"
-import dialogtt from "../../components/dialog/index"
-import dialogtt2 from "../../components/dialog/dialog2"
+import dialog1 from "../../components/dialog/dialog1"
 export default {
   components: {
-    dialogtt,
-    dialogtt2,
-    centermap
+    dialog1,
   },
   data() {
     return {
@@ -206,7 +201,8 @@ export default {
     },
     showdialog2(){
         this.showDialog = true
-        this.$store.state.drag_com = "case_statistics"
+        this.$store.state.drag_com = "handsontable"
+        this.$store.state.drag_ref = "handsontable"
     },
     handleEchartUpdated(){
         console.log('echarts组件的updated钩子函数被触发')

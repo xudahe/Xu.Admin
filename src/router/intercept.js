@@ -77,8 +77,10 @@ async function getAddRouters () {
           {
             id:14, menuName: "常用工具", enabled: false, icon: "fa fa-dashboard",
             children: [
-              { id:15, menuName: "tinymce", className: "/v-tinymce", icon:"el-icon-edit-outline", enabled:false, children:[]},
-              { id:16, menuName: "markdown", className: "/v-markdown", icon:"el-icon-edit-outline", enabled:false, children:[]},
+              { id:15, menuName: "tinymce", className: "/t-tinymce", icon:"el-icon-edit-outline", enabled:false, children:[]},
+              { id:16, menuName: "markdown", className: "/t-markdown", icon:"el-icon-edit-outline", enabled:false, children:[]},
+              { id:17, menuName: "handsontable", className: "/t-handsontable", icon:"el-icon-edit-outline", enabled:false, children:[]},
+              { id:18, menuName: "baseMap", className: "/t-baseMap", icon:"el-icon-edit-outline", enabled:false, children:[]},
             ]
           }
     ]

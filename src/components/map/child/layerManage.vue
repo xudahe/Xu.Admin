@@ -76,7 +76,7 @@
       <font>图层控制</font>
       <div class="layerpannel_btn">
         <Button size="small" style="margin:5px;" shape="circle" @click="close()">
-          <font-awesome-icon icon="times" size="lg"/>
+          <i class="fa fa-times"></i>
         </Button>
       </div>
     </div>

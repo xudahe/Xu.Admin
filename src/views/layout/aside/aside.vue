@@ -3,7 +3,7 @@
     <el-aside id="asideNav">
       <div class="logo-name" @click="changeScreen">
         <p v-if="$store.getters.logoShow">XU</p>
-        <p v-else>vue-Admin后台模板</p>
+        <p v-else>vue-Admin</p>
       </div>
       <el-menu :default-active="$route.path" class="el-menu-vertical"
         @select="selectmenu"

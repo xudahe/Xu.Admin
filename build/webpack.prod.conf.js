@@ -11,8 +11,6 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin') // 一个 webpa
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin') //一个个优化/最小化css资源的插件
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const cesiumSource = 'node_modules/cesium/Source';
-const cesiumWorkers = '../Build/Cesium/Workers';
 const env = require('../config/prod.env')
 
 //合并 webpack.base.conf.js中的配置,里面具体的配置参考webpack.base.conf.js里面的注释
@@ -133,27 +131,7 @@ const webpackConfig = merge(baseWebpackConfig, {
         to: config.build.assetsSubDirectory,
         ignore: ['.*']
       },
-      {
-        from: path.join(cesiumSource, cesiumWorkers),
-        to: 'cesium/Workers'
-      },
-      {
-        from: path.join(cesiumSource, 'Assets'),
-        to: 'cesium/Assets'
-      },
-      {
-        from: path.join(cesiumSource, 'Widgets'),
-        to: 'cesium/Widgets'
-      },
-      {
-        from: path.join(cesiumSource, 'ThirdParty/Workers'),
-        to: 'ThirdParty/Workers'
-      }
     ]),
-    new webpack.DefinePlugin({
-      //Cesium载入静态的资源的路径
-      CESIUM_BASE_URL: JSON.stringify('./')
-    }),
 
     new CleanWebpackPlugin(['dist'])
   ]

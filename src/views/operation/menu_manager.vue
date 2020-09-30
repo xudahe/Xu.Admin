@@ -8,8 +8,8 @@
           <!--快速查询字段-->
           <el-input v-model="filters.name"  style="width:200px;padding-right: 5px;" placeholder="菜单名称"></el-input>
           <!--操作按钮组-->
-          <el-button type="primary" @click.native="getData">查询</el-button>
-          <el-button type="primary" @click.native="handleAdd">新增</el-button>
+          <el-button type="primary" icon="el-icon-search" circle @click.native="getData"></el-button>
+          <el-button type="primary" icon="el-icon-plus" circle @click.native="handleAdd"></el-button>
         </div>
       </v-header>
   
@@ -146,10 +146,10 @@ export default {
             ],
             tableOption: {
               label: '操作',
-              width: '200',
+              width: '160',
               options: [
-                { label: '编辑', type: 'primary', icon: '', methods: 'handleEdit' },
-                { label: '删除', type: 'danger', icon: '', methods: 'handleDelete' },
+                { label: '', type: 'primary', icon: 'el-icon-edit', methods: 'handleEdit' },
+                { label: '', type: 'danger', icon: 'el-icon-delete', methods: 'handleDelete' },
               ]
             },
     

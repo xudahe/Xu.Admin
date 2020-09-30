@@ -13,6 +13,9 @@ import 'mavon-editor/dist/css/index.css'
 import './other/error_log'
 // 引入表单验证
 import './other/validate'
+// 引入区域loading效果
+import loading from './other/loading'
+Vue.use(loading)
 // 引入icon组件
 import '@/icons'
 // 引入UI框架
@@ -24,6 +27,8 @@ import '@/global/css/IviewUI.less'
 import '@/api/iconfont/iconfont'
 import 'element-ui/lib/theme-chalk/index.css'
 import 'view-design/dist/styles/iview.css'
+//引入全局自定义样式
+import '@/global/css/index.css' 
 // 引入css样式初始化
 import 'normalize.css/normalize.css'  
 // 引入第三方图标库
@@ -38,6 +43,9 @@ import http from '@/api/axios/http'
 Vue.use(http)
 // 引入websocket模块
 import Socket from '@/api/websocket'
+//自定义格式扩展，用法参考：https://www.jianshu.com/p/c1fbebc28696
+// import format from 'vue-text-format';
+// Vue.use(format);
 // 引入时间格式化函数
 import Date from '@/api/date'
 // 引入获取URL参数函数
@@ -78,8 +86,6 @@ import exportExcel from '@/api/file/export_excel'
 import exportFile from '@/api/file/export_file'
 // 引入全局配置模块
 import defaultConfig from '@/global/js/config'
-//引入全局自定义样式
-import '@/global/css/index.css' 
 
 /**
  * @author xu

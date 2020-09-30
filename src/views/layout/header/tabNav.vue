@@ -10,6 +10,8 @@
     </div>
     <ul v-show="this.rightMenuShow" :style="{left:this.left+'px',top:this.top+'px'}" class="menuBox">
       <li @click="removeTab($store.getters.rightNav)">关闭</li>
+      <li @click="removeLeftTab($store.getters.rightNav)">关闭左侧</li>
+      <li @click="removeRightTab($store.getters.rightNav)">关闭右侧</li>
       <li @click="removeOtherTab($store.getters.rightNav)">关闭其他</li>
       <li @click="removeAllTab">全部关闭</li>
     </ul>
@@ -38,6 +40,12 @@ export default {
     },
     removeTab (tabItem) {
       this.$store.dispatch("removeTab", {tabItem, fullPath: this.$route.fullPath, router: this.$router})
+    },
+    removeLeftTab (tabItem) {
+      this.$store.dispatch("removeLeftTab", {tabItem, router: this.$router})
+    },
+    removeRightTab (tabItem) {
+      this.$store.dispatch("removeRightTab", {tabItem, router: this.$router})
     },
     removeOtherTab (tabItem) {
       this.$store.dispatch("removeOtherTab", {tabItem, router: this.$router})

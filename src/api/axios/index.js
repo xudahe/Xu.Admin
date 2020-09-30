@@ -12,6 +12,7 @@
 
 import axios from 'axios' //ajax请求
 import qs from 'qs'
+import Vue from 'vue'
 
 import store from "@/vuex/store"
 import router from '../../router/index'
@@ -141,11 +142,17 @@ axios.interceptors.response.use(response => {
 
 function errorState(response) {
   // 如果http状态码正常，则直接返回数据  
-  if (response && (response.status === 200 || response.status === 304 || response.status === 400)) {
+  if (response && response.status === 200) {
     return response
     // 如果不需要除了data之外的数据，可以直接 return response.data  
   } else {
-    alert('网络异常1')
+    let res = response.response
+
+    Vue.prototype.$message({
+      message: res !=undefined ? res.data.message : response.message,
+      type: 'error'
+    });
+    // alert('网络异常1')
   }
 }
 
@@ -191,9 +198,9 @@ const httpServer = (opts, data) => {
         resolve(res)
       }
     ).catch(
-      (response) => {
-        // errorState(response)
-        reject(response)
+      (res) => {
+        errorState(res)
+        reject(res)
       }
     )
 

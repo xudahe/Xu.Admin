@@ -1,7 +1,6 @@
 <!-- 应用系统登录 -->
 <template>
     <div class="login-container">
-        <loading :visible="visible"></loading>
         <el-form :model="loginForm" :rules="rules" status-icon ref="loginForm" label-position="left" label-width="0px" class="demo-ruleForm login-page">
             <h3 class="title">系统登录</h3>
             <el-form-item prop="username">
@@ -24,7 +23,7 @@
             </el-form-item>
             <el-checkbox v-model="checkboxValue" class="rememberme">记住密码</el-checkbox>
             <el-form-item style="width:100%;">
-                <el-button type="primary" style="width:100%;" @click.native="loginSubmit" :loading="logining">登录</el-button>
+                <el-button type="primary" style="width:100%;" @click.native="loginSubmit" :loading="logining">{{loadName}}</el-button>
             </el-form-item>
         </el-form>
     </div>
@@ -36,7 +35,7 @@ import { encrypt } from '@/utils/encrypt' //密码加密
 export default {
     data(){
         return {
-            visible: false,
+            loadName: '登录',
             timeCode: null,
             timeCount: 60,
             timeSum: 0,
@@ -107,30 +106,25 @@ export default {
 				return
             } 
             
-            // this.$store.dispatch("saveToken", this.loginForm.username).then(() => {
-            //   this.$router.push({path: "/"}) //登录成功之后重定向到首页
-            // }).catch(res => {
-            //   this.$message({
-            //     showClose: true,
-            //     message: res,
-            //     type: "error"
-            //   })
-            // })
-            this.visible = true;
-            
+            this.logining = true;
+            this.loadName = "登录中...";
+            this.$loading.showLoading()//打开
+
             //获取Token
             this.$ajax(this.$apiSet.requestToken, {
 					name: this.loginForm.username,
 					pass: encrypt(this.loginForm.password)
 				}).then(res => {
                      if (!res.data.success) {
+                        _this.logining = false;
+                        _this.loadName = "重新登录";
+                        _this.$loading.hideLoading(); //关闭
+
                         _this.$message({
                             message: res.data.message,
                             type: 'error'
                         });
                     } else {
-                        _this.logining = true;
-
                         var token = res.data.token;
                         _this.$store.commit("saveToken", token); // 保存token
 
@@ -161,6 +155,10 @@ export default {
 			     	token: token
 				}).then(res => {
                     if (!res.data.success) {
+                        _this.logining = false;
+                        _this.loadName = "重新登录";
+                        _this.$loading.hideLoading();//关闭
+
                         _this.$message({
                             message: res.data.message,
                             type: 'error'
@@ -190,6 +188,10 @@ export default {
 			     	ids: userinfo.roleIds
 				}).then(res => {
                     if (!res.data.success) {
+                        _this.logining = false;
+                        _this.loadName = "重新登录";
+                        _this.$loading.hideLoading();//关闭
+
                         _this.$message({
                             message: res.data.message,
                             type: 'error'
@@ -215,18 +217,21 @@ export default {
 			     	ids: menuIds.join(',')
 				}).then(res => {
                     _this.logining = false;
+                    _this.$loading.hideLoading();//关闭
+
                     if (!res.data.success) {
+                        _this.loadName = "重新登录";
                         _this.$message({
                             message: res.data.message,
                             type: 'error'
                         });
                     } else {
                         window.localStorage.menuInfo = JSON.stringify(res.data.response)
+                        _this.loadName = '登录成功'
                         _this.$router.push({path: "/"}) //登录成功之后重定向到首页
                         
                         setTimeout(() => {
                             let userinfo = JSON.parse(window.localStorage.userInfo ? window.localStorage.userInfo : null);
-                            _this.visible = false;
 
                             _this.$notify({
                                 type: "success",
@@ -243,7 +248,7 @@ export default {
     mounted(){
         window.localStorage.clear()
         // console.info('%c 本地缓存已清空!', "color:green")
-            
+ 
         this.cookies();
         this.setRefreshCode()
     },

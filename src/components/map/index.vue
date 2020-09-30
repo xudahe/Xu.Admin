@@ -15,11 +15,11 @@
   position: absolute;
   left: 10px;
   top: 10px;
-  z-index: 999;
+  z-index: 998;
 }
 
 .toolbar_info {
-  z-index: 999;
+  z-index: 998;
   position: absolute;
   left: 58px;
   top: 10px;

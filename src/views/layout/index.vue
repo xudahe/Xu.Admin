@@ -4,9 +4,11 @@
       <layoutAside></layoutAside>
       <el-container direction="vertical">
         <layoutHeader @showErrorLogBox="$refs.errorLogBox.dialogVisible = true"></layoutHeader>
-        <el-main id="elmain">
+        <el-main id="elmain" class="elmain">
           <transition name="main" mode="out-in">
-            <router-view v-transition></router-view>
+            <keep-alive>
+              <router-view v-transition></router-view>
+            </keep-alive>
           </transition>
           <back-top :options="{ target: '#elmain' , isMove: true }" />
         </el-main>

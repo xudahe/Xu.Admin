@@ -1,5 +1,5 @@
 <template>
-    <div class="baseMap">
+    <div class="baseMap" style="height: 100%; width: 100%;">
         <baseMap></baseMap>
     </div>
 </template>

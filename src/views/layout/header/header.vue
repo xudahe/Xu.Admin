@@ -1,7 +1,9 @@
 <template>
   <div>
     <el-header id="header">
-      <span class="hideAside" @click="collapse"><i class="fa fa-indent fa-lg"></i></span>
+      <span class="hideAside" @click="collapse">
+        <i :class="$store.getters.isCollapse ? 'el-icon-s-unfold':'el-icon-s-fold'" style="font-size:0.24rem;"></i>
+      </span>
       <el-menu  class="el-menu-demo"
         mode="horizontal" 
         @select="selectMenu" 
@@ -16,8 +18,8 @@
 
       <ul class="personal">
         <li class="fullScreen" @click="fullScreen">
-          <el-tooltip class="item" effect="dark" content="全屏" placement="bottom"><i
-            class="fa fa-arrows-alt fa-lg"></i>
+          <el-tooltip class="item" effect="dark" content="全屏" placement="bottom">
+            <i class="fa fa-arrows-alt fa-lg"></i>
           </el-tooltip>
         </li>
         <li>
@@ -73,6 +75,7 @@ export default {
       isfullScreen: true,
       avatar: "./static/img/favicon.ico",
       weathers: [], //天气数据
+      isFlod: true,
     }
   },
   methods: {

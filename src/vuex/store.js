@@ -12,6 +12,7 @@ const store=new Vuex.Store({
     state:{
         token: null,
         tokenExpire: null,
+
         drag_com: "",
         drag_ref: "",
     },
@@ -49,7 +50,6 @@ const store=new Vuex.Store({
         addRouters: state => state.router.addRouters,
         routers: state => state.router.routers,
         info: state => state.user.info,
-        logoShow: state => state.layout.logoShow,
         isCollapse: state => state.layout.isCollapse,
         uniquerouter: state => state.layout.uniquerouter,
         tabnavBox: state => state.layout.tabnavBox,

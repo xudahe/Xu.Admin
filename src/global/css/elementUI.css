@@ -44,3 +44,16 @@
 .el-card__header {
   padding: 16px 10px !important;
 }
+
+
+.el-loading-spinner i{
+  font-size: 30px !important;
+  color: #000 !important;
+}
+.el-loading-spinner .el-loading-text {
+  color: #000 !important;
+}
+
+.el-message{
+  min-width: 0px !important;
+}

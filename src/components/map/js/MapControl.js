@@ -540,13 +540,11 @@ MapControl.bzShowGeometry = function(geometryl) {
                     new dojo.Color([0, 0, 0]),
                     2
                 )
-                // showExtent = geo.getExtent();
             var tempGra = new esri.Graphic(geo, symbol, null, null);
             MapControl.graphicLayers['gralyr1'].add(tempGra);
         }
     });
 };
-
 
 
 MapControl.setMapClearNew = function(value) {
@@ -633,37 +631,13 @@ MapControl.mapDraw = function(drawtype, isClear) {
     }
 };
 
-MapControl.mapDraw1 = function(drawtype, isClear) {
-    if (doSpaceDrawEventHandler != undefined) {
-        doSpaceDrawEventHandler.remove();
-    }
-    let toolbar = MapControl.drawToolbar[MapControl.mapId];
-    doSpaceDrawEventHandler = toolbar.on('draw-end', doSpaceDraw1);
-
-    if (drawtype == 'point') {
-        toolbar.activate(esri.toolbars.Draw.POINT);
-    } else if (drawtype == 'extent') {
-        toolbar.activate(esri.toolbars.Draw.EXTENT);
-    } else if (drawtype == 'polygon') {
-        toolbar.activate(esri.toolbars.Draw.POLYGON);
-    } else if (drawtype == 'polyline') {
-        toolbar.activate(esri.toolbars.Draw.POLYLINE);
-    } else if (drawtype == 'circle') {
-        toolbar.activate(esri.toolbars.Draw.CIRCLE);
-    } else if (drawtype == 'line') {
-        toolbar.activate(esri.toolbars.Draw.LINE);
-    }
-    if (isClear == true) {
-        MapControl.graphicLayers['gralyr1'].clear();
-    }
-};
-
 MapControl.clearmapDraw = function() {
     MapControl.graphicLayers['gralyr1'].clear();
     if (doSpaceDrawEventHandler != undefined) {
         doSpaceDrawEventHandler.remove();
     }
 };
+
 MapControl.doSpaceDraw = function(gra) {
     doSpaceDraw(gra);
 }
@@ -720,57 +694,6 @@ function doSpaceDraw(gra) {
     bus.$emit('mapTempGra', tempGra);
 }
 
-function doSpaceDraw1(gra) {
-    let map = MapControl.map;
-    if (doSpaceDrawEventHandler != undefined) {
-        doSpaceDrawEventHandler.remove();
-    }
-    let toolbar = MapControl.drawToolbar[MapControl.mapId];
-    toolbar.deactivate();
-    //根据图形的类型定义显示样式
-    var geo = gra.geometry;
-    var symbol;
-    var geom = '';
-
-    switch (geo.type) {
-        case 'point':
-            symbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE, 10, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_CIRCLE, new dojo.Color([255, 87, 34, 5])), new dojo.Color([255, 87, 34, 5.25]));
-            geom = transformUtils.PointToWKT(geo);
-            break;
-        case 'polyline':
-            symbol = new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_DASH, new dojo.Color([0, 189, 1]), 3);
-            geom = transformUtils.LineToWKT(geo);
-            // for (var i = 0; i < geo.paths[0].length; i++) {
-            //     geom = geo.paths[0][i][0] + ' ' + geo.paths[0][i][1] + ',' + geom;
-            // }
-            // geom = 'LINESTRING (' + geom.substring(0, geom.length - 1) + ')';
-            break;
-        case 'polygon':
-            symbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_DASH, new dojo.Color([255, 0, 0]), 3), new dojo.Color([255, 140, 0, 0.35]));
-            //geom = PolygonToWKT(geo);
-            for (var i = 0; i < geo.rings[0].length; i++) {
-                geom = geo.rings[0][i][0] + ' ' + geo.rings[0][i][1] + ',' + geom;
-            }
-            geom = geom + geo.rings[0][0][0] + ' ' + geo.rings[0][0][1];
-            // geom = 'POLYGON((' + geom + '))';
-            geom = 'POLYGON((' + geom + '))';
-            break;
-        case 'extent':
-            symbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_DASH, new dojo.Color([255, 0, 0]), 3), new dojo.Color([255, 140, 0, 0.35]));
-            geom = geo.xmin + ' ' + geo.ymin + ',' + geo.xmax + ' ' + geo.ymin + ',' + geo.xmax + ' ' + geo.ymax + ',' + geo.xmin + ' ' + geo.ymax + ',' + geo.xmin + ' ' + geo.ymin;
-            geom = 'POLYGON((' + geom + '))';
-            break;
-    }
-
-    bus.$emit('mapDrawresult2', {
-        gwkt: geom,
-        gty: geo
-    });
-
-    var tempGra = new esri.Graphic(geo, symbol, null, null);
-    MapControl.graphicLayers['gralyr1'].add(tempGra);
-    bus.$emit('mapTempGra', tempGra);
-}
 MapControl.GetPoint = function(drawtype) {
     if (doSpaceDrawEventHandler != undefined) {
         doSpaceDrawEventHandler.remove();

@@ -10,10 +10,10 @@
                         <!--快速查询字段-->
                         <el-input v-model="filters.name"  style="width:200px;padding-right: 5px;" placeholder="用户名/登录名"></el-input>
                         <!--操作按钮组-->
-                        <el-button type="primary" ghost @click.native="getData">查询</el-button>
-                        <el-button type="primary" ghost @click.native="handleAdd">新增</el-button>
+                        <el-button type="primary" icon="el-icon-search" circle @click.native="getData"></el-button>
+                        <el-button type="primary" icon="el-icon-plus" circle @click.native="handleAdd"></el-button>
                         <el-dropdown style="margin-left:5px;">
-                          <el-button type="primary">
+                          <el-button>
                             更多<i class="el-icon-arrow-down el-icon--right"></i>
                           </el-button>
                           <el-dropdown-menu slot="dropdown">
@@ -164,10 +164,10 @@ export default {
             ],
             tableOption: {
               label: '操作',
-              width: '200',
+              width: '160',
               options: [
-                { label: '编辑', type: 'primary', icon: '', methods: 'handleEdit' },
-                { label: '删除', type: 'danger', icon: '', methods: 'handleDelete' },
+                { label: '', type: 'primary', icon: 'el-icon-edit', methods: 'handleEdit' },
+                { label: '', type: 'danger', icon: 'el-icon-delete', methods: 'handleDelete' },
               ]
             },
 

@@ -11,7 +11,7 @@ const config = {
     delay: 0, // 错误提示的延迟时间
     strict: true, // 没有设置规则的表单不进行校验，
     enableAutoClasses: false,
-    events: 'blur', //* *input|blur** 在用户输入和表单失去焦点时都进行校验 可单独写
+    events: 'input|blur', //* *input|blur** 在用户输入和表单失去焦点时都进行校验 可单独写
 }
 Vue.use(VeeValidate, config)
 

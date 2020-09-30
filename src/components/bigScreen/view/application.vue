@@ -180,6 +180,7 @@
         switch (item.menuname) {
           case "二级菜单1":
           case "二级菜单4":
+          case "二级菜单5":
             _this.isLeftMenu = true;
             _this.leftWidth = 3.2 + 0.1;
             _this.mapWidth = 'calc(100% - '+ _this.leftWidth +'rem' +')';
@@ -246,6 +247,7 @@
           {id:2,classname:"classname",menuname:"二级菜单2",img:"",systemid:32,},
           {id:3,classname:"classname",menuname:"二级菜单3",img:"",systemid:32,},
           {id:3,classname:"test2",menuname:"二级菜单4",img:"",systemid:32,},
+          {id:3,classname:"test3",menuname:"二级菜单5",img:"",systemid:32,},
         ]
 				for (let l = 0; l < children.length; l++) {
 					_this.menuData.push({

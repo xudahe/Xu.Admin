@@ -12,14 +12,14 @@ NProgress.configure({ ease: 'ease', speed: 500 })
 // 全局路由拦截-进入页面前执行
 router.beforeEach((to, from, next) => {
   NProgress.start(); //显示进度条
-  
-  saveRefreshtime(); //刷新Token过期时间
-  
+
+  if(!validataToken()) next({path: "/"})
+
   if (store.getters.token) {
     if (to.path === "/login") {
       next({path: "/"})
     } else {
-      if (!store.getters.info) {
+      if (store.getters.info == "") {
         getAddRouters()
         next({path: to.path})
       } else {
@@ -39,6 +39,28 @@ router.beforeEach((to, from, next) => {
 router.afterEach(() => {  
   NProgress.done() //完成进度(进度条消失)
 })
+
+//验证Token
+async function validataToken() {
+  var curTime = new Date()
+  var refreshtime = new Date(Date.parse(window.localStorage.refreshtime))
+  // 如果在用户操作的活跃期内，刷新Token过期时间
+  if (window.localStorage.refreshtime && (curTime <= refreshtime)) {
+    saveRefreshtime(); //刷新Token过期时间
+
+    if (!store.state.token) {
+      store.commit("saveToken", window.localStorage.Token)
+    }
+    if (!store.state.tokenExpire) {
+      store.commit("saveTokenExpire", window.localStorage.TokenExpire)
+    }
+
+    return true
+  }
+  else { 
+    return false
+  }
+}
 
 async function getAddRouters () {
   // 省略 axios 请求代码 通过 token 向后台请求用户权限等信息

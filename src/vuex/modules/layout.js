@@ -2,7 +2,6 @@
 export default {
   state: {
     isCollapse: false,
-    logoShow: false,
     uniquerouter: true,
     rightNav: {},
     tabnavBox: JSON.parse(sessionStorage.getItem("addTab")) || [{ 
@@ -47,6 +46,30 @@ export default {
 
       window.sessionStorage.setItem("addTab", JSON.stringify(state.tabnavBox))
     },
+    removeLeftTab(state, arg) {
+      let index = state.tabnavBox.findIndex(function (value, key) {
+        return value.path === arg.tabItem.path
+      })
+      state.tabnavBox.splice(0, index)
+      state.tabnavBox.unshift({
+        title: "home",
+        path: "/home"
+      })
+
+      window.sessionStorage.setItem("addTab", JSON.stringify(state.tabnavBox))
+    },
+    removeRightTab(state, arg) {
+      let index = state.tabnavBox.findIndex(function (value, key) {
+        return value.path === arg.tabItem.path
+      })
+      state.tabnavBox.splice(index, 0)
+      state.tabnavBox.unshift({
+        title: "home",
+        path: "/home"
+      })
+      
+      window.sessionStorage.setItem("addTab", JSON.stringify(state.tabnavBox))
+    },
     removeOtherTab (state, arg) {
       state.tabnavBox = [{
         title: "home",
@@ -63,13 +86,6 @@ export default {
     },
     collapse (state, arg) {
       state.isCollapse = !state.isCollapse
-      if (state.logoShow) {
-        setTimeout(function () {
-          state.logoShow = false
-        }, 300)
-      } else {
-        state.logoShow = true
-      }
     }
   },
   actions: {
@@ -81,6 +97,12 @@ export default {
     },
     removeTab ({commit}, arg) {
       commit("removeTab", arg)
+    },
+    removeLeftTab({commit}, arg) {
+      commit("removeLeftTab", arg)
+    },
+    removeRightTab ({commit}, arg) {
+      commit("removeRightTab", arg)
     },
     removeOtherTab ({commit}, arg) {
       commit("removeOtherTab", arg)

@@ -43,9 +43,13 @@
       </template>
       <el-table-column v-if="tableOption.label" :width="tableOption.width" :label="tableOption.label" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
-          <el-button  v-for="(item,index) in tableOption.options" :key="index" :type="item.type" :icon="item.icon" @click.native="handleButton(item.methods,scope.row,index)" size="mini">
-            {{item.label}}
-          </el-button>
+          <template v-for="(item,index) in tableOption.options">
+            <el-button  v-if="item.label" :key="index" :type="item.type" :icon="item.icon" @click.native="handleButton(item.methods,scope.row,index)" size="mini">
+              {{item.label}}
+            </el-button>
+            <el-button v-else :key="index" :type="item.type" :icon="item.icon" @click.native="handleButton(item.methods,scope.row,index)" size="mini">
+            </el-button>
+          </template>
         </template>
       </el-table-column>
   </el-table>

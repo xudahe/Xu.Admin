@@ -138,6 +138,10 @@ const TasksQzModule = {
     url: '/api/TasksQz/Delete',
     method: 'delete'
   },
+  getTasksLog: { //获取任务日志
+    url: '/api/TasksQz/TasksLog',
+    method: 'get'
+  },
 }
 
 const logModule = {

@@ -1,26 +1,23 @@
 <template>
-    <section>
-        <div style="display: none1">
-            <el-form ref="form" label-width="80px" @submit.prevent="onSubmit"
-                     style="margin:20px;width:60%;min-width:600px;">
-                <el-form-item label="用户名">
-                    <el-input v-model="userName"></el-input>
-                </el-form-item>
-
-                <el-form-item label="密码">
-                    <el-input v-model="userMessage"></el-input>
-                </el-form-item>
-            </el-form>
-            <ul v-for="(item, index) in messages" v-bind:key="index + 'itemMessage'">
-                <li><b>Name: </b>{{item.user}}</li>
-                <li><b>Message: </b>{{item.message}}</li>
-                <li><b>：</b>{{item.item1}}</li>
-                <li><b>：</b>{{item.item2}}</li>
-            </ul>
-            <el-button type="primary" @click="submitCard">登录</el-button>
-            <el-button type="primary" @click="getLogs">查询</el-button>
-        </div>
-    </section>
+    <div style="width:100%;height:100%;">
+        <el-form ref="form" label-width="80px" @submit.prevent="onSubmit"
+                 style="margin:20px;width:60%;min-width:300px;">
+            <el-form-item label="用户名">
+                <el-input v-model="userName"></el-input>
+            </el-form-item>
+            <el-form-item label="密码">
+                <el-input v-model="userMessage"></el-input>
+            </el-form-item>
+        </el-form>
+        <ul v-for="(item, index) in messages" v-bind:key="index + 'itemMessage'" style="width:100%;">
+            <li><b>Name: </b>{{item.user}}</li>
+            <li><b>Message: </b>{{item.message}}</li>
+            <li><b>：</b>{{item.item1}}</li>
+            <li><b>：</b>{{item.item2}}</li>
+        </ul>
+        <el-button type="primary" @click="submitCard">登录</el-button>
+        <el-button type="primary" @click="getLogs">查询</el-button>
+    </div>
 </template>
 
 <script>

@@ -5,7 +5,7 @@
         <div style="height: calc(100%);margin-top: 0rem;">
           <div style="position: relative;width: 100%;overflow: hidden;padding:0 0.05rem" :style="{top: noticeTopsb + 'px'}" :class="{transitionTop: isActivesb}" >
             <div :key="index" v-for="(item,index) in yhList" class="pressureDiv" style="cursor: pointer;line-height:0.35rem;">
-              <div style="font-size: 0.16rem;color: #2d8cf0;font-weight: bolder;text-align: left;">
+              <div style="font-size: 0.14rem;color: #2d8cf0;font-weight: bolder;text-align: left;">
                 <span>时间:</span>
                 <span class="span2" style="margin-right: 0rem;">2020-08-20</span>
                 <span>信息:</span>
@@ -49,6 +49,8 @@ export default {
         {id:4,name:'测试数据4'},
         {id:5,name:'测试数据5'},
         {id:6,name:'测试数据6'},
+        {id:6,name:'测试数据7'},
+        {id:6,name:'测试数据8'},
       ],
 
       timersb: {},

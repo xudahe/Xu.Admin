@@ -8,8 +8,9 @@
           <!--快速查询字段-->
            <el-input v-model="filters.name" style="width:200px;padding-right: 5px;" placeholder="任务名称"></el-input>
           <!--操作按钮组-->
-          <el-button type="primary" @click.native="getData">查询</el-button>
-          <el-button type="primary" @click.native="handleAdd">新增</el-button>
+          <el-button type="primary" icon="el-icon-search" circle @click.native="getData"></el-button>
+          <el-button type="primary" icon="el-icon-plus" circle @click.native="handleAdd"></el-button>
+          <el-button type="primary" icon="el-icon-refresh" circle @click.native="refreshData"></el-button>
         </div>
       </v-header>
   
@@ -88,9 +89,9 @@ export default {
                   return (!row.performTime || row.performTime == '') ? '':this.$formatDate(new Date(row.performTime), true);
                 } 
               },
-              { label: '运行状态', param: 'jobState', width:'80', 
+              { label: '运行状态', param: 'jobStatus', width:'80', 
                 render: (h, params) => {
-                  if (params.row.jobState == 1){
+                  if (params.row.jobStatus == 1){
                     return h('el-tag', {
                         props: {
                           type: 'primary',
@@ -102,12 +103,12 @@ export default {
                         on: {
 		                     	click: e => {
                             e.stopPropagation();
-		                     		this.jobState(params.row)
+		                     		this.jobStatus(params.row)
 		                    	}
 		                    }
-                    },'初始化')
+                    },'未启动')
                   }
-                  else if (params.row.jobState == 2){
+                  else if (params.row.jobStatus == 2){
                     return h('el-tag', {
                         props: {
                           type: 'success',
@@ -119,12 +120,12 @@ export default {
                         on: {
 		            	        click: e => {
                             e.stopPropagation();
-		               	     	  this.jobState(params.row)
+		               	     	  this.jobStatus(params.row)
 		            	      	}
 		            	      }
                     },'运行中')
                   }
-                  else if (params.row.jobState == 3){
+                  else if (params.row.jobStatus == 3){
                     return h('el-tag', {
                         props: {
                           type: 'warning',
@@ -136,10 +137,10 @@ export default {
                         on: {
 		                    	click: e => {
                             e.stopPropagation();
-		                    		this.jobState(params.row)
+		                    		this.jobStatus(params.row)
 		                    	}
 		                    }
-                    },'已暂停')
+                    },'已停止')
                   }
                 },
               },
@@ -150,15 +151,15 @@ export default {
               options: [
                 { label: '编辑', type: 'primary', icon: '', methods: 'handleEdit' },
                 { label: '删除', type: 'danger', icon: '', methods: 'handleDelete' },
-                { label: '历史', type: 'info', icon: '', methods: 'handleHistory' },
+                { label: '日志', type: 'info', icon: '', methods: 'handleHistory' },
               ]
             },
 
             nowPage: 1, // 当前页数
             nowSize: 10, // 当前页条数
         
-            loading: false,
             sels: [], //列表选中列
+            timer: null,
     
             formTitle: '',
             formVisible: false, //界面是否显示
@@ -180,161 +181,193 @@ export default {
               triggerType : 'cron', //触发器类型
               cron : "",
               intervalSecond : "", //执行间隔时间
-              JobState : "", //运行状态
+              jobStatus : "", //运行状态
               jobParams : "", //执行传参
               enabled : "",
             },
         }
     },
     methods: {
-        getData() {
-          let _this = this;
-          this.loading = true;
-          this.$ajax(this.$apiSet.getTasksQzInfo,{
-              name: this.filters.name
-            })
-            .then(res => {
-                if (!res.data.success) {
-                    _this.$message({
-                        message: res.data.message,
-                        type: 'error'
-                    });
-                } else {
-                    _this.loading = false;
-                    _this.tableData = res.data.response;
-			    	    }
-            })
-            .catch(err => {})
-        },
-        handleButton (val) {
-          if(val.methods == 'handleEdit') this.handleEdit(val.index,val.row)
-          if(val.methods == 'handleDelete') this.handleDelete(val.index,val.row)
-          if(val.methods == 'handleHistory') this.handleHistory(val.index,val.row)
-        },
-        handleSelectionChange (val) {
-          this.sels = sels;
-        },
-        //删除
-        handleDelete(index, row) {
-          let _this = this
-          this.$showMsgBox({
-             msg: `<p>是否删除【${row.deptName}】定时任务?</p>`,
-             type: 'warning',
-             isHTML: true
-           }).then(() => {
-              _this.$ajax(this.$apiSet.deleteTask,{
-                id: row.id
-              }) .then(res => {
-                if (!res.data.success) {
-                    _this.$message({
+      refreshData(){
+        this.$loading.showLoading();//开启
+        this.getData();
+      },
+      getData() {
+        let _this = this;
+      
+        this.$ajax(this.$apiSet.getTasksQzInfo,{
+            name: this.filters.name
+          })
+          .then(res => {
+              _this.$loading.hideLoading();//关闭
+              if (!res.data.success) {
+                  _this.$message({
                       message: res.data.message,
                       type: 'error'
-                    });
-                } else {
-                    _this.getData();
-                    _this.$message({
-                      message: res.data.message,
-                      type: 'success'
-                    });
-			          }
-              })
-              .catch(err => {})
-           }).catch(()=>{});
-        },
-        //显示编辑界面
-        handleEdit(index, row) {
-            this.formTitle = "编辑";
-            this.formVisible = true;
-            this.taskForm = row;
-        },
-        //显示新增界面
-        handleAdd() {
-            this.formTitle = "新增";
-            this.formVisible = true;
-  
-            this.taskForm = {
-              id: 0,
-              deptCode: "",
-              deptName: "",
-              deptUser: "",
-              parentDept: "",
-              remark: '',
-              enabled: false
-            };
-        },
-        handleSubmit: function() {
-          let apiUrl = this.formTitle=='编辑' ? this.$apiSet.putTasksQz:this.$apiSet.postTasksQz;
-          let _this = this;
-          this.$ajax(apiUrl, this.taskForm)
-            .then(res => {
-              if (!res.data.success) {
-                _this.$message({
-                  message: res.data.message,
-                  type: 'error'
-                });
+                  });
               } else {
-                    _this.formVisible = false;
-                    _this.getData();
-                    _this.$message({
-                      message: res.data.message,
-                      type: 'success'
-                    });
-		      		}
+                  _this.tableData = res.data.response;
+			  	    }
+          })
+          .catch(err => {})
+      },
+      handleButton (val) {
+        if(val.methods == 'handleEdit') this.handleEdit(val.index,val.row)
+        if(val.methods == 'handleDelete') this.handleDelete(val.index,val.row)
+        if(val.methods == 'handleHistory') this.handleHistory(val.index,val.row)
+      },
+      handleSelectionChange (val) {
+        this.sels = sels;
+      },
+      //删除
+      handleDelete(index, row) {
+        let _this = this
+        this.$showMsgBox({
+           msg: `<p>是否删除【${row.deptName}】定时任务?</p>`,
+           type: 'warning',
+           isHTML: true
+         }).then(() => {
+            _this.$ajax(this.$apiSet.deleteTask,{
+              id: row.id
+            }) .then(res => {
+              if (!res.data.success) {
+                  _this.$message({
+                    message: res.data.message,
+                    type: 'error'
+                  });
+              } else {
+                  _this.getData();
+                  _this.$message({
+                    message: res.data.message,
+                    type: 'success'
+                  });
+			        }
             })
             .catch(err => {})
-        },
-        jobState(row){
-            let apiUrl = "", state = ""; 
-            switch (row.jobState) {
-               case 1:
-                 state = "启动";
-                 apiUrl = this.$apiSet.getStartJob;
-                 break;
-               case 2:
-                 state = "停止";
-                 apiUrl = this.$apiSet.getStopJob;
-                 break;
-               case 3:
-                 state = "重启";
-                 apiUrl = this.$apiSet.getReCovery;
-                 break;
-              default:
-                 break;
-            }
+         }).catch(()=>{});
+      },
+      //显示编辑界面
+      handleEdit(index, row) {
+          this.formTitle = "编辑";
+          this.formVisible = true;
+          this.taskForm = row;
+      },
+      //显示新增界面
+      handleAdd() {
+          this.formTitle = "新增";
+          this.formVisible = true;
+  
+          this.taskForm = {
+            id: 0,
+            jobName: "",
+            jobGroup: "",
+            remark : "",
+            startTime : "",
+            endTime : "",
+            triggerType : 'cron', //触发器类型
+            cron : "",
+            intervalSecond : "", //执行间隔时间
+            jobStatus : "", //运行状态
+            jobParams : "", //执行传参
+            enabled : "",
+          };
+      },
+      handleSubmit: function() {
+        let apiUrl = this.formTitle=='编辑' ? this.$apiSet.putTasksQz:this.$apiSet.postTasksQz;
+        let _this = this;
+        this.$ajax(apiUrl, this.taskForm)
+          .then(res => {
+            if (!res.data.success) {
+              _this.$message({
+                message: res.data.message,
+                type: 'error'
+              });
+            } else {
+              _this.formVisible = false;
+              _this.getData();
+              _this.$message({
+                message: res.data.message,
+                type: 'success'
+              });
+		    		}
+          })
+          .catch(err => {})
+      },
+      jobStatus(row){
+        let _this = this;
+        let apiUrl = "", state = ""; 
+        switch (row.jobStatus) {
+           case 1: //未启动
+             state = "启动";
+             apiUrl = this.$apiSet.getStartJob;
+             break;
+           case 2: //运行中
+             state = "停止";
+             apiUrl = this.$apiSet.getStopJob;
+             break;
+           case 3: //已停止
+             state = "重启";
+             apiUrl = this.$apiSet.getReCovery;
+             break;
+        }
 
-            this.$showMsgBox({
-              msg: `<p>是否${state + `【` + row.jobName}】任务?</p>`,
-              type: 'warning',
-              isHTML: true
-            }).then(() => {
-              _this.$ajax(apiUrl,{
-                id: row.id,
-              }).then(res => {
-                  if (!res.data.success) {
-                      _this.$message({
-                          message: res.data.message,
-                          type: 'error'
-                      });
-                  } else {
-                      _this.getData();
-                      _this.$message({
-                          message: res.data.message,
-                          type: 'success'
-                      });
-				  	      }
-               })
-               .catch(err => {})
-            }).catch(()=>{});
+        this.$showMsgBox({
+          msg: `<p>是否${state + `【` + row.jobName}】任务?</p>`,
+          type: 'warning',
+          isHTML: true
+        }).then(() => {
+          _this.$ajax(apiUrl,{
+            id: row.id,
+          }).then(res => {
+              if (!res.data.success) {
+                  _this.$message({
+                      message: res.data.message,
+                      type: 'error'
+                  });
+              } else {
+                  _this.getData();
+                  _this.$message({
+                      message: res.data.message,
+                      type: 'success'
+                  });
+			        }
+           })
+           .catch(err => {})
+        }).catch(()=>{});
+      },
+      handleHistory(index, row){
+        let _this = this;
+        this.$ajax(this.$apiSet.getTasksLog, {
+          id: row.id
+        }).then(res => {
+            if (!res.data.success) {
+              _this.$message({
+                message: res.data.message,
+                type: 'error'
+              });
+            } else {
+              let data = res.data.response;
 
-        },
-        handleHistory(index, row){
-           
-        },
+		    		}
+          })
+          .catch(err => {})
+      },
     },
     mounted() {
-        this.getData();
-  
-    }
+      let _this = this;
+      this.getData();
+      
+      // this.timer = setInterval(() => {
+      //   _this.getData();
+      // }, 30000);
+
+    },
+    destroyed(){
+      clearInterval(this.timer);
+    },
+    beforeDestroy(){
+      clearInterval(this.timer);
+    },
 };
 </script>
 

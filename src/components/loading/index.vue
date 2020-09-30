@@ -40,7 +40,8 @@ export default {
         bottom: 0;
         left: 0;
         right: 0;
-        background-color: rgba(0, 0, 0, .1);
+        z-index: 99999;
+        background-color: rgba(0, 0, 0, .3);
     }
     .loading-content{
         position: fixed;
@@ -49,7 +50,7 @@ export default {
         z-index: 99999;
         transform: translate(-50%,-45%);
         text-align: center;
-        color: #fff;
+        color: #000;
     }
     .loading-content .loading-animate{
         display: inline-block;

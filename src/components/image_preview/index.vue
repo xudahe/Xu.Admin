@@ -9,7 +9,6 @@
 
 <script>
 /**
- * @author xudahe
  * @description 简单的图片预览组件
  * @description 使用方法：  	<ImagePreview :show-modal.sync="isShow" :url="url" />
  */

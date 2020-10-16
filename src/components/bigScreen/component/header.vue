@@ -56,7 +56,7 @@
 export default {
     data() {
       return {
-        ptTitle: '某某某某',
+        ptTitle: '',
 		  	
 		  	ismeunNumLeft: null,
         ismeunNumRight: null,
@@ -74,6 +74,7 @@ export default {
       };
     },
 		watch: {
+      // 检测路由变化
 			$route(to, from) {
 				var _this = this;
 				// to为跳转之后的路由

@@ -53,7 +53,7 @@ const store=new Vuex.Store({
         isCollapse: state => state.layout.isCollapse,
         uniquerouter: state => state.layout.uniquerouter,
         tabnavBox: state => state.layout.tabnavBox,
-        rightNav: state => state.layout.rightNav,
+        openNav: state => state.layout.openNav, //当前打开tab
         errorLogList: state => state.error.errorLogList,
       },
 })

@@ -1,5 +1,4 @@
 /**
- * @author xu
  * @description 设置样式（注意：设置的样式为内联样式，不会覆盖所有内联样式，而是通过追加的形式添加样式）
  * @param {DOM} el  	DOM元素
  * @param {String | Object} ruleName    	CSS属性或组合CSS对象
@@ -18,7 +17,6 @@ function setStyle(el, ruleName, value) {
 }
 
 /**
- * @author xu
  * @description 设置内联样式（注意：设置后会覆盖原有的内联样式，效果等同于在html标签中写样式）
  * @param {DOM} el 
  * @param {String} rule
@@ -29,7 +27,6 @@ function setCssText(el, rule) {
 }
 
 /**
- * @author xu
  * @description 设置全局样式（注意：通过创建style标签并动态追加到head标签内完成样式的全局覆盖）
  * @param {String} css css代码
  * @param {String} className 类名（如果不填该属性，则每次调用都会创建一个新的style标签）

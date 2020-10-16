@@ -41,7 +41,6 @@
 
 <script>
 /**
- * @author xudahe
  * @description 上传头像
  */
 // 引入图片剪裁组件

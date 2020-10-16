@@ -79,8 +79,9 @@ function transform(tranvalue) {
       return "0元";
     }
     return str;
-  }
-  //拆分整数与小数
+}
+
+//拆分整数与小数
 function splits(tranvalue) {
     var value = new Array("", "");
     temp = tranvalue.split(".");
@@ -91,5 +92,6 @@ function splits(tranvalue) {
 }
 
 export default {
-    transform
+  transform,
+  splits
 }

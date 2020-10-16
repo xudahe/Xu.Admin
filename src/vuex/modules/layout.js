@@ -1,9 +1,8 @@
-
 export default {
   state: {
     isCollapse: false,
     uniquerouter: true,
-    rightNav: {},
+    openNav: {},
     tabnavBox: JSON.parse(sessionStorage.getItem("addTab")) || [{ 
       title: "home",
       path: "/home"
@@ -32,7 +31,7 @@ export default {
       window.sessionStorage.setItem("addTab", JSON.stringify(state.tabnavBox))
     },
     openMenu (state, arg) {
-      state.rightNav = arg
+      state.openNav = arg
     },
     removeTab (state, arg) {
       let index = state.tabnavBox.findIndex(function (value, key) {
@@ -50,11 +49,8 @@ export default {
       let index = state.tabnavBox.findIndex(function (value, key) {
         return value.path === arg.tabItem.path
       })
-      state.tabnavBox.splice(0, index)
-      state.tabnavBox.unshift({
-        title: "home",
-        path: "/home"
-      })
+      state.tabnavBox.splice(1, index-1)
+      arg.router.push(arg.tabItem.path)
 
       window.sessionStorage.setItem("addTab", JSON.stringify(state.tabnavBox))
     },
@@ -62,12 +58,9 @@ export default {
       let index = state.tabnavBox.findIndex(function (value, key) {
         return value.path === arg.tabItem.path
       })
-      state.tabnavBox.splice(index, 0)
-      state.tabnavBox.unshift({
-        title: "home",
-        path: "/home"
-      })
-      
+      state.tabnavBox.splice(index + 1,  state.tabnavBox.length)
+      arg.router.push(arg.tabItem.path)
+
       window.sessionStorage.setItem("addTab", JSON.stringify(state.tabnavBox))
     },
     removeOtherTab (state, arg) {

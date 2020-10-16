@@ -31,9 +31,11 @@
 						</div>
 					</div>
         </li>
-        <li v-show="$defaultConfig.errorLog && $store.getters.errorLogList.length">
-          <el-tooltip class="item" effect="dark" content="查看错误日志" placement="bottom">
-            <svg-icon class="bug" icon-class="bug" @click.native="$emit('showErrorLogBox')" />
+        <li v-show="$defaultConfig.errorLog">
+          <el-tooltip class="item" effect="dark" :content="tooltipContent" placement="bottom">
+            <el-badge :max="99" :value="$store.getters.errorLogList.length" class="item">
+              <svg-icon :class="$store.getters.errorLogList.length == 0 ? 'bug-f':'bug-t'" icon-class="bug" @click.native="$emit('showErrorLogBox')" />
+            </el-badge>
           </el-tooltip>
         </li>
         <li><colorPicker></colorPicker></li>
@@ -69,6 +71,11 @@ import tabNav from "./tabNav"
 export default {
   name: "Header",
   components: {tabNav},
+  computed: {
+    tooltipContent () {
+      return  this.$store.getters.errorLogList.length == 0 ? `无异常`:`${this.$store.getters.errorLogList.length} 个异常`
+    }
+  },
   data () {
     return {
       user: this.$store.getters.info.userinfo,
@@ -242,10 +249,18 @@ export default {
       font-family: "eras medium itc";
     }
 
-    .bug {
+    .bug-t {
       width: 24px!important; 
       height: 24px!important; 
       color: red;
+      vertical-align: middle;
+      cursor: pointer;
+    }
+
+    .bug-f {
+      width: 24px !important; 
+      height: 24px !important; 
+      color: rgba(0, 0, 0, .5);
       vertical-align: middle;
     }
 
@@ -253,5 +268,13 @@ export default {
       height: 50px !important;
       line-height: 50px !important;
     }
+
+    .el-badge__content.is-fixed {
+      top:14px !important;
+      line-height: 14px !important; 
+      padding: 0px 3px !important; 
+      cursor: pointer;
+    }
+   
   }
 </style>

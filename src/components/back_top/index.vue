@@ -14,7 +14,6 @@
 
 <script>
 /**
- * @author xu
  * @description 回到顶部
  */
 export default {

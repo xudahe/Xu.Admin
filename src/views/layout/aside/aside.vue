@@ -64,7 +64,7 @@ export default {
       });
     },
     changeScreen() {
-      this.$router.push({ path: "/bigScreen" });
+      this.$router.push({ path: "/platform" });
     }
   }
 };

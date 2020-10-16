@@ -2,7 +2,6 @@
 import axios from 'axios'
 import { Loading, Message } from 'element-ui'
 /**
- * @author xu
  * @description 下载文件
  * @param {String} url 下载路径
  * @param {String} fileName 文件名称

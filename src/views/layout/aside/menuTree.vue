@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="menu-bug-warp">
       <template v-for="(item,index) in menuData" v-if="!item.enabled">
         <el-submenu v-if="item.children.length > 0" :index="index+''" :key="index">
           <template slot="title">

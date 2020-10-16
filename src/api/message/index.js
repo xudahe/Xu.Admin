@@ -1,7 +1,6 @@
 import { Message, MessageBox, Notification } from 'element-ui'
 
 /**
- * @author xu
  * @description 提示
  * @param {String} msg 
  */
@@ -49,7 +48,6 @@ const showMsgBox = ({ title, msg, isHTML, type, iconClass }) => {
 }
 
 /**
- * @author xu
  * @description 成功通知
  * @param {String} msg 通知内容
  * @param {String} title 通知标题
@@ -64,7 +62,6 @@ const successTip = ({ title, msg }) => {
 }
 
 /**
- * @author xu
  * @description 警告通知
  * @param {String} msg 通知内容
  * @param {String} title 通知标题
@@ -79,7 +76,6 @@ const warnTip = ({ title, msg }) => {
 }
 
 /**
- * @author xu
  * @description 错误通知
  * @param {String} msg 通知内容
  * @param {String} title 通知标题

@@ -7,6 +7,7 @@ import Layout from "@/views/layout/index"
 import BigScreen from "@/components/bigScreen/view/home"
 import homePage from "@/components/bigScreen/view/homePage"
 import application from "@/components/bigScreen/view/application"
+import platform from "@/components/bigScreen/view/platform"
 
 //使用动态的import()语法,不是必须加载的组件使用懒加载
 const
@@ -118,6 +119,13 @@ let defaultRouter = [
     path: "/500",
     name:"500",
     component: Error_500,
+    children: []
+  },
+  {
+    path: '/platform',
+    name: 'platform',
+    hidden: true,
+    component: platform,
     children: []
   },
   {

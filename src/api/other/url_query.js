@@ -1,5 +1,4 @@
 /**
- * @author xu
  * @description 获取url后的参数
  * @param { url } 传入的url，默认为空
  * @returns { Object }

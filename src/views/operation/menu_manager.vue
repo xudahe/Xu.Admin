@@ -211,7 +211,7 @@ export default {
         disable(row){
           let _this = this;
           this.$showMsgBox({
-            msg: `<p>是否${row.enabled ? `启用`:`禁用` + `【` + row.menuName}】菜单?</p>`,
+            msg: `<p>是否${row.enabled ? `启用`:`禁用`}【${row.menuName}】菜单?</p>`,
             type: 'warning',
             isHTML: true
           }).then(() => {

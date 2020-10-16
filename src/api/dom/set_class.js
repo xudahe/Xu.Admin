@@ -1,5 +1,4 @@
 /**
- * @author xu
  * @description 添加类
  * @param {DOM} element 
  * @param {String} name 

@@ -9,11 +9,11 @@
       </transition-group>
     </div>
     <ul v-show="this.rightMenuShow" :style="{left:this.left+'px',top:this.top+'px'}" class="menuBox">
-      <li @click="removeTab($store.getters.rightNav)">关闭</li>
-      <li @click="removeLeftTab($store.getters.rightNav)">关闭左侧</li>
-      <li @click="removeRightTab($store.getters.rightNav)">关闭右侧</li>
-      <li @click="removeOtherTab($store.getters.rightNav)">关闭其他</li>
-      <li @click="removeAllTab">全部关闭</li>
+      <li @click="removeTab($store.getters.openNav)">关闭</li>
+      <li @click="removeLeftTab($store.getters.openNav)">关闭左侧</li>
+      <li @click="removeRightTab($store.getters.openNav)">关闭右侧</li>
+      <li @click="removeOtherTab($store.getters.openNav)">关闭其他</li>
+      <li @click="removeAllTab">关闭全部</li>
     </ul>
   </div>
 </template>

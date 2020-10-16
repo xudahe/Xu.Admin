@@ -1,7 +1,4 @@
 /**
- * Created by WebStorm.
- * User: nirongxu
- * Date: 2020/4/15
  * Description: 全局工具方法
  */
 
@@ -100,6 +97,31 @@ export function transverterMss (result) {
   var m = Math.floor((result / 60 % 60)) < 10 ? "0" + Math.floor((result / 60 % 60)) : Math.floor((result / 60 % 60))
   var s = Math.floor((result % 60)) < 10 ? "0" + Math.floor((result % 60)) : Math.floor((result % 60))
   return h + ":" + m + ":" + s
+}
+
+//时间差
+export function dateDiff (stime, etime) {
+  var begin = new Date(stime);
+  var end = new Date(etime);
+  //时间相差毫秒数
+  var span = end.getTime() - begin.getTime();
+  //计算相差天数
+  var result = '';
+  var days = Math.floor(span / (24 * 3600 * 1000));
+  result += days + '天';
+  //相差小时数
+  var leave1 = span % (24 * 3600 * 1000);
+  var hours = Math.floor(leave1 / (3600 * 1000))
+  result += hours + '时';
+  //相差分钟
+  var leave2 = leave1 % (3600 * 1000)
+  var minutes = Math.floor(leave2 / (60 * 1000));
+  result += minutes + '分';
+  //相差秒
+  var level3 = leave2 % (60 * 1000)
+  var seconds = Math.round(level3 / 1000);
+  result += seconds + '秒';
+  return result; //0天10时4分50秒
 }
 
 // 获取日期时间戳

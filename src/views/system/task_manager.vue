@@ -149,9 +149,9 @@ export default {
               label: '操作',
               width: '240',
               options: [
-                { label: '编辑', type: 'primary', icon: '', methods: 'handleEdit' },
-                { label: '删除', type: 'danger', icon: '', methods: 'handleDelete' },
-                { label: '日志', type: 'info', icon: '', methods: 'handleHistory' },
+                { label: '', type: 'primary', icon: 'el-icon-edit', methods: 'handleEdit' },
+                { label: '', type: 'danger', icon: 'el-icon-delete', methods: 'handleDelete' },
+                { label: '', type: 'info', icon: 'el-icon-document', methods: 'handleHistory' },
               ]
             },
 
@@ -166,7 +166,7 @@ export default {
             formRules: {
                 jobName: [{ required: true, message: '任务名称必填', trigger: 'blur' }],
                 jobGroup: [{ required: true, message: '任务分组必填', trigger: 'blur' }],
-                cron: [{ required: true, message: '间隔(Cron)必填', trigger: 'blur' }],
+                cron: [{ required: true, message: 'Cron表达式必填', trigger: 'blur' }],
                 intervalSecond: [{ required: true, message: '执行间隔时间必填', trigger: 'blur' }],
                 triggerType: [{ required: true, message: '触发器类型', trigger: 'blur' }],
             },

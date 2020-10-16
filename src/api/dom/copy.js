@@ -1,5 +1,4 @@
 /**
- * @author xu
  * @description 复制文本
  * @param {DOM | String} obj   要复制的DOM元素文本或纯文本
  * @returns {Promise}

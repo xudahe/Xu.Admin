@@ -43,7 +43,7 @@ export default {
     // border-bottom: 2px solid #57a3f3;
     > span {
       position: relative;
-      top: 2px;
+      // top: 2px;
     }
   }
   .content {

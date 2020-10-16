@@ -1,7 +1,7 @@
 <template>
   <section>
     <el-row :gutter="10">
-      <el-col :sm="24" :md="18">
+      <el-col :sm="24" :md="19">
         <el-card class="box-card" shadow="hover">
           <!--工具条-->
           <v-header icon="md-podium" text="角色列表">
@@ -18,12 +18,12 @@
           <e-table :table-data="tableData" :table-label="tableLabel" :table-option="tableOption" :now-page="nowPage" :now-size="nowSize" @handleRowClick="handleRowClick"  @handleButton="handleButton" @handleSelectionChange="handleSelectionChange"></e-table>
         </el-card>
       </el-col>
-      <el-col :sm="24" :md="6">
+      <el-col :sm="24" :md="5">
         <el-card class="box-card card-gutter-sm" shadow="hover">
           <div slot="header" class="clearfix">
             <span class="header">{{sels.roleName}}&nbsp;--&nbsp;菜单分配</span>
             <el-button type="primary" style="float: right; padding: 5px 10px" :disabled="!showButton" @click.native="saveMenu">
-              <i class="el-icon-check el-icon--left"></i>保存
+              <i class="el-icon-check el-icon--left" style="margin-right:0px;"></i>
             </el-button>
           </div>
           <div class="tree-box"> 
@@ -215,7 +215,7 @@ export default {
         disable(row){
           let _this = this;
           this.$showMsgBox({
-            msg: `<p>是否${row.enabled ? `启用`:`禁用` + `【` + row.roleName}】角色?</p>`,
+            msg: `<p>是否${row.enabled ? `启用`:`禁用`}【${row.roleName}】角色?</p>`,
             type: 'warning',
             isHTML: true
           }).then(() => {
@@ -268,7 +268,7 @@ export default {
         },
         // 初始化菜单选中
         initialMenuCheck(item) {
-          this.menuIds = item.menuIds.split(',')
+          this.menuIds = item.menuIds != '' ? item.menuIds.split(','):[]
         },
         //菜单绑定
         saveMenu() {

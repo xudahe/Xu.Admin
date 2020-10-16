@@ -21,7 +21,7 @@
           :prop="item.param" 
           :sortable="item.sortable ? 'custom' : false">
             <template slot-scope="scope">
-              
+    
               <template  v-if="item.render">
                 <ex-slot :render="item.render" :row="scope.row" :index="scope.$index" :column="item" ></ex-slot>
               </template>
@@ -34,10 +34,6 @@
                   </template>
               </template>
 
-              <!-- <span v-if="item.render">
-                {{item.render(scope.row)}}
-              </span>
-              <span v-else>{{scope.row[item.param]}}</span> -->
             </template>
         </el-table-column>
       </template>

@@ -37,7 +37,7 @@ export default {
         return {
             loadName: '登录',
             timeCode: null,
-            timeCount: 60,
+            timeCount: 60, //验证码刷新时间
             timeSum: 0,
             identifyCode:"",
             identifyCodes: [0,1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R',
@@ -46,7 +46,7 @@ export default {
             logining: false,
             loginForm: {
                 username: 'admin',
-                password: '123456',
+                password: '111111',
                 code:''
             },
             rules: {
@@ -63,9 +63,10 @@ export default {
         refreshCode () {
             this.timeSum = this.timeCount;
             this.identifyCode = ''
-            for (let i = 0; i < 5; i++) {
+            for (let i = 0; i < 4; i++) {
                 this.identifyCode += this.identifyCodes[this.randomNum(0, this.identifyCodes.length)]
             }
+            console.log(this.identifyCode)
         },
         setRefreshCode(){
             window.clearInterval(this.timeCode)

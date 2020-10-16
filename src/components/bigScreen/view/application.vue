@@ -325,7 +325,7 @@
     width: 100%;
     height: calc(100% - 0.6rem);
     position: relative;
-    padding: 0.1rem;
+    padding: 0.05rem;
 
     .appMenu{
       width: 1.6rem;

@@ -140,7 +140,7 @@ export default {
 </script>
 
 <style scoped>
-.name {
+.xa-popup .popup>.title>.name {
   text-align: left;
   margin-left: 10px;
   line-height: 35px;

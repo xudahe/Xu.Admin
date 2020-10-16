@@ -180,7 +180,7 @@ export function isQQ(value) {
     return /^[1-9][0-9]{4,12}$/.test(value.toString());
 }
 
-
+// 校验是否为 数字
 export function isNum(value,floats=null){
     let regexp = new RegExp(`^[1-9][0-9]*.[0-9]{${floats}}$|^0.[0-9]{${floats}}$`);
     return typeof value === 'number' && floats?regexp.test(String(value)):true;

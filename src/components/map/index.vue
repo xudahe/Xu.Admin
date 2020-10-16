@@ -29,7 +29,7 @@
 .searchbox {
   position: absolute;
   top: 0px;
-  left: 560px;
+  padding-left: 5px;
 }
 
 .esriPopupHidden {
@@ -85,11 +85,16 @@
             <i class="fa fa-bookmark-o"></i>
           </Button>
         </Tooltip>
-        </Tooltip>
         <Tooltip content="图层管理">
           <Button @click='toolbar("layermanage")'>
             <i class="fa fa-map-o"></i>
           </Button>
+        </Tooltip>
+        <Tooltip content="快速定位" class="searchbox" :disabled="!queryAuto">
+          <Button @click='queryAuto = !queryAuto' v-show='queryAuto'>
+            <i class="fa fa-search"></i>
+          </Button>
+          <Input v-model="queryValue" search enter-button placeholder="请输入定位关键字" v-show='!queryAuto' @on-search='searchhandle' style="width: 200px"/>
         </Tooltip>
       </Button-group>
     </div>
@@ -132,6 +137,9 @@ export default {
       numb: 0,
       isshow: true,
       info: '展开工具栏',
+      queryData: [],
+      queryValue: '',
+      queryAuto: true,
     
       current_com: '',
       current_ref: '',
@@ -139,6 +147,9 @@ export default {
     }
   },
   methods: {
+    searchhandle(){
+      console.log(this.queryValue)
+    },
     //加载图层
     createMap() {
       var _this = this;

@@ -3,6 +3,7 @@
     
     <el-button @click.native="showdialog1">弹出框</el-button>
     <el-button @click.native="showdialog2">弹出框</el-button>
+    <el-button @click.native="button1">打印</el-button>
     <v-dialog  ref="dialog" v-model="dialog.show" :title="dialog.title" :buttons="dialog.buttons" :bodyshow="dialog.bodyshow" >
 		<div style="height: 300px;">
 		    <echarts :options="options" @hook:updated="handleEchartUpdated"></echarts>
@@ -203,6 +204,9 @@ export default {
         this.showDialog = true
         this.$store.state.drag_com = "handsontable"
         this.$store.state.drag_ref = "handsontable"
+    },
+    button1(){
+        this.$print();
     },
     handleEchartUpdated(){
         console.log('echarts组件的updated钩子函数被触发')

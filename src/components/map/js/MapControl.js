@@ -546,63 +546,6 @@ MapControl.bzShowGeometry = function(geometryl) {
     });
 };
 
-
-MapControl.setMapClearNew = function(value) {
-    // if (value !== undefined) {
-    // MapControl.graphicLayers['gralyr3'].clear();
-    // } else {
-    if (MapControl.graphicLayers['gralyr1'] != undefined)
-        MapControl.graphicLayers['gralyr1'].clear();
-    if (MapControl.graphicLayers['gralyr2'] != undefined)
-        MapControl.graphicLayers['gralyr2'].clear();
-    if (MapControl.graphicLayers['gralyr3'] != undefined)
-        MapControl.graphicLayers['gralyr3'].clear();
-    if (MapControl.graphicLayers['gralyr4'] != undefined)
-        MapControl.graphicLayers['gralyr4'].clear();
-    if (MapControl.graphicLayers['gralyr5'] != undefined)
-        MapControl.graphicLayers['gralyr5'].clear();
-    // }
-    // MapControl.graphicLayers['MyGraphicsLayerMapOutput01FWZT'].clear();
-    // }
-
-    if (MapControl.map[MapControl.mapId] && MapControl.map[MapControl.mapId].graphics != undefined) {
-        MapControl.map[MapControl.mapId].graphics.clear();
-    }
-
-    if (doSpaceDrawEventHandler !== undefined) {
-        doSpaceDrawEventHandler.remove();
-    }
-    if (domapOnclickEventHandler !== undefined) {
-        domapOnclickEventHandler.remove();
-    }
-    if (doAttMapDrawEventHandler !== undefined) {
-        doAttMapDrawEventHandler.remove();
-    }
-    if (doMeasureEventHandler !== undefined) {
-        doMeasureEventHandler.remove();
-    }
-    if (doLengthsCompleteHandler !== undefined) {
-        doLengthsCompleteHandler.remove();
-    }
-    if (doAreasAndLengthsCompleteHandler !== undefined) {
-        doAreasAndLengthsCompleteHandler.remove();
-    }
-    let toolbar = MapControl.drawToolbar[MapControl.mapId];
-    if (toolbar) {
-        toolbar.deactivate();
-    }
-    let editbar = MapControl.editToolbar[MapControl.mapId];
-    if (editbar) {
-        editbar.deactivate();
-    }
-    let map = MapControl.map[MapControl.mapId];
-    if (map) {
-
-        map.infoWindow.hide();
-    }
-};
-
-
 /**
  *地图绘制
  */
@@ -1155,6 +1098,46 @@ MapControl.addGraphic = function($graphic, att) {
     if (att != undefined) gra.setAttributes(att);
     MapControl.graphicLayers[$graphic.layer].add(gra);
 };
+
+//添加气球标注(X,Y)文字标注偏移量（默认可以认为是0,13）
+MapControl.GetTxtSymbols = function (geo, num, X, Y, color, attrdata) {
+
+    var symbol = "";
+   
+    var iconPath =
+      'M21.4,10.75C21.4,13.8596180857762 20.0672757983134,16.6579617557165 17.9418493492401,18.6050090555209 17.0443221066919,19.427210169498 16.4687497071909,20.1972502374357 15.4999997246083,21.0410002473414 15.1788168986504,21.3207401363281 14.6249997403403,21.947250257981 13.7499997560722,23.3847502748576 13.3436019926217,24.0524037632258 12.876040684451,24.9010880896574 12.4687497791082,25.666000300437 11.1874998021442,28.0722503285736 11.4538843799389,31.2910003676782 10.6874998111339,31.2910003676782 9.9311690792195,31.2910003676782 10.062499822371,28.2910003311315 8.96874984203587,25.7597503015333 8.58471596323839,24.8709861556588 8.03709726822865,23.8066075530583 7.56249986731934,23.1035002715558 6.71874988248939,21.8535002568804 6.01878656603682,21.3001083190566 5.71874990046874,21.0097502469744 4.74999991788621,20.0722502359682 4.15562035443328,19.2270786136257 3.17966875598971,18.2408347051012 1.27570825337479,16.3167951822706 0.0999999999999996,13.670698279192 0.0999999999999996,10.75 0.0999999999999996,4.86816741430205 4.86816741430205,0.0999999999999996 10.75,0.0999999999999996 16.631832585698,0.0999999999999996 21.4,4.86816741430205 21.4,10.75z';
+    var system = new esri.symbol.SimpleMarkerSymbol();
+    system.setPath(iconPath);
+    system.setSize(size != undefined ? size : 25);
+    system.setColor(new esri.Color(attrdata != undefined ? color : '#ff0000'));
+    system.setOffset(0, 15);
+  
+    symbol = new esri.symbol.SimpleLineSymbol(
+      esri.symbol.SimpleLineSymbol.STYLE_NULL,
+      new dojo.Color([255, 0, 0]),
+      0
+    );
+    system.setOutline(symbol);
+  
+    var graphic = new esri.Graphic(geo, system);
+    graphic.setAttributes(attrdata);
+    MapControl.graphicLayers['gralyr2'].add(graphic);
+
+    var txtSym = new esri.symbol.TextSymbol();
+    txtSym.setAlign(esri.symbol.TextSymbol.ALIGN_MIDDLE);
+    txtSym.setText(num.toString());
+    txtSym.setColor(new esri.Color(color)); //"#f7f7f7"
+    txtSym.setOffset(X, Y);
+    var font = new esri.symbol.Font();
+    font.setSize('12px');
+    font.setWeight(esri.symbol.Font.WEIGHT_BOLD);
+    font.setFamily('微软雅黑');
+    txtSym.setFont(font);
+    var graphic1 = new esri.Graphic(geo, txtSym);
+    graphic1.setAttributes(attrdata);
+    MapControl.graphicLayers['gralyr2'].add(graphic1);
+    MapControl.graphicLayers['gralyr2'].redraw()
+  };
 
 //添加标注
 MapControl.addLabel = function(point, content, guid) {

@@ -36,6 +36,8 @@
     "tinymce": "^5.3.2",
     "v-viewer": "^1.5.1",
     "vee-validate": "^2.0.0-rc.25",
+    "video.js": "^7.9.7",
+    "videojs-contrib-hls": "^5.15.0",
     "view-design": "^4.0.2",
     "vue": "^2.5.13",
     "vue-axios": "^2.0.2",

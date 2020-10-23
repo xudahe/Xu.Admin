@@ -47,24 +47,16 @@
 					<div slot="header" class="clearfix"><span class="header">基本信息</span></div>
 					<el-tabs>
 						<el-tab-pane label="基本资料">
-              <keep-alive>
 					   		<Basic @updateUserInfo="updateUserInfo" />
-              </keep-alive>
 						</el-tab-pane>
 						<el-tab-pane label="修改邮箱">
-              <keep-alive>
 						   	<editEmail @updateUserInfo="updateUserInfo" />
-              </keep-alive>
 						</el-tab-pane>
 						<el-tab-pane label="修改密码">
-              <keep-alive>
 					   		<editPassword />
-              </keep-alive>
 						</el-tab-pane>
 						<el-tab-pane label="操作日志">
-              <keep-alive>
-					   		<Table />
-              </keep-alive>
+					   		<logTable />
 						</el-tab-pane>
 					</el-tabs>
 				</el-card>
@@ -81,11 +73,11 @@
 import Basic from './components/basic'
 import editPassword from './components/edit_password';
 import editEmail from './components/edit_email';
-import Table from './components/log_table';
+import logTable from './components/log_table';
 
 export default {
 	name: 'personal',
-	components: { Basic, editPassword, editEmail, Table },
+	components: { Basic, editPassword, editEmail, logTable },
     data() {
       return {
         activeName: "first",

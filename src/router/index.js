@@ -4,7 +4,7 @@ Vue.use(Router)
 
 import Login from "@/views/login/index"
 import Layout from "@/views/layout/index"
-import BigScreen from "@/components/bigScreen/view/home"
+import bigScreen from "@/components/bigScreen/view/home"
 import homePage from "@/components/bigScreen/view/homePage"
 import application from "@/components/bigScreen/view/application"
 import platform from "@/components/bigScreen/view/platform"
@@ -99,7 +99,8 @@ let defaultRouter = [
         path: "/personal",
         name:"个人中心",
         component: personal,
-        children: []
+        children: [],
+        // keepAlive: true,  //缓存页面，也可使用<keep-alive></keep-alive>
       }
     ]
   },
@@ -135,7 +136,7 @@ let defaultRouter = [
       title: "大屏"
     },
     hidden: true,
-    component: BigScreen,
+    component: bigScreen,
     children: [
       {
         path: '/homePage',

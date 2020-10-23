@@ -83,7 +83,6 @@ export default {
           return (this.imgList.length*this.imgWidth)+'px';
         },
         slateX(){
-        //    console.log('translate3d('+(-this.imgIndex*this.imgWidth)+'px,0,0)')
            return 'translate3d('+(-this.imgIndex*this.imgWidth)+'px,0,0)'
         },
         transitionConfig(){
@@ -170,7 +169,7 @@ export default {
 #swiper{
     position: relative;
     overflow: hidden;
-    width: 600px;
+    width: 100%;
     height: 300px;
     background: #fff;
 

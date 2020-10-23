@@ -1,7 +1,7 @@
 <template>
   <section>
-    <el-row :gutter="10">
-      <el-col :sm="24" :md="19">
+    <el-row :gutter="10" style="height:100%;">
+      <el-col :sm="24" :md="19" style="height:100%;">
         <el-card class="box-card" shadow="hover">
           <!--工具条-->
           <v-header icon="md-podium" text="角色列表">
@@ -18,7 +18,7 @@
           <e-table :table-data="tableData" :table-label="tableLabel" :table-option="tableOption" :now-page="nowPage" :now-size="nowSize" @handleRowClick="handleRowClick"  @handleButton="handleButton" @handleSelectionChange="handleSelectionChange"></e-table>
         </el-card>
       </el-col>
-      <el-col :sm="24" :md="5">
+      <el-col :sm="24" :md="5" style="height:100%;">
         <el-card class="box-card card-gutter-sm" shadow="hover">
           <div slot="header" class="clearfix">
             <span class="header">{{sels.roleName}}&nbsp;--&nbsp;菜单分配</span>

@@ -8,6 +8,10 @@
         font-style: normal;
     }
 
+    html, body {
+        height: 100%;
+    }
+
     /*滚动条凹槽的颜色，还可以设置边框属性 */
     ::-webkit-scrollbar-track-piece {
         background: transparent;

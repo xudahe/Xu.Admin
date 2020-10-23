@@ -122,7 +122,7 @@ export default {
     return {
       currentPage: this.nowPage,
       pageSize: this.nowSize,
-      tableHeight: 350,
+      tableHeight: 310,
     }
   },
   computed:{

@@ -25,15 +25,6 @@ export default {
 		//   document.getElementById("app").style.height = window.innerHeight + "px";
     // });
 
-    // if (window.sessionStorage.getItem("Token")) {
-    //   var currentPath = window.location.hash.slice(1);
-    //   if (this.$route.path !== currentPath && currentPath.indexOf("id") < 0) {
-    //     this.$router.push(currentPath);
-    //   } else {
-    //     this.$router.push({name: "login"});
-    //   }
-    // }
-
     function checkIE() {
       return (
         "-ms-scroll-limit" in document.documentElement.style &&
@@ -70,4 +61,8 @@ export default {
 
 
 <style lang="scss">
+  #app {
+    height: 100%;
+    width: 100%;
+  }
 </style>

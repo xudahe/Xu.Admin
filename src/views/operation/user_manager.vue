@@ -1,7 +1,7 @@
 <template>
     <section>
-        <el-row :gutter="10">
-           <el-col :sm="24" :md="19">
+        <el-row :gutter="10" style="height:100%;">
+            <el-col :sm="24" :md="19" style="height:100%;">
                 <el-card class="box-card" shadow="hover">
                     <!--工具条-->
                     <v-header icon="md-podium" text="用户列表">
@@ -13,7 +13,7 @@
                         <el-button type="primary" icon="el-icon-search" circle @click.native="getData"></el-button>
                         <el-button type="primary" icon="el-icon-plus" circle @click.native="handleAdd"></el-button>
                         <el-dropdown style="margin-left:5px;">
-                          <el-button>
+                          <el-button type="primary">
                             更多<i class="el-icon-arrow-down el-icon--right"></i>
                           </el-button>
                           <el-dropdown-menu slot="dropdown">
@@ -28,7 +28,7 @@
                     <e-table :table-data="tableData" :table-label="tableLabel" :table-option="tableOption" :now-page="nowPage" :now-size="nowSize" @handleRowClick="handleRowClick" @handleButton="handleButton" @handleSelectionChange="handleSelectionChange"></e-table>
                 </el-card>
             </el-col>
-            <el-col :sm="24" :md="5">
+            <el-col :sm="24" :md="5" style="height:100%;">
                 <el-card class="box-card card-gutter-sm" shadow="hover">
                   <div slot="header" class="clearfix">
                     <span class="header">{{sels.loginName}}&nbsp;--&nbsp;角色分配</span>

@@ -1,5 +1,5 @@
-﻿/* WKT与arcgis geometry转换
-author: Yuankang 
+﻿/* 
+   WKT与arcgis geometry转换
 */
 
 var WKTUtil = function (options) {

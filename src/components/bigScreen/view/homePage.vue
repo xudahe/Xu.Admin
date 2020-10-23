@@ -122,10 +122,10 @@ export default {
     height: 100% !important;
   }
   @{deep}.ivu-carousel-arrow {
-    background-color: rgb(83, 133, 152) !important;
+    background-color: #2851a2  !important;
   }
   @{deep}.ivu-carousel-arrow :hover {
-    background-color: rgb(83, 133, 152) !important;
+    background-color: #2851a2  !important;
   }
   @{deep}.ivu-carousel-item{
     height: 100% !important;

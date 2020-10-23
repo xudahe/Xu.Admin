@@ -9,6 +9,8 @@ import vueg from 'vueg'
 // Markdown （mavonEditor）编辑器
 import mavonEditor  from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
+// 引入videojs
+import 'video.js/dist/video-js.css'
 // 引入前端错误日志
 import './other/error_log'
 // 引入表单验证
@@ -22,7 +24,7 @@ import '@/icons'
 import './UI/elementUI'
 import './UI/iviewUI'
 // 引入全局样式
-import '@/global/css/elementUI.css'
+import '@/global/css/elementUI.less'
 import '@/global/css/IviewUI.less'
 import '@/api/iconfont/iconfont'
 import 'element-ui/lib/theme-chalk/index.css'

@@ -10,7 +10,9 @@
   </div>
 </template>
 <script>
+import { randomWord } from '../../utils/index.js'
 import echarts from 'echarts'
+
 export default {
     name: "echarts",
     props: {
@@ -24,7 +26,7 @@ export default {
     },
     data() {
       return {
-        randomId: 'echarts-dom'+ Math.random(),
+        randomId: 'echarts'+ randomWord(true,2,4),
         myEcharts: null,
         isOptionAbnormal: false,
         isLoading: false,

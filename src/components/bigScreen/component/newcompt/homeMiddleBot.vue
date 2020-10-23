@@ -125,7 +125,7 @@ export default {
   methods: {
     settimeoutsl() {
       let _this = this;
-      let list = JSON.parse(JSON.stringify(_this.yhList));
+      let list = _this.yhList;
    
       let index = 1;
    

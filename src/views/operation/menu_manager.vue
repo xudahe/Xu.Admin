@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <div class="menu_manager card_css">
     <el-card class="box-card" shadow="hover">
       <!--工具条-->
       <v-header icon="md-podium" text="菜单列表">
@@ -81,7 +81,7 @@
       </div>
     </el-dialog>
     
-  </section>
+  </div>
 </template>
 
 <script>
@@ -319,4 +319,8 @@ export default {
 </script>
 
 <style scoped>
+.menu_manager{
+  height: 100%;
+  widows: 100%;
+}
 </style>

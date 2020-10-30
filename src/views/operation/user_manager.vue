@@ -1,5 +1,5 @@
 <template>
-    <section>
+    <div class="user_manager card_css">
         <el-row :gutter="10" style="height:100%;">
             <el-col :sm="24" :md="19" style="height:100%;">
                 <el-card class="box-card" shadow="hover">
@@ -101,7 +101,7 @@
             </div>
         </el-dialog>
     
-    </section>
+    </div>
 </template>
 
 <script>
@@ -394,5 +394,8 @@ export default {
 </script>
 
 <style scoped>
-
+.user_manager{
+  height: 100%;
+  widows: 100%;
+}
 </style>

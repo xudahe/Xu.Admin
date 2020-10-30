@@ -18,6 +18,7 @@
     "config-yml": "^0.10.3",
     "echarts": "^4.7.0",
     "element-ui": "^2.13.1",
+    "enquire.js": "^2.1.6",
     "es6-promise": "^4.2.8",
     "esri-loader": "^2.9.2",
     "file-saver": "^2.0.2",

@@ -104,6 +104,12 @@ async function getAddRouters () {
               { id:17, menuName: "handsontable", className: "/t-handsontable", icon:"el-icon-edit-outline", enabled:false, children:[]},
               { id:18, menuName: "baseMap", className: "/t-baseMap", icon:"el-icon-edit-outline", enabled:false, children:[]},
             ]
+          },
+          {
+            id:91, menuName: "组件页面", enabled: false, icon: "fa fa-dashboard",
+            children: [
+              { id:19, menuName: "card", className: "/card", icon:"el-icon-edit-outline", enabled:false, children:[]},
+            ]
           }
     ]
   })

@@ -32,9 +32,10 @@ export default {
       );
     }
     if (checkIE()) {
-      window.addEventListener(
-        "hashchange",
-        () => {
+
+      //①当URL的片段标识符更改时，将触发hashchange事件（跟在#符号后面的URL部分，包括#符号）
+      //②hashchange事件触发时，事件对象会有hash改变前的URL（e.oldURL）和hash改变后的URL（e.newURL）两个属性：
+      window.addEventListener("hashchange", (e) => {
           var currentPath = window.location.hash.slice(1);
           if (this.$route.path !== currentPath) {
             this.$router.push(currentPath);
@@ -57,6 +58,17 @@ export default {
 
   }
 };
+
+/**
+ *   （1）window.location.href  得到的是完整的URL
+ *       比如：window.location.href = ' www.baidu.com'
+ *
+ *   （2）window.location.hash  得到的是锚链接
+ *       比如：window.location.hash= ' #all'
+ *
+ *   （3）window.location.search得到的是URL‘？’号后面的字符串部分
+ *       比如：window.location.search= ' ?username=aaa&age=10'
+ */
 </script>
 
 

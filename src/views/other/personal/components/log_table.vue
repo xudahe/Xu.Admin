@@ -1,5 +1,5 @@
 <template>
-    <section>
+    <div class="log_table card_css">
       <el-card class="box-card">
         <!--工具条-->
         <v-header icon="md-podium" text="日志列表">
@@ -14,7 +14,7 @@
         <!--列表-->
         <e-table :table-data="tableData" :table-label="tableLabel" :now-page="nowPage" :now-size="nowSize"></e-table>
       </el-card>
-    </section>
+    </div>
 </template>
 
 <script>
@@ -67,4 +67,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.log_table{
+  height: 100%;
+  widows: 100%;
+}
+</style>

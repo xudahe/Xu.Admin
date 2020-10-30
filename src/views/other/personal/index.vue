@@ -1,5 +1,5 @@
 <template>
-    <section>
+  <div class="personal card_css">
 		<el-row :gutter="10">
 			<el-col :sm="24" :md="6">
 				<el-card class="box-card" shadow="hover">
@@ -63,7 +63,7 @@
 			</el-col>
 		</el-row>
 		<upload-avatar :is-show.sync="isShow" :upload-avatar="uploadAvatar" />
-    </section>
+    </div>
 </template>
 
 <script>
@@ -108,6 +108,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.personal{
+  height: 100%;
+  widows: 100%;
+}
+
 .header {
   position: relative;
   font-size: 0.18rem;

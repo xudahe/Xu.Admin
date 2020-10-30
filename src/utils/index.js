@@ -102,7 +102,7 @@ export function transverterMss (result) {
   return h + ":" + m + ":" + s
 }
 
-//时间差
+//时间差,返回格式：0天10时4分50秒
 export function dateDiff (stime, etime) {
   var begin = new Date(stime);
   var end = new Date(etime);

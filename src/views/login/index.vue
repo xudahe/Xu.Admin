@@ -31,7 +31,7 @@
 
 <script>
 import Cookies from 'js-cookie';
-import { encrypt } from '@/utils/encrypt' //密码加密
+import { encrypt, decrypt } from '@/utils/encrypt' //密码加密
 export default {
     data(){
         return {
@@ -90,7 +90,7 @@ export default {
 				this.loginForm.username = name;
 			}
 			if (psw && psw != undefined) {
-				this.loginForm.password = psw;
+				this.loginForm.password = decrypt(psw);
 				this.checkboxValue = true;
 			}
 			if (name == undefined || psw == undefined) {
@@ -169,8 +169,8 @@ export default {
                         let userinfo = res.data.response;
                         window.localStorage.userInfo = JSON.stringify(userinfo)
                         if (this.checkboxValue == true) {
-							Cookies.set('username', this.loginForm.username);
-							Cookies.set('password', this.loginForm.password);
+							Cookies.set('username', this.loginForm.username, { expires: 7 });
+							Cookies.set('password', encrypt(this.loginForm.password), { expires: 7 });
 						}
                        
                         if (userinfo.id > 0) {

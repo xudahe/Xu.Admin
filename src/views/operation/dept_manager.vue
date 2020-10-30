@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <div class="dept_manager card_css">
     <el-card class="box-card" shadow="hover">
       <!--工具条-->
       <v-header icon="md-podium" text="部门列表">
@@ -57,7 +57,7 @@
       </div>
     </el-dialog>
   
-  </section>
+  </div>
 </template>
 
 <script>
@@ -303,4 +303,8 @@ export default {
 </script>
 
 <style scoped>
+.dept_manager{
+  height: 100%;
+  widows: 100%;
+}
 </style>

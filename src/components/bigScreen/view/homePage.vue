@@ -47,7 +47,6 @@ export default {
         date: '',
         liquidWarn: [],
 
-        timer: null,
         noticeTop: 0, // 公告top值
         isActive: true, // 是否显示transitionTop动画
         wit: 0
@@ -63,7 +62,7 @@ export default {
         let index = 1;
         let list = JSON.parse(JSON.stringify(_this.liquidWarn));
 
-        _this.timer = setInterval(() => {
+        const timer = setInterval(() => {
 
           if ((index - 1) == _this.liquidWarn.length) {
             index = 1;
@@ -82,6 +81,11 @@ export default {
           index++;
 
         }, 5000);
+        
+        // 通过$once来监听定时器，在beforeDestroy钩子可以被清除。
+        this.$once('hook:beforeDestroy', () => {            
+          clearInterval(timer);
+        })
       }
 
     },
@@ -99,9 +103,6 @@ export default {
       let rem = wW * 100 / designSize;
 
       this.wit = 6.4 * rem
-    },
-    beforeDestroy() {
-      clearInterval(this.timer)
     },
     created() {
     }

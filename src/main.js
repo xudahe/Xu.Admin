@@ -68,6 +68,7 @@ Vue.prototype.$store = store
 new Vue({
   el: '#app',
   router,
+  store,
   components: {
     App
   },

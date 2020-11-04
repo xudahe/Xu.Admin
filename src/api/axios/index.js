@@ -10,6 +10,9 @@
 // 方法二： 将序列化的内容拆分成一个个单一的对象
 // qs.parse() 转换成json对象
 
+//Object.assign方法的第一个参数是目标对象，后面的参数都是源对象。
+//注意，如果目标对象与源对象有同名属性，或多个源对象有同名属性，则后面的属性会覆盖前面的属性。
+
 import axios from 'axios' //ajax请求
 import qs from 'qs'
 import Vue from 'vue'

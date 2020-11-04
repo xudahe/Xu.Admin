@@ -154,19 +154,22 @@ export default {
     handleCurrentChange(val) {
       this.initialPage(val.currentPage,val.pageSize);
     },
+    initialTable(){
+      let docm1 = document.getElementsByClassName("el-card")
+      this.tableHeight = docm1 != undefined ? docm1[docm1.length-1].offsetHeight - 105: _this.tableHeight;
+    }
   },
   created(){
     let _this = this;
     
     setTimeout(() => {
-      let docm = document.getElementsByClassName("el-card")
-      _this.tableHeight = docm != undefined ? docm[docm.length-1].offsetHeight - 105: _this.tableHeight;
+      _this.initialTable();
     }, 100);
     
-    window.addEventListener("resize", function() { 
-      let docm1 = document.getElementsByClassName("el-card")
-      _this.tableHeight = docm1 != undefined ? docm1[docm1.length-1].offsetHeight - 105: _this.tableHeight;
-    });
-  }
+    window.addEventListener("resize", this.initialTable);
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.initialTable);
+  },
 }
 </script>

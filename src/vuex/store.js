@@ -36,7 +36,7 @@ const store=new Vuex.Store({
         user,
         error
     },
-    // 执行异步操作改变state   this.$store.dispatch("saveToken", data);
+    // 执行异步操作，但不能直接改变state   this.$store.dispatch("saveToken", data);
     actions: {
         saveToken ({commit}, token) {
           return new Promise((resolve, reject) => {
@@ -45,6 +45,8 @@ const store=new Vuex.Store({
           })
         }
     },
+    // Getters相当于vue中的computed计算属性，getter的返回值根据它的依赖被缓存起来，且只有当它的依赖值发生改变时才会重新计算。
+    // Getters可以用于监听，state中的值的变化，返回计算后的结果。
     getters: {
         token: state => state.token,
         addRouters: state => state.router.addRouters,
@@ -53,7 +55,7 @@ const store=new Vuex.Store({
         isCollapse: state => state.layout.isCollapse,
         uniquerouter: state => state.layout.uniquerouter,
         tabnavBox: state => state.layout.tabnavBox,
-        openNav: state => state.layout.openNav, //当前打开tab
+        openNav: state => state.layout.openNav, //当前打开tab面包屑
         errorLogList: state => state.error.errorLogList,
       },
 })

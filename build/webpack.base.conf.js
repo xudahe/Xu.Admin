@@ -13,7 +13,7 @@ function resolve(dir) {
 
 module.exports = {
   context: path.resolve(__dirname, '../'),
-  entry: ['babel-polyfill', './src/main.js'], // 编译文件入口
+  entry: ['babel-polyfill', './src/main.js'], // 编译文件入口,它将是整个依赖关系的根
   // entry: {
   //   app: './src/main.js' 
   // },
@@ -42,7 +42,7 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        loader: 'babel-loader',
+        loader: 'babel-loader', // 让下一代的js文件转换成现代浏览器能够支持的JS文件。
         include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
       },
       {

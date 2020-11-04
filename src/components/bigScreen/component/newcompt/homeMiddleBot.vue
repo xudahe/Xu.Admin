@@ -104,9 +104,6 @@ export default {
         {id:6,name:'测试数据8'},
       ],
 
-      timersb: null,
-      timerxl: null,
-
       timerrt: null,
  
       isActivesb: true,// 是否显示transitionTop动画
@@ -129,7 +126,7 @@ export default {
    
       let index = 1;
    
-      _this.timersb = setInterval(() => {
+      const timersb = setInterval(() => {
         if (index > _this.yhList.length) {
           index = 1;
         }
@@ -153,57 +150,58 @@ export default {
         index++;
         
       }, 5000);
+      
+      // 通过$once来监听定时器，在beforeDestroy钩子可以被清除。
+      this.$once('hook:beforeDestroy', () => {            
+        clearInterval(timersb);                                    
+      })
 
     },
     settimeoutsr(){
       let _this = this
 
-      	let wid = document.body.clientWidth; //屏幕宽度
-		  	_this.tempWid = wid * (8 / 24) * 0.9 - 30 - 35 - 10 - 35;
+      let wid = document.body.clientWidth; //屏幕宽度
+		  _this.tempWid = wid * (8 / 24) * 0.9 - 30 - 35 - 10 - 35;
+      
+			let index = 1,list = this.noticeList;
+			const timerrt = setInterval(() => {
+				if ((index - 1) == list.length) {
+					index = 1;
+        }
         
-				let index = 1,list = this.noticeList;
-				_this.timerrt = setInterval(() => {
-
-					if ((index - 1) == list.length) {
-						index = 1;
-					}
-					let dom = document.getElementsByClassName('carousel_DivList');
-
+				let dom = document.getElementsByClassName('carousel_DivList');
+				for (let i = 0; i < dom.length; i++) {
+					dom[i].classList.remove('activeList')
+				}
+				if (dom.length > 0) {
+					let wid = dom[0].offsetWidth;
+					_this.noticeRight = -wid;
+					dom[0].classList.add('activeList')
+        }
+        
+				_this.noticeList.push(list[(index - 1)]);
+				_this.isActive = true;
+				setTimeout(function() {
+					_this.isActive = false;
+					_this.noticeRight = 0;
+					_this.noticeList.splice(0, 1);
 					for (let i = 0; i < dom.length; i++) {
 						dom[i].classList.remove('activeList')
 					}
-					if (dom.length > 0) {
-						let wid = dom[0].offsetWidth;
-						_this.noticeRight = -wid;
-						dom[0].classList.add('activeList')
-					}
-
-					_this.noticeList.push(list[(index - 1)]);
-					_this.isActive = true;
-
-					setTimeout(function() {
-						_this.isActive = false;
-						_this.noticeRight = 0;
-						_this.noticeList.splice(0, 1);
-						for (let i = 0; i < dom.length; i++) {
-							dom[i].classList.remove('activeList')
-						}
-					}, 2500)
-					index++;
-
-				}, 5000);
+				}, 2500)
+				index++;
+			}, 5000);
+     
+      // 通过$once来监听定时器，在beforeDestroy钩子可以被清除。
+      this.$once('hook:beforeDestroy', () => {            
+        clearInterval(timerrt);                                    
+      })
     },
   },
   mounted() {
     var _this = this;
     this.settimeoutsl();
     this.settimeoutsr();
-  },
-  beforeDestroy() {
-    clearInterval(this.timersb);
-    clearTimeout(this.timerxl);
-    
-    clearInterval(this.timerrt);
   },
 };
 </script>

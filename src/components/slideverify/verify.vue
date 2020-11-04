@@ -55,6 +55,7 @@ export default {
       if (typeof document.ontouchstart == "object") {
         boxEven = ["touchstart", "touchmove", "touchend"];
       }
+      var goX, offsetLeft, deviation, evenWidth, endX;
       
       function handel(e) {
         e = boxEven["0"] == "touchstart" ? e.touches[0] : e || window.event;
@@ -66,8 +67,7 @@ export default {
         document.addEventListener(boxEven["1"], moveFn, false);
         document.addEventListener(boxEven["2"], removeFn, false);
       }
-
-      var goX, offsetLeft, deviation, evenWidth, endX;
+      
       function moveFn(e) {
         e.preventDefault();
         e = boxEven["0"] == "touchstart" ? e.touches[0] : e || window.event;

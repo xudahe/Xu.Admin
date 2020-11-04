@@ -13,7 +13,6 @@ export default {
   data() {
     return {
       date: new Date(), //实时时间
-      timeId: null,
     };
   },
   methods: {
@@ -23,18 +22,18 @@ export default {
     
   },
   mounted() {
-    //创建定时器更新最新的时间
+    // 创建定时器更新最新的时间
     var _this = this;
-    this.timeId = setInterval(function() {
+    const timer = setInterval(function() {
       _this.date = _this.$formatDate(new Date(), true);
     }, 1000);
+
+    // 通过$once来监听定时器，在beforeDestroy钩子可以被清除。
+    this.$once('hook:beforeDestroy', () => {
+      clearInterval(timer);
+    })
+
   },
-  beforeDestroy: function() {
-    //实例销毁前青出于定时器
-    if (this.timeId) {
-      clearInterval(this.timeId);
-    }
-  }
 };
 </script>
 <style lang="scss" scoped>

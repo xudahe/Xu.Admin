@@ -265,7 +265,10 @@ export default {
     beforeDestroy(){
         document.onkeydown = undefined;
         window.clearInterval(this.timeCode)
-    }
+    },
+    destroyed() {
+        window.clearInterval(this.timeCode)
+    },
 };
 </script>
 

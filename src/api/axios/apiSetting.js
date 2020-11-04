@@ -11,115 +11,115 @@ const LoginModule = {
 
 const UserModule = {
   getUserByToken: { //根据Token获取用户信息
-    url: '/api/User/GetInfoByToken',
+    url: '/api/User/GetUserByToken',
     method: 'get'
   },
   getUserInfo: { //获取用户数据
-    url: '/api/User/Get',
+    url: '/api/User/GetUser',
     method: 'get'
   }, 
   postUser: { //添加用户
-    url: '/api/User/Post',
+    url: '/api/User/PostUser',
     method: 'post'
   },
   putUser: { //更新用户
-    url: '/api/User/Put',
+    url: '/api/User/PutUser',
     method: 'put'
   },
   disableUser: { //禁用用户
-    url: '/api/User/Disable',
+    url: '/api/User/DisableUser',
     method: 'delete'
   },
   deleteUesr: { //删除用户
-    url: '/api/User/Delete',
+    url: '/api/User/DeleteUser',
     method: 'delete'
   },
 }
 
 const DeptModule = {
   getDeptInfo: { //获取部门数据
-    url: '/api/Dept/Get',
+    url: '/api/Dept/GetDept',
     method: 'get'
   },
   postDept: { //添加部门
-    url: '/api/Dept/Post',
+    url: '/api/Dept/PostDept',
     method: 'post'
   },
   putDept: { //更新部门
-    url: '/api/Dept/Put',
+    url: '/api/Dept/PutDept',
     method: 'put'
   },
   disableDept: { //禁用部门
-    url: '/api/Dept/Disable',
+    url: '/api/Dept/DisableDept',
     method: 'delete'
   },
   deleteDept: { //删除部门
-    url: '/api/Dept/Delete',
+    url: '/api/Dept/DeleteDept',
     method: 'delete'
   },
 }
 
 const RoleModule = {
   getRoleInfo: { //获取角色数据
-    url: '/api/Role/Get',
+    url: '/api/Role/GetRole',
     method: 'get'
   },
   postRole: { //添加角色
-    url: '/api/Role/Post',
+    url: '/api/Role/PostRole',
     method: 'post'
   },
   putRole: { //更新角色
-    url: '/api/Role/Put',
+    url: '/api/Role/PutRole',
     method: 'put'
   },
   disableRole: { //禁用角色
-    url: '/api/Role/Disable',
+    url: '/api/Role/DisableRole',
     method: 'delete'
   },
   deleteRole: { //删除角色
-    url: '/api/Role/Delete',
+    url: '/api/Role/DeleteRole',
     method: 'delete'
   },
 }
 
 const MenuModule = {
   getMenuInfo: { //获取菜单数据(列表)
-    url: '/api/Menu/Get',
+    url: '/api/Menu/GetMenu',
     method: 'get'
   },
   getMenuByIds: { //根据菜单数据(树状)
-    url: '/api/Menu/GetByIds',
+    url: '/api/Menu/GetMenuByIds',
     method: 'get'
   },
   postMenu: { //添加菜单
-    url: '/api/Menu/Post',
+    url: '/api/Menu/PostMenu',
     method: 'post'
   },
   putMenu: { //更新菜单
-    url: '/api/Menu/Put',
+    url: '/api/Menu/PutMenu',
     method: 'put'
   },
   disableMenu: { //禁用菜单
-    url: '/api/Menu/Disable',
+    url: '/api/Menu/DisableMenu',
     method: 'delete'
   },
   deleteMenu: { //删除菜单
-    url: '/api/Menu/Delete',
+    url: '/api/Menu/DeleteMenu',
     method: 'delete'
   },
 }
 
 const TasksQzModule = {
   getTasksQzInfo: { //获取全部定时任务数据
-    url: '/api/TasksQz/Get',
+    url: '/api/TasksQz/GetTasksQz',
     method: 'get'
   },
   postTasksQz: { //添加定时任务
-    url: '/api/TasksQz/Post',
+    url: '/api/TasksQz/PostTasksQz',
     method: 'post'
   },
   putTasksQz: { //更新定时任务
-    url: '/api/TasksQz/Put',
+    url: '/api/TasksQz/PutTasksQz',
     method: 'put'
   },
   getReCovery: { //重启定时任务
@@ -135,11 +135,11 @@ const TasksQzModule = {
     method: 'get'
   },
   deleteTask: { //删除定时任务
-    url: '/api/TasksQz/Delete',
+    url: '/api/TasksQz/DeleteTasksQz',
     method: 'delete'
   },
   getTasksLog: { //获取任务日志
-    url: '/api/TasksQz/TasksLog',
+    url: '/api/TasksQz/GetTasksLog',
     method: 'get'
   },
 }

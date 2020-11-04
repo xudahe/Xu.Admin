@@ -266,6 +266,9 @@
 		mounted() {
 			let _this = this;
       
+      //通过 $on(eventName, eventHandler) 侦听一个事件
+      //通过 $off(eventName, eventHandler) 停止侦听一个事件
+
       // 返回列表页
 			bus.$off("showLeftMenu");
 			bus.$on("showLeftMenu", function() {
@@ -295,7 +298,7 @@
 				_this.titleBotmName = title;
       });
       
-			// 右侧详情页
+			//右侧详情页
 			bus.$off("rightDetail");
 			bus.$on("rightDetail", function(value, item, title) {
         _this.isDetailDataRight = true;

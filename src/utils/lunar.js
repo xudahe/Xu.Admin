@@ -237,7 +237,6 @@ const nStr2 = ['\u521d', '\u5341', '\u5eff', '\u5345', '\u3000']
 // let monthName = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
 
 /*
-
 var BG_DATA = {
   '立春': 'http://img03.taobaocdn.com/tps/i3/T1JZWnXnJpXXXXXXXX-83-56.jpg',
   '情人节': 'http://img01.taobaocdn.com/tps/i1/T17cynXf0sXXXXXXXX-83-56.jpg',
@@ -608,7 +607,7 @@ export function dateFormat (dateStr, format, options) {
     } else {
       return obj
     }
-  }
+}
 
 //
 //

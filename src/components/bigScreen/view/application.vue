@@ -62,7 +62,7 @@
         <!-- 中间地图部分 -->
 				<div style="position:absolution;float: left;" :style="{height: mapHeight,width: mapWidth}" v-show="isMapShow">
 					<div class="appCompontsContMap scale-in">
-					
+					   <baseMap></baseMap>
 					</div>
 				</div>
 

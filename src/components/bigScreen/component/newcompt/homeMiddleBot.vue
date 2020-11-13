@@ -134,8 +134,8 @@ export default {
         let dom = document.getElementsByClassName("pressureDiv");
         
         if (dom.length > 0) {
-          dom[0].classList.remove("active");
-          dom[0].classList.add("active");
+          dom[0].classList.remove("active-transform");
+          dom[0].classList.add("active-transform");
           _this.noticeTopsb = -dom[0].clientHeight;
         }
 
@@ -145,7 +145,7 @@ export default {
           _this.yhList.splice(0, 1);
           _this.isActivesb = false;
           _this.noticeTopsb = 0;
-          if (dom.length > 0) dom[0].classList.remove("active");
+          if (dom.length > 0) dom[0].classList.remove("active-transform");
         }, 2500);
         index++;
         

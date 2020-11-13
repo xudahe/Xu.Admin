@@ -1,3 +1,7 @@
+/**
+ * @description 使用 window.navigator 可以收集到用户的设备信息，操作系统，浏览器信息...
+ */
+
 /* 判断浏览器类型 */
 var Browser = Browser || (function (window) {
 	var document = window.document,

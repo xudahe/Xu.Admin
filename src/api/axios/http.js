@@ -66,10 +66,20 @@ export default
                 }
                 options.type = options.type?options.type.toUpperCase():'GET';
                 options.async = (options.async && options.async === false)?false:true;
-                options.dataType = options.dataType || "json";
+                options.dataType = options.dataType || "json"; // 解析方式
                 options.data = options.data || {};
                 options.headers = options.headers || {};
-                var dataStr=strData(options.data);
+                var dataStr = strData(options.data);
+                
+                /*
+                ** readyState属性存储有XMLHttpRequest的状态信息
+                ** 0 ：请求未初始化
+                ** 1 ：服务器连接已建立
+                ** 2 ：请求已接受
+                ** 3 : 请求处理中
+                ** 4 ：请求已完成，且相应就绪
+                */
+                
                 /*创建 XMLHttpRequest 对象*/
                 var xhr=createXHR();
                 /*创建服务器返回响应后执行操作函数*/

@@ -11,6 +11,13 @@
     html, body {
         height: 100%;
     }
+    
+    /* chrome设置小于12px字体 */
+    /* span {
+        font-size: 10px;
+        -webkit-transform: scale(0.8);
+        display: block;
+    } */
 
     /*滚动条凹槽的颜色，还可以设置边框属性 */
     ::-webkit-scrollbar-track-piece {
@@ -487,7 +494,7 @@
         transition: left 1000ms ease-in-out;
     }
 
-    .active{
+    .active-transform{
         opacity: 0;
         transform: translate(100%) scale(0);
         transform-origin: 100% 100%;

@@ -9,7 +9,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin') //可以将单个文件
 const HtmlWebpackPlugin = require('html-webpack-plugin') // 一个可以插入 html 并且创建新的 .html 文件的插件
 const ExtractTextPlugin = require('extract-text-webpack-plugin') // 一个 webpack 扩展，可以提取一些代码并且将它们和文件分离开，如果我们想将 webpack 打包成一个文件 css js 分离开，那我们需要这个插件
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin') //一个个优化/最小化css资源的插件
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')  //压缩 js文件
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const env = require('../config/prod.env')
 

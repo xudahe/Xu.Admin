@@ -13,6 +13,11 @@
 //Object.assign方法的第一个参数是目标对象，后面的参数都是源对象。
 //注意，如果目标对象与源对象有同名属性，或多个源对象有同名属性，则后面的属性会覆盖前面的属性。
 
+// Promise有三种状态
+// pending: 等待中，或者进行中，表示还没有得到结果
+// resolved: 已经完成，表示得到了我们想要的结果，可以继续往下执行
+// rejected: 也表示得到结果，但是由于结果并非我们所愿，因此拒绝执(用catch捕获异常)
+
 import axios from 'axios' //ajax请求
 import qs from 'qs'
 import Vue from 'vue'
@@ -101,9 +106,8 @@ axios.interceptors.response.use(response => {
               error.message = '未授权，请重新登录';
               ToLogin()
             }
-           
             break;
-        case 403:
+        case 403: //无权限
             error.message = '拒绝访问';
             break;
         case 404:
@@ -114,6 +118,9 @@ axios.interceptors.response.use(response => {
             break;
         case 408:
             error.message = '请求超时';
+            break;
+        case 429: //ip限流
+            error.message = '刷新次数过多，请稍事休息重试';
             break;
         case 500:
             error.message = '服务器端出错';

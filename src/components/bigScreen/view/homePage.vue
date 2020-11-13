@@ -60,7 +60,7 @@ export default {
             this.liquidWarn.push("<div>天气预报：<span class='liquidWarnRoad'>2020-08-18 多云 27℃ 西北风2到3级!</span></div>")
         }
         let index = 1;
-        let list = JSON.parse(JSON.stringify(_this.liquidWarn));
+        let list = JSON.parse(JSON.stringify(_this.liquidWarn)); //JSON.parse(JSON.stringify(obj))一般用来深拷贝深
 
         const timer = setInterval(() => {
 

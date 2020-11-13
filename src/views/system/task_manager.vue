@@ -344,21 +344,7 @@ export default {
         }).catch(()=>{});
       },
       handleHistory(index, row){
-        let _this = this;
-        this.$ajax(this.$apiSet.getTasksLog, {
-          id: row.id
-        }).then(res => {
-            if (!res.data.success) {
-              _this.$message({
-                message: res.data.message,
-                type: 'error'
-              });
-            } else {
-              let data = res.data.response;
-
-		    		}
-          })
-          .catch(err => {})
+        
       },
     },
     mounted() {

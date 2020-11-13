@@ -63,6 +63,8 @@ export default {
             {title:"某某"},
             {title:"某某"},
             {title:"某某"},
+            {title:"某某"},
+            {title:"某某"},
           ],
         },
 				selectId: -1, //已选择的编号

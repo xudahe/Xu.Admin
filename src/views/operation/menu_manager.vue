@@ -6,10 +6,15 @@
         <div slot="content"></div>
         <div style="text-align: right;">
           <!--快速查询字段-->
-          <el-input v-model="filters.name"  style="width:200px;padding-right: 5px;" placeholder="菜单名称"></el-input>
+          <el-input v-model="filters.name"  style="width:160px;padding-right: 5px;" placeholder="菜单名称"></el-input>
+          <!--快速查询字段-->
+          <el-select v-model="filters.parentId" style="width:160px !important;padding-right: 5px;" placeholder="父级菜单" filterable clearable>
+            <el-option v-for="(item,index) in parentData" :key="index" :label="item.menuName" :value="item.id"></el-option>
+          </el-select>
           <!--操作按钮组-->
           <el-button type="primary" icon="el-icon-search" circle @click.native="getData"></el-button>
           <el-button type="primary" icon="el-icon-plus" circle @click.native="handleAdd"></el-button>
+          <el-button type="primary" icon="el-icon-refresh" circle @click.native="refreshData"></el-button>
         </div>
       </v-header>
   
@@ -31,6 +36,12 @@
                 <el-option label="大屏" value="大屏"></el-option>
               </el-select>
             </el-form-item>
+            <el-form-item label="加载方式" prop="loadWay">
+              <el-select v-model="menuForm.loadWay" placeholder="请选择系统名称">
+                <el-option label="右侧" value="右侧"></el-option>
+                <el-option label="顶部" value="顶部"></el-option>
+              </el-select>
+            </el-form-item>
             <el-form-item label="图标" prop="icon">
               <el-popover placement="bottom-start" width="400" trigger="click" @show="$refs['iconSelect'].reset()">
                 <IconSelect ref="iconSelect" @selected="selected" />
@@ -41,25 +52,18 @@
                 </el-input>
               </el-popover>
             </el-form-item>
-            <el-form-item label="加载方式" prop="loadWay">
-              <el-select v-model="menuForm.loadWay" placeholder="请选择系统名称">
-                <el-option label="右侧" value="右侧"></el-option>
-                <el-option label="顶部" value="顶部"></el-option>
-              </el-select>
-            </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="菜单名称" prop="menuName">
               <el-input v-model="menuForm.menuName" auto-complete="off"></el-input>
             </el-form-item>
             <el-form-item label="父级菜单" prop="parentId">
-              <el-select v-model="menuForm.parentId" placeholder="请选择父级菜单">
-                <el-option label="无" value=""></el-option>
-                <el-option :label="item.menuName" :value="item.id" :key="index" v-for="(item,index) in tableData"></el-option>
+              <el-select v-model="menuForm.parentId" placeholder="请选择父级菜单" filterable clearable>
+                <el-option :label="item.menuName" :value="item.id" :key="index" v-for="(item,index) in parentData"></el-option>
               </el-select>
             </el-form-item>
-            <el-form-item label="序号" prop="Index">
-              <el-input v-model="menuForm.Index" auto-complete="off" placeholder="请填写序号"></el-input>
+            <el-form-item label="加载序号" prop="index">
+              <el-input v-model="menuForm.index" auto-complete="off" placeholder="请填写序号"></el-input>
             </el-form-item>
             <el-form-item label="状态" prop="enabled">
               <el-radio-group v-model="menuForm.enabled">
@@ -91,11 +95,14 @@ export default {
     data() {
         return {
             filters: {
-                name: ""
+                name: "",
+                parentId: "",
             },
+            parentData: [],
             tableData: [],
             tableLabel: [
-              { label: '系统名称', param: 'systemName'},
+              { label: '标识', param: 'id',width: '60',},
+              // { label: '系统名称', param: 'systemName'},
               { label: '菜单类名', param: 'className'},
               { label: '菜单名称', param: 'menuName'},
               { label: '父级菜单', param: 'parentId'},
@@ -186,8 +193,26 @@ export default {
           let _this = this;
           this.loading = true;
           this.$ajax(this.$apiSet.getMenuInfo,{
-              menuName: this.filters.name
+              menuName: this.filters.name,
+              parentId: this.filters.parentId,
             })
+            .then(res => {
+              if (!res.data.success) {
+                  _this.$message({
+                      message: res.data.message,
+                      type: 'error'
+                  });
+              } else {
+                  _this.loading = false;
+                  _this.tableData = res.data.response;
+				      }
+            })
+            .catch(err => {})
+        },
+        getParentData() {
+          let _this = this;
+          this.loading = true;
+          this.$ajax(this.$apiSet.getMenuInfo)
             .then(res => {
                 if (!res.data.success) {
                     _this.$message({
@@ -195,8 +220,7 @@ export default {
                         type: 'error'
                     });
                 } else {
-                    _this.loading = false;
-                    _this.tableData = res.data.response;
+                    _this.parentData = _this.tableData.filter(val => val.parentId == null);
 				       	}
             })
             .catch(err => {})
@@ -264,16 +288,16 @@ export default {
         },
         //显示编辑界面
         handleEdit(index, row) {
-            this.formTitle = "编辑";
-            this.formVisible = true;
-            this.menuForm = row;
+          this.formTitle = "编辑";
+          this.formVisible = true;
+          this.menuForm = Object.assign({},row);
         },
         //显示新增界面
         handleAdd() {
             this.formTitle = "新增";
             this.formVisible = true;
 
-            this.roleForm = {
+            this.menuForm = {
               id: 0,
               systemName: '应用',
               className: '',
@@ -291,6 +315,8 @@ export default {
           this.menuForm.icon = name;
         },
         handleSubmit: function() {
+          this.menuForm.icon = "el-icon-edit-outline"; //暂时写死
+          
           let apiUrl = this.formTitle=='编辑' ? this.$apiSet.putMenu:this.$apiSet.postMenu;
           let _this = this;
           this.$ajax(apiUrl, this.menuForm)
@@ -311,9 +337,13 @@ export default {
             })
             .catch(err => {})
         },
+        refreshData(){
+          this.getData();
+          this.getParentData();
+        },
     },
     mounted() {
-      this.getData();
+      this.refreshData();
     }
 };
 </script>

@@ -6,7 +6,7 @@
           <Col :span="colNum" style="padding-left: 0.1rem;">
               <img :src="mapTopImg" class="topImgBg" />
 				      <img :src="item.img" class="topImg" />
-				      <div style="display: inline-block;margin-left: 0.1rem;padding: 0.05rem 0;">
+				      <div style="display: inline-block;margin-left: 0.1rem;">
 				      	<div class="topName">{{item.name}}</div>
 				      	<div class="topValue">{{item.value}}</div>
 				      	<div class="topUnit">{{item.unit}}</div>
@@ -22,7 +22,6 @@
 </template>
 
 <script>
-import bus from "../../../../eventBus.js";
 
 export default {
   name: "homeMiddleTop",
@@ -52,19 +51,19 @@ export default {
 					name:'污水管',
 					value: parseFloat(218).toFixed(1),
 					unit:'公里',
-					img: '../../../../static/img/newhome/icon/ic_积淹点.png'
+					img: '../../../../static/img/newhome/icon/ic_检查井.png'
         },
         {
 				  name:'雨水管',
 				  value:parseFloat(343).toFixed(1),
 				  unit:'公里',
-				  img: '../../../../static/img/newhome/icon/ic_积淹点.png'
+				  img: '../../../../static/img/newhome/icon/ic_检查井.png'
 				},
 				{
 				  name:'节点井',
 				  value: 12,
 				  unit:'个',
-				  img: '../../../../static/img/newhome/icon/ic_节点井.png'
+				  img: '../../../../static/img/newhome/icon/ic_检查井.png'
         },
       ]
     };

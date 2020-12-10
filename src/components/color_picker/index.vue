@@ -28,9 +28,6 @@ export default {
   computed: {
 
   },
-  watch: {
-
-  },
   methods: {
     setChange(){
           

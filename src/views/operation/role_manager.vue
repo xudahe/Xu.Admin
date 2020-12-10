@@ -8,7 +8,7 @@
             <div slot="content"></div>
             <div style="text-align: right;">
               <!--快速查询字段-->
-               <el-input v-model="filters.name" style="width:200px;padding-right: 5px;" placeholder="角色名称"></el-input>
+               <el-input v-model="filters.name" style="width:160px;padding-right: 5px;" placeholder="角色名称"></el-input>
               <!--操作按钮组-->
               <el-button type="primary" icon="el-icon-search" circle @click.native="getData"></el-button>
               <el-button type="primary" icon="el-icon-plus" circle @click.native="handleAdd"></el-button>
@@ -22,7 +22,7 @@
         <el-card class="box-card card-gutter-sm" shadow="hover">
           <div slot="header" class="clearfix">
             <span class="header">{{sels.roleName}}&nbsp;--&nbsp;菜单分配</span>
-            <el-button type="primary" style="float: right; padding: 5px 10px" :disabled="!showButton" @click.native="saveMenu">
+            <el-button title="保存" type="primary" style="float: right; padding: 5px 10px" :disabled="!showButton" @click.native="saveMenu">
               <i class="el-icon-check el-icon--left" style="margin-right:0px;"></i>
             </el-button>
           </div>
@@ -289,7 +289,7 @@ export default {
         handleEdit(index, row) {
             this.formTitle = "编辑";
             this.formVisible = true;
-            this.roleForm = row;
+            this.roleForm = Object.assign({},row);
         },
         //显示新增界面
         handleAdd() {

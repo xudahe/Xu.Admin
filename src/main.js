@@ -6,7 +6,9 @@ import App from './App'
 import router from './router'
 import store from "./vuex/store"
 
-//全局注册事件eventBus
+Vue.use(Vuex)
+
+//全局事件总线 eventBus
 // Vue.prototype.$eventBus = new Vue();
 
 //api模块初始化。引用第三方插件
@@ -46,11 +48,13 @@ req.keys().forEach(val => {
     Vue.component(component.name, component)
   })
 
-
+// 方案1：在 webpack.config.js 文件中，entry 入口处修改，加入即可
+// 方案2：不修改webpack的情况下，在你的主入口文件头部加入
+// import "babel-polyfill"
+  
 import promise from 'es6-promise' //兼容IE
 promise.polyfill()
 
-import echarts from 'echarts' 
 import './router/intercept.js' //路由拦截
 
 //图片点击放大预览
@@ -61,8 +65,14 @@ Viewer.setDefaults({
   Options: { 'inline': true, 'button': true, 'navbar': true, 'title': true, 'toolbar': true, 'tooltip': true, 'movable': true, 'zoomable': true, 'rotatable': true, 'scalable': true, 'transition': true, 'fullscreen': true, 'keyboard': true, 'url': 'data-source' }
 })
 
-Vue.use(Vuex)
-Vue.prototype.$echarts = echarts;
+     
+// 设置浏览器标题
+Vue.directive('title', {
+  inserted: function (el, binding) {
+    document.title = el.dataset.title
+  }
+})
+
 Vue.prototype.$store = store
 
 new Vue({

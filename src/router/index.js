@@ -9,6 +9,8 @@ import homePage from "@/components/bigScreen/view/homePage"
 import application from "@/components/bigScreen/view/application"
 import platform from "@/components/bigScreen/view/platform"
 
+//路由懒加载：减少首次加载时从服务器请求的组件，当路由被访问时，再从服务器请求对应组件。
+
 //使用动态的import()语法,不是必须加载的组件使用懒加载
 const
   Home = () => import('@/views/home/index'),
@@ -22,7 +24,7 @@ const operation_routes = getRoutes(require.context('@/views/operation', true, /\
 const system_routes = getRoutes(require.context('@/views/system', true, /\.vue$/));
 const tools_routes = getRoutes(require.context('@/views/tools', true, /\.vue$/));
 const log_routes = getRoutes(require.context('@/views/other/log', true, /\.vue$/));
-const list_page = getRoutes(require.context('@/views/list', true, /\.vue$/));
+const list_page = getRoutes(require.context('@/views/pages', true, /\.vue$/));
 
 let addRouter = [
   {

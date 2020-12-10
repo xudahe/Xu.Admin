@@ -40,7 +40,7 @@
       </div>
       <div class="row at-row flex-end" style="padding-top: 0.1rem;">
 				<Page simple show-total :current="page.current" :total="page.total" @on-change="changePage" size="small" style="padding-right: 0.1rem;float: right;"></Page>
-				<span style="color:#fff;font-size: 0.12rem; float: left;padding-left: 0.1rem;">共{{page.total}}条</span>
+				<span style="color:#fff;font-size: 0.12rem;padding-left: 0.1rem;">共{{page.total}}条</span>
 			</div>
 		</div>
   </div>
@@ -60,11 +60,13 @@ export default {
 			  	current: 1, //当前页码
           total: 0,
           pageList: [
-            {title:"某某",children:[{name:"某某"}]},
-            {title:"某某",children:[{name:"某某"}]},
-            {title:"某某",children:[{name:"某某"}]},
-            {title:"某某",children:[{name:"某某"}]},
-            {title:"某某",children:[{name:"某某"}]},
+            {title:"某某1",children:[{name:"某某1"}]},
+            {title:"某某2",children:[{name:"某某2"}]},
+            {title:"某某3",children:[{name:"某某3"}]},
+            {title:"某某4",children:[{name:"某某4"}]},
+            {title:"某某5",children:[{name:"某某5"}]},
+            {title:"某某6",children:[{name:"某某6"}]},
+            {title:"某某7",children:[{name:"某某7"}]},
           ],
         },
 				selectId: '', //已选择的编号
@@ -89,6 +91,10 @@ export default {
             listClass[i].classList.add('bgActiveF');
           }
         }
+        
+        // bus.$emit("rightDetail","test1",item,item.name)
+        bus.$emit("leftDetail","test1",item,item.name)
+        // bus.$emit("botmDetail","test1",item,item.name)
       },
       changePage(index) {
         this.page.current = index;

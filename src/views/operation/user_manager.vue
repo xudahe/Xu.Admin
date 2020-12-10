@@ -8,12 +8,12 @@
                       <div slot="content"></div>
                       <div style="text-align: right;">
                         <!--快速查询字段-->
-                        <el-input v-model="filters.name"  style="width:200px;padding-right: 5px;" placeholder="用户名/登录名"></el-input>
+                        <el-input v-model="filters.name"  style="width:160px;padding-right: 5px;" placeholder="用户名/登录名"></el-input>
                         <!--操作按钮组-->
                         <el-button type="primary" icon="el-icon-search" circle @click.native="getData"></el-button>
                         <el-button type="primary" icon="el-icon-plus" circle @click.native="handleAdd"></el-button>
                         <el-dropdown style="margin-left:5px;">
-                          <el-button type="primary">
+                          <el-button type="primary" style="padding: 10px;">
                             更多<i class="el-icon-arrow-down el-icon--right"></i>
                           </el-button>
                           <el-dropdown-menu slot="dropdown">
@@ -66,9 +66,9 @@
                             <el-input v-model="userForm.loginPwd" show-password  auto-complete="off" :disabled="formTitle=='编辑'?true:false"></el-input>
                         </el-form-item>
                         <el-form-item label="部门" prop="deptName">
-                            <el-select v-model="userForm.deptName" placeholder="请选择所属部门">
+                            <el-select v-model="userForm.deptName" placeholder="请选择所属部门" filterable clearable>
                                 <el-option label="财务部" value="1"></el-option>
-                                <el-option label="技术部" value="2"></el-option>
+                                <el-option label="开发部" value="2"></el-option>
                                 <el-option label="市场部" value="3"></el-option>
                             </el-select>
                         </el-form-item>
@@ -342,7 +342,7 @@ export default {
         handleEdit (index, row) {
             this.formTitle = "编辑";
             this.formVisible = true;
-            this.userForm = row;
+            this.userForm = Object.assign({},row);
         },
         //显示新增界面
         handleAdd() {

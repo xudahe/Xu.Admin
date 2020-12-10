@@ -30,6 +30,7 @@
     /*滚动条的宽度*/
     ::-webkit-scrollbar {
         width: 4px;
+        height: 8px;
     }
     
     /*滚动条的设置*/
@@ -51,6 +52,7 @@
         background: green !important;  /* 自定义颜色 */
     }
     
+
     .fade-in-right {
         -webkit-animation: fade-in-right 1s;
         animation: fade-in-right 1s;
@@ -192,9 +194,10 @@
         }
     }
 
+    /* 底部动画 由下至上加载 */
     .fade-in-up {
-        -webkit-animation: fade-in-up 0.5s;
-                animation: fade-in-up 0.5s;
+        -webkit-animation: fade-in-up 1s;
+                animation: fade-in-up 1s;
         -webkit-animation-timing-function: ease-out;
                 animation-timing-function: ease-out;
     }
@@ -202,13 +205,11 @@
         0%
         {
             -webkit-transform: translateY(100%);
-    
             opacity: 0;
         }
         100%
         {
             -webkit-transform: translateY(0%);
-    
             opacity: 1;
         }
     }
@@ -216,16 +217,47 @@
         0%
         {
             transform: translateY(100%);
-    
             opacity: 0;
         }
         100%
         {
             transform: translateY(0%);
-    
             opacity: 1;
         }
     }
+
+    /* 顶部动画 由上至下加载 */
+    .fade-in-down{
+        -webkit-animation: fade-in-down 1s;
+                animation: fade-in-down 1s;
+        -webkit-animation-timing-function: ease-out;
+                animation-timing-function: ease-out;
+    }
+    @-webkit-keyframes fade-in-down{
+        0%
+        {
+            -webkit-transform: translateY(-100%);
+            opacity: 0;
+        }
+        100%
+        {
+            -webkit-transform: translateY(0%);
+            opacity: 1;
+        }
+    }
+    @keyframes fade-in-down{
+        0%
+        {
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+        100%
+        {
+            transform: translateY(0%);
+            opacity: 1;
+        }
+    }
+
     .fade-out-right {
         -webkit-animation: fade-out-right 1s;
                 animation: fade-out-right 1s;

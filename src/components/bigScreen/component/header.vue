@@ -6,7 +6,7 @@
 
 				<div class="left-div" style="width:33.3%;float: left;height: 100%;">
           <div class="leftTool">
-            <div style="padding-left:12%;color:rgb(75 236 214);">
+            <div style="padding-left:0.1rem;color:rgb(75 236 214);">
               <newDate></newDate>
             </div>
 					</div>
@@ -51,7 +51,6 @@
 </template>
 
 <script>
-	import bus from "../../../eventBus.js";
 
 export default {
     data() {
@@ -115,8 +114,8 @@ export default {
 							this.menuDataLeft.push({
 								classname: this.menuList[k].classname,
 								id: this.menuList[k].id,
-								imgT: '../../static/img/newhome/icon_inspection_s.png',
-								imgF: '../../static/img/newhome/icon_inspection_n.png',
+								imgT: '',
+								imgF: '',
 								menuname: this.menuList[k].menuname,
 								children: this.menuList[k].children
 							})
@@ -125,8 +124,8 @@ export default {
 							this.menuDataRight.push({
 								classname: this.menuList[l].classname,
 								id: this.menuList[l].id,
-								imgT: '../../static/img/newhome/icon_inspection_s.png',
-								imgF: '../../static/img/newhome/icon_inspection_n.png',
+								imgT: '',
+								imgF: '',
 								menuname: this.menuList[l].menuname,
 								children: this.menuList[l].children
 							})
@@ -171,7 +170,7 @@ export default {
   .homePageTitle{
     height: 0.6rem;
     width: 100%;
-    background-image: url("../../../../static/img/newhome/02/topTitle.png");
+    background-image: url("../../../../static/img/newhome/04/topTitle_02.png");
     background-repeat: no-repeat;
     background-size: 100% auto;
     animation: loadFromTop 2s linear;
@@ -189,13 +188,13 @@ export default {
       height: 0.493616rem;
     }
     .menuDivL{
-        background-image: url("../../../../static/img/newhome/02/BG_navigation_s.png");
+        background-image: url("../../../../static/img/newhome/04/BG_navigation_s.png");
         background-repeat: no-repeat;
         background-size: contain;
         height: 100%;
     }
     .menuDivR{
-        background-image: url("../../../../static/img/newhome/02/BG_navigation_s.png");
+        background-image: url("../../../../static/img/newhome/04/BG_navigation_s.png");
         background-repeat: no-repeat;
         background-size: contain;
         height: 100%;

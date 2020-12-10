@@ -42,7 +42,7 @@
 }
 </style>
 <template>
-  <div class="map-conent"  :id='mapId' style="position: relative;">
+  <div class="map-conent"  :id='mapId' style="position: relative;border-radius: 0.1rem;">
     <div class='toolbar_info' v-show='isshow' id='toolbar_info'>
       <Button-group size="large">
         <Tooltip content="放大" :transfer="true">
@@ -112,7 +112,6 @@
 </template>
 <script>
 import esriLoader from 'esri-loader'
-import bus from '../../eventBus.js'
 import { MapControl } from '../map/js/MapControl'
 import mapconfig from '../map/js/mapconfig';
 import layermanage from '../map/child/layerManage'

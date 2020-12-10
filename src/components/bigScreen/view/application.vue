@@ -15,12 +15,12 @@
 			<div id="appComponts" class="appComponts" :style="{width:'calc(100% - 1.60rem)'}">
 
         <!-- 左侧列表框 -->
-				<div id="leftMenu" class="appCompontsContLeft fade-in-right" :style="{width: leftWidth +'rem'}" v-show="isLeftMenu">
+				<div class="appCompontsContLeft fade-in-right" :style="{width: pageWidth +'rem'}" v-show="isLeftMenu">
 					<div class="appCompontsContLeftDiv">
 						<div class="titleCont titleContImg">
 							<div class="titleContText">{{titleName}}</div>
-							<div style="position: absolute;top: 20%;right: 0.15rem;">
-								<img class="closeImg" :src="closeImg" v-on:mouseover="changeImg(1,1)" v-on:mouseout="changeImg(1,2)" @click="detailclose('leftMenu')" />
+							<div class="titleRight">
+                 <Icon class="closeIcon" type="ios-close-circle-outline" @click="detailclose('leftMenu')"/>
 							</div>
 						</div>
 						<div style="height: calc(100% - 0.4rem);margin-top: 0.4rem;">
@@ -30,68 +30,69 @@
 				</div>
 
         <!-- 左侧详情框 -->
-				<div class="appCompontsContLeft fade-in-right"  style="width:3.2rem" v-show="isDetailDataLeft">
+				<div class="appCompontsContLeft fade-in-right"  :style="{width: pageWidth +'rem',marginLeft: isDetailDataLeft ? '0.05rem':'0rem'}" v-show="isDetailDataLeft">
 					<div class="appCompontsContLeftDiv">
 						<div class="titleCont titleContImg">
 							<div class="titleContText">{{titleLeftName}}</div>
-							<div style="position: absolute;top: 20%;right: 0.15rem;">
-								<img class="closeImg" :src="closeImg1" v-on:mouseover="changeImg(2,1)" v-on:mouseout="changeImg(2,2)" @click="detailclose('leftdetail')" />
+							<div class="titleRight">
+                <Icon class="closeIcon" type="ios-close-circle-outline" @click="detailclose('leftdetail')"/>
 							</div>
 						</div>
 						<div :style="{height: 'calc(100% - 0.4rem)',marginTop: '0.4rem'}">
-							<component :is="componentLeftDetail" v-bind:detailData="leftDetailData"></component>
+							<component :is="componentLeft" v-bind:detailData="leftDetailData"></component>
 						</div>
 					</div>
 				</div>
 
 				<!-- 全屏框/半框 -->
-				<div style="float: left;height: 100%;" :style="{width: screenWidth,paddingRight: screenWidth == '49%' ? '0.1rem':'0rem'}" v-show="isDetailScreen">
+				<div style="float: left;height: 100%;" :style="{width: pageWidth,paddingRight: pageWidth == '49%' ? '0.05rem':'0rem'}" v-show="isDetailScreen">
 					<div class="appCompontsScreen scale-in">
 						<div class="titleCont titleContImgT" style="width:100%">
 							<div class="titleContText">{{titleScreenName}}</div>
-							<div style="position: absolute; top: 20%; bottom: 0; right: 0.15rem;">
-								<img class="closeImg" :src="closeImg" v-on:mouseover="changeImg(1,1)" v-on:mouseout="changeImg(1,2)" @click="detailclose('screendetail')" />
+							<div class="titleRight">
+                <Icon class="closeIcon" type="ios-close-circle-outline" @click="detailclose('screendetail')"/>
 							</div>
 						</div>
 						<div style="height: calc(100% - 0.4rem);margin-top: 0.4rem;">
-							<component :is="componentScreenName" v-bind:detailData="screenDetailData"></component>
+							<component :is="componentName" v-bind:detailData="screenDetailData"></component>
 						</div>
 					</div>
 				</div>
         
         <!-- 中间地图部分 -->
-				<div style="position:absolution;float: left;" :style="{height: mapHeight,width: mapWidth}" v-show="isMapShow">
+				<div style="position:absolution;float: left;" :style="{height: mapHeight,width: mapWidth,padding: mapadding}" v-show="isMapShow">
 					<div class="appCompontsContMap scale-in">
 					   <baseMap></baseMap>
 					</div>
 				</div>
 
         <!-- 底部详情框 -->
-				<div  class="appCompontsContDetail fade-in-up" :style="{height: '50%',width: 'calc(100% - '+ leftWidth +'rem)'}" v-show="isDetailDataBotm">
+				<div class="appCompontsContDetail fade-in-up" :class="botmShow ? '':''" :style="{height: botmHeight,width: mapWidth, paddingLeft: isDetailDataBotm && !isDetailScreen ?'0.05rem':'0rem'}" v-show="isDetailDataBotm">
 					<div class="appCompontsContDetailDiv">
-						<div class="titleCont titleContImg" style="width: 100%;">
-							<div class="titleContText">{{titleBotmName}}	</div>
-							<div style="position: absolute;top: 20%;right: 0.15rem;">
-								<img class="closeImg" :src="closeImg1" v-on:mouseover="changeImg(2,1)" v-on:mouseout="changeImg(2,2)" @click="detailclose('botmdetail')" />
+						<div class="titleCont titleContImg" :style="{borderBottom: botmShow ? '1px solid #0161ba':'none'}">
+							<div class="titleContText">{{titleBotmName}}</div>
+							<div class="titleRight">
+	              <Icon class="closeIcon" :type="botmShow ? 'ios-arrow-dropdown':'ios-arrow-dropup'" @click="detailShow('botmdetail', !botmShow)"/>
+                <Icon class="closeIcon" type="ios-close-circle-outline" @click="detailclose('botmdetail')"/>
 							</div>
 						</div>
-						<div style="height: calc(100% - 0.4rem);margin-top: 0.4rem;">
-							<component :is="componentBotmDetail" v-bind:detailData="botmDetailData"></component>
+						<div style="height: calc(100% - 0.4rem);margin-top: 0.4rem;" v-show="botmShow">
+							<component :is="componentBotm" v-bind:detailData="botmDetailData"></component>
 						</div>
 					</div>
 				</div>
 
 				<!-- 右侧详情框 -->
-				<div class="appCompontsContLeft fade-in-left1" v-show="isDetailDataRight">
+				<div class="appCompontsContLeft fade-in-left1" :style="{width: pageWidth +'rem'}" v-show="isDetailDataRight">
 					<div class="appCompontsContLeftDiv">
 						<div class="titleCont titleContImg">
 							<div class="titleContText">{{titleRightName}}</div>
-							<div style="position: absolute;top: 20%;right: 0.15rem;">
-								<img class="closeImg" :src="closeImg1" v-on:mouseover="changeImg(2,1)" v-on:mouseout="changeImg(2,2)" @click="detailclose('rightdetail')" />
+							<div class="titleRight">
+                 <Icon class="closeIcon" type="ios-close-circle-outline" @click="detailclose('rightdetail')"/>
 							</div>
 						</div>
 						<div style="height: calc(100% - 0.4rem);margin-top: 0.4rem;">
-							<component :is="componentRightDetail" v-bind:detailData="rightDetailData"></component>
+							<component :is="componentRight" v-bind:detailData="rightDetailData"></component>
 						</div>
 					</div>
 				</div>
@@ -125,127 +126,130 @@
 		data() {
 			return {
 				menuFlag: -1,
-				menuData: [],
+        menuData: [],
+        
+        //组件名称
 				componentName: "",
-				componentBotmDetail: "", //底部详情
-        componentLeftDetail: "", //左侧详情
-        componentRightDetail: "",//右侧详情
-        componentScreenName: "", //全屏
-
-				isDetailDataLeft: false,
+				componentBotm: "", //底部详情
+        componentLeft: "", //左侧详情
+        componentRight: "",//右侧详情
+        
+        //详情框头部名称
 				titleName: "",
 				titleLeftName: "",
         titleBotmName: "",
         titleRightName: "",
         titleScreenName: "",
-
-				closeImg: require("../../../../static/img/newhome/btn_Close_n.png"),
-				closeImg1: require("../../../../static/img/newhome/btn_Close_n.png"),
-				isLeftMenu: false,
+				
         detailData: {},
-        
         botmDetailData: {},
         rightDetailData: {},
         leftDetailData: {},
         screenDetailData: {},
 
-        leftWidth: 3.2, //左侧列表宽度
-        screenWidth: '100%',
+        pageWidth: 3.3, //列表宽度
         mapWidth: '100%',
         mapHeight: '100%',
+        mapadding: '0', //中间地图边距
+        botmHeight: '50%', //底部详情框高度
+        botmShow: true, ////底部详情框显示隐藏
         
+        isLeftMenu: false,
         isDetailDataLeft: false,
         isDetailDataBotm: false,
         isDetailDataRight: false,
         isDetailScreen: false,
         
-				isMapShow:true,
+				isMapShow:true, //显示地图
 			};
-		},
+    },
 		methods: {
 			changeMenu(item, index) {
-				var _this = this;
-        _this.menuFlag = index;
-				_this.componentName = item.classname;
-        _this.titleName = item.menuname;
-			
-				_this.isMapShow = true; //地图显示
-
-        _this.isLeftMenu = false;
-        _this.isDetailScreen = false;
-        _this.isMapShow = true;
+        var _this = this;
         
-        _this.detailclose();
+        this.menuFlag = index;
+				this.componentName = item.classname;
+        this.titleName = item.menuname;
+			
+        this.detailclose();
 
         switch (item.menuname) {
           case "二级菜单1":
           case "二级菜单4":
           case "二级菜单5":
-            _this.isLeftMenu = true;
-            _this.leftWidth = 3.2 + 0.1;
-            _this.mapWidth = 'calc(100% - '+ _this.leftWidth +'rem' +')';
-            _this.titleLeftName = item.menuname;
+            this.isLeftMenu = true;
+            this.pageWidth = 3.3;
+            this.mapadding = '0 0 0 0.05rem';
+            this.mapWidth = 'calc(100% - '+ (this.pageWidth) +'rem)';
+            this.titleLeftName = item.menuname;
             break;
           case "二级菜单2":
-            _this.isDetailScreen = true;
-            _this.screenWidth = '49%';
-            _this.mapWidth = '51%';
-            _this.titleScreenName = item.menuname;
+            this.isDetailScreen = true;
+            this.pageWidth = '49%';
+            this.mapWidth = 'calc(100% - '+ (this.pageWidth) +')';
+            this.titleScreenName = item.menuname;
             break;
           case "二级菜单3":
-            _this.isMapShow = false;
-            _this.isDetailScreen = true;
-            _this.screenWidth = '100%';
-            _this.mapWidth = '0%';
-            _this.titleScreenName = item.menuname;
+            this.isMapShow = false;
+            this.isDetailScreen = true;
+            this.pageWidth = '100%';
+            this.mapWidth = 'calc(100% - '+ (this.pageWidth) +')';
+            this.titleScreenName = item.menuname;
             break;
         }
-			
 			},
 			detailclose(type) {
-				this.isMapvisible = true; //关闭组件时，将地图显示出来
-
+        this.isMapShow = true; //关闭组件时，将地图显示出来
+        this.mapHeight = '100%';
+        
 				if (type == "leftMenu") {
 					this.isLeftMenu = false;
-          this.leftWidth = 0;
+          this.pageWidth = 0;
           this.mapWidth = '100%';
+          this.mapadding = '0';
+          this.isDetailDataLeft = false;
+          this.isDetailDataRight = false;
+          this.isDetailDataBotm = false;
+          this.isDetailScreen = false;
 				}
 				else if (type == "leftdetail") {
-					this.leftWidth = 3.2 + 0.1;
-					this.isDetailDataLeft = false;
+          this.mapWidth = 'calc(100% - '+ (this.pageWidth) +'rem)';
+   
+          this.mapadding = '0 0 0 0.05rem';
+          this.isDetailDataLeft = false;
+          this.isDetailDataBotm = false;
 				}
 				else if (type == "botmdetail") {
-          this.mapHeight = '100%';
 					this.isDetailDataBotm = false;
         }
         else if (type == "screendetail") {
           this.mapWidth = '100%';
-					this.isDetailScreen = false;
+          this.isDetailScreen = false;
+          this.isDetailDataBotm = false;
 				}
         else if (type == "rightdetail") {
+          this.mapWidth = 'calc(100% - '+ (this.pageWidth) +'rem)';
+          this.mapadding = '0 0 0 0.05rem';
           this.isDetailDataRight = false;
         }
         else {
-          this.leftWidth = 0;
+        	this.isLeftMenu = false;
+          this.pageWidth = 0;
+          this.mapWidth = '100%';
+          this.mapadding = '0';
           this.isDetailDataLeft = false;
-          this.isDetailDataBotm = false;
           this.isDetailDataRight = false;
+          this.isDetailDataBotm = false;
+          this.isDetailScreen = false;
         }
-				this.closeImg = this.closeImg1 = "../../../../static/img/newhome/btn_Close_n.png";
-			},
-			changeImg(type, flag) {
-				if (type == "1")
-					this.closeImg  = "../../../../static/img/newhome/"+ (flag == 1 ?"btn_Close_h.png":"btn_Close_n.png")
-        if (type == "2")
-          this.closeImg1 = "../../../../static/img/newhome/"+ (flag == 1 ?"btn_Close_h.png":"btn_Close_n.png")
 			},
 			getMenus(menuid) {
 				var _this = this;
 				_this.menuData = [];
 			  let children = [
           {id:1,classname:"test1",menuname:"二级菜单1",img:"",systemid:32,},
-          {id:2,classname:"classname",menuname:"二级菜单2",img:"",systemid:32,},
-          {id:3,classname:"classname",menuname:"二级菜单3",img:"",systemid:32,},
+          {id:2,classname:"test1",menuname:"二级菜单2",img:"",systemid:32,},
+          {id:3,classname:"test4",menuname:"二级菜单3",img:"",systemid:32,},
           {id:3,classname:"test2",menuname:"二级菜单4",img:"",systemid:32,},
           {id:3,classname:"test3",menuname:"二级菜单5",img:"",systemid:32,},
         ]
@@ -256,12 +260,19 @@
 						img: children[l].img,
 						menuname: children[l].menuname,
 						systemid: children[l].systemid,
-						imgT: "../../static/img/newhome/icon_inspection_s.png",
-						imgF: "../../static/img/newhome/icon_inspection_n.png",
+						imgT: "",
+						imgF: "",
 					})
 				}
 							
-			},
+      },
+      detailShow(type,flag){
+        if (type == "botmdetail") {
+          this.botmShow = flag;
+          this.botmHeight = this.botmShow ? '50%': '0.5rem';
+          this.mapHeight = 'calc(100% - '+ (this.botmHeight) +')'
+        }
+      },
 		},
 		mounted() {
 			let _this = this;
@@ -270,45 +281,61 @@
       //通过 $off(eventName, eventHandler) 停止侦听一个事件
 
       // 返回列表页
-			bus.$off("showLeftMenu");
 			bus.$on("showLeftMenu", function() {
-				_this.isLeftMenu = true;
-        _this.isDetailDataLeft = false;
-        _this.mapWidth = 'calc(100% - '+ _this.leftWidth +'rem' +')';
+        _this.detailclose()
+        _this.isLeftMenu = true;
+
+        _this.mapWidth = 'calc(100% - '+ (_this.pageWidth) +'rem)';
+        _this.mapadding = '0 0 0 0.05rem';
       });
 
       //左侧详情页
-			bus.$off("leftDetail");
-			bus.$on("leftDetail", function(value, item, title) {
+			bus.$on("leftDetail", function(componentName, item, title) {
         _this.isDetailDataLeft = true;
-        _this.mapWidth = 'calc(100% - '+ (_this.leftWidth + _this.leftWidth + 0.1) +'rem' +')'
         _this.leftDetailData = item;
-        _this.componentLeftDetail = value;
+        _this.componentLeft = componentName;
         _this.titleLeftName = title;
+
+        _this.mapWidth = 'calc(100% - '+ (_this.pageWidth*2 + 0.05) +'rem)';
       });
 
       //底部详情页
-			bus.$off("botmDetail");
-			bus.$on("botmDetail", function(value, item, title) {
+			bus.$on("botmDetail", function(componentName, item, title) {
         _this.isDetailDataBotm = true;
-        _this.mapHeight = '50%';
-        _this.mapWidth = 'calc(100% - '+ (_this.leftWidth) +'rem' +')'
+        _this.botmShow = true;
+        
 				_this.botmDetailData = item;
-				_this.componentBotmDetail = value;
-				_this.titleBotmName = title;
+				_this.componentBotm = componentName;
+        _this.titleBotmName = title;
+        
+        _this.mapHeight = '50%';
+        _this.botmHeight =  'calc(100% - '+ (_this.mapHeight) +')'
+        if(_this.isLeftMenu)
+          _this.mapWidth = 'calc(100% - '+ (_this.pageWidth) +'rem)';
+
+        if (_this.isDetailDataRight)
+          _this.mapWidth = 'calc(100% - '+ (_this.pageWidth*2) +'rem)' 
+        
+        if(_this.isDetailDataLeft) 
+          _this.mapWidth = 'calc(100% - '+ (_this.pageWidth*2 + 0.05) +'rem)' 
+
+        if(_this.isDetailScreen) 
+          _this.mapWidth = 'calc(100% - '+ (_this.pageWidth) +')'
+      
       });
       
 			//右侧详情页
-			bus.$off("rightDetail");
-			bus.$on("rightDetail", function(value, item, title) {
+			bus.$on("rightDetail", function(componentName, item, title) {
         _this.isDetailDataRight = true;
 				_this.rightDetailData = item;
-				_this.componentLeftDetail = value;
-				_this.titleRightName = title;
+				_this.componentLeft = componentName;
+        _this.titleRightName = title;
+        
+        _this.mapWidth = 'calc(100% - '+ (_this.pageWidth*2 + 0.05) +'rem)';
+        _this.mapadding = '0 0.05rem';
 			});
 
       //关闭详情框
-			bus.$off("detailclose");
 			bus.$on("detailclose", function(value) {
 				_this.detailclose(value);
       });
@@ -319,7 +346,14 @@
 			_this.detailclose("leftMenu");
 			_this.menuFlag = -1;
 
-		},
+    },
+    beforeDestroy() {
+      bus.$off("showLeftMenu");
+      bus.$off("leftDetail");
+      bus.$off("botmDetail");
+      bus.$off("rightDetail");
+      bus.$off("detailclose");
+    },
 	}
 </script>
 
@@ -333,11 +367,10 @@
     .appMenu{
       width: 1.6rem;
       height: 100%;
-      // background-color: #013282;
       border-right: none;
       float: left;
       overflow-y: auto;
-      background-image: url("../../../../static/img/newhome/02/bg_left.png");
+      background-image: url("../../../../static/img/newhome/04/bg_left.png");
       background-size: 100% 100%;
     }
     .appMenu1{
@@ -350,19 +383,20 @@
     .menuCont{
       position: relative;
       cursor: pointer;
-      padding-top: 0.1rem;
     }
     .menuSel {
-        background-image: url("../../../../static/img/newhome/02/bg_选项_sel.png");
+        background-image: url("../../../../static/img/newhome/icon/bg_选项_sel.png");
         background-size: 100% 100%;
         margin: 0.15rem;
         height: 0.35rem;
+        line-height: 0.35rem;
     }
     .menuNor {
-        background-image: url("../../../../static/img/newhome/02/bg_选项_nor.png");
+        background-image: url("../../../../static/img/newhome/icon/bg_选项_nor.png");
         background-size: 100% 100%;
         margin: 0.15rem;
         height: 0.35rem;
+        line-height: 0.35rem;
     }
     .menuImg{
       width: 0.2rem;
@@ -370,6 +404,7 @@
       position: relative;
       left: 0.15rem;
       float: left;
+      padding-top: 0.06rem;
     }
     .menuContImg{
       position: absolute;
@@ -380,8 +415,6 @@
     font-size: 0.12rem;
     color: #9db8e5ba;
     font-weight: bold;
-    text-align: left;
-    padding-top: 0rem;
     padding-left: 0.45rem;
     }
     .menuContText .actives{
@@ -392,27 +425,25 @@
       width: 100%;
       height: 100%;
       position: relative;
-      padding-left: 0.1rem;
+      padding-left: 0.05rem;
     .appCompontsContLeft{
       width: 100%;
       height: 100%;
       float: left;
-      padding-right: 0.1rem;
     }
     .appCompontsContLeftDiv{
-      border-radius: 0.2rem;
+      border-radius: 0.1rem;
       background: none;
-      width: 100%;
+      width: 3.3rem;
       height: 100%;
       float: left;
       position: relative;
-      background-image: url("../../../../static/img/newhome/02/底部bg-06.png");
-      background-size: 100% 100%;
+      border: 1px solid #326ab2;
     }
 
     .appCompontsScreen{
-      border: 1px solid #285fa3;
-      border-radius: 0.2rem;
+      border: 1px solid #326ab2;
+      border-radius: 0.1rem;
       background: transparent;
       width: 100%;
       height: 100%;
@@ -427,26 +458,21 @@
 
     .appCompontsContMap{
       border: 1px solid #2962ab;
-      border-radius: 0.2rem;
+      border-radius: 0.1rem;
       width: 100%;
       height: 100%;
       position: relative;
     }
     .appCompontsContDetail{
-      width: 100%;
-      height: 50%;
-      padding-top: 0.1rem;
+      padding-top: 0.05rem;
       float: left;
     }
 
     .appCompontsContDetailDiv{
       height: 100%;
-      border: 1px solid rgba(255,0,0,0);
-      border-radius: 0.2rem;
+      border: 1px solid #2962ab;
+      border-radius: 0.1rem;
       position: relative;
-      background: url("../../../../static/img/newhome/02/底部bg-2.png");
-      background-repeat: no-repeat;
-      background-size: 101% 100%;
     }
     
     .titleCont {
@@ -454,33 +480,40 @@
     }
     
     .titleContImg {
-      width: 3.2rem;
+      width: 100%;
       height: 0.4rem;
       line-height: 0.4rem;
-      border-radius: 10px 10px 0px 0px;
       border-bottom: 1px solid #0161ba;
     }
     .titleContImgT {
       height: 0.4rem;
       line-height: 0.4rem;
-      background: #0052b0;
-      border-radius: 10px 10px 0px 0px;
       border-bottom: 1px solid #0161ba;
     }
     
     .titleContText {
       position: absolute;
-      top: 0;
       font-size: 0.14rem;
       color: #ffffff;
       font-weight: bold;
-      left: 0.15rem;
+      left: 0.05rem;
       float: left;
     }
+
+    .titleRight {
+      position: absolute;
+      top: 10%;
+      right: 0.05rem;
+    }
     
-    .closeImg {
-      height: 0.25rem;
-      float: right;
+    .closeIcon {
+      padding: 0rem;
+      font-size:0.25rem;
+      color:rgba(255,255,255,0.5);
+    }
+    .closeIcon:hover {
+      padding: 0rem;
+      color:rgba(255,255,255,1);
     }
   }
 }

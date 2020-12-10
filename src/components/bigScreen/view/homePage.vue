@@ -25,7 +25,6 @@
   </div>
 </template>
 <script>
-import bus from "../../../eventBus.js";
 
 import carouselPage1 from "../component/publics/carouselPage1.vue";
 
@@ -38,8 +37,6 @@ export default {
         overviewPage: 0,
         maxPage: [
           {id:1},
-          {id:2},
-          {id:3},
         ],
 
         time: null,

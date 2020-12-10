@@ -64,7 +64,7 @@ module.exports = {
      * Source Maps
      */
 
-    productionSourceMap: true, //生成用于生产构建的源映射
+    productionSourceMap: true, //生成用于生产构建的源映射, 在开发完成上线打包的时候，就要关闭这个开关，一方面能减少代码包的大小，另一方面也有利于系统安全。
     // https://webpack.js.org/configuration/devtool/#production
     devtool: '#source-map',
 
@@ -72,8 +72,8 @@ module.exports = {
     // Surge or Netlify already gzip all static assets for you.
     // Before setting to `true`, make sure to:
     // npm install --save-dev compression-webpack-plugin
-    productionGzip: false, // 是否开启 gzip
-    productionGzipExtensions: ['js', 'css'], // 需要使用 gzip 压缩的文件扩展名
+    productionGzip: true, // 是否开启 gzip
+    productionGzipExtensions: ['js', 'css', 'svg'], // 需要使用 gzip 压缩的文件扩展名
 
     // Run the build command with an extra argument to
     // View the bundle analyzer report after build finishes:

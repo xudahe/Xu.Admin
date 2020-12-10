@@ -21,7 +21,6 @@
 	</div>
 </template>
 <script>
-    import bus from "../../../../eventBus.js";
     
     import homeLeft from "../newcompt/homeLeft.vue";
     import homeMiddleBot from "../newcompt/homeMiddleBot.vue";

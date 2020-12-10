@@ -104,7 +104,6 @@
 </template>
 <script>
 
-import bus from "../../eventBus.js";
 
 export default {
   components: {

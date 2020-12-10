@@ -186,15 +186,13 @@ export default {
               triggerType : 'cron', //触发器类型
               cron : "",
               intervalSecond : "", //执行间隔时间
-              jobStatus : "", //运行状态
-              jobParams : "", //执行传参
+              jobStatus : 1, //运行状态
               enabled : "",
             },
         }
     },
     methods: {
       refreshData(){
-        this.$loading.showLoading();//开启
         this.getData();
       },
       getData() {
@@ -204,7 +202,6 @@ export default {
             name: this.filters.name
           })
           .then(res => {
-              _this.$loading.hideLoading();//关闭
               if (!res.data.success) {
                   _this.$message({
                       message: res.data.message,
@@ -255,7 +252,7 @@ export default {
       handleEdit(index, row) {
           this.formTitle = "编辑";
           this.formVisible = true;
-          this.taskForm = row;
+          this.taskForm = Object.assign({},row);
       },
       //显示新增界面
       handleAdd() {
@@ -272,8 +269,7 @@ export default {
             triggerType : 'cron', //触发器类型
             cron : "",
             intervalSecond : "", //执行间隔时间
-            jobStatus : "", //运行状态
-            jobParams : "", //执行传参
+            jobStatus : 1, //运行状态
             enabled : "",
           };
       },
@@ -305,18 +301,18 @@ export default {
         let _this = this;
         let apiUrl = "", state = ""; 
         switch (row.jobStatus) {
-           case 1: //未启动
-             state = "启动";
-             apiUrl = this.$apiSet.getStartJob;
-             break;
-           case 2: //运行中
-             state = "停止";
-             apiUrl = this.$apiSet.getStopJob;
-             break;
-           case 3: //已停止
-             state = "重启";
-             apiUrl = this.$apiSet.getReCovery;
-             break;
+          case 1: //未启动
+            state = "启动";
+            apiUrl = this.$apiSet.getStartJob;
+            break;
+          case 2: //运行中
+            state = "停止";
+            apiUrl = this.$apiSet.getStopJob;
+            break;
+          case 3: //已停止
+            state = "重启";
+            apiUrl = this.$apiSet.getReCovery;
+            break;
         }
 
         this.$showMsgBox({
@@ -344,7 +340,7 @@ export default {
         }).catch(()=>{});
       },
       handleHistory(index, row){
-        
+        console.info(row.tasksLog)
       },
     },
     mounted() {

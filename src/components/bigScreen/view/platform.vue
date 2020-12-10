@@ -4,7 +4,7 @@
 	height: 100%;
 	width: 100%;
 	overflow: hidden;
-	background: url('../../../../static/img/login/bg.jpg') no-repeat;
+	background: url('../../../../static/img/menus/bg.jpg') no-repeat;
 	background-attachment: fixed;
 	background-size: cover;
 	position: relative;
@@ -155,7 +155,7 @@ span .Img2 {
 </style>
 <template>
 	<div id="menus" class="menuApp">
-		<div class="div_head" style="background: url('../../../../static/img/login/title.png') no-repeat;background-size: 100% 100%;height: 0.9rem;">
+		<div class="div_head" style="background: url('../../../../static/img/menus/title.png') no-repeat;background-size: 100% 100%;height: 0.9rem;">
 			<div style="position:absolute; left: 0.1rem;">
 				<img class="weathers_img" :src="'../../static/weather/' + weathers.type + '.gif'" />
 				<span class="weathers_text">{{ weathers.txtInfo }}</span>

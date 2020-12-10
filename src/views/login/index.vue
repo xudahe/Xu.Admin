@@ -50,13 +50,15 @@ export default {
                 code:''
             },
             rules: {
-                username: [{required: true, message: 'please enter your account', trigger: 'blur'}],
-                password: [{required: true, message: 'enter your password', trigger: 'blur'}]
+                username: [{required: true, message: '请输入用户名！', trigger: 'blur'}],
+                password: [{required: true, message: '请输入密码！', trigger: 'blur'}]
             },
             checkboxValue: true
         }
     },
     methods: {
+        // this.tabs = Array.from(new Set(this.tabs)); //去重赋值
+
         randomNum (min, max) {
             return Math.floor(Math.random() * (max - min) + min)
         },
@@ -68,6 +70,7 @@ export default {
             }
             console.log(this.identifyCode)
         },
+        //自动重置验证码
         setRefreshCode(){
             window.clearInterval(this.timeCode)
             this.refreshCode();
@@ -120,6 +123,7 @@ export default {
                         _this.logining = false;
                         _this.loadName = "重新登录";
                         _this.$loading.hideLoading(); //关闭
+                        _this.setRefreshCode();
 
                         _this.$message({
                             message: res.data.message,
@@ -145,7 +149,7 @@ export default {
                         _this.getUserByToken(token)
 			    	}
 				}).catch(err => {
-     
+                    _this.$loading.hideLoading();
                 })
         },
         // 获取用户
@@ -155,11 +159,13 @@ export default {
             this.$ajax(this.$apiSet.getUserByToken, {
 			     	token: token
 				}).then(res => {
+                    _this.$loading.hideLoading();//关闭
+
                     if (!res.data.success) {
                         _this.logining = false;
                         _this.loadName = "重新登录";
-                        _this.$loading.hideLoading();//关闭
-
+                        _this.setRefreshCode();
+                        
                         _this.$message({
                             message: res.data.message,
                             type: 'error'
@@ -178,7 +184,7 @@ export default {
                         }
                     }
                 }).catch(err => {
-
+                    _this.$loading.hideLoading();
                 })
         },
         // 获取角色
@@ -192,6 +198,7 @@ export default {
                         _this.logining = false;
                         _this.loadName = "重新登录";
                         _this.$loading.hideLoading();//关闭
+                        _this.setRefreshCode();
 
                         _this.$message({
                             message: res.data.message,
@@ -207,7 +214,7 @@ export default {
                         }
                     }
                 }).catch(err => {
-
+                    _this.$loading.hideLoading();
                 })
         },
         // 获取菜单
@@ -217,11 +224,13 @@ export default {
             this.$ajax(this.$apiSet.getMenuByIds, {
 			     	ids: menuIds.join(',')
 				}).then(res => {
-                    _this.logining = false;
-                    _this.$loading.hideLoading();//关闭
+                    _this.$loading.hideLoading(); //关闭
 
                     if (!res.data.success) {
+                        _this.logining = false;
                         _this.loadName = "重新登录";
+                        _this.setRefreshCode();
+
                         _this.$message({
                             message: res.data.message,
                             type: 'error'
@@ -242,7 +251,7 @@ export default {
                         }, 1000);
                     }
                 }).catch(err => {
-                
+                    _this.$loading.hideLoading();
                 })
         }
     },

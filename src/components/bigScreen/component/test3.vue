@@ -11,7 +11,7 @@
 	      </div>
 				
         <div style="overflow: auto;height: calc(100% - 0.65rem);" class="borderdiv">
-          <div :class="index==selectId?'bgActiveT':'bgActiveF bgActive'" style="padding-left: 0.05rem;padding-top: 0.05rem;margin-top: 0.05rem; cursor:pointer;position: relative;" 
+          <div :class="index==selectId?'bgActiveT':'bgActiveF bgActive'" style="padding:0.05rem;margin-bottom: 0.05rem;cursor:pointer;position: relative;" 
           @click="goto(item,index)" v-for="(item,index) in tableList" :key="index" :id="index">
 						<div style="display: inline-block;width:100%; height: 0.2rem;">
 							<div class="row at-row no-gutter" style="width: 32px;float: left;position: relative;">
@@ -46,7 +46,7 @@
 
 				<div class="row at-row flex-end" style="padding-top: 0.1rem;">
 					<Page simple show-total :current="page.current" :total="page.total" @on-change="changePage" size="small" style="padding-right: 0.1rem;float: right;"></Page>
-					<span style="color:#fff;font-size: 0.12rem; float: left;padding-left: 0.1rem;">共{{page.total}}条</span>
+					<span style="color:#fff;font-size: 0.12rem;padding-left: 0.1rem;">共{{page.total}}条</span>
 				</div>
 			</div>
 	</div>
@@ -85,11 +85,13 @@ export default {
 			  	current: 1, //当前页码
           total: 0,
           pageList: [
-            {title:"某某"},
-            {title:"某某"},
-            {title:"某某"},
-            {title:"某某"},
-            {title:"某某"},
+            {title:"某某1"},
+            {title:"某某2"},
+            {title:"某某3"},
+            {title:"某某4"},
+            {title:"某某5"},
+            {title:"某某6"},
+            {title:"某某7"},
           ],
         },
 				selectId: -1, //已选择的编号
@@ -118,7 +120,7 @@ export default {
     },
     mounted() {
       var _this = this;
-
+      this.changePage(1);
     
     },
     beforeDestroy() {
@@ -160,7 +162,7 @@ export default {
     width: 0.5rem;
     display: inline-block;
     cursor: pointer;
-    background-image: url(../../../../static/img/newhome/05/中-选中小.png);
+    background-image: url(../../../../static/img/newhome/icon/中-选中小.png);
     background-size: 100% 100%;
   }
   

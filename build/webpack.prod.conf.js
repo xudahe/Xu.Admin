@@ -74,7 +74,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     new HtmlWebpackPlugin({
       filename: config.build.index,
       template: 'index.html',
-      favicon: path.resolve('src/assets/favicon.ico'), // 引入图片地址
+      favicon: path.resolve('src/assets/favicon.ico'), //浏览器标签页图标
       inject: true, // 是否注入 html
       minify: {  // 压缩的方式
         removeComments: true, //移除带html的注释

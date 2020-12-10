@@ -123,6 +123,7 @@ export default {
   },
   mounted() {
     var that = this;
+    bus.$off("onshowdialog")
     bus.$on("onshowdialog", function(isshwo) {
       if (that.isshow != undefined) {
         if (that.$parent.dialog) that.$parent.dialog.show = true;

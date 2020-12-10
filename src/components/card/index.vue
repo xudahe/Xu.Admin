@@ -7,7 +7,7 @@
           <el-card class="box-card" shadow="hover" style="border: 1px solid #ebeef5;">
              <div class="panel_body">
                 <div class="data-item">
-                  <img src="../../../static/img/暂无图片.png" class="imgLeft"></img>
+                  <img src="../../../static/img/暂无图片.png" class="imgLeft" v-viewer></img>
                   <div class="text">
                       <div class="card_title">萧杰</div>
                       <div class="card_lable">专根示千常备接亲确调大志只定。儿集得分度断制线开示种然事白给参。共度可却积改率教指识细器具资林术</div>
@@ -177,6 +177,10 @@
 
   .panel-action_item:last-child::after {
     display: none;
+  }
+
+   .panel-action_item:hover {
+    color: rgba(24, 144, 255,1);
   }
 
   .data-item {

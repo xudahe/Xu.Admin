@@ -45,7 +45,7 @@ var dataList = [
   { title: "异常日志", name: "exception_log" },
   { title: "权限日志", name: "authority_log" },
   { title: "图片管理", name: "picture_manager" },
-  { title: "定时任务", name: "mission_manager" },
+  { title: "定时任务", name: "task_manager" },
 ]
 
 function getTitle(value) {

@@ -19,7 +19,7 @@
           :align="item.align ? item.align : 'center'" 
           :label="item.label" 
           :prop="item.param" 
-          :sortable="item.sortable ? 'custom' : false">
+          :sortable="item.sortable ? true : false">
             <template slot-scope="scope">
     
               <template  v-if="item.render">

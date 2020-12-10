@@ -6,7 +6,7 @@
         <div slot="content"></div>
         <div style="text-align: right;">
           <!--快速查询字段-->
-           <el-input v-model="filters.name" style="width:200px;padding-right: 5px;" placeholder="部门名称"></el-input>
+           <el-input v-model="filters.name" style="width:160px;padding-right: 5px;" placeholder="部门名称"></el-input>
           <!--操作按钮组-->
           <el-button type="primary" icon="el-icon-search" circle @click.native="getData"></el-button>
           <el-button type="primary" icon="el-icon-plus" circle @click.native="handleAdd"></el-button>
@@ -255,7 +255,7 @@ export default {
         handleEdit(index, row) {
             this.formTitle = "编辑";
             this.formVisible = true;
-            this.deptForm = row;
+            this.deptForm = Object.assign({},row);
         },
         //显示新增界面
         handleAdd() {

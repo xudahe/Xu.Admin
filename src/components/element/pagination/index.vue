@@ -61,7 +61,7 @@ export default {
   },
   created() {
     // 初始化数据
-    this.isInit && this.toFirstPage()
+    this.isInit && this.toFirstPage() //这种写法为：短路条件
   },
   methods: {
     // 跳转到第一页

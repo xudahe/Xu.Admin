@@ -1,3 +1,4 @@
+<!-- 平台切换页面 -->
 <style lang="less" scoped="scoped">
 
 .menuApp {

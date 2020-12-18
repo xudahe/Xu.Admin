@@ -12,15 +12,7 @@
                         <!--操作按钮组-->
                         <el-button type="primary" icon="el-icon-search" circle @click.native="getData"></el-button>
                         <el-button type="primary" icon="el-icon-plus" circle @click.native="handleAdd"></el-button>
-                        <el-dropdown style="margin-left:5px;">
-                          <el-button type="primary" style="padding: 10px;">
-                            更多<i class="el-icon-arrow-down el-icon--right"></i>
-                          </el-button>
-                          <el-dropdown-menu slot="dropdown">
-                            <el-dropdown-item>导出</el-dropdown-item>
-                            <el-dropdown-item>导出</el-dropdown-item>
-                          </el-dropdown-menu>
-                        </el-dropdown>
+                        <el-button type="primary" icon="el-icon-refresh" circle @click.native="refreshData"></el-button>
                       </div>
                     </v-header>
               
@@ -295,33 +287,27 @@ export default {
         //删除
         handleDelete (index, row) {
             let _this = this;
-            this.$showMsgBox({
-              msg: `<p>是否删除【${row.realName}】用户?</p>`,
-              type: 'warning',
-              isHTML: true
-            }).then(() => {
-                _this.$ajax(this.$apiSet.deleteUesr,{
-                        id: row.id
-                    }) .then(res => {
-                        if (!res.data.success) {
-                            _this.$message({
-                                message: res.data.message,
-                                type: 'error'
-                            });
-                        } else {
-                            _this.getData();
-                            _this.$message({
-                                message: res.data.message,
-                                type: 'success'
-                            });
-				    	}
-                    })
-                    .catch(err => {})
-            }).catch(()=>{});
+            this.$ajax(this.$apiSet.deleteUesr,{
+                    id: row.id
+                }) .then(res => {
+                    if (!res.data.success) {
+                        _this.$message({
+                            message: res.data.message,
+                            type: 'error'
+                        });
+                    } else {
+                        _this.getData();
+                        _this.$message({
+                            message: res.data.message,
+                            type: 'success'
+                        });
+			    	}
+                })
+                .catch(err => {})
         },
         // 初始化角色选中
         initialRoleCheck(item) {
-            this.roleIds = item.roleIds != '' ? item.roleIds.split(','):[]
+            this.roleIds = item.roleIds ? item.roleIds.split(','):[]
         },
         //角色绑定
         saveRole() {
@@ -384,10 +370,13 @@ export default {
                 })
                 .catch(err => {})
         },
+        refreshData(){
+            this.getData();
+            this.getRoleData();
+        },
     },
     mounted() {
-        this.getData();
-        this.getRoleData();
+        this.refreshData();
     }
 }
 
@@ -396,6 +385,10 @@ export default {
 <style scoped>
 .user_manager{
   height: 100%;
-  widows: 100%;
+  width: 100%;
+}
+.user_manager .tree-box {
+  height: calc(100% - 50px);
+  overflow: auto;
 }
 </style>

@@ -213,7 +213,7 @@ export default {
           })
           .catch(err => {})
       },
-      handleButton (val) {
+      handleButton(val) {
         if(val.methods == 'handleEdit') this.handleEdit(val.index,val.row)
         if(val.methods == 'handleDelete') this.handleDelete(val.index,val.row)
         if(val.methods == 'handleHistory') this.handleHistory(val.index,val.row)
@@ -315,29 +315,23 @@ export default {
             break;
         }
 
-        this.$showMsgBox({
-          msg: `<p>是否${state + `【` + row.jobName}】任务?</p>`,
-          type: 'warning',
-          isHTML: true
-        }).then(() => {
-          _this.$ajax(apiUrl,{
-            id: row.id,
-          }).then(res => {
-              if (!res.data.success) {
-                  _this.$message({
-                      message: res.data.message,
-                      type: 'error'
-                  });
-              } else {
-                  _this.getData();
-                  _this.$message({
-                      message: res.data.message,
-                      type: 'success'
-                  });
-			        }
-           })
-           .catch(err => {})
-        }).catch(()=>{});
+        this.$ajax(apiUrl,{
+          id: row.id,
+        }).then(res => {
+            if (!res.data.success) {
+                _this.$message({
+                    message: res.data.message,
+                    type: 'error'
+                });
+            } else {
+                _this.getData();
+                _this.$message({
+                    message: res.data.message,
+                    type: 'success'
+                });
+			      }
+         })
+         .catch(err => {})
       },
       handleHistory(index, row){
         console.info(row.tasksLog)
@@ -364,6 +358,6 @@ export default {
 <style scoped>
 .task_manager{
   height: 100%;
-  widows: 100%;
+  width: 100%;
 }
 </style>

@@ -15,6 +15,8 @@ const store=new Vuex.Store({
 
         drag_com: "",
         drag_ref: "",
+        mapitems: Array, //地图窗口组件id名称
+        mapitemsload: Object, //分屏预加载图层
     },
     // 执行同步操作改变state   this.$store.commit("saveToken", data)
     mutations: {

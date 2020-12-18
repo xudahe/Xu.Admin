@@ -220,7 +220,7 @@ export default {
                         type: 'error'
                     });
                 } else {
-                    _this.parentData = _this.tableData.filter(val => val.parentId == null);
+                    _this.parentData = res.data.response.filter(val => val.parentId == null);
 				       	}
             })
             .catch(err => {})
@@ -262,29 +262,23 @@ export default {
         //删除
         handleDelete(index, row) {
           let _this = this
-          this.$showMsgBox({
-            msg: `<p>是否删除【${row.menuName}】菜单?</p>`,
-            type: 'warning',
-            isHTML: true
-           }).then(() => {
-              _this.$ajax(this.$apiSet.deleteMenu,{
-                id: row.id
-              }) .then(res => {
-                if (!res.data.success) {
-                  _this.$message({
-                    message: res.data.message,
-                    type: 'error'
-                  });
-                } else {
-                  _this.getData();
-                  _this.$message({
-                    message: res.data.message,
-                    type: 'success'
-                  });
-				        }
-              })
-              .catch(err => {})
-           }).catch(()=>{});
+          this.$ajax(this.$apiSet.deleteMenu,{
+            id: row.id
+          }) .then(res => {
+            if (!res.data.success) {
+              _this.$message({
+                message: res.data.message,
+                type: 'error'
+              });
+            } else {
+              _this.getData();
+              _this.$message({
+                message: res.data.message,
+                type: 'success'
+              });
+				    }
+          })
+          .catch(err => {})
         },
         //显示编辑界面
         handleEdit(index, row) {
@@ -351,6 +345,6 @@ export default {
 <style scoped>
 .menu_manager{
   height: 100%;
-  widows: 100%;
+  width: 100%;
 }
 </style>

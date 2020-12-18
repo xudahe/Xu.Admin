@@ -1,5 +1,5 @@
 <template>
- <section>
+<section>
   <el-table ref="table" 
     element-loading-text="Loading" 
     :data="dataList" 
@@ -17,7 +17,7 @@
           :width="item.width ? item.width : ''" 
           :key="index" 
           :align="item.align ? item.align : 'center'" 
-          :label="item.label" 
+          :label="item.label"
           :prop="item.param" 
           :sortable="item.sortable ? true : false">
             <template slot-scope="scope">
@@ -40,17 +40,29 @@
       <el-table-column v-if="tableOption.label" :width="tableOption.width" :label="tableOption.label" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <template v-for="(item,index) in tableOption.options">
-            <el-button  v-if="item.label" :key="index" :type="item.type" :icon="item.icon" @click.native="handleButton(item.methods,scope.row,index)" size="mini">
+            <!-- <el-button  v-if="item.label" :key="index" :type="item.type" :icon="item.icon" @click.native="handleButton(item.methods,scope.row,index)" size="mini">
               {{item.label}}
+            </el-button> -->
+            <el-button v-if="item.type!='danger'" :key="index" :type="item.type" :icon="item.icon" @click.native="handleButton(item.methods,scope.row,index)" size="mini">
             </el-button>
-            <el-button v-else :key="index" :type="item.type" :icon="item.icon" @click.native="handleButton(item.methods,scope.row,index)" size="mini">
-            </el-button>
+            <el-popconfirm v-if="item.type=='danger'"
+              :key="index"
+              confirm-button-text='确定'
+              cancel-button-text='取消'
+              icon="el-icon-error"
+              icon-color="red"
+              title="这条数据确定删除吗？"
+              @onConfirm="handleButton(item.methods,scope.row,index)"
+              @onCancel="()=>{}"
+            >
+              <el-button slot="reference" :type="item.type" :icon="item.icon" style="margin-left:5px;" size="mini"></el-button>
+            </el-popconfirm>
           </template>
         </template>
       </el-table-column>
   </el-table>
   <pagination ref="pagination" :now-page.sync="nowPage" :now-size.sync="nowSize" :total="tableData.length"  @handleSizeChange="handleSizeChange" @handleCurrentChange="handleCurrentChange"/>
- </section>
+</section>
 </template>
 
 <script>

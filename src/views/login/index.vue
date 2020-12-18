@@ -57,7 +57,7 @@ export default {
         }
     },
     methods: {
-        // this.tabs = Array.from(new Set(this.tabs)); //去重赋值
+        // this.tabs = Array.from(new Set(this.tabs)); //去除数组重复项
 
         randomNum (min, max) {
             return Math.floor(Math.random() * (max - min) + min)

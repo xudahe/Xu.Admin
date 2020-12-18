@@ -112,7 +112,7 @@
 </template>
 <script>
 import esriLoader from 'esri-loader'
-import { MapControl } from '../map/js/MapControl'
+import { MapControl } from "../map/js/MapControl";
 import mapconfig from '../map/js/mapconfig';
 import layermanage from '../map/child/layerManage'
 import bottombar from "../map/child/bottombar";

@@ -1,6 +1,19 @@
-import dialogDrag from './dialog_drag'
+import dialogDrag from './methods/dialog_drag'
+import copy from './methods/copy' //复制粘贴指令 v-copy
+import emoji from './methods/emoji' //禁止表情及特殊字符 v-emoji
+import longpress from './methods/longpress'
+import debounce from './methods/debounce' //输入框防抖指令 v-debounce
+import waterMarker from './methods/waterMarker' //实现页面水印 v-waterMarker
+import color from './methods/color'
+// import LazyLoad from './methods/lazyLoad' //图片懒加载 v-LazyLoad
 
 //注册指令,出口文件，所有全局指令都在该文件里导出。
 export default {
-  dialogDrag
+  dialogDrag,
+  copy,
+  emoji,
+  longpress,
+  debounce,
+  waterMarker,
+  color
 }

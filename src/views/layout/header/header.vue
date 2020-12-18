@@ -33,7 +33,7 @@
         </li>
         <li v-show="$defaultConfig.errorLog">
           <el-tooltip class="item" effect="dark" :content="tooltipContent" placement="bottom">
-            <el-badge :max="99" :value="$store.getters.errorLogList.length" class="item">
+            <el-badge :max="99" :value="$store.getters.errorLogList.length" style="cursor: pointer;">
               <svg-icon :class="$store.getters.errorLogList.length == 0 ? 'bug-f':'bug-t'" icon-class="bug" @click.native="$emit('showErrorLogBox')" />
             </el-badge>
           </el-tooltip>
@@ -254,7 +254,6 @@ export default {
       height: 24px!important; 
       color: red;
       vertical-align: middle;
-      cursor: pointer;
     }
 
     .bug-f {

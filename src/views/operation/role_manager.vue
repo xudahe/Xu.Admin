@@ -12,6 +12,7 @@
               <!--操作按钮组-->
               <el-button type="primary" icon="el-icon-search" circle @click.native="getData"></el-button>
               <el-button type="primary" icon="el-icon-plus" circle @click.native="handleAdd"></el-button>
+              <el-button type="primary" icon="el-icon-refresh" circle @click.native="refreshData"></el-button>
             </div>
           </v-header>
           <!--列表-->
@@ -22,7 +23,7 @@
         <el-card class="box-card card-gutter-sm" shadow="hover">
           <div slot="header" class="clearfix">
             <span class="header">{{sels.roleName}}&nbsp;--&nbsp;菜单分配</span>
-            <el-button title="保存" type="primary" style="float: right; padding: 5px 10px" :disabled="!showButton" @click.native="saveMenu">
+            <el-button type="primary" style="float: right; padding: 5px 10px" :disabled="!showButton" @click.native="saveMenu">
               <i class="el-icon-check el-icon--left" style="margin-right:0px;"></i>
             </el-button>
           </div>
@@ -242,33 +243,27 @@ export default {
         //删除
         handleDelete(index, row) {
           let _this = this;
-          this.$showMsgBox({
-            msg: `<p>是否删除【${row.roleName}】角色?</p>`,
-            type: 'warning',
-            isHTML: true
-          }).then(() => {
-            _this.$ajax(this.$apiSet.deleteRole,{
-              id: row.id
-            }) .then(res => {
-              if (!res.data.success) {
-                  _this.$message({
-                      message: res.data.message,
-                      type: 'error'
-                  });
-              } else {
-                  _this.getData();
-                  _this.$message({
-                      message: res.data.message,
-                      type: 'success'
-                  });
-				      }
-            })
-            .catch(err => {})
-          }).catch(()=>{});
+          this.$ajax(this.$apiSet.deleteRole,{
+            id: row.id
+          }) .then(res => {
+            if (!res.data.success) {
+                _this.$message({
+                    message: res.data.message,
+                    type: 'error'
+                });
+            } else {
+                _this.getData();
+                _this.$message({
+                    message: res.data.message,
+                    type: 'success'
+                });
+				    }
+          })
+          .catch(err => {})
         },
         // 初始化菜单选中
         initialMenuCheck(item) {
-          this.menuIds = item.menuIds != '' ? item.menuIds.split(','):[]
+          this.menuIds = item.menuIds ? item.menuIds.split(','):[]
         },
         //菜单绑定
         saveMenu() {
@@ -326,10 +321,13 @@ export default {
             })
             .catch(err => {})
         },
+        refreshData(){
+          this.getData();
+          this.getMenuData();
+        },
     },
     mounted() {
-      this.getData();
-      this.getMenuData();
+      this.refreshData();
     }
 };
 </script>
@@ -337,6 +335,10 @@ export default {
 <style scoped>
 .role_manager{
   height: 100%;
-  widows: 100%;
+  width: 100%;
+}
+.role_manager .tree-box {
+  height: calc(100% - 50px);
+  overflow: auto;
 }
 </style>

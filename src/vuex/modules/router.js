@@ -1,4 +1,7 @@
-import {defaultRouter, addRouter} from "@/router/index"
+import {
+  defaultRouter,
+  addRouter
+} from "@/router/index"
 
 const routerData = {
   state: {
@@ -13,11 +16,13 @@ const routerData = {
     }
   },
   actions: {
-    newRoutes ({commit}, role) {
+    newRoutes({
+      commit
+    }, role) {
       //  通过递归路由表，删除掉没有权限的路由
       function eachSelect(routers, userRole) {
         for (let j = 0; j < routers.length; j++) {
-          routers[j].name = getTitle(routers[j].name)
+          routers[j].name = dataList[routers[j].name] || routers[j].name;
           if (routers[j].meta && routers[j].meta.role.length && routers[j].meta.role.indexOf(userRole) === -1) {
             routers.splice(j, 1)
             j = j !== 0 ? j - 1 : j
@@ -35,25 +40,16 @@ const routerData = {
 }
 
 //可以通过后端返回数据
-var dataList = [
-  { title: "用户管理", name: "user_manager" },
-  { title: "部门管理", name: "dept_manager" },
-  { title: "角色管理", name: "role_manager" },
-  { title: "菜单管理", name: "menu_manager" },
-  { title: "字典管理", name: "dictionary_manager" },
-  { title: "操作日志", name: "operation_log" },
-  { title: "异常日志", name: "exception_log" },
-  { title: "权限日志", name: "authority_log" },
-  { title: "图片管理", name: "picture_manager" },
-  { title: "定时任务", name: "task_manager" },
-]
-
-function getTitle(value) {
-  let dt = dataList.filter(val => val.name == value);
-  if (dt.length >0 && dt != undefined)
-    return  dt[0].title
-  else
-    return value
+var dataList = {
+  "user_manager": "用户管理",
+  "dept_manager": "部门管理",
+  "role_manager": "角色管理",
+  "menu_manager": "菜单管理",
+  "operation_log": "操作日志",
+  "exception_log": "异常日志",
+  "authority_log": "权限日志",
+  "picture_manager": "图片管理",
+  "task_manager": "定时任务",
 }
 
 export default routerData

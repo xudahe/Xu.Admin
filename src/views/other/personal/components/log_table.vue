@@ -70,6 +70,6 @@ export default {
 <style>
 .log_table{
   height: 100%;
-  widows: 100%;
+  width: 100%;
 }
 </style>

@@ -7,6 +7,7 @@ const mapconfig = {
 	lsbasemap: 'http://58.213.48.104/arcgis/rest/services/NJ08/LS081/MapServer',
 	tzbasemap:'http://58.213.48.106/arcgis/rest/services/TZPS/TZDXT/MapServer',
 	jnbasemap:'http://58.213.48.106/arcgis/rest/services/NJ08/JNDXT/MapServer',
+	rgbasemap: 'http://58.213.48.108/arcgis/rest/services/%E5%A6%82%E7%9A%8B%E6%9C%8D%E5%8A%A1/%E7%9F%A2%E9%87%8F%E5%BA%95%E5%9B%BE/MapServer',
 	
 	basemap: 'http://58.213.48.106:6080/arcgis/rest/services/NJ08/NJDXT20180830/MapServer', //南京市基础底图
 	basemapview: 'http://58.213.48.106:6080/arcgis/rest/services/NJ08/NJ08dom1M/MapServer', //基础影像图
@@ -22,6 +23,7 @@ const mapconfig = {
 		xmax: 331744.7149,
 		ymax: 356750.94739999995
 	},
+	MapControl: {}, //用来控制地图是否同步
 };
 
 export default mapconfig

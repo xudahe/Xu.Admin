@@ -136,7 +136,7 @@
 
 .v-card {
   height: 100%;
-  widows: 100%;
+  width: 100%;
 
   @{deep}.el-card__body {
     padding: 0 !important;

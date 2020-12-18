@@ -1,5 +1,5 @@
 <template>
-  <el-dialog :visible.sync="dialogVisible" fullscreen append-to-body>
+  <el-dialog :visible.sync="dialogVisible" width="95%" append-to-body>
     <div class="error-box-title" slot="title">
       <span>错误日志</span> 
       <el-button @click.native="remove" type="danger" size="mini" icon="el-icon-delete">清空</el-button>

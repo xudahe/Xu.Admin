@@ -1,3 +1,7 @@
+/**
+ * @description 拖拽指令
+ * 
+ */
 function drag(el) {
 	const dialogHeaderEl = el.querySelector('.el-dialog__header')
 	const dragDom = el.querySelector('.el-dialog')

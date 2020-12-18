@@ -47,7 +47,7 @@
 					<div slot="header" class="clearfix"><span class="header">基本信息</span></div>
 					<el-tabs>
 						<el-tab-pane label="基本资料">
-					   		<Basic @updateUserInfo="updateUserInfo" />
+					   		<basic @updateUserInfo="updateUserInfo" />
 						</el-tab-pane>
 						<el-tab-pane label="修改邮箱">
 						   	<editEmail @updateUserInfo="updateUserInfo" />
@@ -70,14 +70,14 @@
 
 // keep-alive 包裹动态组件时，会缓存不活动的组件实例，而不是销毁它们。 它是一个抽象组件：它自身不会渲染一个 DOM 元素，也不会出现在父组件链中。
 
-import Basic from './components/basic'
+import basic from './components/basic'
 import editPassword from './components/edit_password';
 import editEmail from './components/edit_email';
 import logTable from './components/log_table';
 
 export default {
 	name: 'personal',
-	components: { Basic, editPassword, editEmail, logTable },
+	components: { basic, editPassword, editEmail, logTable },
     data() {
       return {
         activeName: "first",
@@ -110,7 +110,7 @@ export default {
 <style lang="scss" scoped>
 .personal{
   height: 100%;
-  widows: 100%;
+  width: 100%;
 }
 
 .header {

@@ -1,3 +1,4 @@
+<!-- 首页面 -->
 <template>
   <div class="homepage" style="width: 100%;height: calc(100% - 0.6rem);">
     <marquee :width="wit" direction="left" align="middle" class="cementDiv">

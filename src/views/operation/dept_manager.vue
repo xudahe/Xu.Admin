@@ -10,6 +10,7 @@
           <!--操作按钮组-->
           <el-button type="primary" icon="el-icon-search" circle @click.native="getData"></el-button>
           <el-button type="primary" icon="el-icon-plus" circle @click.native="handleAdd"></el-button>
+          <el-button type="primary" icon="el-icon-refresh" circle @click.native="refreshData"></el-button>
         </div>
       </v-header>
   
@@ -26,8 +27,7 @@
               <el-input v-model="deptForm.deptName" auto-complete="off"></el-input>
             </el-form-item>
             <el-form-item label="负责人" prop="deptUser">
-              <el-select v-model="deptForm.deptUser" placeholder="请选择父级菜单">
-                <el-option label="无" value=""></el-option>
+              <el-select v-model="deptForm.deptUser" placeholder="请选择部门负责人" filterable clearable>
                 <el-option :label="item.realName" :value="item.id" :key="index" v-for="(item,index) in userData"></el-option>
               </el-select>
             </el-form-item>
@@ -39,8 +39,10 @@
             <el-form-item label="部门编码" prop="deptCode">
               <el-input v-model="deptForm.deptCode" auto-complete="off"></el-input>
             </el-form-item>
-            <el-form-item label="上级部门" prop="parentDept">
-              <el-input v-model="deptForm.parentDept" auto-complete="off"></el-input>
+            <el-form-item label="上级部门" prop="parentDept" filterable clearable>
+              <el-select v-model="deptForm.parentDept" placeholder="请选择上级部门" filterable clearable>
+                <el-option :label="item.deptName" :value="item.id" :key="index" v-for="(item,index) in tableData"></el-option>
+              </el-select>
             </el-form-item>
             <el-form-item label="状态" prop="enabled">
               <el-radio-group v-model="deptForm.enabled">
@@ -227,29 +229,23 @@ export default {
         //删除
         handleDelete(index, row) {
           let _this = this
-          this.$showMsgBox({
-             msg: `<p>是否删除【${row.deptName}】部门?</p>`,
-             type: 'warning',
-             isHTML: true
-           }).then(() => {
-              _this.$ajax(this.$apiSet.deleteDept,{
-                id: row.id
-              }) .then(res => {
-                if (!res.data.success) {
-                  _this.$message({
-                    message: res.data.message,
-                    type: 'error'
-                  });
-                } else {
-                  _this.getData();
-                  _this.$message({
-                    message: res.data.message,
-                    type: 'success'
-                  });
-				        }
-              })
-              .catch(err => {})
-           }).catch(()=>{});
+          this.$ajax(this.$apiSet.deleteDept,{
+            id: row.id
+          }) .then(res => {
+            if (!res.data.success) {
+              _this.$message({
+                message: res.data.message,
+                type: 'error'
+              });
+            } else {
+              _this.getData();
+              _this.$message({
+                message: res.data.message,
+                type: 'success'
+              });
+				    }
+          })
+          .catch(err => {})
         },
         //显示编辑界面
         handleEdit(index, row) {
@@ -293,11 +289,13 @@ export default {
             })
             .catch(err => {})
         },
+        refreshData(){
+          this.getData();
+          this.getUserData();
+        },
     },
     mounted() {
-        this.getData();
-        this.getUserData();
-  
+      this.refreshData()
     }
 };
 </script>
@@ -305,6 +303,6 @@ export default {
 <style scoped>
 .dept_manager{
   height: 100%;
-  widows: 100%;
+  width: 100%;
 }
 </style>

@@ -528,9 +528,6 @@ import resize from "@/api/mixins/echart.js";
           index++;
         }, 5000);
 
-        this.$once('hook:beforeDestroy', () => {            
-          clearInterval(timersb);                                    
-        })
       },
       
 		},

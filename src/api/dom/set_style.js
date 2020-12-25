@@ -33,9 +33,9 @@ function setCssText(el, rule) {
  * 示例： this.$createStyle(`body { background: #666; padding: 20px; }`)
  */
 function createStyle(css = "", className = "") {
-  const style = className
-    ? document.querySelector(`.${className}`)
-    : null
+  const style = className ?
+    document.querySelector(`.${className}`) :
+    null
   if (style) {
     style.innerText = css
   } else {
@@ -51,4 +51,3 @@ export default {
   setCssText,
   createStyle,
 }
-

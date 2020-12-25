@@ -50,166 +50,153 @@ axios.interceptors.response.use(response => {
   }
   return response
 }, error => {
+
   // 超时请求处理
   var originalRequest = error.config;
-  if(error.code == 'ECONNABORTED' && error.message.indexOf('timeout')!=-1 && !originalRequest._retry){
-    
+  if (error.code == 'ECONNABORTED' && error.message.indexOf('timeout') != -1 && !originalRequest._retry) {
+
     Vue.prototype.$message({
-        message: '请求超时！',
-        type: 'error'
+      message: '请求超时！',
+      type: 'error'
     });
-  
+
     originalRequest._retry = true
     return null;
   }
-    
+
   if (error && error.response) {
-      switch (error.response.status) {
-        case 400:
-            error.message = '错误请求';
-            break;
-        case 401:
-            var curTime = new Date()
-            var refreshtime = new Date(Date.parse(window.localStorage.refreshtime))
-            // 在用户操作的活跃期内
-            if (window.localStorage.refreshtime && (curTime <= refreshtime)) {
-              // 直接将整个请求 return 出去，不然的话，请求会晚于当前请求，无法达到刷新操作 
-              return httpServer(apiSetting.refreshToken, {
-                token: window.localStorage.Token
-              }).then(res => {
-                if (res.success == true) {
-                    Vue.prototype.$message({
-                      message: 'refreshToken success! loading data...',
-                      type: 'success'
-                    });
-  
-                    store.commit("saveToken", res.token);
-  
-                    var curTime = new Date();
-                    var expiredate = new Date(curTime.setSeconds(curTime.getSeconds() + res.expires_in));
-                    store.commit("saveTokenExpire", expiredate);
-  
-                    error.config.__isRetryRequest = true;
-                    error.config.headers.Authorization = 'Bearer ' + res.token;
-                    return axios(error.config); //这里就是重新进行一次请求， error.config 包含了当前请求的所有信息             
-                } else {
-                    ToLogin() // 刷新token失败,清除token信息并跳转到登录页面
-		          		}
-		          	},
-		          	error => {
-		          		ToLogin() // 刷新token失败,清除token信息并跳转到登录页面
-		          	}
-              );
-           
-            } else {
-              // 返回 401，并且不知用户操作活跃期内 清除token信息并跳转到登录页面
-              error.message = '未授权，请重新登录';
-              ToLogin()
+    switch (error.response.status) {
+      case 400:
+        error.message = '错误请求';
+        break;
+      case 401:
+        var curTime = new Date()
+        var refreshtime = new Date(Date.parse(window.localStorage.refreshtime))
+        // 在用户操作的活跃期内
+        if (window.localStorage.refreshtime && (curTime <= refreshtime)) {
+          // 直接将整个请求 return 出去，不然的话，请求会晚于当前请求，无法达到刷新操作 
+          return httpServer(apiSetting.refreshToken, {
+            token: window.localStorage.Token
+          }).then(res => {
+              if (res.success == true) {
+                Vue.prototype.$message({
+                  message: 'refreshToken success! loading data...',
+                  type: 'success'
+                });
+
+                store.commit("saveToken", res.token);
+
+                var curTime = new Date();
+                var expiredate = new Date(curTime.setSeconds(curTime.getSeconds() + res.expires_in));
+                store.commit("saveTokenExpire", expiredate);
+
+                error.config.__isRetryRequest = true;
+                error.config.headers.Authorization = 'Bearer ' + res.token;
+                return axios(error.config); //这里就是重新进行一次请求， error.config 包含了当前请求的所有信息             
+              } else {
+                ToLogin() // 刷新token失败,清除token信息并跳转到登录页面
+              }
+            },
+            error => {
+              ToLogin() // 刷新token失败,清除token信息并跳转到登录页面
             }
-            break;
-        case 403: //无权限
-            error.message = '拒绝访问';
-            break;
-        case 404:
-            error.message = '请求错误,未找到该资源';
-            break;
-        case 405:
-            error.message = '请求方法未允许';
-            break;
-        case 408:
-            error.message = '请求超时';
-            break;
-        case 429: //ip限流
-            error.message = '刷新次数过多，请稍事休息重试';
-            break;
-        case 500:
-            error.message = '服务器端出错';
-            break;
-        case 501:
-            error.message = '网络未实现';
-            break;
-        case 502:
-            error.message = '网络错误';
-            break;
-        case 503:
-            error.message = '服务不可用';
-            break;
-        case 504:
-            error.message = '网络超时';
-            break;
-        case 505:
-            error.message = 'http版本不支持该请求';
-            break;
-        default:
-            error.message = `未知错误${error.response.status}`;
-      }
-    } else {
-        error.message = "连接到服务器失败";
+          );
+
+        } else {
+          // 返回 401，并且不知用户操作活跃期内 清除token信息并跳转到登录页面
+          error.message = '未授权，请重新登录';
+          ToLogin()
+        }
+        break;
+      case 403: //无权限
+        error.message = '拒绝访问，请重新登录';
+        ToLogin();
+        break;
+      case 404:
+        error.message = '请求错误,未找到该资源';
+        break;
+      case 405:
+        error.message = '请求方法未允许';
+        break;
+      case 408:
+        error.message = '请求超时';
+        break;
+      case 429: //ip限流
+        error.message = '刷新次数过多，请稍事休息重试';
+        break;
+      case 500:
+        error.message = '服务器端出错';
+        break;
+      case 501:
+        error.message = '网络未实现';
+        break;
+      case 502:
+        error.message = '网络错误';
+        break;
+      case 503:
+        error.message = '服务不可用';
+        break;
+      case 504:
+        error.message = '网络超时';
+        break;
+      case 505:
+        error.message = 'http版本不支持该请求';
+        break;
+      default:
+        error.message = `未知错误${error.response.status}`;
     }
-    return Promise.reject(error);
-})
-
-
-function errorState(response) {
-  // 如果http状态码正常，则直接返回数据  
-  if (response && response.status === 200) {
-    return response
-    // 如果不需要除了data之外的数据，可以直接 return response.data  
   } else {
-    let res = response.response
-
-    Vue.prototype.$message({
-      message: res !=undefined ? res.data.message : response.message,
-      type: 'error'
-    });
-    // alert('网络异常1')
+    error.message = "连接到服务器失败";
   }
-}
 
-function successState(res) {
-  //统一判断后端返回的错误码  
-  if (res.data.errCode == '000002') {
-    alert('网络异常')
-  } else if (res.data.errCode != '000002' && res.data.errCode != '000000') {
-    alert('网络异常2')
-  }
-}
+  Vue.prototype.$message({
+    message: error.message,
+    type: 'error'
+  });
 
+  return Promise.reject(error);
+})
 
 //参考：https://blog.csdn.net/qq_42553082/article/details/84072301
 const httpServer = (opts, data) => {
   let Public = { //公共参数  
   }
-  
+
   let httpDefaultOpts = { //http默认配置  
     method: opts.method,
     baseURL: 'http://localhost:1081', //配置后端接口地址
     url: opts.url,
     timeout: 300000, //响应时间
     params: Object.assign(Public, data),
-    data: Object.assign(Public, data),
+    // data: Object.assign(Public, data),
     // data: qs.stringify(Object.assign(Public, data))
   }
-  
+
   if (opts.method == 'get' || opts.method == 'delete') {
+    // 默认application/x-www-form-urlencoded请求格式
     delete httpDefaultOpts.data
-  } else if (opts.method == 'post' || opts.method == 'put') {
+  } else if (opts.method == 'post') {
+    // multipart/form-data请求格式
+    httpDefaultOpts.data = qs.stringify(data)
+    delete httpDefaultOpts.params
+  } else if (opts.method == 'other' || opts.method == 'put') {
+    // application/json请求格式
+    httpDefaultOpts.method = opts.method == 'other' ? 'post' : 'put'
     httpDefaultOpts.headers = {
       "Accept": "application/json, text/javascript, */*; q=0.01",
       "Content-Type": "application/json; charset=UTF-8"
     }
+    httpDefaultOpts.data = Object.assign(Public, data)
     delete httpDefaultOpts.params
   }
 
   let promise = new Promise(function (resolve, reject) {
     axios(httpDefaultOpts).then(
       (res) => {
-        // successState(res)
         resolve(res)
       }
     ).catch(
       (res) => {
-        errorState(res)
         reject(res)
       }
     )
@@ -223,11 +210,13 @@ const ToLogin = params => {
   store.commit("saveTokenExpire", "");
 
   router.replace({
-      path: "/login",
-      query: {redirect: router.currentRoute.fullPath}
+    path: "/login",
+    query: {
+      redirect: router.currentRoute.fullPath
+    }
   });
 
-   window.location.reload()
+  window.location.reload()
 
 };
 
@@ -236,16 +225,16 @@ export const saveRefreshtime = params => {
   let nowtime = new Date();
   let lastRefreshtime = window.localStorage.refreshtime ? new Date(window.localStorage.refreshtime) : new Date(-1); //最后刷新时间，当用户操作的时候，实时更新最后的刷新时间，保证用户活跃时间一直有效
   let expiretime = new Date(Date.parse(window.localStorage.TokenExpire))
-  
+
   //refreshCount 滑动系数：就是你自定义的用户的停止活跃时间段，比如你想用户最大的休眠时间是20分钟，用户可以最多20分钟内不进行操作，
   //如果20分钟后，再操作，就跳转到登录页，如果20分钟内，继续操作，那继续更新时间，休眠时间还是以当前时间 + 20分钟。
-  let refreshCount=1; 
+  let refreshCount = 1;
   if (lastRefreshtime >= nowtime) {
-      lastRefreshtime = nowtime>expiretime ? nowtime:expiretime;
-      lastRefreshtime.setMinutes(lastRefreshtime.getMinutes() + refreshCount); 
-      window.localStorage.refreshtime = lastRefreshtime;
-  }else {
-      window.localStorage.refreshtime = new Date(-1);
+    lastRefreshtime = nowtime > expiretime ? nowtime : expiretime;
+    lastRefreshtime.setMinutes(lastRefreshtime.getMinutes() + refreshCount);
+    window.localStorage.refreshtime = lastRefreshtime;
+  } else {
+    window.localStorage.refreshtime = new Date(-1);
   }
 };
 

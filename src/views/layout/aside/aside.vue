@@ -42,7 +42,7 @@ export default {
     selectmenu(key) {
       let router = this.$store.getters.routers;
       let name = "";
-      
+
       let navTitle = function(path, routerARR) {
         for (let i = 0; i < routerARR.length; i++) {
           if (routerARR[i].children.length > 0 || routerARR[i].path === path) {

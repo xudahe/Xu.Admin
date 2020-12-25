@@ -20,7 +20,7 @@ const UserModule = {
   }, 
   postUser: { //添加用户
     url: '/api/User/PostUser',
-    method: 'post'
+    method: 'other'
   },
   putUser: { //更新用户
     url: '/api/User/PutUser',
@@ -43,7 +43,7 @@ const DeptModule = {
   },
   postDept: { //添加部门
     url: '/api/Dept/PostDept',
-    method: 'post'
+    method: 'other'
   },
   putDept: { //更新部门
     url: '/api/Dept/PutDept',
@@ -66,7 +66,7 @@ const RoleModule = {
   },
   postRole: { //添加角色
     url: '/api/Role/PostRole',
-    method: 'post'
+    method: 'other'
   },
   putRole: { //更新角色
     url: '/api/Role/PutRole',
@@ -93,7 +93,7 @@ const MenuModule = {
   },
   postMenu: { //添加菜单
     url: '/api/Menu/PostMenu',
-    method: 'post'
+    method: 'other'
   },
   putMenu: { //更新菜单
     url: '/api/Menu/PutMenu',
@@ -116,7 +116,7 @@ const TasksQzModule = {
   },
   postTasksQz: { //添加定时任务
     url: '/api/TasksQz/PostTasksQz',
-    method: 'post'
+    method: 'other'
   },
   putTasksQz: { //更新定时任务
     url: '/api/TasksQz/PutTasksQz',

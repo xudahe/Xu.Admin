@@ -302,7 +302,8 @@ function monthDays(B, A) {
 
 function Lunar(F) {
   // let A = ''
-  let D, C = 0, B = 0;
+  let D, C = 0,
+    B = 0;
   // let E = new Date(1900, 0, 31)
   let G = Math.floor((F.getTime() + 2206425600000) / 86400000);
   // A += 'objDate=' + F.getTime() + ', new Date(1900,0,31)=' + E.getTime();
@@ -415,7 +416,9 @@ export function cDay(B) {
 }
 
 export function Calendar(N, F, tY, tM, tD) {
-  let O, I, L, B, K = 1, C, M = 0, H, G;
+  let O, I, L, B, K = 1,
+    C, M = 0,
+    H, G;
   const D = new Array(3);
   let E = 0;
   let A = 0;
@@ -534,7 +537,9 @@ export function getFestivals(start, end) {
   let startMonth = new Date(startDate.getFullYear(), startDate.getMonth())
   const endMonth = new Date(endDate.getFullYear(), endDate.getMonth())
   while (endMonth.getTime() > startMonth.getTime()) {
-    startMonth = dateFormat(startMonth, null, {M: 1})
+    startMonth = dateFormat(startMonth, null, {
+      M: 1
+    })
     const festivals = getFestivalsByMonth(startMonth.getFullYear(), startMonth.getMonth())
       .filter(item => item.festival)
       .filter(function (item) {
@@ -563,50 +568,50 @@ export function getFestivals(start, end) {
  * // 当前时间减少一天, 并转换格式
  *  date(new Date(), 'yyyy-MM-dd', {d: -1})
  */
-export function dateFormat (dateStr, format, options) {
-    if (!dateStr) {
-      return (new Date())
+export function dateFormat(dateStr, format, options) {
+  if (!dateStr) {
+    return (new Date())
+  }
+  let obj = typeof dateStr === 'string' ? new Date(dateStr.replace(/-/g, '/')) : dateStr
+  const setting = {
+    y: 0, // 年
+    M: 0, // 月
+    d: 0, // 日
+    h: 0, // 时
+    m: 0, // 分
+    s: 0 // 秒
+  }
+  Object.assign(setting, options || {})
+
+  obj = new Date(setting.y + obj.getFullYear(),
+    setting.M + obj.getMonth(),
+    setting.d + obj.getDate(),
+    setting.h + obj.getHours(),
+    setting.m + obj.getMinutes(),
+    setting.s + obj.getSeconds())
+  const o = {
+    'M+': obj.getMonth() + 1,
+    'd+': obj.getDate(),
+    'h+': obj.getHours(),
+    'm+': obj.getMinutes(),
+    's+': obj.getSeconds(),
+    'q+': Math.floor((obj.getMonth() + 3) / 3),
+    S: obj.getMilliseconds()
+  }
+  if (format) {
+    if (/(y+)/.test(format)) {
+      format = format.replace(RegExp.$1,
+        RegExp.$1.length === 4 ? obj.getFullYear() : (obj.getFullYear() + '').substr(4 - RegExp.$1.length))
     }
-    let obj = typeof dateStr === 'string' ? new Date(dateStr.replace(/-/g, '/')) : dateStr
-    const setting = {
-      y: 0, // 年
-      M: 0, // 月
-      d: 0, // 日
-      h: 0, // 时
-      m: 0, // 分
-      s: 0 // 秒
-    }
-    Object.assign(setting, options || {})
-  
-    obj = new Date(setting.y + obj.getFullYear(),
-      setting.M + obj.getMonth(),
-      setting.d + obj.getDate(),
-      setting.h + obj.getHours(),
-      setting.m + obj.getMinutes(),
-      setting.s + obj.getSeconds())
-    const o = {
-      'M+': obj.getMonth() + 1,
-      'd+': obj.getDate(),
-      'h+': obj.getHours(),
-      'm+': obj.getMinutes(),
-      's+': obj.getSeconds(),
-      'q+': Math.floor((obj.getMonth() + 3) / 3),
-      S: obj.getMilliseconds()
-    }
-    if (format) {
-      if (/(y+)/.test(format)) {
-        format = format.replace(RegExp.$1,
-          RegExp.$1.length === 4 ? obj.getFullYear() : (obj.getFullYear() + '').substr(4 - RegExp.$1.length))
+    for (var k in o) {
+      if (new RegExp('(' + k + ')').test(format)) {
+        format = format.replace(RegExp.$1, RegExp.$1.length === 1 ? o[k] : ('00' + o[k]).substr(('' + o[k]).length))
       }
-      for (var k in o) {
-        if (new RegExp('(' + k + ')').test(format)) {
-          format = format.replace(RegExp.$1, RegExp.$1.length === 1 ? o[k] : ('00' + o[k]).substr(('' + o[k]).length))
-        }
-      }
-      return format
-    } else {
-      return obj
     }
+    return format
+  } else {
+    return obj
+  }
 }
 
 //

@@ -1,11 +1,10 @@
-
 import CryptoJS from "crypto-js"
 
 const encryptKey = "WfJTKO9S4eLkrPz2JKrAnzdb"
 const encryptIV = "D076D35C"
 
 // 3DES加密
-export function desEncrypt (text, key = encryptKey, iv = encryptIV) {
+export function desEncrypt(text, key = encryptKey, iv = encryptIV) {
   var cryptoKey = CryptoJS.enc.Utf8.parse(key) // 秘钥
   var cryptoIv = CryptoJS.enc.Utf8.parse(iv.substr(0, 8)) // 偏移量
   var encodeStr = CryptoJS.TripleDES.encrypt(text, cryptoKey, {
@@ -17,7 +16,7 @@ export function desEncrypt (text, key = encryptKey, iv = encryptIV) {
 }
 
 // 3DES解密
-export function desDecrypt (text, key = encryptKey, iv = encryptIV) {
+export function desDecrypt(text, key = encryptKey, iv = encryptIV) {
   var cryptoKey = CryptoJS.enc.Utf8.parse(key)
   var cryptoIv = CryptoJS.enc.Utf8.parse(iv.substr(0, 8))
   var decryptStr = CryptoJS.TripleDES.decrypt(text, cryptoKey, {

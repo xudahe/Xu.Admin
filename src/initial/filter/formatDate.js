@@ -1,8 +1,8 @@
 const isEmpty = (val) => {
-  if(val == null || val == "" || val == undefined) {
-      return true
-  }else {
-      return false
+  if (val == null || val == "" || val == undefined) {
+    return true
+  } else {
+    return false
   }
 }
 
@@ -18,33 +18,34 @@ const transfer = (val) => {
  * @description  <!--使用过滤器--> {{ dateStr | formatDate }}
  */
 const formatDate = (val, format) => {
-  if(isEmpty(val)) return
-  let 
-      date = new Date(val),
-      y = date.getFullYear(),
-      m = date.getMonth() + 1,
-      d = date.getDate(),
-      h = date.getHours(),
-      min = date.getMinutes(),
-      s = date.getSeconds(),
-      result = ""
-  if(format == undefined) {
-      result = `${y}-${transfer(m)}-${transfer(d)} ${transfer(h)}-${transfer(min)}-${transfer(s)}`
+  if (isEmpty(val)) return
+  let
+    date = new Date(val),
+    y = date.getFullYear(),
+    m = date.getMonth() + 1,
+    d = date.getDate(),
+    h = date.getHours(),
+    min = date.getMinutes(),
+    s = date.getSeconds(),
+    result = "";
+
+  if (format == undefined) {
+    result = `${y}-${transfer(m)}-${transfer(d)} ${transfer(h)}-${transfer(min)}-${transfer(s)}`
   }
-  if(format == 'yyyy-mm-dd') {
-      result = `${y}-${transfer(m)}-${transfer(d)}`
+  if (format == 'yyyy-mm-dd') {
+    result = `${y}-${transfer(m)}-${transfer(d)}`
   }
-  if(format == 'yyyy-mm') {
-      result = `${y}-${transfer(m)}`
+  if (format == 'yyyy-mm') {
+    result = `${y}-${transfer(m)}`
   }
-  if(format == 'mm-dd') {
-      result = `${transfer(m)}-${transfer(d)}`
+  if (format == 'mm-dd') {
+    result = `${transfer(m)}-${transfer(d)}`
   }
-  if(format == 'hh:mm') {
-      result = `${transfer(h)}:${transfer(min)}`
+  if (format == 'hh:mm') {
+    result = `${transfer(h)}:${transfer(min)}`
   }
-  if(format == 'yyyy') {
-      result = `${y}`
+  if (format == 'yyyy') {
+    result = `${y}`
   }
   return result
 }

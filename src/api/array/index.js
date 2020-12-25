@@ -8,27 +8,27 @@
  *      this.$sortList(list, 'level', true)
  */
 function sortList(list, property, isDes = false) {
-	if (property) {
-		if ((typeof list[0][property]).toLowerCase() === 'number') {
-			return list.sort((a, b) => {
-				return isDes ?
-					b[property] - a[property] :
-					a[property] - b[property]
-			})
-		} else {
-			return list.sort((a, b) => {
-				return isDes ?
-					new Date(b[property]).getTime() - new Date(a[property]).getTime() :
-					new Date(a[property]).getTime() - new Date(b[property]).getTime()
-			})
-		}
-	} else {
-		return list.sort((a, b) => {
-			return isDes ?
-				b - a :
-				a - b
-		})
-	}
+  if (property) {
+    if ((typeof list[0][property]).toLowerCase() === 'number') {
+      return list.sort((a, b) => {
+        return isDes ?
+          b[property] - a[property] :
+          a[property] - b[property]
+      })
+    } else {
+      return list.sort((a, b) => {
+        return isDes ?
+          new Date(b[property]).getTime() - new Date(a[property]).getTime() :
+          new Date(a[property]).getTime() - new Date(b[property]).getTime()
+      })
+    }
+  } else {
+    return list.sort((a, b) => {
+      return isDes ?
+        b - a :
+        a - b
+    })
+  }
 }
 /**
  * @description 模糊搜索数组
@@ -40,16 +40,16 @@ function sortList(list, property, isDes = false) {
  *      this.$searchResult(list, ['name'], 'xxx') // []
  */
 function searchResult(list, keys, value) {
-	return new Fuse(list, {
-		matchAllTokens: true,
-		findAllMatches: true,
-		threshold: 0.6,
-		location: 0,
-		distance: 100,
-		maxPatternLength: 32,
-		minMatchCharLength: 1,
-		keys
-	}).search(value)
+  return new Fuse(list, {
+    matchAllTokens: true,
+    findAllMatches: true,
+    threshold: 0.6,
+    location: 0,
+    distance: 100,
+    maxPatternLength: 32,
+    minMatchCharLength: 1,
+    keys
+  }).search(value)
 }
 
 /**
@@ -63,25 +63,25 @@ function searchResult(list, keys, value) {
  *      this.$removeRepeat(arr_1, 'value') 
  */
 function removeRepeat(arr, key) {
-	let newArr = []
-	if (key) {
-		let hash = {}
-		newArr = arr.reduce((prev, next) => {
-			!hash[next[key]] && (hash[next[key]] = true, prev.push(next))
-			return prev
-		}, [])
-	} else {
-		arr.forEach(val => {
-			if (!newArr.includes(val)) {
-				newArr.push(val)
-			}
-		})
-	}
-	return newArr
+  let newArr = []
+  if (key) {
+    let hash = {}
+    newArr = arr.reduce((prev, next) => {
+      !hash[next[key]] && (hash[next[key]] = true, prev.push(next))
+      return prev
+    }, [])
+  } else {
+    arr.forEach(val => {
+      if (!newArr.includes(val)) {
+        newArr.push(val)
+      }
+    })
+  }
+  return newArr
 }
 
 export default {
-	sortList,
-	searchResult,
-	removeRepeat
+  sortList,
+  searchResult,
+  removeRepeat
 }

@@ -1,7 +1,10 @@
 import axios from 'axios'
 import JSZip from 'jszip'
 import FileSaver from 'file-saver'
-import { Loading, Message } from 'element-ui'
+import {
+  Loading,
+  Message
+} from 'element-ui'
 
 let loading = ""
 
@@ -21,10 +24,10 @@ export default (fileList, fileName = 'file') => {
   const
     zip = new JSZip(),
     promises = []
-  loading = Loading.service({ 
-    fullscreen: true, 
-    background: "rgba(255, 255, 255, .4)", 
-    customClass: 'top-floor' 
+  loading = Loading.service({
+    fullscreen: true,
+    background: "rgba(255, 255, 255, .4)",
+    customClass: 'top-floor'
   })
   Message({
     message: "正在导出，请耐心等待",

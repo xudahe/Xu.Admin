@@ -36,7 +36,7 @@ export default {
         { label: '请求耗时', param: 'opTime' },
         { label: '请求时间', param: 'beginTime', sortable: true,
           formatter: row => {
-            return (!row.beginTime || row.beginTime == '') ? '':this.$formatDate(new Date(row.beginTime), true);
+            return this.$formatDate(new Date(row.beginTime), true);
           } 
         },
       ],
@@ -48,10 +48,7 @@ export default {
       this.$ajax(this.$apiSet.getAccessLogs)
         .then(res => {
             if (!res.data.success) {
-                _this.$message({
-                    message: res.data.message,
-                    type: 'error'
-                });
+                _this.$errorMsg(res.data.message)
             } else {
                 _this.loading = false;
                 _this.tableData = res.data.response;

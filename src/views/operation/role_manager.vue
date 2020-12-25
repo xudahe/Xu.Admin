@@ -10,8 +10,8 @@
               <!--快速查询字段-->
                <el-input v-model="filters.name" style="width:160px;padding-right: 5px;" placeholder="角色名称"></el-input>
               <!--操作按钮组-->
-              <el-button type="primary" icon="el-icon-search" circle @click.native="getData"></el-button>
-              <el-button type="primary" icon="el-icon-plus" circle @click.native="handleAdd"></el-button>
+              <el-button type="primary" icon="el-icon-search" circle @click.native="searchData"></el-button>
+              <el-button type="primary" icon="el-icon-plus" circle @click.native="plusData"></el-button>
               <el-button type="primary" icon="el-icon-refresh" circle @click.native="refreshData"></el-button>
             </div>
           </v-header>
@@ -23,12 +23,14 @@
         <el-card class="box-card card-gutter-sm" shadow="hover">
           <div slot="header" class="clearfix">
             <span class="header">{{sels.roleName}}&nbsp;--&nbsp;菜单分配</span>
-            <el-button type="primary" style="float: right; padding: 5px 10px" :disabled="!showButton" @click.native="saveMenu">
-              <i class="el-icon-check el-icon--left" style="margin-right:0px;"></i>
-            </el-button>
+            <el-tooltip content="保存">
+              <el-button type="primary" style="float: right; padding: 5px 10px" :disabled="!showButton" @click.native="saveMenu">
+                <i class="el-icon-check el-icon--left" style="margin-right:0px;"></i>
+              </el-button>
+            </el-tooltip>
           </div>
           <div class="tree-box"> 
-            <el-tree ref="menu" :data="menuData" :default-checked-keys="menuIds" :props="defaultProps" default-expand-all show-checkbox node-key="id" />
+            <el-tree ref="menutree" :data="menuData" :default-checked-keys="menuIds" :props="defaultProps" default-expand-all show-checkbox node-key="id" />
           </div>
         </el-card>
       </el-col>
@@ -69,6 +71,7 @@
 </template>
 
 <script>
+import {debounce} from '@/api/control/index.js'
 
 export default {
     name: 'role_manager',
@@ -77,14 +80,15 @@ export default {
             filters: {
                 name: ""
             },
+
             tableData: [],
             tableLabel: [
               { label: '角色编码', param: 'roleCode'},
               { label: '角色名称', param: 'roleName'},
               // { label: '备注', param: 'remark' },
-              { label: '创建时间', param: 'createTime', sortable: true, width:'160',
+              { label: '更新时间', param: 'createTime', sortable: true, width:'160',
                 formatter: row => {
-                  return (!row.createTime || row.createTime == '') ? '':this.$formatDate(new Date(row.createTime), true);
+                  return this.$formatDate(new Date(this.$isNull(row.modifyTime) ? row.createTime:row.modifyTime), true);
                 } 
               },
               { label: '状态', param: 'enabled', width:'80',
@@ -136,15 +140,15 @@ export default {
             },
 
             nowPage: 1, // 当前页数
-            nowSize: 10, // 当前页条数
+            nowSize: 15, // 当前页条数
    
             loading: false,
-            sels: [], //列表选中列
+            sels: {}, //列表选中列
     
             formTitle: '',
             formVisible: false, //界面是否显示
             formRules: {
-              roleName: [{ required: true, message: "请输入角色名", trigger: "blur" }],
+              // roleName: [{ required: true, message: "请输入角色名", trigger: "blur" }],
             },
             //界面数据
             roleForm: {
@@ -167,7 +171,7 @@ export default {
     },
     methods: {
         //获取角色列表
-        getData () {
+        searchData () {
           let _this = this;
           this.loading = true;
           this.$ajax(this.$apiSet.getRoleInfo,{
@@ -175,10 +179,7 @@ export default {
             })
             .then(res => {
                 if (!res.data.success) {
-                    _this.$message({
-                        message: res.data.message,
-                        type: 'error'
-                    });
+                    _this.$errorMsg(res.data.message)
                 } else {
                     _this.loading = false;
                     _this.tableData = res.data.response;
@@ -191,10 +192,7 @@ export default {
           this.$ajax(this.$apiSet.getMenuByIds)
             .then(res => {
                 if (!res.data.success) {
-                    _this.$message({
-                        message: res.data.message,
-                        type: 'error'
-                    });
+                    _this.$errorMsg(res.data.message)
                 } else {
                     _this.menuData = res.data.response;
 				       	}
@@ -225,16 +223,10 @@ export default {
                 falg: !row.enabled
             }).then(res => {
                 if (!res.data.success) {
-                    _this.$message({
-                        message: res.data.message,
-                        type: 'error'
-                    });
+                    _this.$errorMsg(res.data.message)
                 } else {
-                    _this.getData();
-                    _this.$message({
-                        message: res.data.message,
-                        type: 'success'
-                    });
+                    _this.searchData();
+                    _this.$successMsg(res.data.message)
 				  	    }
             })
             .catch(err => {})
@@ -247,33 +239,28 @@ export default {
             id: row.id
           }) .then(res => {
             if (!res.data.success) {
-                _this.$message({
-                    message: res.data.message,
-                    type: 'error'
-                });
+              _this.$errorMsg(res.data.message)
             } else {
-                _this.getData();
-                _this.$message({
-                    message: res.data.message,
-                    type: 'success'
-                });
+              _this.searchData();
+              _this.$successMsg(res.data.message)
 				    }
           })
           .catch(err => {})
         },
         // 初始化菜单选中
         initialMenuCheck(item) {
-          this.menuIds = item.menuIds ? item.menuIds.split(','):[]
+          this.$refs.menutree.setCheckedKeys([])
+          this.menuIds = item.menuIds ? item.menuIds.split(','):[];
         },
         //菜单绑定
         saveMenu() {
           let menuIds = [];
-          
+
           // 得到已选中的 key 值
-          this.$refs.menu.getCheckedKeys().forEach(function(data, index) {
+          this.$refs.menutree.getCheckedKeys().forEach(function(data, index) {
             menuIds.push(data);
           });
-          
+  
           this.roleForm = this.sels
           this.roleForm.menuIds = menuIds.join(',')
           
@@ -287,7 +274,7 @@ export default {
             this.roleForm = Object.assign({},row);
         },
         //显示新增界面
-        handleAdd() {
+        plusData() {
             this.formTitle = "新增";
             this.formVisible = true;
   
@@ -299,31 +286,34 @@ export default {
               enabled: false
             };
         },
-        handleSubmit() {
+        handleSubmit:debounce(function() {
+          if(this.$isNull(this.roleForm.roleName)) 
+            return this.$warnMsg("角色名称不能为空！")
+
           let _this = this;
           let apiUrl = this.formTitle=='编辑' ? this.$apiSet.putRole:this.$apiSet.postRole;
           this.$ajax(apiUrl, this.roleForm)
             .then(res => {
               if (!res.data.success) {
-                  _this.$message({
-                      message: res.data.message,
-                      type: 'error'
-                  });
+                 _this.$errorMsg(res.data.message)
               } else {
                   _this.formVisible = false;
-                  _this.getData();
-
-                  _this.$message({
-                      message: res.data.message,
-                      type: 'success'
-                  });
+                  _this.searchData();
+                  _this.$successMsg(res.data.message)
 					    }
             })
             .catch(err => {})
-        },
+        },1000),
         refreshData(){
-          this.getData();
+          let _this = this;
+
+          this.sels = {}
+          this.searchData();
           this.getMenuData();
+
+          this.$nextTick(()=>{
+            _this.$refs.menutree.setCheckedKeys([])
+          })
         },
     },
     mounted() {

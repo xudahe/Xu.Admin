@@ -8,8 +8,8 @@
           <!--快速查询字段-->
            <el-input v-model="filters.name" style="width:200px;padding-right: 5px;" placeholder="任务名称"></el-input>
           <!--操作按钮组-->
-          <el-button type="primary" icon="el-icon-search" circle @click.native="getData"></el-button>
-          <el-button type="primary" icon="el-icon-plus" circle @click.native="handleAdd"></el-button>
+          <el-button type="primary" icon="el-icon-search" circle @click.native="searchData"></el-button>
+          <el-button type="primary" icon="el-icon-plus" circle @click.native="plusData"></el-button>
           <el-button type="primary" icon="el-icon-refresh" circle @click.native="refreshData"></el-button>
         </div>
       </v-header>
@@ -72,6 +72,7 @@
 </template>
 
 <script>
+import {debounce} from '@/api/control/index.js'
 
 export default {
     name: 'task_manager',
@@ -90,7 +91,7 @@ export default {
               { label: '执行间隔(秒)', param: 'intervalSecond'},
               { label: '最后执行时间', param: 'performTime', sortable: true, width:'160',
                 formatter: row => {
-                  return (!row.performTime || row.performTime == '') ? '':this.$formatDate(new Date(row.performTime), true);
+                  return this.$formatDate(new Date(row.performTime), true);
                 } 
               },
               { label: '运行状态', param: 'jobStatus', width:'80', 
@@ -160,9 +161,9 @@ export default {
             },
 
             nowPage: 1, // 当前页数
-            nowSize: 10, // 当前页条数
+            nowSize: 15, // 当前页条数
         
-            sels: [], //列表选中列
+            sels: {}, //列表选中列
             timer: null,
     
             formTitle: '',
@@ -193,9 +194,9 @@ export default {
     },
     methods: {
       refreshData(){
-        this.getData();
+        this.searchData();
       },
-      getData() {
+      searchData() {
         let _this = this;
       
         this.$ajax(this.$apiSet.getTasksQzInfo,{
@@ -203,10 +204,7 @@ export default {
           })
           .then(res => {
               if (!res.data.success) {
-                  _this.$message({
-                      message: res.data.message,
-                      type: 'error'
-                  });
+                  _this.$errorMsg(res.data.message)
               } else {
                   _this.tableData = res.data.response;
 			  	    }
@@ -233,16 +231,10 @@ export default {
               id: row.id
             }) .then(res => {
               if (!res.data.success) {
-                  _this.$message({
-                    message: res.data.message,
-                    type: 'error'
-                  });
+                  _this.$errorMsg(res.data.message)
               } else {
-                  _this.getData();
-                  _this.$message({
-                    message: res.data.message,
-                    type: 'success'
-                  });
+                  _this.searchData();
+                  _this.$successMsg(res.data.message)
 			        }
             })
             .catch(err => {})
@@ -255,7 +247,7 @@ export default {
           this.taskForm = Object.assign({},row);
       },
       //显示新增界面
-      handleAdd() {
+      plusData() {
           this.formTitle = "新增";
           this.formVisible = true;
   
@@ -273,7 +265,7 @@ export default {
             enabled : "",
           };
       },
-      handleSubmit: function() {
+      handleSubmit: debounce(function() {
         if(this.taskForm.triggerType == 'cron')  this.taskForm.intervalSecond = ''
         if(this.taskForm.triggerType == 'simple')  this.taskForm.cron = ''
 
@@ -282,21 +274,15 @@ export default {
         this.$ajax(apiUrl, this.taskForm)
           .then(res => {
             if (!res.data.success) {
-              _this.$message({
-                message: res.data.message,
-                type: 'error'
-              });
+              _this.$errorMsg(res.data.message)
             } else {
               _this.formVisible = false;
-              _this.getData();
-              _this.$message({
-                message: res.data.message,
-                type: 'success'
-              });
+              _this.searchData();
+              _this.$successMsg(res.data.message)
 		    		}
           })
           .catch(err => {})
-      },
+      },1000),
       jobStatus(row){
         let _this = this;
         let apiUrl = "", state = ""; 
@@ -319,16 +305,10 @@ export default {
           id: row.id,
         }).then(res => {
             if (!res.data.success) {
-                _this.$message({
-                    message: res.data.message,
-                    type: 'error'
-                });
+                 _this.$errorMsg(res.data.message)
             } else {
-                _this.getData();
-                _this.$message({
-                    message: res.data.message,
-                    type: 'success'
-                });
+                _this.searchData();
+                _this.$successMsg(res.data.message)
 			      }
          })
          .catch(err => {})
@@ -339,10 +319,10 @@ export default {
     },
     mounted() {
       let _this = this;
-      this.getData();
+      this.searchData();
       
       // this.timer = setInterval(() => {
-      //   _this.getData();
+      //   _this.searchData();
       // }, 30000);
 
     },

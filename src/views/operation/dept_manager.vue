@@ -8,8 +8,8 @@
           <!--快速查询字段-->
            <el-input v-model="filters.name" style="width:160px;padding-right: 5px;" placeholder="部门名称"></el-input>
           <!--操作按钮组-->
-          <el-button type="primary" icon="el-icon-search" circle @click.native="getData"></el-button>
-          <el-button type="primary" icon="el-icon-plus" circle @click.native="handleAdd"></el-button>
+          <el-button type="primary" icon="el-icon-search" circle @click.native="searchData"></el-button>
+          <el-button type="primary" icon="el-icon-plus" circle @click.native="plusData"></el-button>
           <el-button type="primary" icon="el-icon-refresh" circle @click.native="refreshData"></el-button>
         </div>
       </v-header>
@@ -39,8 +39,8 @@
             <el-form-item label="部门编码" prop="deptCode">
               <el-input v-model="deptForm.deptCode" auto-complete="off"></el-input>
             </el-form-item>
-            <el-form-item label="上级部门" prop="parentDept" filterable clearable>
-              <el-select v-model="deptForm.parentDept" placeholder="请选择上级部门" filterable clearable>
+            <el-form-item label="上级部门" prop="parentId" filterable clearable>
+              <el-select v-model="deptForm.parentId" placeholder="请选择上级部门" filterable clearable>
                 <el-option :label="item.deptName" :value="item.id" :key="index" v-for="(item,index) in tableData"></el-option>
               </el-select>
             </el-form-item>
@@ -63,6 +63,7 @@
 </template>
 
 <script>
+import {debounce} from '@/api/control/index.js'
 
 export default {
     name: 'dept_manager',
@@ -78,9 +79,9 @@ export default {
               { label: '部门名称', param: 'deptName'},
               { label: '部门负责人', param: 'deptUser'},
               { label: '备注', param: 'remark' },
-              { label: '创建时间', param: 'createTime', sortable: true, width:'160',
+              { label: '更新时间', param: 'createTime', sortable: true, width:'160',
                 formatter: row => {
-                  return (!row.createTime || row.createTime == '') ? '':this.$formatDate(new Date(row.createTime), true);
+                  return this.$formatDate(new Date(this.$isNull(row.modifyTime) ? row.createTime:row.modifyTime), true);
                 } 
               },
               { label: '状态', param: 'enabled', width:'80', 
@@ -132,15 +133,15 @@ export default {
             },
 
             nowPage: 1, // 当前页数
-            nowSize: 10, // 当前页条数
+            nowSize: 15, // 当前页条数
         
             loading: false,
-            sels: [], //列表选中列
+            sels: {}, //列表选中列
     
             formTitle: '',
             formVisible: false, //界面是否显示
             formRules: {
-              deptName: [{ required: true, message: "请输入部门名称", trigger: "blur" }],
+              // deptName: [{ required: true, message: "请输入部门名称", trigger: "blur" }],
             },
             //界面数据
             deptForm: {
@@ -148,7 +149,7 @@ export default {
                 deptCode: "",
                 deptName: "",
                 deptUser: "",
-                parentDept: "",
+                parentId: "",
                 remark: '',
                 enabled: false
             },
@@ -158,7 +159,7 @@ export default {
     },
     methods: {
         //获取部门列表
-        getData() {
+        searchData() {
           let _this = this;
           this.loading = true;
           this.$ajax(this.$apiSet.getDeptInfo,{
@@ -166,10 +167,7 @@ export default {
             })
             .then(res => {
                 if (!res.data.success) {
-                    _this.$message({
-                        message: res.data.message,
-                        type: 'error'
-                    });
+                     _this.$errorMsg(res.data.message)
                 } else {
                     _this.loading = false;
                     _this.tableData = res.data.response;
@@ -182,10 +180,7 @@ export default {
           this.$ajax(this.$apiSet.getUserInfo)
             .then(res => {
               if (!res.data.success) {
-                _this.$message({
-                  message: res.data.message,
-                  type: 'error'
-                });
+                 _this.$errorMsg(res.data.message)
               } else {
                   _this.userData = res.data.response;
 				      }
@@ -211,16 +206,10 @@ export default {
                 falg: !row.enabled
             }).then(res => {
                 if (!res.data.success) {
-                    _this.$message({
-                        message: res.data.message,
-                        type: 'error'
-                    });
+                     _this.$errorMsg(res.data.message)
                 } else {
-                    _this.getData();
-                    _this.$message({
-                        message: res.data.message,
-                        type: 'success'
-                    });
+                    _this.searchData();
+                    _this.$successMsg(res.data.message)
 				  	    }
             })
             .catch(err => {})
@@ -233,16 +222,10 @@ export default {
             id: row.id
           }) .then(res => {
             if (!res.data.success) {
-              _this.$message({
-                message: res.data.message,
-                type: 'error'
-              });
+              _this.$errorMsg(res.data.message)
             } else {
-              _this.getData();
-              _this.$message({
-                message: res.data.message,
-                type: 'success'
-              });
+              _this.searchData();
+              _this.$successMsg(res.data.message)
 				    }
           })
           .catch(err => {})
@@ -254,7 +237,7 @@ export default {
             this.deptForm = Object.assign({},row);
         },
         //显示新增界面
-        handleAdd() {
+        plusData() {
             this.formTitle = "新增";
             this.formVisible = true;
   
@@ -263,34 +246,31 @@ export default {
               deptCode: "",
               deptName: "",
               deptUser: "",
-              parentDept: "",
+              parentId: "",
               remark: '',
               enabled: false
             };
         },
-        handleSubmit: function() {
+        handleSubmit:debounce(function() {
+          if(this.$isNull(this.deptForm.deptName)) 
+            return this.$warnMsg("部门名称不能为空！")
+
           let apiUrl = this.formTitle=='编辑' ? this.$apiSet.putDept:this.$apiSet.postDept;
           let _this = this;
           this.$ajax(apiUrl, this.deptForm)
             .then(res => {
               if (!res.data.success) {
-                _this.$message({
-                  message: res.data.message,
-                  type: 'error'
-                });
+                 _this.$errorMsg(res.data.message)
               } else {
                 _this.formVisible = false;
-                _this.getData();
-                _this.$message({
-                  message: res.data.message,
-                  type: 'success'
-                });
+                _this.searchData();
+                _this.$successMsg(res.data.message)
 					    }
             })
             .catch(err => {})
-        },
+        },1000),
         refreshData(){
-          this.getData();
+          this.searchData();
           this.getUserData();
         },
     },

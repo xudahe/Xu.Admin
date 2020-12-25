@@ -13,7 +13,7 @@ function addWaterMarker(str, parentNode, font, textColor) {
   var can = document.createElement('canvas')
   parentNode.appendChild(can)
   can.width = 200
-  can.height = 150
+  can.height = 200
   can.style.display = 'none'
   var cans = can.getContext('2d')
   cans.rotate((-20 * Math.PI) / 180)
@@ -32,5 +32,3 @@ const waterMarker = {
 }
 
 export default waterMarker
-
-

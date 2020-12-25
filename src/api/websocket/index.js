@@ -4,12 +4,12 @@
  * @returns {WebSocket}
  */
 export default ({
-    url,
-    onOpen,
-    onMessage,
-    onError,
-    onClose
-  }) => {
+  url,
+  onOpen,
+  onMessage,
+  onError,
+  onClose
+}) => {
   if (!url) {
     throw new Error("请填写连接url")
   }
@@ -39,4 +39,3 @@ export default ({
 //       onClose(e) {} // websocket关闭后的回调（选填）
 //     }
 //   ) // 返回WebSocket实例
-

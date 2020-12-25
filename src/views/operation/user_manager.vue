@@ -10,8 +10,8 @@
                         <!--快速查询字段-->
                         <el-input v-model="filters.name"  style="width:160px;padding-right: 5px;" placeholder="用户名/登录名"></el-input>
                         <!--操作按钮组-->
-                        <el-button type="primary" icon="el-icon-search" circle @click.native="getData"></el-button>
-                        <el-button type="primary" icon="el-icon-plus" circle @click.native="handleAdd"></el-button>
+                        <el-button type="primary" icon="el-icon-search" circle @click.native="searchData"></el-button>
+                        <el-button type="primary" icon="el-icon-plus" circle @click.native="plusData"></el-button>
                         <el-button type="primary" icon="el-icon-refresh" circle @click.native="refreshData"></el-button>
                       </div>
                     </v-header>
@@ -24,12 +24,14 @@
                 <el-card class="box-card card-gutter-sm" shadow="hover">
                   <div slot="header" class="clearfix">
                     <span class="header">{{sels.loginName}}&nbsp;--&nbsp;角色分配</span>
-                    <el-button type="primary" style="float: right; padding: 5px 10px" :disabled="!showButton" @click.native="saveRole">
-                        <i class="el-icon-check el-icon--left"  ></i>
-                    </el-button>
+                    <el-tooltip content="保存">
+                        <el-button type="primary" style="float: right; padding: 5px 10px" :disabled="!showButton" @click.native="saveRole">
+                            <i class="el-icon-check el-icon--left"  ></i>
+                        </el-button>
+                    </el-tooltip>
                   </div>
                   <div class="tree-box"> 
-                    <el-tree ref="role" :data="roleData" :default-checked-keys="roleIds" :props="defaultProps" default-expand-all show-checkbox node-key="id" />
+                    <el-tree ref="roletree" :data="roleData" :default-checked-keys="roleIds" :props="defaultProps" default-expand-all show-checkbox node-key="id" />
                   </div>
                 </el-card>
             </el-col>
@@ -57,8 +59,8 @@
                         <el-form-item label="密码" prop="loginPwd">
                             <el-input v-model="userForm.loginPwd" show-password  auto-complete="off" :disabled="formTitle=='编辑'?true:false"></el-input>
                         </el-form-item>
-                        <el-form-item label="部门" prop="deptName">
-                            <el-select v-model="userForm.deptName" placeholder="请选择所属部门" filterable clearable>
+                        <el-form-item label="部门" prop="deptId">
+                            <el-select v-model="userForm.deptId" placeholder="请选择所属部门" filterable clearable>
                                 <el-option label="财务部" value="1"></el-option>
                                 <el-option label="开发部" value="2"></el-option>
                                 <el-option label="市场部" value="3"></el-option>
@@ -97,6 +99,7 @@
 </template>
 
 <script>
+import {debounce} from '@/api/control/index.js'
 
 export default {
     name: 'user_manager',
@@ -109,10 +112,10 @@ export default {
             tableLabel: [
                 { label: '登录名', param: 'loginName'},
                 { label: '用户名', param: 'realName' },
-                { label: '所属部门', param: 'deptName'},
-                { label: '创建时间', param: 'createTime', sortable: true, width:'160',
+                { label: '所属部门', param: 'deptId'},
+                { label: '更新时间', param: 'createTime', sortable: true, width:'160',
                     formatter: row => {
-                        return (!row.createTime || row.createTime == '') ? '':this.$formatDate(new Date(row.createTime), true);
+                        return this.$formatDate(new Date(this.$isNull(row.modifyTime) ? row.createTime:row.modifyTime), true);
                     } 
                 },
                 { label: '状态', param: 'enabled', width:'80', 
@@ -164,26 +167,18 @@ export default {
             },
 
             nowPage: 1, // 当前页数
-            nowSize: 10, // 当前页条数
+            nowSize: 15, // 当前页条数
     
             loading: false,
-            sels: [],//列表选中列
+            sels: {},//列表选中列
             
             formTitle: '',
             formVisible: false, //界面是否显示
             formUsers: {
-                loginName: [
-                    {required: true, message: '请输入登录名', trigger: 'blur'}
-                ],
-                realName: [
-                    {required: true, message: '请输入用户名', trigger: 'blur'}
-                ],
-                loginPwd: [
-                    {required: true, message: '请输入密码', trigger: 'blur'}
-                ],
-                birth: [
-                    {required: true, message: '请填写生日', trigger: 'blur'}
-                ]
+                loginName: [{required: true, message: '请输入登录名', trigger: 'blur'}],
+                realName: [{required: true, message: '请输入用户名', trigger: 'blur'}],
+                loginPwd: [{required: true, message: '请输入密码', trigger: 'blur'}],
+                birth: [{required: true, message: '请填写生日', trigger: 'blur'}]
             },
             //界面数据
             userForm: {
@@ -191,7 +186,7 @@ export default {
                 loginName: '',
                 loginPwd: '',
                 realName: '',
-                deptName: '',
+                deptId: '',
                 mobile: '',
                 sex: -1,
                 birth: '',
@@ -211,7 +206,7 @@ export default {
     },
     methods: {
         //获取用户列表
-        getData () {
+        searchData () {
             let _this = this;
             this.loading = true;
             this.$ajax(this.$apiSet.getUserInfo,{
@@ -219,10 +214,7 @@ export default {
                 })
                 .then(res => {
                     if (!res.data.success) {
-                        _this.$message({
-                            message: res.data.message,
-                            type: 'error'
-                        });
+                        _this.$errorMsg(res.data.message)
                     } else {
                         _this.loading = false;
                         _this.tableData = res.data.response;
@@ -235,10 +227,7 @@ export default {
           this.$ajax(this.$apiSet.getRoleInfo)
             .then(res => {
                 if (!res.data.success) {
-                    _this.$message({
-                        message: res.data.message,
-                        type: 'error'
-                    });
+                    _this.$errorMsg(res.data.message)
                 } else {
                     _this.roleData = res.data.response;
 				}
@@ -269,16 +258,10 @@ export default {
                         falg: !row.enabled
                     }) .then(res => {
                         if (!res.data.success) {
-                            _this.$message({
-                                message: res.data.message,
-                                type: 'error'
-                            });
+                            _this.$errorMsg(res.data.message)
                         } else {
-                            _this.getData();
-                            _this.$message({
-                                message: res.data.message,
-                                type: 'success'
-                            });
+                            _this.searchData();
+                            _this.$successMsg(res.data.message)
 				    	}
                     })
                     .catch(err => {})
@@ -291,22 +274,17 @@ export default {
                     id: row.id
                 }) .then(res => {
                     if (!res.data.success) {
-                        _this.$message({
-                            message: res.data.message,
-                            type: 'error'
-                        });
+                        _this.$errorMsg(res.data.message)
                     } else {
-                        _this.getData();
-                        _this.$message({
-                            message: res.data.message,
-                            type: 'success'
-                        });
+                        _this.searchData();
+                        _this.$successMsg(res.data.message)
 			    	}
                 })
                 .catch(err => {})
         },
         // 初始化角色选中
         initialRoleCheck(item) {
+            this.$refs.roletree.setCheckedKeys([])
             this.roleIds = item.roleIds ? item.roleIds.split(','):[]
         },
         //角色绑定
@@ -314,7 +292,7 @@ export default {
           let roleIds = [];
           
           // 得到已选中的 key 值
-          this.$refs.role.getCheckedKeys().forEach(function(data, index) {
+          this.$refs.roletree.getCheckedKeys().forEach(function(data, index) {
             roleIds.push(data);
           });
           
@@ -331,7 +309,7 @@ export default {
             this.userForm = Object.assign({},row);
         },
         //显示新增界面
-        handleAdd() {
+        plusData() {
             this.formTitle = "新增";
             this.formVisible = true;
             this.userForm = {
@@ -339,7 +317,7 @@ export default {
                 loginName: '',
                 loginPwd: '',
                 realName: '',
-                deptName: '',
+                deptId: '',
                 mobile: '',
                 sex: -1,
                 birth: '',
@@ -348,31 +326,36 @@ export default {
                 remark: ''
             };
         },
-        handleSubmit () {
+        handleSubmit:debounce(function() {
+            if(this.$isNull(this.userForm.loginName)) 
+                return this.$warnMsg("用户名不能为空！")
+            if(this.$isNull(this.userForm.loginPwd)) 
+                return this.$warnMsg("密码不能为空！")
+
             let apiUrl = this.formTitle=='编辑' ? this.$apiSet.putUser:this.$apiSet.postUser;
             let _this = this;
             this.$ajax(apiUrl, this.userForm)
                 .then(res => {
                     if (!res.data.success) {
-                        _this.$message({
-                            message: res.data.message,
-                            type: 'error'
-                        });
+                        _this.$errorMsg(res.data.message)
                     } else {
                         _this.formVisible = false;
-                        _this.getData();
-
-                        _this.$message({
-                            message: res.data.message,
-                            type: 'success'
-                        });
+                        _this.searchData();
+                        _this.$successMsg(res.data.message)
 					}
                 })
                 .catch(err => {})
-        },
+        },1000),
         refreshData(){
-            this.getData();
+            let _this = this;
+
+            this.sels = {}
+            this.searchData();
             this.getRoleData();
+
+            this.$nextTick(()=>{
+                this.$refs.roletree.setCheckedKeys([])
+            })
         },
     },
     mounted() {

@@ -4,11 +4,11 @@
  * @param {Any} data 
  */
 function setMemorySes(key, data) { //会话存储，写入
-    sessionStorage.setItem(key, JSON.stringify(data))
+  sessionStorage.setItem(key, JSON.stringify(data))
 }
 
 function getMemorySes(key) { //会话存储，读取
-    return JSON.parse(sessionStorage.getItem(key))
+  return JSON.parse(sessionStorage.getItem(key))
 }
 
 /**
@@ -17,25 +17,26 @@ function getMemorySes(key) { //会话存储，读取
  * @param {Number | Boolean | String | Object} data 
  */
 function setMemoryPmt(key, data) { //长久存储，写入
-    localStorage.setItem(key, JSON.stringify(data))
+  localStorage.setItem(key, JSON.stringify(data))
 }
+
 function getMemoryPmt(key) { //长久存储，读取
-    return JSON.parse(localStorage.getItem(key))
+  return JSON.parse(localStorage.getItem(key))
 }
 
 function clearMemorySes() {
-    sessionStorage.clear()
+  sessionStorage.clear()
 }
 
 function clearMemoryPmt() {
-    localStorage.clear()
+  localStorage.clear()
 }
 
 export default {
-    setMemorySes,
-    getMemorySes,
-    setMemoryPmt,
-    getMemoryPmt,
-    clearMemorySes,
-    clearMemoryPmt
+  setMemorySes,
+  getMemorySes,
+  setMemoryPmt,
+  getMemoryPmt,
+  clearMemorySes,
+  clearMemoryPmt
 }

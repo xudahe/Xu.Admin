@@ -18,40 +18,40 @@ import '@/initial/modules'
 import filters from '@/initial/filter/index'
 // 全局注册过滤器
 Object.keys(filters).forEach(key => {
-    Vue.filter(key, filters[key])
-  })
+  Vue.filter(key, filters[key])
+})
 
 //全局指令初始化。在如下路径文件下全局注册指令即可。
 import directives from '@/initial/directives/index'
 // 全局注册指令
 Object.keys(directives).forEach(key => {
-    Vue.directive(key, {
-      // 只调用一次，指令第一次绑定到元素时调用
-      bind: directives[key].bind || (() => {}),
-      // 被绑定元素插入父节点时调用
-      inserted: directives[key].inserted || (() => {}),
-      // 所在组件的 VNode 更新时调用，但是可能发生在其子 VNode 更新之前
-      update: directives[key].update || (() => {}),
-      // 指令所在组件的 VNode 及其子 VNode 全部更新后调用
-      componentUpdated: directives[key].componentUpdated || (() => {}),
-      // 只调用一次，指令与元素解绑时调用
-      unbind: directives[key].unbind || (() => {})
-    })
+  Vue.directive(key, {
+    // 只调用一次，指令第一次绑定到元素时调用
+    bind: directives[key].bind || (() => {}),
+    // 被绑定元素插入父节点时调用
+    inserted: directives[key].inserted || (() => {}),
+    // 所在组件的 VNode 更新时调用，但是可能发生在其子 VNode 更新之前
+    update: directives[key].update || (() => {}),
+    // 指令所在组件的 VNode 及其子 VNode 全部更新后调用
+    componentUpdated: directives[key].componentUpdated || (() => {}),
+    // 只调用一次，指令与元素解绑时调用
+    unbind: directives[key].unbind || (() => {})
   })
+})
 
 //全局组件初始化。最终读取src/components下的所有index.vue文件进行组件注册。
 //注意：自动注册组件依赖组件名称，因此，请在封装组件时给组件加上name字段。
 const req = require.context('@/components', true, /index\.vue$/)
 //全局注册组件
 req.keys().forEach(val => {
-    const component = req(val).default
-    Vue.component(component.name, component)
-  })
+  const component = req(val).default
+  Vue.component(component.name, component)
+})
 
 // 方案1：在 webpack.config.js 文件中，entry 入口处修改，加入即可
 // 方案2：不修改webpack的情况下，在你的主入口文件头部加入
 // import "babel-polyfill"
-  
+
 import promise from 'es6-promise' //兼容IE
 promise.polyfill()
 
@@ -62,10 +62,25 @@ import 'viewerjs/dist/viewer.css'
 import Viewer from 'v-viewer'
 Vue.use(Viewer)
 Viewer.setDefaults({
-  Options: { 'inline': true, 'button': true, 'navbar': true, 'title': true, 'toolbar': true, 'tooltip': true, 'movable': true, 'zoomable': true, 'rotatable': true, 'scalable': true, 'transition': true, 'fullscreen': true, 'keyboard': true, 'url': 'data-source' }
+  Options: {
+    'inline': true,
+    'button': true,
+    'navbar': true,
+    'title': true,
+    'toolbar': true,
+    'tooltip': true,
+    'movable': true,
+    'zoomable': true,
+    'rotatable': true,
+    'scalable': true,
+    'transition': true,
+    'fullscreen': true,
+    'keyboard': true,
+    'url': 'data-source'
+  }
 })
 
-     
+
 // 设置浏览器标题
 Vue.directive('title', {
   inserted: function (el, binding) {
@@ -84,4 +99,3 @@ new Vue({
   },
   template: '<App/>'
 })
-

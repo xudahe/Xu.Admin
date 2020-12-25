@@ -12,8 +12,8 @@
             <el-option v-for="(item,index) in parentData" :key="index" :label="item.menuName" :value="item.id"></el-option>
           </el-select>
           <!--操作按钮组-->
-          <el-button type="primary" icon="el-icon-search" circle @click.native="getData"></el-button>
-          <el-button type="primary" icon="el-icon-plus" circle @click.native="handleAdd"></el-button>
+          <el-button type="primary" icon="el-icon-search" circle @click.native="searchData"></el-button>
+          <el-button type="primary" icon="el-icon-plus" circle @click.native="plusData"></el-button>
           <el-button type="primary" icon="el-icon-refresh" circle @click.native="refreshData"></el-button>
         </div>
       </v-header>
@@ -27,7 +27,7 @@
       <el-form :model="menuForm" label-width="80px" :rules="formRules" ref="menuForm">
         <el-row>
           <el-col :span="12">
-            <el-form-item label="菜单类名" prop="className">
+            <el-form-item label="组件名称" prop="className">
               <el-input v-model="menuForm.className" auto-complete="off"></el-input>
             </el-form-item>
             <el-form-item label="系统名称" prop="systemName">
@@ -89,6 +89,7 @@
 </template>
 
 <script>
+import {debounce} from '@/api/control/index.js'
 
 export default {
     name: 'menu_manager',
@@ -103,13 +104,13 @@ export default {
             tableLabel: [
               { label: '标识', param: 'id',width: '60',},
               // { label: '系统名称', param: 'systemName'},
-              { label: '菜单类名', param: 'className'},
+              { label: '组件名称', param: 'className'},
               { label: '菜单名称', param: 'menuName'},
-              { label: '父级菜单', param: 'parentId'},
+              { label: '父级菜单', param: 'parentName'},
               { label: '备注', param: 'remark' },
-              { label: '创建时间', param: 'createTime', sortable: true, width:'160',
+              { label: '更新时间', param: 'createTime', sortable: true, width:'160',
                 formatter: row => {
-                  return (!row.createTime || row.createTime == '') ? '':this.$formatDate(new Date(row.createTime), true);
+                  return this.$formatDate(new Date(this.$isNull(row.modifyTime) ? row.createTime:row.modifyTime), true);
                 } 
               },
               { label: '状态', param: 'enabled', width:'80',
@@ -161,16 +162,16 @@ export default {
             },
     
             loading: false,
-            sels: [], //列表选中列
+            sels: {}, //列表选中列
 
             nowPage: 1, // 当前页数
-            nowSize: 10, // 当前页条数
+            nowSize: 15, // 当前页条数
     
             formTitle: '',
             formVisible: false, //界面是否显示
             formRules: {
-              className: [{ required: true, message: "请输入菜单类名", trigger: "blur" }],
-              menuName: [{ required: true, message: "请输入菜单名称", trigger: "blur" }],
+              // className: [{ required: true, message: "请输入菜单类名", trigger: "blur" }],
+              // menuName: [{ required: true, message: "请输入菜单名称", trigger: "blur" }],
             },
             //界面数据
             menuForm: {
@@ -189,7 +190,7 @@ export default {
     },
     methods: {
         //获取菜单列表
-        getData() {
+        searchData() {
           let _this = this;
           this.loading = true;
           this.$ajax(this.$apiSet.getMenuInfo,{
@@ -198,10 +199,7 @@ export default {
             })
             .then(res => {
               if (!res.data.success) {
-                  _this.$message({
-                      message: res.data.message,
-                      type: 'error'
-                  });
+                 _this.$errorMsg(res.data.message)
               } else {
                   _this.loading = false;
                   _this.tableData = res.data.response;
@@ -215,10 +213,7 @@ export default {
           this.$ajax(this.$apiSet.getMenuInfo)
             .then(res => {
                 if (!res.data.success) {
-                    _this.$message({
-                        message: res.data.message,
-                        type: 'error'
-                    });
+                    _this.$errorMsg(res.data.message)
                 } else {
                     _this.parentData = res.data.response.filter(val => val.parentId == null);
 				       	}
@@ -244,16 +239,10 @@ export default {
                 falg: !row.enabled
             }).then(res => {
                 if (!res.data.success) {
-                    _this.$message({
-                        message: res.data.message,
-                        type: 'error'
-                    });
+                    _this.$errorMsg(res.data.message)
                 } else {
-                    _this.getData();
-                    _this.$message({
-                        message: res.data.message,
-                        type: 'success'
-                    });
+                    _this.searchData();
+                    _this.$successMsg(res.data.message)
 				  	    }
             })
             .catch(err => {})
@@ -266,16 +255,10 @@ export default {
             id: row.id
           }) .then(res => {
             if (!res.data.success) {
-              _this.$message({
-                message: res.data.message,
-                type: 'error'
-              });
+              _this.$errorMsg(res.data.message)
             } else {
-              _this.getData();
-              _this.$message({
-                message: res.data.message,
-                type: 'success'
-              });
+              _this.searchData();
+              _this.$successMsg(res.data.message)
 				    }
           })
           .catch(err => {})
@@ -287,7 +270,7 @@ export default {
           this.menuForm = Object.assign({},row);
         },
         //显示新增界面
-        handleAdd() {
+        plusData() {
             this.formTitle = "新增";
             this.formVisible = true;
 
@@ -308,31 +291,30 @@ export default {
         selected(name) {
           this.menuForm.icon = name;
         },
-        handleSubmit: function() {
+        handleSubmit:debounce(function() {
           this.menuForm.icon = "el-icon-edit-outline"; //暂时写死
+          
+          if(this.$isNull(this.menuForm.className)) 
+            return this.$warnMsg("组件名称不能为空！")
+          if(this.$isNull(this.menuForm.menuName)) 
+            return this.$warnMsg("菜单名称不能为空！")
           
           let apiUrl = this.formTitle=='编辑' ? this.$apiSet.putMenu:this.$apiSet.postMenu;
           let _this = this;
           this.$ajax(apiUrl, this.menuForm)
             .then(res => {
               if (!res.data.success) {
-                _this.$message({
-                  message: res.data.message,
-                  type: 'error'
-                });
+                _this.$errorMsg(res.data.message)
               } else {
                 _this.formVisible = false;
-                _this.getData();
-                _this.$message({
-                  message: res.data.message,
-                  type: 'success'
-                });
+                _this.searchData();
+                _this.$successMsg(res.data.message)
 					    }
             })
             .catch(err => {})
-        },
+        },1000),
         refreshData(){
-          this.getData();
+          this.searchData();
           this.getParentData();
         },
     },

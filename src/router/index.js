@@ -18,7 +18,7 @@ const
   Error_500 = () => import('@/views/other/error/500'),
   Error_403 = () => import('@/views/other/error/403'),
   Error_404 = () => import('@/views/other/error/404')
-  
+
 //异步挂载的路由
 const operation_routes = getRoutes(require.context('@/views/operation', true, /\.vue$/));
 const system_routes = getRoutes(require.context('@/views/system', true, /\.vue$/));
@@ -26,23 +26,21 @@ const tools_routes = getRoutes(require.context('@/views/tools', true, /\.vue$/))
 const log_routes = getRoutes(require.context('@/views/other/log', true, /\.vue$/));
 const list_page = getRoutes(require.context('@/views/pages', true, /\.vue$/));
 
-let addRouter = [
-  {
-    path: "/",
-    iconCls: "el-icon-tickets", // 图标样式class
-    name: "系统设置",
-    component: Layout,
-    children: operation_routes.concat(system_routes).concat(tools_routes).concat(log_routes).concat(list_page)
-  }
-];
+let addRouter = [{
+  path: "/",
+  iconCls: "el-icon-tickets", // 图标样式class
+  name: "系统设置",
+  component: Layout,
+  children: operation_routes.concat(system_routes).concat(tools_routes).concat(log_routes).concat(list_page)
+}];
 
 //自动注册路由
-function getRoutes(req) { 
+function getRoutes(req) {
   let routes = req.keys().map(val => {
     // 获取组件配置
     const componentConfig = req(val);
     // 剥去文件名开头的 `./` 和`.vue`结尾的扩展名
-    const componentName = val.replace(/^\.\//,'').replace(/\.vue$/,'');
+    const componentName = val.replace(/^\.\//, '').replace(/\.vue$/, '');
     // 全局注册组件
     const name = componentConfig.default.name;
 
@@ -55,7 +53,7 @@ function getRoutes(req) {
       path: '/' + name,
       name: name,
       component,
-      children:[]
+      children: []
     }
   });
 
@@ -63,8 +61,7 @@ function getRoutes(req) {
 }
 
 //默认路由
-let defaultRouter = [
-  {
+let defaultRouter = [{
     path: '/login',
     name: 'login',
     meta: {
@@ -74,7 +71,7 @@ let defaultRouter = [
     component: Login,
     children: []
   },
-  { 
+  {
     path: "/",
     meta: {
       title: "重定向"
@@ -91,8 +88,7 @@ let defaultRouter = [
     },
     iconCls: "fa fa-dashboard", // 图标样式class
     component: Layout,
-    children: [
-      {
+    children: [{
         path: "/home",
         name: "首页",
         component: Home,
@@ -100,7 +96,7 @@ let defaultRouter = [
       },
       {
         path: "/personal",
-        name:"个人中心",
+        name: "个人中心",
         component: personal,
         children: [],
         // keepAlive: true,  //缓存页面，也可使用<keep-alive></keep-alive>
@@ -109,19 +105,19 @@ let defaultRouter = [
   },
   {
     path: "/403",
-    name:"403",
+    name: "403",
     component: Error_403,
     children: []
   },
   {
     path: "/404",
-    name:"404",
+    name: "404",
     component: Error_404,
     children: []
   },
   {
     path: "/500",
-    name:"500",
+    name: "500",
     component: Error_500,
     children: []
   },
@@ -140,8 +136,7 @@ let defaultRouter = [
     },
     hidden: true,
     component: bigScreen,
-    children: [
-      {
+    children: [{
         path: '/homePage',
         name: 'homePage',
         meta: {
@@ -165,17 +160,19 @@ let defaultRouter = [
 // 解决ElementUI导航栏中的vue-router在3.0版本以上重复点菜单报错问题
 const originalPush = Router.prototype.push
 Router.prototype.push = function push(location) {
-    return originalPush.call(this, location).catch(err => err)
+  return originalPush.call(this, location).catch(err => err)
 }
-  
+
 const originalReplace = Router.prototype.replace;
 Router.prototype.replace = function replace(location) {
   return originalReplace.call(this, location).catch(err => err);
 };
 
 export default new Router({
-    // mode: 'history',
+  // mode: 'history',
   routes: defaultRouter
 })
-export { defaultRouter, addRouter }
-
+export {
+  defaultRouter,
+  addRouter
+}

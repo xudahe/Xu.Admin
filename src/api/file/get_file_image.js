@@ -5,33 +5,33 @@
  * 示例：this.$getFile(limit) .then((raw, url) => {})   raw --文件对象；url --base64字符串
  */
 function getImgFile(limit = 2) {
-    return new Promise((resolve, reject) => {
-        let
-            reader = new FileReader(),
-            pattern = new RegExp(/^image/),
-            fileEle = document.createElement('input'),
-            event = new MouseEvent('click'),
-            data = {}
-        fileEle.type = "file"
-        fileEle.accept = "image/*"
-    		fileEle.style.display = 'none'
-        fileEle.addEventListener('change', () => {
-            const files = fileEle.files[0]
-            data.raw = files
-            files.size / (1024 ** 2) > limit
-            ? reject(`图片大小不能超过${limit}MB!`)
-            : (pattern.test(files.type)
-            ? reader.readAsDataURL(files)
-            : reject('请选择图片!'))
-    				document.body.removeChild(fileEle)
-        })
-        reader.addEventListener('load', () => {
-            data.url = reader.result
-            resolve(data)
-        })
-        fileEle.dispatchEvent(event)
-    		document.body.appendChild(fileEle)
+  return new Promise((resolve, reject) => {
+    let
+      reader = new FileReader(),
+      pattern = new RegExp(/^image/),
+      fileEle = document.createElement('input'),
+      event = new MouseEvent('click'),
+      data = {};
+    fileEle.type = "file"
+    fileEle.accept = "image/*"
+    fileEle.style.display = 'none'
+    fileEle.addEventListener('change', () => {
+      const files = fileEle.files[0]
+      data.raw = files
+      files.size / (1024 ** 2) > limit ?
+        reject(`图片大小不能超过${limit}MB!`) :
+        (pattern.test(files.type) ?
+          reader.readAsDataURL(files) :
+          reject('请选择图片!'))
+      document.body.removeChild(fileEle)
     })
+    reader.addEventListener('load', () => {
+      data.url = reader.result
+      resolve(data)
+    })
+    fileEle.dispatchEvent(event)
+    document.body.appendChild(fileEle)
+  })
 }
 
 /**
@@ -40,15 +40,15 @@ function getImgFile(limit = 2) {
  * @returns {String}
  */
 function getBase64Image(image) {
-    const 
-        canvas = document.createElement('canvas'),
-        ctx = canvas.getContext('2d'),
-        width = image.width,
-        height = image.height
-    canvas.width = width
-    canvas.height = height
-    ctx.drawImage(image, 0, 0, width, height)
-    return canvas.toDataURL(`image/${image.src.toLowerCase()}`)
+  const
+    canvas = document.createElement('canvas'),
+    ctx = canvas.getContext('2d'),
+    width = image.width,
+    height = image.height;
+  canvas.width = width
+  canvas.height = height
+  ctx.drawImage(image, 0, 0, width, height)
+  return canvas.toDataURL(`image/${image.src.toLowerCase()}`)
 }
 
 /**
@@ -56,16 +56,16 @@ function getBase64Image(image) {
  * @param {String} base64 
  */
 function openPictureBase64(base64) {
-    const 
-        image = new Image(),
-        newTag = window.open('', '_blank')
-    image.src = base64
-    newTag.document.body.style['textAlign'] = "center"
-    newTag.document.body.appendChild(image)
+  const
+    image = new Image(),
+    newTag = window.open('', '_blank');
+  image.src = base64
+  newTag.document.body.style['textAlign'] = "center"
+  newTag.document.body.appendChild(image)
 }
 
 export default {
-    getImgFile,
-    getBase64Image,
-    openPictureBase64
+  getImgFile,
+  getBase64Image,
+  openPictureBase64
 }

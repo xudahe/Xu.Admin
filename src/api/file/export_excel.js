@@ -10,18 +10,24 @@ import XLSX from "xlsx"
  */
 export default (obj, name = 'table') => {
   let vb = ""
-  if(obj.length) {
+  if (obj.length) {
     let table = document.createElement('table')
-    for(let i = 0, len = obj.length; i < len; i ++) {
+    for (let i = 0, len = obj.length; i < len; i++) {
       table.appendChild(obj[i].cloneNode(true))
     }
     vb = XLSX.utils.table_to_book(table);
-  }else {
+  } else {
     vb = XLSX.utils.table_to_book(obj);
   }
-  let vbout = XLSX.write(vb, { bookType: 'xlsx', bookSST: true, type: 'array' });
+  let vbout = XLSX.write(vb, {
+    bookType: 'xlsx',
+    bookSST: true,
+    type: 'array'
+  });
   try {
-    FileSaver.saveAs(new Blob([vbout], { type: 'application/octet-stream' }), `${name}.xlsx`);
+    FileSaver.saveAs(new Blob([vbout], {
+      type: 'application/octet-stream'
+    }), `${name}.xlsx`);
   } catch (e) {
     if (typeof console !== 'undefined') console.log(e, vbout);
   }

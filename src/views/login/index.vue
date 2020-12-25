@@ -58,7 +58,8 @@ export default {
     },
     methods: {
         // this.tabs = Array.from(new Set(this.tabs)); //去除数组重复项
-
+        
+        //产生随机数
         randomNum (min, max) {
             return Math.floor(Math.random() * (max - min) + min)
         },
@@ -99,16 +100,20 @@ export default {
 			if (name == undefined || psw == undefined) {
 				this.$router.push({ path: "/login" });
 			}
-		},
+        },
+        loginError(){
+            this.logining = false;
+            this.loadName = "重新登录";
+            this.$loading.hideLoading(); //关闭
+            this.setRefreshCode();
+        },
         loginSubmit(){
             let _this = this;
-            if (!this.loginForm.username) {
-				this.$warnTip({ title: "请填写用户名" })
-				return
-			} else if (!this.loginForm.password) {
-				this.$warnTip({ title: "请填写密码" })
-				return
-            } 
+            
+            if (!this.loginForm.username) 
+				return this.$warnTip({ title: "请填写用户名" })
+			if (!this.loginForm.password) 
+				return this.$warnTip({ title: "请填写密码" })
             
             this.logining = true;
             this.loadName = "登录中...";
@@ -120,15 +125,8 @@ export default {
 					pass: encrypt(this.loginForm.password)
 				}).then(res => {
                      if (!res.data.success) {
-                        _this.logining = false;
-                        _this.loadName = "重新登录";
-                        _this.$loading.hideLoading(); //关闭
-                        _this.setRefreshCode();
-
-                        _this.$message({
-                            message: res.data.message,
-                            type: 'error'
-                        });
+                        _this.loginError();
+                        _this.$errorMsg(res.data.message)
                     } else {
                         var token = res.data.token;
                         _this.$store.commit("saveToken", token); // 保存token
@@ -149,27 +147,18 @@ export default {
                         _this.getUserByToken(token)
 			    	}
 				}).catch(err => {
-                    _this.$loading.hideLoading();
+                    _this.loginError();
                 })
         },
         // 获取用户
         getUserByToken(token) {
             var _this = this;
-            
             this.$ajax(this.$apiSet.getUserByToken, {
 			     	token: token
 				}).then(res => {
-                    _this.$loading.hideLoading();//关闭
-
                     if (!res.data.success) {
-                        _this.logining = false;
-                        _this.loadName = "重新登录";
-                        _this.setRefreshCode();
-                        
-                        _this.$message({
-                            message: res.data.message,
-                            type: 'error'
-                        });
+                        _this.loginError();
+                        _this.$errorMsg(res.data.message)
                     } else {
                         
                         let userinfo = res.data.response;
@@ -184,26 +173,18 @@ export default {
                         }
                     }
                 }).catch(err => {
-                    _this.$loading.hideLoading();
+                    _this.loginError();
                 })
         },
         // 获取角色
         getRoleData(userinfo) {
             var _this = this;
-            
             this.$ajax(this.$apiSet.getRoleInfo, {
 			     	ids: userinfo.roleIds
 				}).then(res => {
                     if (!res.data.success) {
-                        _this.logining = false;
-                        _this.loadName = "重新登录";
-                        _this.$loading.hideLoading();//关闭
-                        _this.setRefreshCode();
-
-                        _this.$message({
-                            message: res.data.message,
-                            type: 'error'
-                        });
+                        _this.loginError();
+                        _this.$errorMsg(res.data.message)
                     } else {
                         let roleinfo = res.data.response;
                         window.localStorage.roleInfo = JSON.stringify(roleinfo)
@@ -214,27 +195,20 @@ export default {
                         }
                     }
                 }).catch(err => {
-                    _this.$loading.hideLoading();
+                    _this.loginError();
                 })
         },
         // 获取菜单
         getMenuData(menuIds) {
             var _this = this;
-
             this.$ajax(this.$apiSet.getMenuByIds, {
 			     	ids: menuIds.join(',')
 				}).then(res => {
                     _this.$loading.hideLoading(); //关闭
 
                     if (!res.data.success) {
-                        _this.logining = false;
-                        _this.loadName = "重新登录";
-                        _this.setRefreshCode();
-
-                        _this.$message({
-                            message: res.data.message,
-                            type: 'error'
-                        });
+                        _this.loginError();
+                        _this.$errorMsg(res.data.message)
                     } else {
                         window.localStorage.menuInfo = JSON.stringify(res.data.response)
                         _this.loadName = '登录成功'
@@ -245,19 +219,20 @@ export default {
 
                             _this.$notify({
                                 type: "success",
-                                message: `登录成功 \n 欢迎管理员：${userinfo.realName} ！Token 将在 ${window.localStorage.expires_in / 60} 分钟后过期！`,
-                                duration: 4000
+                                message: `登录成功 \n 欢迎管理员：${userinfo.realName}！Token 将在 ${window.localStorage.expires_in / 60} 分钟后过期！`,
+                                duration: 3000
                             });
                         }, 1000);
                     }
                 }).catch(err => {
-                    _this.$loading.hideLoading();
+                    _this.loginError();
                 })
         }
     },
     mounted(){
         window.localStorage.clear()
-        // console.info('%c 本地缓存已清空!', "color:green")
+        window.sessionStorage.clear()
+        console.info('%c 本地缓存已清空!', "color:green")
  
         this.cookies();
         this.setRefreshCode()

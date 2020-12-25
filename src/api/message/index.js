@@ -1,7 +1,11 @@
-import { Message, MessageBox, Notification } from 'element-ui'
+import {
+  Message,
+  MessageBox,
+  Notification
+} from 'element-ui'
 
 /**
- * @description 提示
+ * @description 成功提示
  * @param {String} msg 
  */
 const successMsg = msg => {
@@ -12,6 +16,10 @@ const successMsg = msg => {
   })
 }
 
+/**
+ * @description 警告提示
+ * @param {String} msg 
+ */
 const warnMsg = msg => {
   Message({
     message: msg,
@@ -20,6 +28,10 @@ const warnMsg = msg => {
   })
 }
 
+/**
+ * @description 报错提示
+ * @param {String} msg 
+ */
 const errorMsg = msg => {
   Message({
     message: msg,
@@ -28,7 +40,13 @@ const errorMsg = msg => {
   })
 }
 
-const showMsgBox = ({ title, msg, isHTML, type, iconClass }) => {
+const showMsgBox = ({
+  title,
+  msg,
+  isHTML,
+  type,
+  iconClass
+}) => {
   return MessageBox.confirm(msg || "", title || "", {
     // 不允许显示取消icon
     showClose: false,
@@ -52,7 +70,10 @@ const showMsgBox = ({ title, msg, isHTML, type, iconClass }) => {
  * @param {String} msg 通知内容
  * @param {String} title 通知标题
  */
-const successTip = ({ title, msg }) => {
+const successTip = ({
+  title,
+  msg
+}) => {
   Notification({
     title: title || "",
     message: msg,
@@ -66,7 +87,10 @@ const successTip = ({ title, msg }) => {
  * @param {String} msg 通知内容
  * @param {String} title 通知标题
  */
-const warnTip = ({ title, msg }) => {
+const warnTip = ({
+  title,
+  msg
+}) => {
   Notification({
     title: title || "",
     message: msg,
@@ -80,7 +104,10 @@ const warnTip = ({ title, msg }) => {
  * @param {String} msg 通知内容
  * @param {String} title 通知标题
  */
-const errorTip = ({ title, msg }) => {
+const errorTip = ({
+  title,
+  msg
+}) => {
   Notification({
     title: title || "",
     message: msg,
@@ -89,7 +116,13 @@ const errorTip = ({ title, msg }) => {
   })
 }
 
-const showTipDiy = ({ title, msg, type, iconClass, isHTML }) => {
+const showTipDiy = ({
+  title,
+  msg,
+  type,
+  iconClass,
+  isHTML
+}) => {
   Notification({
     title: title || "",
     message: msg,

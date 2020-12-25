@@ -562,12 +562,12 @@
    }
 
   .answer-radio{
-    display: list-item;
+    display: block;
     margin: 5px 0px;
   }
 
   .answer-checkbox{
-    display: list-item;
+    display: block;
     margin: 5px 0px;
   }
 

@@ -11,10 +11,8 @@ if (typeof window !== 'undefined') {
     return {
       media: mediaQuery,
       matches: false,
-      addListener() {
-      },
-      removeListener() {
-      }
+      addListener() {},
+      removeListener() {}
     };
   };
   window.matchMedia = window.matchMedia || matchMediaPolyfill;
@@ -103,8 +101,7 @@ const responsiveObserve = {
           this.fire(ponitMap)
         },
         // Keep a empty destroy to avoid triggering unmatch when unregister
-        destroy() {
-        }
+        destroy() {}
       })
     })
   },

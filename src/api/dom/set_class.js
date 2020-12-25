@@ -4,19 +4,19 @@
  * @param {String} name 
  */
 function addClass(element, name) {
-    element.classList.add(name)
+  element.classList.add(name)
 }
 
 function removeClass(element, name) {
-    element.classList.remove(name)
+  element.classList.remove(name)
 }
 
 function getClassName(element) {
-    return element.getAttribute('className')
+  return element.getAttribute('className')
 }
 
 export default {
-    addClass,
-    removeClass,
-    getClassName
+  addClass,
+  removeClass,
+  getClassName
 }

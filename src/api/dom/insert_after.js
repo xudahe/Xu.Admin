@@ -4,7 +4,7 @@
  * @param {DOM} nowEle 
  */
 function insertAfter(newEle, nowEle) {
-	nowEle.parentNode.insertBefore(newEle, nowEle.nextSibling)
+  nowEle.parentNode.insertBefore(newEle, nowEle.nextSibling)
 }
 
 export default insertAfter

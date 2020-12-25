@@ -1,6 +1,9 @@
-
 import axios from 'axios'
-import { Loading, Message } from 'element-ui'
+import {
+  Loading,
+  Message
+} from 'element-ui'
+
 /**
  * @description 下载文件
  * @param {String} url 下载路径
@@ -9,10 +12,10 @@ import { Loading, Message } from 'element-ui'
 let loading = ""
 
 function download(url, fileName) {
-  loading = Loading.service({ 
-    fullscreen: true, 
-    background: "rgba(255, 255, 255, .4)", 
-    customClass: 'top-floor' 
+  loading = Loading.service({
+    fullscreen: true,
+    background: "rgba(255, 255, 255, .4)",
+    customClass: 'top-floor'
   })
   Message({
     message: "正在下载文件，请耐心等待",
@@ -24,21 +27,21 @@ function download(url, fileName) {
     method: "get",
     responseType: 'blob'
   }).then(result => {
-		if(window.navigator.msSaveBlob) {
-			try {
-				window.navigator.msSaveBlob(blob, fileName || arr[arr.length - 1])
-			} catch(e) {
-				console.log(e)
-			}
-		}else {
-			const
-			  a = document.createElement('a'),
-			  arr = url.split('/')
-			a.download = fileName || arr[arr.length - 1]
-			a.href = window.URL.createObjectURL(result.data)
-			a.click()
-			loading.close()
-		}  
+    if (window.navigator.msSaveBlob) {
+      try {
+        window.navigator.msSaveBlob(blob, fileName || arr[arr.length - 1])
+      } catch (e) {
+        console.log(e)
+      }
+    } else {
+      const
+        a = document.createElement('a'),
+        arr = url.split('/');
+      a.download = fileName || arr[arr.length - 1]
+      a.href = window.URL.createObjectURL(result.data)
+      a.click()
+      loading.close()
+    }
   }).catch(e => {
     Message({
       message: e,

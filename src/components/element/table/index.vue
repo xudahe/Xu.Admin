@@ -55,7 +55,7 @@
               @onConfirm="handleButton(item.methods,scope.row,index)"
               @onCancel="()=>{}"
             >
-              <el-button slot="reference" :type="item.type" :icon="item.icon" style="margin-left:5px;" size="mini"></el-button>
+              <el-button slot="reference" :type="item.type" :icon="item.icon" style="margin-right:5px;" size="mini"></el-button>
             </el-popconfirm>
           </template>
         </template>

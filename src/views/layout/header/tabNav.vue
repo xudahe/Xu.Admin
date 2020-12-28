@@ -117,6 +117,7 @@ export default {
 
   .tabnavBox {
     @extend %w100;
+    background-color: #fff;
     height: 42px;
     min-height: 42px;
     overflow: hidden;

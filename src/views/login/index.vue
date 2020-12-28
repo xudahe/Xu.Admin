@@ -1,22 +1,42 @@
 <!-- 应用系统登录 -->
 <template>
     <div class="login-container">
-        <el-form :model="loginForm" :rules="rules" status-icon ref="loginForm" label-position="left" label-width="0px" class="demo-ruleForm login-page">
-            <h3 class="title">系统登录</h3>
+        <el-form :model="loginForm" status-icon ref="loginForm" label-position="left" label-width="0px" class="demo-ruleForm login-page">
+            <Menu mode="horizontal" style="margin-bottom: 30px" active-name="1">
+              <MenuItem name="1"><Icon type="md-contacts" />帐号登陆</MenuItem>
+              <MenuItem name="2"> <Icon type="ios-mail" />短信登陆</MenuItem>
+            </Menu>
             <el-form-item prop="username">
-                <el-input type="text" v-model="loginForm.username" placeholder="用户名"></el-input>
+                <el-row :span="24">
+                    <el-col :span="6">
+                        <Icon type="ios-people" :size="20" />&nbsp;用户名：
+                    </el-col>
+                    <el-col :span="18">
+                       <el-input type="text" v-model="loginForm.username" placeholder="输入用户" />
+                    </el-col>
+                </el-row>
             </el-form-item>
-            <el-form-item prop="password">
-                <el-input type="password" v-model="loginForm.password" placeholder="密码" ></el-input>
+            <el-form-item prop="username">
+                <el-row :span="24">
+                    <el-col :span="6">
+                        <Icon type="ios-lock" :size="20" />&nbsp;密&nbsp;&nbsp;&nbsp;码：
+                    </el-col>
+                    <el-col :span="18">
+                       <el-input type="text" v-model="loginForm.password" placeholder="输入密码" />
+                    </el-col>
+                </el-row>
             </el-form-item>
             <el-form-item prop="code">
                 <el-row :span="24">
-                    <el-col :span="14">
-                        <el-input v-model="loginForm.code" auto-complete="off" placeholder="验证码" size=""></el-input>
+                    <el-col :span="6">
+                        <Icon type="md-images" :size="20" />&nbsp;验证码：
                     </el-col>
-                    <el-col :span="10">
+                    <el-col :span="12">
+                        <el-input v-model="loginForm.code" auto-complete="off" placeholder="输入验证码"></el-input>
+                    </el-col>
+                    <el-col :span="6">
                         <div class="login-code" @click="setRefreshCode">
-                        <s-identify :identifyCode="identifyCode"></s-identify>
+                        <s-identify :identifyCode="identifyCode" :fontSizeMax="20" :contentWidth="80"></s-identify>
                     </div>
                     </el-col>
                 </el-row>
@@ -48,10 +68,6 @@ export default {
                 username: 'admin',
                 password: '111111',
                 code:''
-            },
-            rules: {
-                username: [{required: true, message: '请输入用户名！', trigger: 'blur'}],
-                password: [{required: true, message: '请输入密码！', trigger: 'blur'}]
             },
             checkboxValue: true
         }
@@ -111,9 +127,9 @@ export default {
             let _this = this;
             
             if (!this.loginForm.username) 
-				return this.$warnTip({ title: "请填写用户名" })
+				return this.$errorMsg("请输入用户名" )
 			if (!this.loginForm.password) 
-				return this.$warnTip({ title: "请填写密码" })
+				return this.$errorMsg("请输入密码" )
             
             this.logining = true;
             this.loadName = "登录中...";
@@ -141,7 +157,7 @@ export default {
                         _this.$notify({
                             type: "success",
                             message: `成功获取令牌，等待服务器返回用户信息...`,
-                            duration: 3000
+                            duration: 2000
                         });
                         
                         _this.getUserByToken(token)
@@ -233,7 +249,7 @@ export default {
         window.localStorage.clear()
         window.sessionStorage.clear()
         console.info('%c 本地缓存已清空!', "color:green")
- 
+
         this.cookies();
         this.setRefreshCode()
     },
@@ -256,7 +272,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 .title {
     text-align: center;
     margin: 0 0 22px;
@@ -264,13 +280,17 @@ export default {
 .login-container {
     width: 100%;
     height: 100%;
+    padding: 8% 50%;
+    background-image: linear-gradient(135deg, #00a7f5 10%, #0cb3ff);
 }
+
 .login-page {
+    color: #868484;
+    font-weight: 400;
     -webkit-border-radius: 5px;
     border-radius: 5px;
-    margin: 120px auto;
-    width: 350px;
-    padding: 35px 35px 15px;
+    width: 400px;
+    padding: 15px 35px;
     background: #fff;
     border: 1px solid #eaeaea;
     box-shadow: 0 0 25px #cac6c6;

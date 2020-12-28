@@ -99,7 +99,7 @@ export default {
     logout() {
       window.sessionStorage.clear();
       window.localStorage.clear();
-      location.reload();
+      window.location.reload();
       this.$router.push({ path: "/login" });
     },
     fullScreen () {

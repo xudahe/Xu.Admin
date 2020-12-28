@@ -88,7 +88,7 @@ export default {
   }
 
   #elmain {
-    background-color: #f0f2f5;
+    background-color: #fff;
     padding: 5px !important;
   }
 

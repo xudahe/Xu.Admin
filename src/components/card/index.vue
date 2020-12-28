@@ -185,7 +185,7 @@
 
   .data-item {
     width: 100%;
-    height: 0.8rem;
+    height: 1rem;
   }
 
   .corner-mark {
@@ -193,9 +193,8 @@
     height: 0.5rem;
     -webkit-transform: translate(50%,-50%);
     transform: translate(50%,-50%);
-
     float: right;
-    margin-top: -0.7rem;
+    margin-top: -0.9rem;
     margin-right: 0.1rem;
   }
 
@@ -203,8 +202,8 @@
     height: 0.2rem;
     line-height: 0.2rem;
     font-size: 0.08rem;
-    background: #1890ff;
-    color: #91d5ff;
+    background: #ffffff;
+    color: #ffaf02;
     text-align: center;
     -webkit-box-shadow: 0 2px 4px rgba(0,0,0,.12),0 0 6px rgba(0,0,0,.12);
     box-shadow: 0 2px 4px rgba(0,0,0,.12),0 0 6px rgba(0,0,0,.12);
@@ -218,7 +217,8 @@
   .data-item .imgLeft {
     width: 0.8rem;
     height: 0.8rem;
-    float: left;
+    // float: left;
+    margin-top: 0.2rem;
   }
 
   .data-item .text {
@@ -240,11 +240,11 @@
   .card_lable {
     font-size: 0.12rem;
     height: calc(100% - 0.3rem);
-    // text-indent: 2em; //首行缩进
+    text-indent: 2em; //首行缩进
 
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 4;
     overflow: hidden;
   }
 

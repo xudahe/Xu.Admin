@@ -1,3 +1,16 @@
+<!-- 
+  1、xs，小于768px
+  2、sm，大于等于768px
+  3、md，大于等于992px
+  4、lg，大于等于1200px
+  5、xl，大于等于1920px
+  <el-row :gutter="10">
+    <el-col :xs="8" :sm="6" :md="4" :lg="3"></el-col>
+    <el-col :xs="4" :sm="6" :md="8" :lg="9"></el-col>
+    <el-col :xs="4" :sm="6" :md="8" :lg="9"></el-col>
+    <el-col :xs="8" :sm="6" :md="4" :lg="3"></el-col>
+  </el-row>
+-->
 <template>
   <div class="role_manager card_css">
     <el-row :gutter="10" style="height:100%;">

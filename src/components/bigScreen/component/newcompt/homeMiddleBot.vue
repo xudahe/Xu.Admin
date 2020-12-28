@@ -71,9 +71,9 @@ export default {
         },
         series: [
           {
-            type: "pictorialBar",
-            symbol: spirit,
-            symbolRepeat: "fixed",
+            type: "pictorialBar", //echarts图的类型
+            symbol: spirit, //内部类型（方块，圆，svg，base64图片）
+            symbolRepeat: "fixed", //是否重复symbol
             symbolMargin: "5%", //间距
             symbolClip: true,
             symbolSize: 15, //图标大小
@@ -98,7 +98,7 @@ export default {
                 }
               ]
             },
-            z: 10
+            z: 10 //图层值
           },
           {
             type: "pictorialBar",

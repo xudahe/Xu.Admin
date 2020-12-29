@@ -19,16 +19,12 @@ router.beforeEach((to, from, next) => {
   NProgress.start(); //显示进度条
 
   if (!validataToken()) {
-    next({
-      path: "/"
-    })
+    next()
   }
-
+  
   if (store.getters.token) {
     if (to.path === "/login") {
-      next({
-        path: "/"
-      })
+      next()
     } else {
       if (store.getters.info == "") {
         getAddRouters()

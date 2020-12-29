@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-// VueResource使用方式：this.$http.get("../../../static/data/layer.json").then(res => {});
-import VueResource from 'vue-resource'
 // 为Vue应用添加页面间的转场特效
 import vueg from 'vueg'
 // import 'vueg/css/transition-min.css'
@@ -349,9 +347,6 @@ Vue.use(vueg, new Router(), defaultConfig.option)
 
 // 引入mavonEditor编辑器
 Vue.use(mavonEditor)
-
-// Vue 要实现异步加载需要使用到 vue-resource 库
-Vue.use(VueResource)
 
 // 阻止显示生产模式的消息
 Vue.config.productionTip = false

@@ -33,7 +33,7 @@
         </el-card>
       </el-col>
       <el-col :sm="24" :md="5" style="height:100%;">
-        <el-card class="box-card card-gutter-sm" shadow="hover">
+        <el-card class="box-card" shadow="hover">
           <div slot="header" class="clearfix">
             <span class="header">{{sels.roleName}}&nbsp;--&nbsp;菜单分配</span>
             <el-tooltip content="保存">
@@ -55,15 +55,15 @@
         <el-row>
           <el-col :span="12">
             <el-form-item label="角色名称" prop="roleName">
-              <el-input v-model="roleForm.roleName" auto-complete="off"></el-input>
+              <el-input v-model="roleForm.roleName" autocomplete="off"></el-input>
             </el-form-item>
             <el-form-item label="备注" prop="remark">
-              <el-input v-model="roleForm.remark" auto-complete="off" type="textarea"></el-input>
+              <el-input v-model="roleForm.remark" autocomplete="off" type="textarea"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="角色编码" prop="roleCode">
-              <el-input v-model="roleForm.roleCode" auto-complete="off"></el-input>
+              <el-input v-model="roleForm.roleCode" autocomplete="off"></el-input>
             </el-form-item>
             <el-form-item label="状态" prop="enabled">
               <el-radio-group v-model="roleForm.enabled">
@@ -186,17 +186,16 @@ export default {
         //获取角色列表
         searchData () {
           let _this = this;
-          this.loading = true;
           this.$ajax(this.$apiSet.getRoleInfo,{
               roleName: this.filters.name
             })
             .then(res => {
-                if (!res.data.success) {
-                    _this.$errorMsg(res.data.message)
-                } else {
-                    _this.loading = false;
-                    _this.tableData = res.data.response;
-				       	}
+              _this.$loading.hideLoading();
+              if (!res.data.success) {
+                  _this.$errorMsg(res.data.message)
+              } else {
+                  _this.tableData = res.data.response;
+				      }
             })
             .catch(err => {})
         },
@@ -321,6 +320,7 @@ export default {
           let _this = this;
 
           this.sels = {}
+          this.$loading.showLoading()
           this.searchData();
           this.getMenuData();
 

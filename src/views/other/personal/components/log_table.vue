@@ -30,8 +30,8 @@ export default {
 		  tableData: [],
       tableLabel: [
         { label: '操作人', param: 'user'},
-        { label: 'Api', param: 'api'},
-        { label: 'IP', param: 'ip'},
+        { label: '请求Api', param: 'api'},
+        { label: '用户IP', param: 'ip'},
         { label: 'IP来源', param: 'address' },
         { label: '请求耗时', param: 'opTime' },
         { label: '请求时间', param: 'beginTime', sortable: true,

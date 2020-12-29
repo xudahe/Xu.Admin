@@ -24,7 +24,7 @@
         <el-row>
           <el-col :span="12">
             <el-form-item label="部门名称" prop="deptName">
-              <el-input v-model="deptForm.deptName" auto-complete="off"></el-input>
+              <el-input v-model="deptForm.deptName" autocomplete="off"></el-input>
             </el-form-item>
             <el-form-item label="负责人" prop="deptUser">
               <el-select v-model="deptForm.deptUser" placeholder="请选择部门负责人" filterable clearable>
@@ -32,12 +32,12 @@
               </el-select>
             </el-form-item>
             <el-form-item label="备注" prop="remark">
-              <el-input v-model="deptForm.remark" auto-complete="off" type="textarea"></el-input>
+              <el-input v-model="deptForm.remark" autocomplete="off" type="textarea"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="部门编码" prop="deptCode">
-              <el-input v-model="deptForm.deptCode" auto-complete="off"></el-input>
+              <el-input v-model="deptForm.deptCode" autocomplete="off"></el-input>
             </el-form-item>
             <el-form-item label="上级部门" prop="parentId" filterable clearable>
               <el-select v-model="deptForm.parentId" placeholder="请选择上级部门" filterable clearable>
@@ -161,17 +161,16 @@ export default {
         //获取部门列表
         searchData() {
           let _this = this;
-          this.loading = true;
           this.$ajax(this.$apiSet.getDeptInfo,{
               deptName: this.filters.name
             })
             .then(res => {
-                if (!res.data.success) {
-                     _this.$errorMsg(res.data.message)
-                } else {
-                    _this.loading = false;
-                    _this.tableData = res.data.response;
-				       	}
+              _this.$loading.hideLoading();
+              if (!res.data.success) {
+                   _this.$errorMsg(res.data.message)
+              } else {
+                  _this.tableData = res.data.response;
+				      }
             })
             .catch(err => {})
         },
@@ -270,6 +269,7 @@ export default {
             .catch(err => {})
         },1000),
         refreshData(){
+          this.$loading.showLoading()
           this.searchData();
           this.getUserData();
         },

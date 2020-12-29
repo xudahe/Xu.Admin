@@ -281,7 +281,7 @@ export default {
       text-align: center;
     }
     .carousel_main {
-      height: calc(100% - 60px);
+      height: calc(~'100% - 60px');
       width: 100%;
       padding-top: 10px;
     }

@@ -9,24 +9,41 @@
       label-width="80px"
     >
       <el-form-item label="旧密码" prop="oldPass">
-        <el-input v-model="userForm.oldPass" type="password" style="width: 360px;" clearable/>
+        <el-input
+          v-model="userForm.oldPass"
+          type="password"
+          style="width: 360px;"
+          clearable
+        />
       </el-form-item>
       <el-form-item label="新密码" prop="newPass">
-        <el-input v-model="userForm.newPass" type="password" style="width: 360px;" clearable/>
+        <el-input
+          v-model="userForm.newPass"
+          type="password"
+          style="width: 360px;"
+          clearable
+        />
       </el-form-item>
       <el-form-item label="确认密码" prop="checkPass">
-        <el-input v-model="userForm.checkPass" type="password" style="width: 360px;" clearable/>
+        <el-input
+          v-model="userForm.checkPass"
+          type="password"
+          style="width: 360px;"
+          clearable
+        />
       </el-form-item>
-			<el-form-item>
-			  <el-button @click.native="resetForm" size="small">重置</el-button>
-			  <el-button type="primary" @click.native="doSubmit" size="small">确认</el-button>
-			</el-form-item>
+      <el-form-item>
+        <el-button @click.native="resetForm" size="small">重置</el-button>
+        <el-button type="primary" @click.native="doSubmit" size="small"
+          >确认</el-button
+        >
+      </el-form-item>
     </el-form>
   </div>
 </template>
 
 <script>
-import { encrypt } from '@/utils/encrypt'
+import { encrypt } from "@/utils/encrypt";
 export default {
   data() {
     var checkPassword = (rule, value, callback) => {
@@ -43,11 +60,21 @@ export default {
       rules: {
         oldPass: [
           { required: true, message: "请输入旧密码", trigger: "blur" },
-          { min: 3, max: 21, message: "长度在 3 到 21 个字符", trigger: "change" }
+          {
+            min: 3,
+            max: 21,
+            message: "长度在 3 到 21 个字符",
+            trigger: "change"
+          }
         ],
         newPass: [
           { required: true, message: "请输入新密码", trigger: "blur" },
-          { min: 3, max: 21, message: "长度在 3 到 21 个字符", trigger: "change" }
+          {
+            min: 3,
+            max: 21,
+            message: "长度在 3 到 21 个字符",
+            trigger: "change"
+          }
         ],
         checkPass: [{ validator: checkPassword, trigger: "blur" }]
       }
@@ -85,5 +112,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

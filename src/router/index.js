@@ -27,7 +27,7 @@ const log_routes = getRoutes(require.context('@/views/other/log', true, /\.vue$/
 const list_page = getRoutes(require.context('@/views/pages', true, /\.vue$/));
 
 let addRouter = [{
-  path: "/",
+  path: "/index",
   iconCls: "el-icon-tickets", // 图标样式class
   name: "系统设置",
   component: Layout,
@@ -76,7 +76,7 @@ let defaultRouter = [{
     meta: {
       title: "重定向"
     },
-    redirect: "/home",
+    redirect: "/home", //默认重定向到首页
     hidden: true,
     children: []
   },

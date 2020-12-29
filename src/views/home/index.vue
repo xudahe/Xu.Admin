@@ -25,9 +25,9 @@
      </el-row>
    
     <v-dialog  ref="dialog" v-model="dialog.show" :title="dialog.title" :buttons="dialog.buttons" :bodyshow="dialog.bodyshow" >
-		<div style="height: 300px;">
-		   
-		</div>
+	    <div style="height: 300px;">
+      
+	    </div>
     </v-dialog>
     <dialog1 ref="dragdialog" v-show="showDialog"></dialog1>
   </div>
@@ -53,7 +53,7 @@ export default {
         {img: './static/img/home/b4.png'},
       ],
 
-       dialog: {
+      dialog: {
         show: false,
         title: {
           text: '分析',

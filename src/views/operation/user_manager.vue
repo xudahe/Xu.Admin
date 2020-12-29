@@ -21,7 +21,7 @@
                 </el-card>
             </el-col>
             <el-col :sm="24" :md="5" style="height:100%;">
-                <el-card class="box-card card-gutter-sm" shadow="hover">
+                <el-card class="box-card" shadow="hover">
                   <div slot="header" class="clearfix">
                     <span class="header">{{sels.loginName}}&nbsp;--&nbsp;角色分配</span>
                     <el-tooltip content="保存">
@@ -43,21 +43,21 @@
                 <el-row style="padding:0 10px;">
                     <el-col :span="12">
                         <el-form-item label="登录名" prop="loginName">
-                            <el-input v-model="userForm.loginName" auto-complete="off"></el-input>
+                            <el-input v-model="userForm.loginName" autocomplete="off"></el-input>
                         </el-form-item>
                         <el-form-item label="用户名" prop="realName">
-                            <el-input v-model="userForm.realName" auto-complete="off"></el-input>
+                            <el-input v-model="userForm.realName" autocomplete="off"></el-input>
                         </el-form-item>
                         <el-form-item label="出生日期">
                             <el-date-picker type="date" placeholder="选择出生日期" v-model="userForm.birth"></el-date-picker>
                         </el-form-item>
                         <el-form-item label="联系方式" prop="mobile">
-                            <el-input v-model="userForm.mobile" placeholder="请填写联系方式" auto-complete="off"></el-input>
+                            <el-input v-model="userForm.mobile" placeholder="请填写联系方式" autocomplete="off"></el-input>
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
                         <el-form-item label="密码" prop="loginPwd">
-                            <el-input v-model="userForm.loginPwd" show-password  auto-complete="off" :disabled="formTitle=='编辑'?true:false"></el-input>
+                            <el-input v-model="userForm.loginPwd" show-password  autocomplete="off" :disabled="formTitle=='编辑'?true:false"></el-input>
                         </el-form-item>
                         <el-form-item label="部门" prop="deptId">
                             <el-select v-model="userForm.deptId" placeholder="请选择所属部门" filterable clearable>
@@ -81,10 +81,10 @@
                     </el-col>
                     <el-col :span="24">
                         <el-form-item label="地址">
-                            <el-input v-model="userForm.address" auto-complete="off"></el-input>
+                            <el-input v-model="userForm.address" autocomplete="off"></el-input>
                         </el-form-item>
                         <el-form-item label="备注" prop="remark">
-                          <el-input v-model="userForm.remark" auto-complete="off" type="textarea"></el-input>
+                          <el-input v-model="userForm.remark" autocomplete="off" type="textarea"></el-input>
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -208,15 +208,14 @@ export default {
         //获取用户列表
         searchData () {
             let _this = this;
-            this.loading = true;
             this.$ajax(this.$apiSet.getUserInfo,{
                     key: this.filters.name
                 })
                 .then(res => {
+                    _this.$loading.hideLoading();
                     if (!res.data.success) {
                         _this.$errorMsg(res.data.message)
                     } else {
-                        _this.loading = false;
                         _this.tableData = res.data.response;
 					}
                 })
@@ -350,6 +349,7 @@ export default {
             let _this = this;
 
             this.sels = {}
+            this.$loading.showLoading()
             this.searchData();
             this.getRoleData();
 

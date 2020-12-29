@@ -6,45 +6,48 @@
               <MenuItem name="1"><Icon type="md-contacts" />帐号登陆</MenuItem>
               <MenuItem name="2"> <Icon type="ios-mail" />短信登陆</MenuItem>
             </Menu>
-            <el-form-item prop="username">
-                <el-row :span="24">
+            <el-row :span="24">
+                <el-form-item prop="username" style="border-bottom: 1px solid #eeeeee;">
                     <el-col :span="6">
                         <Icon type="ios-people" :size="20" />&nbsp;用户名：
                     </el-col>
                     <el-col :span="18">
-                       <el-input type="text" v-model="loginForm.username" placeholder="输入用户" />
+                       <el-input type="text" v-model="loginForm.username" autocomplete="off" placeholder="请输入用户民" clearable/>
                     </el-col>
-                </el-row>
-            </el-form-item>
-            <el-form-item prop="username">
-                <el-row :span="24">
+                </el-form-item>
+                <el-form-item prop="username" style="border-bottom: 1px solid #eeeeee;">
                     <el-col :span="6">
                         <Icon type="ios-lock" :size="20" />&nbsp;密&nbsp;&nbsp;&nbsp;码：
                     </el-col>
                     <el-col :span="18">
-                       <el-input type="text" v-model="loginForm.password" placeholder="输入密码" />
+                       <el-input type="text" v-model="loginForm.password" autocomplete="off" placeholder="请输入密码" show-password/>
                     </el-col>
-                </el-row>
-            </el-form-item>
-            <el-form-item prop="code">
-                <el-row :span="24">
+                </el-form-item>
+                <el-form-item prop="code" style="border-bottom: 1px solid #eeeeee;">
                     <el-col :span="6">
                         <Icon type="md-images" :size="20" />&nbsp;验证码：
                     </el-col>
                     <el-col :span="12">
-                        <el-input v-model="loginForm.code" auto-complete="off" placeholder="输入验证码"></el-input>
+                        <el-input type="text" v-model="loginForm.code" autocomplete="off" placeholder="请输入验证码" clearable/>
                     </el-col>
                     <el-col :span="6">
                         <div class="login-code" @click="setRefreshCode">
-                        <s-identify :identifyCode="identifyCode" :fontSizeMax="20" :contentWidth="80"></s-identify>
-                    </div>
+                            <s-identify :identifyCode="identifyCode" :fontSizeMax="25" :contentWidth="80"></s-identify>
+                        </div>
                     </el-col>
-                </el-row>
-            </el-form-item>
-            <el-checkbox v-model="checkboxValue" class="rememberme">记住密码</el-checkbox>
-            <el-form-item style="width:100%;">
-                <el-button type="primary" style="width:100%;" @click.native="loginSubmit" :loading="logining">{{loadName}}</el-button>
-            </el-form-item>
+                </el-form-item>
+                <el-form-item style="width:100%;">
+                    <el-col :span="24">
+                        <el-button type="primary" style="width:100%;" @click.native="loginSubmit" :loading="logining">{{loadName}}</el-button>
+                    </el-col>
+                </el-form-item>
+                <el-col :span="12">
+                    <el-checkbox v-model="checkboxValue" class="rememberme">记住密码</el-checkbox>
+                </el-col>
+                <el-col :span="12" style="text-align: right;">
+                    <a >忘记密码</a>
+                </el-col>
+            </el-row>
         </el-form>
     </div>
 </template>
@@ -228,7 +231,7 @@ export default {
                     } else {
                         window.localStorage.menuInfo = JSON.stringify(res.data.response)
                         _this.loadName = '登录成功'
-                        _this.$router.push({path: "/"}) //登录成功之后重定向到首页
+                        _this.$router.push({path: "/home"}) //登录成功之后重定向到首页
                         
                         setTimeout(() => {
                             let userinfo = JSON.parse(window.localStorage.userInfo ? window.localStorage.userInfo : null);
@@ -272,31 +275,32 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
-.title {
-    text-align: center;
-    margin: 0 0 22px;
-}
+<style lang="less">
 .login-container {
     width: 100%;
     height: 100%;
     padding: 8% 50%;
     background-image: linear-gradient(135deg, #00a7f5 10%, #0cb3ff);
-}
 
-.login-page {
-    color: #868484;
-    font-weight: 400;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    width: 400px;
-    padding: 15px 35px;
-    background: #fff;
-    border: 1px solid #eaeaea;
-    box-shadow: 0 0 25px #cac6c6;
-}
-label.el-checkbox.rememberme {
-    margin: 0px 0px 15px;
-    text-align: left;
+    .el-input__inner{
+        border: none !important;
+    }
+
+
+    .login-page {
+        color: #868484;
+        font-weight: 400;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        width: 400px;
+        padding: 15px 35px;
+        background: #fff;
+        border: 1px solid #eaeaea;
+        box-shadow: 0 0 25px #cac6c6;
+    }
+    label.el-checkbox.rememberme {
+        margin: 0px 0px 15px;
+        text-align: left;
+    }
 }
 </style>

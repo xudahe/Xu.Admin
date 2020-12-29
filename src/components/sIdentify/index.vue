@@ -93,10 +93,12 @@ export default {
     drawText(ctx, txt, i) {
       ctx.fillStyle = this.randomColor(this.colorMin, this.colorMax);
       ctx.font = this.randomNum(this.fontSizeMin, this.fontSizeMax) + "px SimHei";
-      let x = (i + 1) * (this.contentWidth / (this.identifyCode.length + 1));
+      let x = (i + 1) * (this.contentWidth / (this.identifyCode.length + 1)) - 5;
       let y = this.randomNum(this.fontSizeMax, this.contentHeight - 5);
       var deg = this.randomNum(-25, 25);
       // 修改坐标原点和旋转角度
+      console.log(x)
+      console.log(y)
       ctx.translate(x, y);
       ctx.rotate((deg * Math.PI) / 180);
       ctx.fillText(txt, 0, 0);

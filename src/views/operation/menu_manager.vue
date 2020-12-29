@@ -28,7 +28,7 @@
         <el-row>
           <el-col :span="12">
             <el-form-item label="组件名称" prop="className">
-              <el-input v-model="menuForm.className" auto-complete="off"></el-input>
+              <el-input v-model="menuForm.className" autocomplete="off"></el-input>
             </el-form-item>
             <el-form-item label="系统名称" prop="systemName">
               <el-select v-model="menuForm.systemName" placeholder="请选择系统名称">
@@ -55,7 +55,7 @@
           </el-col>
           <el-col :span="12">
             <el-form-item label="菜单名称" prop="menuName">
-              <el-input v-model="menuForm.menuName" auto-complete="off"></el-input>
+              <el-input v-model="menuForm.menuName" autocomplete="off"></el-input>
             </el-form-item>
             <el-form-item label="父级菜单" prop="parentId">
               <el-select v-model="menuForm.parentId" placeholder="请选择父级菜单" filterable clearable>
@@ -63,7 +63,7 @@
               </el-select>
             </el-form-item>
             <el-form-item label="加载序号" prop="index">
-              <el-input v-model="menuForm.index" auto-complete="off" placeholder="请填写序号"></el-input>
+              <el-input v-model="menuForm.index" autocomplete="off" placeholder="请填写序号"></el-input>
             </el-form-item>
             <el-form-item label="状态" prop="enabled">
               <el-radio-group v-model="menuForm.enabled">
@@ -74,7 +74,7 @@
           </el-col>
           <el-col :span="24">
             <el-form-item label="备注" prop="remark">
-              <el-input v-model="menuForm.remark" auto-complete="off" type="textarea"></el-input>
+              <el-input v-model="menuForm.remark" autocomplete="off" type="textarea"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
@@ -192,16 +192,15 @@ export default {
         //获取菜单列表
         searchData() {
           let _this = this;
-          this.loading = true;
           this.$ajax(this.$apiSet.getMenuInfo,{
               menuName: this.filters.name,
               parentId: this.filters.parentId,
             })
             .then(res => {
+              _this.$loading.hideLoading();
               if (!res.data.success) {
                  _this.$errorMsg(res.data.message)
               } else {
-                  _this.loading = false;
                   _this.tableData = res.data.response;
 				      }
             })
@@ -209,7 +208,6 @@ export default {
         },
         getParentData() {
           let _this = this;
-          this.loading = true;
           this.$ajax(this.$apiSet.getMenuInfo)
             .then(res => {
                 if (!res.data.success) {
@@ -314,6 +312,7 @@ export default {
             .catch(err => {})
         },1000),
         refreshData(){
+          this.$loading.showLoading()
           this.searchData();
           this.getParentData();
         },

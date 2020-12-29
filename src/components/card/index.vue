@@ -222,7 +222,7 @@
   }
 
   .data-item .text {
-    width: calc(100% - 0.8rem);
+    width: calc(~'100% - 0.8rem');
     height: 100%;
     float: left;
     padding-left: 0.05rem;

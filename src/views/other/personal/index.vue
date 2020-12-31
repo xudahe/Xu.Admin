@@ -1,7 +1,7 @@
 <template>
   <div class="personal card_css">
-		<el-row :gutter="10">
-			<el-col :sm="24" :md="8">
+		<el-row :gutter="10" style="height: 100%;width:100%;">
+			<el-col :sm="24" :md="6" style="height: 100%;">
 				<el-card class="box-card" shadow="hover">
 					<el-Divider>
             <span >信息绑定</span>
@@ -42,8 +42,8 @@
           </div>
 				</el-card>
 			</el-col>
-			<el-col :sm="24" :md="8">
-				<el-card class="box-card" shadow="hover" style="padding:10px;">
+			<el-col :sm="24" :md="8" style="height: 100%;">
+				<el-card class="box-card" shadow="hover" style="padding:0 10px 10px;">
           <el-Divider>
             <span >个人信息</span>
           </el-Divider>
@@ -75,9 +75,9 @@
           </div>
 				</el-card>
 			</el-col>
-      <el-col :sm="24" :md="8">
+      <el-col :sm="24" :md="10" style="height: 100%;">
         	<el-card class="box-card" shadow="hover">
-           
+           <logTable></logTable>
           </el-card>
       </el-col>
 		</el-row>

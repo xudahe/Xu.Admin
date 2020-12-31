@@ -28,7 +28,7 @@
         <el-row>
           <el-col :span="12">
             <el-form-item label="组件名称" prop="className">
-              <el-input v-model="menuForm.className" autocomplete="off"></el-input>
+              <el-input v-model="menuForm.className" autocomplete="off" placeholder="请输入组件名称" clearable></el-input>
             </el-form-item>
             <el-form-item label="系统名称" prop="systemName">
               <el-select v-model="menuForm.systemName" placeholder="请选择系统名称">
@@ -55,7 +55,7 @@
           </el-col>
           <el-col :span="12">
             <el-form-item label="菜单名称" prop="menuName">
-              <el-input v-model="menuForm.menuName" autocomplete="off"></el-input>
+              <el-input v-model="menuForm.menuName" autocomplete="off" placeholder="请输入菜单名称" clearable></el-input>
             </el-form-item>
             <el-form-item label="父级菜单" prop="parentId">
               <el-select v-model="menuForm.parentId" placeholder="请选择父级菜单" filterable clearable>
@@ -63,7 +63,7 @@
               </el-select>
             </el-form-item>
             <el-form-item label="加载序号" prop="index">
-              <el-input v-model="menuForm.index" autocomplete="off" placeholder="请填写序号"></el-input>
+              <el-input v-model="menuForm.index" autocomplete="off" placeholder="请输入加载序号" clearable></el-input>
             </el-form-item>
             <el-form-item label="状态" prop="enabled">
               <el-radio-group v-model="menuForm.enabled">
@@ -291,6 +291,7 @@ export default {
         },
         handleSubmit:debounce(function() {
           this.menuForm.icon = "el-icon-edit-outline"; //暂时写死
+          this.menuForm.className = "/"+this.menuForm.className;
           
           if(this.$isNull(this.menuForm.className)) 
             return this.$warnMsg("组件名称不能为空！")

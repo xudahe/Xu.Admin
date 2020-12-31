@@ -23,7 +23,6 @@ const
 const operation_routes = getRoutes(require.context('@/views/operation', true, /\.vue$/));
 const system_routes = getRoutes(require.context('@/views/system', true, /\.vue$/));
 const tools_routes = getRoutes(require.context('@/views/tools', true, /\.vue$/));
-const log_routes = getRoutes(require.context('@/views/other/log', true, /\.vue$/));
 const list_page = getRoutes(require.context('@/views/pages', true, /\.vue$/));
 
 let addRouter = [{
@@ -31,7 +30,7 @@ let addRouter = [{
   iconCls: "el-icon-tickets", // 图标样式class
   name: "系统设置",
   component: Layout,
-  children: operation_routes.concat(system_routes).concat(tools_routes).concat(log_routes).concat(list_page)
+  children: operation_routes.concat(system_routes).concat(tools_routes).concat(list_page)
 }];
 
 //自动注册路由

@@ -26,7 +26,7 @@
     import * as signalR from "@aspnet/signalr";
 
     export default {
-        name:'operation_log',
+        name:'signalr_manager',
         data() {
             return {
                 filters: {

@@ -31,7 +31,7 @@
                     </el-tooltip>
                   </div>
                   <div class="tree-box"> 
-                    <el-tree ref="roletree" :data="roleData" :default-checked-keys="roleIds" :props="defaultProps" default-expand-all show-checkbox node-key="id" />
+                    <el-tree ref="roletree" :data="roleData" :props="defaultProps" @node-click="nodeclick" default-expand-all show-checkbox node-key="id" />
                   </div>
                 </el-card>
             </el-col>
@@ -43,21 +43,21 @@
                 <el-row style="padding:0 10px;">
                     <el-col :span="12">
                         <el-form-item label="登录名" prop="loginName">
-                            <el-input v-model="userForm.loginName" autocomplete="off"></el-input>
+                            <el-input v-model="userForm.loginName" autocomplete="off" clearable></el-input>
                         </el-form-item>
                         <el-form-item label="用户名" prop="realName">
-                            <el-input v-model="userForm.realName" autocomplete="off"></el-input>
+                            <el-input v-model="userForm.realName" autocomplete="off" clearable></el-input>
                         </el-form-item>
                         <el-form-item label="出生日期">
                             <el-date-picker type="date" placeholder="选择出生日期" v-model="userForm.birth"></el-date-picker>
                         </el-form-item>
                         <el-form-item label="联系方式" prop="mobile">
-                            <el-input v-model="userForm.mobile" placeholder="请填写联系方式" autocomplete="off"></el-input>
+                            <el-input v-model="userForm.mobile" placeholder="请填写联系方式" autocomplete="off" clearable></el-input>
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
                         <el-form-item label="密码" prop="loginPwd">
-                            <el-input v-model="userForm.loginPwd" show-password  autocomplete="off" :disabled="formTitle=='编辑'?true:false"></el-input>
+                            <el-input v-model="userForm.loginPwd" show-password  autocomplete="off" :disabled="formTitle=='编辑'?true:false" clearable></el-input>
                         </el-form-item>
                         <el-form-item label="部门" prop="deptId">
                             <el-select v-model="userForm.deptId" placeholder="请选择所属部门" filterable clearable>
@@ -81,7 +81,7 @@
                     </el-col>
                     <el-col :span="24">
                         <el-form-item label="地址">
-                            <el-input v-model="userForm.address" autocomplete="off"></el-input>
+                            <el-input v-model="userForm.address" autocomplete="off" clearable></el-input>
                         </el-form-item>
                         <el-form-item label="备注" prop="remark">
                           <el-input v-model="userForm.remark" autocomplete="off" type="textarea"></el-input>
@@ -197,7 +197,6 @@ export default {
 
             showButton: false, //菜单配置保存按钮
             roleData: [],
-            roleIds: [],
             defaultProps: {
               children: "children",
               label: "roleName"
@@ -283,23 +282,44 @@ export default {
         },
         // 初始化角色选中
         initialRoleCheck(item) {
+            let _this = this;
             this.$refs.roletree.setCheckedKeys([])
-            this.roleIds = item.roleIds ? item.roleIds.split(','):[]
+            // this.$refs.roletree.setCheckedKeys(item.roleIds ? item.roleIds.split(','):[])
+            
+            //item.menuIds前提时guid集合，才用下面方法，如果是id集合则用上面注释的方法
+            if(!this.$isNull(item.roleIds)){
+              this.$ajax(this.$apiSet.getRoleInfo,{
+                  ids: item.roleIds,
+                })
+                .then(res => {
+                  if (res.data.success) {
+                    let ids = res.data.response.map(item=>item.id);
+
+                    this.checkStrictly = true  //重点：给树节点赋值之前 先设置为true
+                    this.$nextTick(() => {
+                      this.$refs.roletree.setCheckedKeys(ids) //给树节点赋值
+                      this.checkStrictly = false //重点： 赋值完成后 设置为false
+                    })
+                  }
+                })
+                .catch(err => {})
+            }
+
+
+        },
+        nodeclick(data, node) {
+          node.checked = !(node.checked)
         },
         //角色绑定
         saveRole() {
-          let roleIds = [];
-          
-          // 得到已选中的 key 值
-          this.$refs.roletree.getCheckedKeys().forEach(function(data, index) {
-            roleIds.push(data);
-          });
-          
-          this.userForm = this.sels
-          this.userForm.roleIds = roleIds.join(',')
-          
-          this.formTitle = "编辑"
-          this.handleSubmit()
+            // let ids = this.$refs.roletree.getCheckedKeys().concat(this.$refs.roletree.getHalfCheckedKeys())
+            let ids = this.$refs.roletree.getCheckedNodes(false,true).map(item=> item.guid)
+
+            this.userForm = this.sels
+            this.userForm.roleIds = ids.join(',')
+    
+            this.formTitle = "编辑"
+            this.handleSubmit()
         },
         //显示编辑界面
         handleEdit (index, row) {

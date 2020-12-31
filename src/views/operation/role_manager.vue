@@ -43,7 +43,7 @@
             </el-tooltip>
           </div>
           <div class="tree-box"> 
-            <el-tree ref="menutree" :data="menuData" :default-checked-keys="menuIds" :props="defaultProps" default-expand-all show-checkbox node-key="id" />
+            <el-tree ref="menutree" :data="menuData" :check-strictly="checkStrictly" :props="defaultProps" @node-click="nodeclick" default-expand-all show-checkbox node-key="id" />
           </div>
         </el-card>
       </el-col>
@@ -174,10 +174,11 @@ export default {
 
             showButton: false, //菜单配置保存按钮
             menuData: [],
-            menuIds: [],
+            checkStrictly: false,
             defaultProps: {
               children: "children",
-              label: "menuName"
+              label: "menuName",
+              disabled: "enabled"
             },
     
         }
@@ -261,20 +262,37 @@ export default {
         },
         // 初始化菜单选中
         initialMenuCheck(item) {
-          this.$refs.menutree.setCheckedKeys([])
-          this.menuIds = item.menuIds ? item.menuIds.split(','):[];
+          let _this = this;
+          this.$refs.menutree.setCheckedNodes([])
+          // this.$refs.menutree.setCheckedKeys(item.menuIds ? item.menuIds.split(','):[])
+
+          //item.menuIds前提时guid集合，才用下面方法，如果是id集合则用上面注释的方法
+          if(!this.$isNull(item.menuIds)){
+            this.$ajax(this.$apiSet.getMenuInfo,{
+                ids: item.menuIds,
+              })
+              .then(res => {
+                if (res.data.success) {
+                  this.checkStrictly = true  //重点：给树节点赋值之前 先设置为true
+                  this.$nextTick(() => {
+                    this.$refs.menutree.setCheckedNodes(res.data.response) //给树节点赋值
+                    this.checkStrictly = false //重点： 赋值完成后 设置为false
+                  })
+                }
+              })
+              .catch(err => {})
+          }
+        },
+        nodeclick(data, node) {
+          node.checked = !(node.checked)
         },
         //菜单绑定
         saveMenu() {
-          let menuIds = [];
-
-          // 得到已选中的 key 值
-          this.$refs.menutree.getCheckedKeys().forEach(function(data, index) {
-            menuIds.push(data);
-          });
-  
+          // let ids = this.$refs.menutree.getCheckedKeys().concat(this.$refs.menutree.getHalfCheckedKeys())
+          let ids = this.$refs.menutree.getCheckedNodes(false,true).map(item=> item.guid)
+    
           this.roleForm = this.sels
-          this.roleForm.menuIds = menuIds.join(',')
+          this.roleForm.menuIds = ids.join(',')
           
           this.formTitle = "编辑"
           this.handleSubmit()

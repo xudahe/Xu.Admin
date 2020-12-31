@@ -93,18 +93,11 @@ async function getAddRouters() {
           ] 
         },
         {
-          id:7, menuName: "日志管理", enabled: false, icon: "fa fa-dashboard",
-          children: [
-            { id:8, menuName: "操作日志", className: "/operation_log", icon:"el-icon-edit-outline", enabled:false, children:[]},
-            { id:9, menuName: "异常日志", className: "/exception_log", icon:"el-icon-edit-outline", enabled:false, children:[]},
-            { id:10, menuName: "权限日志", className: "/authority_log", icon:"el-icon-edit-outline", enabled:false, children:[]},
-          ]
-        },
-        {
           id:11, menuName: "系统工具", enabled: false, icon: "fa fa-dashboard",
           children: [
             { id:12, menuName: "图片管理", className: "/picture_manager", icon:"el-icon-edit-outline", enabled:false, children:[]},
             { id:13, menuName: "定时任务", className: "/task_manager", icon:"el-icon-edit-outline", enabled:false, children:[]},
+            { id:13, menuName: "通信管理", className: "/signalr", icon:"el-icon-edit-outline", enabled:false, children:[]},
           ]
         },
         {

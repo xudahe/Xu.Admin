@@ -140,10 +140,20 @@ const TasksQzModule = {
   },
 }
 
-const logModule = {
+const LogModule = {
   getAccessLogs: {
     url: '/api/Monitor/GetAccessLogs',
     method: 'get'
+  },
+}
+const FileModule = {
+  imgUpload: {
+    url: '/api/File/imgUpload',
+    method: 'file'
+  },
+  imgDelete: {
+    url: '/api/File/imgDelete',
+    method: 'delete'
   },
 }
 
@@ -154,7 +164,8 @@ const ApiSetting = {
   ...RoleModule,
   ...MenuModule,
   ...TasksQzModule,
-  ...logModule,
+  ...LogModule,
+  ...FileModule,
 }
 
 export default ApiSetting

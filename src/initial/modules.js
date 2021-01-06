@@ -31,7 +31,7 @@ import 'view-design/dist/styles/iview.css'
 import '@/global/css/index.css'
 // 引入css样式初始化
 import 'normalize.css/normalize.css'
-// 引入第三方图标库
+// 引入第三方图标库：https://www.thinkcmf.com/font/search.html
 import "font-awesome/css/font-awesome.css"
 // 引入全局提示模块
 import Message from '@/api/message'

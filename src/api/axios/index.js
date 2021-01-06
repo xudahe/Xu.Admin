@@ -26,7 +26,7 @@ import store from "@/vuex/store"
 import router from '../../router/index'
 import apiSetting from "./apiSetting"
 
-//POST传参序列化(添加request请求拦截器)
+//添加request请求拦截器
 axios.interceptors.request.use(config => {
   var curTime = new Date()
   var expiretime = new Date(Date.parse(store.state.tokenExpire))
@@ -43,7 +43,7 @@ axios.interceptors.request.use(config => {
   return Promise.reject(error)
 })
 
-//返回状态判断(添加response响应拦截器)
+//添加response响应拦截器
 axios.interceptors.response.use(response => {
   if (!!window.ActiveXObject || "ActiveXObject" in window) {
     response.data = JSON.parse(response.request.responseText)
@@ -157,7 +157,6 @@ axios.interceptors.response.use(response => {
   return Promise.reject(error);
 })
 
-//参考：https://blog.csdn.net/qq_42553082/article/details/84072301
 const httpServer = (opts, data) => {
   let Public = { //公共参数  
   }
@@ -173,14 +172,21 @@ const httpServer = (opts, data) => {
   }
 
   if (opts.method == 'get' || opts.method == 'delete') {
-    // 默认application/x-www-form-urlencoded请求格式
     delete httpDefaultOpts.data
   } else if (opts.method == 'post') {
-    // multipart/form-data请求格式
+    httpDefaultOpts.headers = {
+      "Content-Type": "application/x-www-form-urlencoded;"
+    }
     httpDefaultOpts.data = qs.stringify(data)
     delete httpDefaultOpts.params
+  } else if (opts.method == 'file') {
+    httpDefaultOpts.method = 'post'
+    httpDefaultOpts.headers = {
+      "Content-Type": "multipart/form-data;"
+    }
+    httpDefaultOpts.data = data
+    delete httpDefaultOpts.params
   } else if (opts.method == 'other' || opts.method == 'put') {
-    // application/json请求格式
     httpDefaultOpts.method = opts.method == 'other' ? 'post' : 'put'
     httpDefaultOpts.headers = {
       "Accept": "application/json, text/javascript, */*; q=0.01",

@@ -45,11 +45,9 @@ var dataList = {
   "dept_manager": "部门管理",
   "role_manager": "角色管理",
   "menu_manager": "菜单管理",
-  "operation_log": "操作日志",
-  "exception_log": "异常日志",
-  "authority_log": "权限日志",
   "picture_manager": "图片管理",
   "task_manager": "定时任务",
+  "card": "卡片",
 }
 
 export default routerData

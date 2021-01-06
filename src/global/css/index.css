@@ -1,512 +1,530 @@
-   
-    
-    /* 液晶字体*/
-    @font-face {
-        font-family: 'DFW';
-        src: url('../../../static/fonts/digifaceWide.ttf');
-        font-weight: bold;
-        font-style: normal;
-    }
+   /* 液晶字体*/
+   @font-face {
+     font-family: 'DFW';
+     src: url('../../../static/fonts/digifaceWide.ttf');
+     font-weight: bold;
+     font-style: normal;
+   }
 
-    html, body {
-        height: 100%;
-    }
-    
-    /* chrome设置小于12px字体 */
-    /* span {
+   html,
+   body {
+     height: 100%;
+   }
+
+   /* chrome设置小于12px字体 */
+   /* span {
         font-size: 10px;
         -webkit-transform: scale(0.8);
         display: block;
     } */
 
-    /*滚动条凹槽的颜色，还可以设置边框属性 */
-    ::-webkit-scrollbar-track-piece {
-        background: transparent;
-        -webkit-border-radius: 2em;
-        -moz-border-radius: 2em;
-        border-radius: 2em;
-    }
-    
-    /*滚动条的宽度*/
-    ::-webkit-scrollbar {
-        width: 4px;
-        height: 8px;
-    }
-    
-    /*滚动条的设置*/
-    ::-webkit-scrollbar-thumb {
-        background: #039ea0;
-        background-clip: padding-box;
-        -webkit-border-radius: 2em;
-        -moz-border-radius: 2em;
-        border-radius: 2em;
-    }
-    
-    /*滚动条鼠标移上去*/
-    ::-webkit-scrollbar-thumb:hover {
-        background: #039ea0;
-    }
+   /*滚动条凹槽的颜色，还可以设置边框属性 */
+   ::-webkit-scrollbar-track-piece {
+     background: transparent;
+     -webkit-border-radius: 2em;
+     -moz-border-radius: 2em;
+     border-radius: 2em;
+   }
 
-    /*顶部进度条样式 */
-    #nprogress .bar {
-        background: green !important;  /* 自定义颜色 */
-    }
-    
+   /*滚动条的宽度*/
+   ::-webkit-scrollbar {
+     width: 4px;
+     height: 8px;
+   }
 
-    .fade-in-right {
-        -webkit-animation: fade-in-right 1s;
-        animation: fade-in-right 1s;
-        -webkit-animation-timing-function: ease-out;
-                animation-timing-function: ease-out;
-          animation-fill-mode: both;
-    }
-    .fade-in-right1 {
-        -webkit-animation: fade-in-right 0.5s;
-                animation: fade-in-right 0.5s;
-        -webkit-animation-timing-function: ease-out;
-                animation-timing-function: ease-out;
-          animation-fill-mode: both;
-    }
-    .fade-in-right2 {
-        -webkit-animation: fade-in-right 0.5s;
-                animation: fade-in-right 0.5s;
-        -webkit-animation-timing-function: ease-out;
-                animation-timing-function: ease-out;
-          animation-fill-mode: both;
-          
-           -webkit-animation-delay:0.2s;  /**延迟动画**/
-           animation-delay:0.2s; 
-    }
-    .fade-in-right3 {
-        -webkit-animation: fade-in-right 0.5s;
-                animation: fade-in-right 0.5s;
-        -webkit-animation-timing-function: ease-out;
-                animation-timing-function: ease-out;
-          animation-fill-mode: both;
-          
-           -webkit-animation-delay:0.4s;  /**延迟动画**/
-           animation-delay:0.4s; 
-    }
-    .fade-in-right4 {
-        -webkit-animation: fade-in-right 0.5s;
-                animation: fade-in-right 0.5s;
-        -webkit-animation-timing-function: ease-out;
-                animation-timing-function: ease-out;
-          animation-fill-mode: both;
-          
-           -webkit-animation-delay:0.6s;  /**延迟动画**/
-           animation-delay:0.6s; 
-    }
-    @-webkit-keyframes fade-in-right {
-        0%
-        {
-            -webkit-transform: translateX(-100%);
-    
-            opacity: 0;
-        }
-        100%
-        {
-            -webkit-transform: translateX(0%);
-    
-            opacity: 1;
-        }
-    }
-    @keyframes fade-in-right {
-        0%
-        {
-            transform: translateX(-100%);
-    
-            opacity: 0;
-        }
-        100%
-        {
-            transform: translateX(0%);
-    
-            opacity: 1;
-        }
-    }
+   /*滚动条的设置*/
+   ::-webkit-scrollbar-thumb {
+     background: rgba(144, 147, 153, 0.5);
+     background-clip: padding-box;
+     -webkit-border-radius: 2em;
+     -moz-border-radius: 2em;
+     border-radius: 2em;
+   }
+
+   /*滚动条鼠标移上去*/
+   ::-webkit-scrollbar-thumb:hover {
+     background: rgba(144, 147, 153, 0.5);
+   }
+
+   /*顶部进度条样式 */
+   #nprogress .bar {
+     background: green !important;
+     /* 自定义颜色 */
+   }
 
 
-    .fade-in-left1 {
-        -webkit-animation: fade-in-left 0.5s;
-                animation: fade-in-left 0.5s;
-        -webkit-animation-timing-function: ease-out;
-                animation-timing-function: ease-out;
-          animation-fill-mode: both;
-          
-    }
-    .fade-in-left2  {
-        -webkit-animation: fade-in-left 0.5s;
-                animation: fade-in-left 0.5s;
-        -webkit-animation-timing-function: ease-out;
-                animation-timing-function: ease-out;
-          animation-fill-mode: both;  /**动画开始之前先隐藏**/
-          
-           -webkit-animation-delay:0.2s;  /**延迟动画**/
-           animation-delay:0.2s; 
-    }
-    .fade-in-left3  {
-        -webkit-animation: fade-in-left 0.5s;
-                animation: fade-in-left 0.5s;
-        -webkit-animation-timing-function: ease-out;
-                animation-timing-function: ease-out;
-          animation-fill-mode: both;
-          
-           -webkit-animation-delay:0.4s;  /**延迟动画**/
-           animation-delay:0.4s; 
-    }
-    .fade-in-left4 {
-        -webkit-animation: fade-in-left 0.5s;
-                animation: fade-in-left 0.5s;
-        -webkit-animation-timing-function: ease-out;
-                animation-timing-function: ease-out;
-          animation-fill-mode: both;
-          
-           -webkit-animation-delay:0.6s;  /**延迟动画**/
-           animation-delay:0.6s; 
-    }
-    @-webkit-keyframes fade-in-left {
-        0%
-        {
-            -webkit-transform: translateX(100%);
-    
-            opacity: 0;
-        }
-        100%
-        {
-            -webkit-transform: translateX(0%);
-    
-            opacity: 1;
-        }
-    }
-    @keyframes fade-in-left {
-        0%
-        {
-            transform: translateX(100%);
-    
-            opacity: 0;
-        }
-        100%
-        {
-            transform: translateX(0%);
-    
-            opacity: 1;
-        }
-    }
+   .fade-in-right {
+     -webkit-animation: fade-in-right 1s;
+     animation: fade-in-right 1s;
+     -webkit-animation-timing-function: ease-out;
+     animation-timing-function: ease-out;
+     animation-fill-mode: both;
+   }
 
-    /* 底部动画 由下至上加载 */
-    .fade-in-up {
-        -webkit-animation: fade-in-up 1s;
-                animation: fade-in-up 1s;
-        -webkit-animation-timing-function: ease-out;
-                animation-timing-function: ease-out;
-    }
-    @-webkit-keyframes fade-in-up {
-        0%
-        {
-            -webkit-transform: translateY(100%);
-            opacity: 0;
-        }
-        100%
-        {
-            -webkit-transform: translateY(0%);
-            opacity: 1;
-        }
-    }
-    @keyframes fade-in-up {
-        0%
-        {
-            transform: translateY(100%);
-            opacity: 0;
-        }
-        100%
-        {
-            transform: translateY(0%);
-            opacity: 1;
-        }
-    }
+   .fade-in-right1 {
+     -webkit-animation: fade-in-right 0.5s;
+     animation: fade-in-right 0.5s;
+     -webkit-animation-timing-function: ease-out;
+     animation-timing-function: ease-out;
+     animation-fill-mode: both;
+   }
 
-    /* 顶部动画 由上至下加载 */
-    .fade-in-down{
-        -webkit-animation: fade-in-down 1s;
-                animation: fade-in-down 1s;
-        -webkit-animation-timing-function: ease-out;
-                animation-timing-function: ease-out;
-    }
-    @-webkit-keyframes fade-in-down{
-        0%
-        {
-            -webkit-transform: translateY(-100%);
-            opacity: 0;
-        }
-        100%
-        {
-            -webkit-transform: translateY(0%);
-            opacity: 1;
-        }
-    }
-    @keyframes fade-in-down{
-        0%
-        {
-            transform: translateY(-100%);
-            opacity: 0;
-        }
-        100%
-        {
-            transform: translateY(0%);
-            opacity: 1;
-        }
-    }
+   .fade-in-right2 {
+     -webkit-animation: fade-in-right 0.5s;
+     animation: fade-in-right 0.5s;
+     -webkit-animation-timing-function: ease-out;
+     animation-timing-function: ease-out;
+     animation-fill-mode: both;
 
-    .fade-out-right {
-        -webkit-animation: fade-out-right 1s;
-                animation: fade-out-right 1s;
-        -webkit-animation-timing-function: ease-out;
-                animation-timing-function: ease-out;
-    }
-    @-webkit-keyframes fade-out-right {
-        0%
-        {
-            -webkit-transform: translateX(0%);
-    
-            opacity: 1;
-        }
-        100%
-        {
-            -webkit-transform: translateX(100%);
-    
-            opacity: 0;
-        }
-    }
-    @keyframes fade-out-right {
-        0%
-        {
-            transform: translateX(0%);
-    
-            opacity: 1;
-        }
-        100%
-        {
-            transform: translateX(100%);
-    
-            opacity: 0;
-        }
-    }
-    .fade-out-left {
-        -webkit-animation: fade-out-left 1s;
-                animation: fade-out-left 1s;
-        -webkit-animation-timing-function: ease-out;
-                animation-timing-function: ease-out;
-    }
-    @-webkit-keyframes fade-out-left
-    {
-        0%
-        {
-            -webkit-transform: translateX(0%);
-    
-            opacity: 1;
-        }
-        100%
-        {
-            -webkit-transform: translateX(-100%);
-    
-            opacity: 0;
-        }
-    }
-    @keyframes fade-out-left {
-        0%
-        {
-            transform: translateX(0%);
-    
-            opacity: 1;
-        }
-        100%
-        {
-            transform: translateX(-100%);
-    
-            opacity: 0;
-        }
-    }
-    .scale-in
-    {
-        -webkit-animation: scale-in 1s;
-                animation: scale-in 1s;
-    }
-    .scale-in1 {
-        -webkit-animation: scale-in 1s;
-                animation: scale-in 1s;
-          animation-fill-mode: both;
-          
-           -webkit-animation-delay:2.5s;  /**延迟动画**/
-           animation-delay:2.5s; 
-    }
-    .scale-in2 {
-        -webkit-animation: scale-in 1s;
-                animation: scale-in 1s;
-          animation-fill-mode: both;
-          
-           -webkit-animation-delay:3s;  /**延迟动画**/
-           animation-delay:3s; 
-    }
-    @keyframes scale-in {
-        0%
-        {
-            transform: scale(0);
-            opacity: 0;
-        }
-        100%
-        {
-            transform: scale(1);
-            opacity: 1;
-        }
-    }
-    @-webkit-keyframes scale-in {
-        0%
-        {
-            -webkit-transform: scale(0);
-            opacity: 0;
-        }
-        100%
-        {
-            -webkit-transform: scale(1);
-            opacity: 1;
-        }
-    }
+     -webkit-animation-delay: 0.2s;
+     /**延迟动画**/
+     animation-delay: 0.2s;
+   }
 
-    /* 从左到右 */
-    .push-in-right {
-        -webkit-transform-origin: 0 50% 0;
-        transform-origin: 0 50% 0;
-        -webkit-animation: push-in-right 1s;
-        animation: push-in-right 1s;
-      
-        -webkit-animation-timing-function: ease-in;
-        animation-timing-function: ease-in;
-        transform-style: preserve-3d;
-      }
-      @keyframes push-in-right {
-        0% {
-          transform: rotateY(90deg);
-      
-          opacity: 0;
-        }
-        100% {
-          transform: none;
-        }
-      }
-      @-webkit-keyframes push-in-right {
-        0% {
-          -webkit-transform: rotateY(90deg);
-      
-          opacity: 0;
-        }
-        100% {
-          -webkit-transform: none;
-        }
-      }
+   .fade-in-right3 {
+     -webkit-animation: fade-in-right 0.5s;
+     animation: fade-in-right 0.5s;
+     -webkit-animation-timing-function: ease-out;
+     animation-timing-function: ease-out;
+     animation-fill-mode: both;
 
-     /* 上下翻滚 */
-    .rotate-out-x
-    {
-        -webkit-animation: rotate-out-x 1s;
-                animation: rotate-out-x 1s;
-        -webkit-animation-timing-function: ease-in-out;
-                animation-timing-function: ease-in-out;
-    }
-    @keyframes rotate-out-x
-    {
-        0%
-        {
-            transform: rotateX(0deg);
-        }
-        20%
-        {
-            opacity: 1;
-        }
-        100%
-        {
-            transform: rotateX(180deg);
-    
-            opacity: 0;
-        }
-    }
-    @-webkit-keyframes rotate-out-x
-    {
-        0%
-        {
-            -webkit-transform: rotateX(0deg);
-        }
-        20%
-        {
-            opacity: 1;
-        }
-        100%
-        {
-            -webkit-transform: rotateX(180deg);
-    
-            opacity: 0;
-        }
-    }
+     -webkit-animation-delay: 0.4s;
+     /**延迟动画**/
+     animation-delay: 0.4s;
+   }
 
-    /* 上下翻滚 */
-    .rotate-in-x
-    {
-        -webkit-animation: rotate-in-x 1s;
-                animation: rotate-in-x 1s;
-        -webkit-animation-timing-function: ease-in-out;
-                animation-timing-function: ease-in-out;
-    }
-    @keyframes rotate-in-x
-    {
-        0%
-        {
-            transform: rotateX(180deg);
-            opacity: 0;
-        }
-        80%
-        {
-            opacity: 1;
-        }
-        100%
-        {
-            transform: rotateX(0deg);
-        }
-    }
-    @-webkit-keyframes rotate-in-x
-    {
-        0%
-        {
-            -webkit-transform: rotateX(180deg);
-            opacity: 0;
-        }
-        80%
-        {
-            opacity: 1;
-        }
-        100%
-        {
-            -webkit-transform: rotateX(0deg);
-        }
-    }
+   .fade-in-right4 {
+     -webkit-animation: fade-in-right 0.5s;
+     animation: fade-in-right 0.5s;
+     -webkit-animation-timing-function: ease-out;
+     animation-timing-function: ease-out;
+     animation-fill-mode: both;
 
-    /* 中心点旋转 */
-    .middle-rotate{
-        animation: rotastes 6s linear infinite;
-        transform-origin:50% 50%;
-         
-        -webkit-animation: rotastes 6s linear infinite;
-        -webkit-transform-origin:50% 50%;
-    }
-    @keyframes rotastes{
-        0%{
-            transform: rotate(0deg);
-        }
-        100%{
-            transform: rotate(360deg);
-        }
-    }
+     -webkit-animation-delay: 0.6s;
+     /**延迟动画**/
+     animation-delay: 0.6s;
+   }
 
-    /* 
+   @-webkit-keyframes fade-in-right {
+     0% {
+       -webkit-transform: translateX(-100%);
+
+       opacity: 0;
+     }
+
+     100% {
+       -webkit-transform: translateX(0%);
+
+       opacity: 1;
+     }
+   }
+
+   @keyframes fade-in-right {
+     0% {
+       transform: translateX(-100%);
+
+       opacity: 0;
+     }
+
+     100% {
+       transform: translateX(0%);
+
+       opacity: 1;
+     }
+   }
+
+
+   .fade-in-left1 {
+     -webkit-animation: fade-in-left 0.5s;
+     animation: fade-in-left 0.5s;
+     -webkit-animation-timing-function: ease-out;
+     animation-timing-function: ease-out;
+     animation-fill-mode: both;
+
+   }
+
+   .fade-in-left2 {
+     -webkit-animation: fade-in-left 0.5s;
+     animation: fade-in-left 0.5s;
+     -webkit-animation-timing-function: ease-out;
+     animation-timing-function: ease-out;
+     animation-fill-mode: both;
+     /**动画开始之前先隐藏**/
+
+     -webkit-animation-delay: 0.2s;
+     /**延迟动画**/
+     animation-delay: 0.2s;
+   }
+
+   .fade-in-left3 {
+     -webkit-animation: fade-in-left 0.5s;
+     animation: fade-in-left 0.5s;
+     -webkit-animation-timing-function: ease-out;
+     animation-timing-function: ease-out;
+     animation-fill-mode: both;
+
+     -webkit-animation-delay: 0.4s;
+     /**延迟动画**/
+     animation-delay: 0.4s;
+   }
+
+   .fade-in-left4 {
+     -webkit-animation: fade-in-left 0.5s;
+     animation: fade-in-left 0.5s;
+     -webkit-animation-timing-function: ease-out;
+     animation-timing-function: ease-out;
+     animation-fill-mode: both;
+
+     -webkit-animation-delay: 0.6s;
+     /**延迟动画**/
+     animation-delay: 0.6s;
+   }
+
+   @-webkit-keyframes fade-in-left {
+     0% {
+       -webkit-transform: translateX(100%);
+
+       opacity: 0;
+     }
+
+     100% {
+       -webkit-transform: translateX(0%);
+
+       opacity: 1;
+     }
+   }
+
+   @keyframes fade-in-left {
+     0% {
+       transform: translateX(100%);
+
+       opacity: 0;
+     }
+
+     100% {
+       transform: translateX(0%);
+
+       opacity: 1;
+     }
+   }
+
+   /* 底部动画 由下至上加载 */
+   .fade-in-up {
+     -webkit-animation: fade-in-up 1s;
+     animation: fade-in-up 1s;
+     -webkit-animation-timing-function: ease-out;
+     animation-timing-function: ease-out;
+   }
+
+   @-webkit-keyframes fade-in-up {
+     0% {
+       -webkit-transform: translateY(100%);
+       opacity: 0;
+     }
+
+     100% {
+       -webkit-transform: translateY(0%);
+       opacity: 1;
+     }
+   }
+
+   @keyframes fade-in-up {
+     0% {
+       transform: translateY(100%);
+       opacity: 0;
+     }
+
+     100% {
+       transform: translateY(0%);
+       opacity: 1;
+     }
+   }
+
+   /* 顶部动画 由上至下加载 */
+   .fade-in-down {
+     -webkit-animation: fade-in-down 1s;
+     animation: fade-in-down 1s;
+     -webkit-animation-timing-function: ease-out;
+     animation-timing-function: ease-out;
+   }
+
+   @-webkit-keyframes fade-in-down {
+     0% {
+       -webkit-transform: translateY(-100%);
+       opacity: 0;
+     }
+
+     100% {
+       -webkit-transform: translateY(0%);
+       opacity: 1;
+     }
+   }
+
+   @keyframes fade-in-down {
+     0% {
+       transform: translateY(-100%);
+       opacity: 0;
+     }
+
+     100% {
+       transform: translateY(0%);
+       opacity: 1;
+     }
+   }
+
+   .fade-out-right {
+     -webkit-animation: fade-out-right 1s;
+     animation: fade-out-right 1s;
+     -webkit-animation-timing-function: ease-out;
+     animation-timing-function: ease-out;
+   }
+
+   @-webkit-keyframes fade-out-right {
+     0% {
+       -webkit-transform: translateX(0%);
+
+       opacity: 1;
+     }
+
+     100% {
+       -webkit-transform: translateX(100%);
+
+       opacity: 0;
+     }
+   }
+
+   @keyframes fade-out-right {
+     0% {
+       transform: translateX(0%);
+
+       opacity: 1;
+     }
+
+     100% {
+       transform: translateX(100%);
+
+       opacity: 0;
+     }
+   }
+
+   .fade-out-left {
+     -webkit-animation: fade-out-left 1s;
+     animation: fade-out-left 1s;
+     -webkit-animation-timing-function: ease-out;
+     animation-timing-function: ease-out;
+   }
+
+   @-webkit-keyframes fade-out-left {
+     0% {
+       -webkit-transform: translateX(0%);
+
+       opacity: 1;
+     }
+
+     100% {
+       -webkit-transform: translateX(-100%);
+
+       opacity: 0;
+     }
+   }
+
+   @keyframes fade-out-left {
+     0% {
+       transform: translateX(0%);
+
+       opacity: 1;
+     }
+
+     100% {
+       transform: translateX(-100%);
+
+       opacity: 0;
+     }
+   }
+
+   .scale-in {
+     -webkit-animation: scale-in 1s;
+     animation: scale-in 1s;
+   }
+
+   .scale-in1 {
+     -webkit-animation: scale-in 1s;
+     animation: scale-in 1s;
+     animation-fill-mode: both;
+
+     -webkit-animation-delay: 2.5s;
+     /**延迟动画**/
+     animation-delay: 2.5s;
+   }
+
+   .scale-in2 {
+     -webkit-animation: scale-in 1s;
+     animation: scale-in 1s;
+     animation-fill-mode: both;
+
+     -webkit-animation-delay: 3s;
+     /**延迟动画**/
+     animation-delay: 3s;
+   }
+
+   @keyframes scale-in {
+     0% {
+       transform: scale(0);
+       opacity: 0;
+     }
+
+     100% {
+       transform: scale(1);
+       opacity: 1;
+     }
+   }
+
+   @-webkit-keyframes scale-in {
+     0% {
+       -webkit-transform: scale(0);
+       opacity: 0;
+     }
+
+     100% {
+       -webkit-transform: scale(1);
+       opacity: 1;
+     }
+   }
+
+   /* 从左到右 */
+   .push-in-right {
+     -webkit-transform-origin: 0 50% 0;
+     transform-origin: 0 50% 0;
+     -webkit-animation: push-in-right 1s;
+     animation: push-in-right 1s;
+
+     -webkit-animation-timing-function: ease-in;
+     animation-timing-function: ease-in;
+     transform-style: preserve-3d;
+   }
+
+   @keyframes push-in-right {
+     0% {
+       transform: rotateY(90deg);
+
+       opacity: 0;
+     }
+
+     100% {
+       transform: none;
+     }
+   }
+
+   @-webkit-keyframes push-in-right {
+     0% {
+       -webkit-transform: rotateY(90deg);
+
+       opacity: 0;
+     }
+
+     100% {
+       -webkit-transform: none;
+     }
+   }
+
+   /* 上下翻滚 */
+   .rotate-out-x {
+     -webkit-animation: rotate-out-x 1s;
+     animation: rotate-out-x 1s;
+     -webkit-animation-timing-function: ease-in-out;
+     animation-timing-function: ease-in-out;
+   }
+
+   @keyframes rotate-out-x {
+     0% {
+       transform: rotateX(0deg);
+     }
+
+     20% {
+       opacity: 1;
+     }
+
+     100% {
+       transform: rotateX(180deg);
+
+       opacity: 0;
+     }
+   }
+
+   @-webkit-keyframes rotate-out-x {
+     0% {
+       -webkit-transform: rotateX(0deg);
+     }
+
+     20% {
+       opacity: 1;
+     }
+
+     100% {
+       -webkit-transform: rotateX(180deg);
+
+       opacity: 0;
+     }
+   }
+
+   /* 上下翻滚 */
+   .rotate-in-x {
+     -webkit-animation: rotate-in-x 1s;
+     animation: rotate-in-x 1s;
+     -webkit-animation-timing-function: ease-in-out;
+     animation-timing-function: ease-in-out;
+   }
+
+   @keyframes rotate-in-x {
+     0% {
+       transform: rotateX(180deg);
+       opacity: 0;
+     }
+
+     80% {
+       opacity: 1;
+     }
+
+     100% {
+       transform: rotateX(0deg);
+     }
+   }
+
+   @-webkit-keyframes rotate-in-x {
+     0% {
+       -webkit-transform: rotateX(180deg);
+       opacity: 0;
+     }
+
+     80% {
+       opacity: 1;
+     }
+
+     100% {
+       -webkit-transform: rotateX(0deg);
+     }
+   }
+
+   /* 中心点旋转 */
+   .middle-rotate {
+     animation: rotastes 6s linear infinite;
+     transform-origin: 50% 50%;
+
+     -webkit-animation: rotastes 6s linear infinite;
+     -webkit-transform-origin: 50% 50%;
+   }
+
+   @keyframes rotastes {
+     0% {
+       transform: rotate(0deg);
+     }
+
+     100% {
+       transform: rotate(360deg);
+     }
+   }
+
+   /* 
        linear               规定以相同速度开始至结束的过渡效果（等于 cubic-bezier(0,0,1,1)）。
        ease                规定慢速开始，然后变快，然后慢速结束的过渡效果（cubic-bezier(0.25,0.1,0.25,1)）。
        ease-in            规定以慢速开始的过渡效果（等于 cubic-bezier(0.42,0,1,1)）。
@@ -514,22 +532,26 @@
        ease-in-out      规定以慢速开始和结束的过渡效果（等于 cubic-bezier(0.42,0,0.58,1)）。
        cubic-bezier(n,n,n,n)    在 cubic-bezier 函数中定义自己的值。可能的值是 0 至 1 之间的数值。 
     */
-    .transitionTop{
-        transition: top 1000ms ease-in-out;
-    }
+   .transitionTop {
+     transition: top 1000ms ease-in-out;
+   }
 
-    .transitionRight{
-        transition: right 1000ms ease-in-out;
-    }
+   .transitionRight {
+     transition: right 1000ms ease-in-out;
+   }
 
-    .transitionLeft{
-        transition: left 1000ms ease-in-out;
-    }
+   .transitionLeft {
+     transition: left 1000ms ease-in-out;
+   }
 
-    .active-transform{
-        opacity: 0;
-        transform: translate(100%) scale(0);
-        transform-origin: 100% 100%;
-        transition-duration: 2.5s;
-    }
-    
+   .active-transform {
+     opacity: 0;
+     transform: translate(100%) scale(0);
+     transform-origin: 100% 100%;
+     transition-duration: 2.5s;
+   }
+
+
+   .icon:hover {
+     color: #38B2FF !important;
+   }

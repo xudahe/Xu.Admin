@@ -97,8 +97,6 @@ export default {
       let y = this.randomNum(this.fontSizeMax, this.contentHeight - 5);
       var deg = this.randomNum(-25, 25);
       // 修改坐标原点和旋转角度
-      console.log(x)
-      console.log(y)
       ctx.translate(x, y);
       ctx.rotate((deg * Math.PI) / 180);
       ctx.fillText(txt, 0, 0);

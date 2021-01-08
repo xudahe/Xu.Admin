@@ -65,6 +65,7 @@ export default {
     };
   },
   mounted(){
+    this.getjson();
   },
   methods: {
     showdialog1(){
@@ -81,6 +82,10873 @@ export default {
     },
     handleEchartUpdated(){
         console.log('echarts组件的updated钩子函数被触发')
+    },
+    getjson(){
+    let nodeDataArray = [
+        {
+        "text": "箭头",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\基本符号\\箭头-01.svg",
+        "scale": 1,
+        "ratio": 2.4444444444444446,
+        "width": 44,
+        "height": 18,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供泵房.V12",
+        "isAttr": true,
+        "key": -129,
+        "loc": "688 288"
+    }, {
+        "text": "进水",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "50 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "15",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 15pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -130,
+        "loc": "-938.9999999999995 263.5614285714285"
+    }, {
+        "text": "箭头",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\基本符号\\箭头-01.svg",
+        "scale": 1,
+        "ratio": 2.4444444444444446,
+        "width": 44,
+        "height": 18,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -131,
+        "loc": "-936.0000000000005 287.9999999999999"
+    }, {
+        "text": "至用户",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "32 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "15",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 15pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -309,
+        "loc": "680 255.9999999999999"
+    }, {
+        "text": "3#泵",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "50 29",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -331,
+        "loc": "40.876953125 39.8291015625"
+    }, {
+        "text": "状态",
+        "figure": "modal",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "category": "pointCase",
+        "type": "锁定",
+        "width": 12,
+        "height": 12,
+        "ratio": 1,
+        "fillColor": {
+            "class": "go.Brush",
+            "type": "Linear",
+            "start": {
+                "class": "go.Spot",
+                "x": 0.5,
+                "y": 0,
+                "offsetX": 0,
+                "offsetY": 0
+            },
+            "end": {
+                "class": "go.Spot",
+                "x": 0.5,
+                "y": 1,
+                "offsetX": 0,
+                "offsetY": 0
+            },
+            "colorStops": {
+                "0": "#6D7A97",
+                "1": "#9FB3BF"
+            }
+        },
+        "strokeWidth": 2,
+        "stroke": "#808080",
+        "showName": "泵3状态",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -391,
+        "loc": "8 40"
+    }, {
+        "text": "实时值",
+        "figure": "val",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "valCase",
+        "size": "56 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#00FF00",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "3#变频器运行频率",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -87,
+        "loc": "24.999999999999996 72"
+    }, {
+        "text": "A",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "25 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "10",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 10pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -90,
+        "loc": "135 72"
+    }, {
+        "text": "h",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "23 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "10",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 10pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -92,
+        "loc": "223.5 72.00000000000001"
+    }, {
+        "text": "节点",
+        "category": "linkPort",
+        "size": "50 4",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "isAttr": true,
+        "key": -2,
+        "loc": "-1000 -480.0000000000001",
+        "stationName": "设备A",
+        "pointName": "熊猫二供机组.V11"
+    }, {
+        "text": "节点",
+        "category": "linkPort",
+        "size": "50 4",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "isAttr": true,
+        "key": -276,
+        "loc": "824.0000000000001 411.5000000000001",
+        "stationName": "设备A",
+        "pointName": "熊猫二供机组.V11"
+    }, {
+        "text": "节点",
+        "category": "linkPort",
+        "size": "50 4",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "isAttr": true,
+        "key": -275,
+        "loc": "-1039.9999999999995 416",
+        "stationName": "设备A",
+        "pointName": "熊猫二供机组.V11"
+    }, {
+        "text": "节点",
+        "category": "linkPort",
+        "size": "50 4",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "isAttr": true,
+        "key": -277,
+        "loc": "760.0000000000001 -479.5000000000001",
+        "stationName": "设备A",
+        "pointName": "熊猫二供机组.V11"
+    }, {
+        "text": "二供水箱-02",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\二供设备\\二供水箱-02.svg",
+        "scale": 1,
+        "ratio": 1.7177914110429446,
+        "width": 188.9570552147239,
+        "height": 110,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -16,
+        "loc": "-590.9000000000001 320.85",
+        "size": "190 174"
+    }, {
+        "text": "二供压力表-02",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\二供设备\\二供压力表-02.svg",
+        "scale": 1,
+        "ratio": 1.0527306967984933,
+        "width": 43,
+        "height": 40.8,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -21,
+        "loc": "-232.00000000000003 320.99999999999994",
+        "size": "43 63"
+    }, {
+        "text": "二供流量计-02",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\二供设备\\二供流量计-02.svg",
+        "scale": 1,
+        "ratio": 1.108910891089109,
+        "width": 43,
+        "height": 38.8,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -13,
+        "loc": "-128 329.06142857142856",
+        "size": "56 75"
+    }, {
+        "text": "二供泵-02",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\二供设备\\二供泵-02.svg",
+        "scale": 1,
+        "ratio": 0.39999999999999997,
+        "width": 32,
+        "height": 80,
+        "showName": "泵1状态",
+        "controlType": "开关展示",
+        "controlName": "",
+        "openVal": "2,4",
+        "startVal": "1,3",
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -6,
+        "loc": "-40 321.5",
+        "size": "32 139"
+    }, {
+        "text": "二供泵-02",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\二供设备\\二供泵-02.svg",
+        "scale": 1,
+        "ratio": 0.39999999999999997,
+        "width": 32,
+        "height": 80,
+        "showName": "泵2状态",
+        "controlType": "开关展示",
+        "controlName": "",
+        "openVal": "2,4",
+        "startVal": "1,3",
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -280,
+        "loc": "-40 215.83671875",
+        "size": "32 140"
+    }, {
+        "text": "二供泵-02",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\二供设备\\二供泵-02.svg",
+        "scale": 1,
+        "ratio": 0.39999999999999997,
+        "width": 32,
+        "height": 80,
+        "showName": "泵3状态",
+        "controlType": "开关展示",
+        "controlName": "",
+        "openVal": "2,4",
+        "startVal": "1,3",
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -281,
+        "loc": "-40 101",
+        "size": "34 143"
+    }, {
+        "text": "二供指标",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "解锁",
+        "imgSrc": "二维\\二供设备\\二供指标.svg",
+        "scale": 1,
+        "ratio": 2.8426395939086295,
+        "width": 70,
+        "height": 30,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -22,
+        "loc": "32 71.99999999999999"
+    }, {
+        "text": "Hz",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "20 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "10",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 10pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -285,
+        "loc": "55.77734375 72"
+    }, {
+        "text": "实时值",
+        "figure": "val",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "valCase",
+        "size": "60 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#00FF00",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "变3电流",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -283,
+        "loc": "102 72"
+    }, {
+        "text": "二供指标",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "解锁",
+        "imgSrc": "二维\\二供设备\\二供指标.svg",
+        "scale": 1,
+        "ratio": 2.8426395939086295,
+        "width": 70,
+        "height": 30,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -284,
+        "loc": "109.5 71.99999999999999",
+        "size": "75 30"
+    }, {
+        "text": "实时值",
+        "figure": "val",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "valCase",
+        "size": "60 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#00FF00",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "泵3运行时间",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -282,
+        "loc": "184 72"
+    }, {
+        "text": "二供指标",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "解锁",
+        "imgSrc": "二维\\二供设备\\二供指标.svg",
+        "scale": 1,
+        "ratio": 2.8426395939086295,
+        "width": 86,
+        "height": 30,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -286,
+        "loc": "190.5 71.99999999999999",
+        "size": "88 30"
+    }, {
+        "text": "横管",
+        "category": "HBar",
+        "size": "330 0",
+        "list": {
+            "drawInfo": ["水管", "水流"]
+        },
+        "stroke": "#209bfb",
+        "strokeWidth": 8,
+        "waterStroke": "#FFFFFF",
+        "waterWidth": 4,
+        "width": 330,
+        "dashes": [20, 40],
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "isAttr": true,
+        "key": -1,
+        "loc": "-88 156",
+        "stationName": "设备A",
+        "pointName": "熊猫二供机组.V11",
+        "angle": 90,
+        "unstroke": "#41BFEC",
+        "unwaterStroke": "#FFFFFF",
+        "authoControl": "否",
+        "hBarControl": "否"
+    }, {
+        "text": "横管",
+        "category": "HBar",
+        "size": "330 0",
+        "list": {
+            "drawInfo": ["水管", "水流"]
+        },
+        "stroke": "#209bfb",
+        "strokeWidth": 8,
+        "waterStroke": "#FFFFFF",
+        "waterWidth": 4,
+        "width": 330,
+        "dashes": [20, 40],
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "isAttr": false,
+        "key": -279,
+        "loc": "248 156.85000000000002",
+        "stationName": "设备A",
+        "pointName": "熊猫二供机组.V11",
+        "angle": 90
+    }, {
+        "text": "实时值",
+        "figure": "val",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "valCase",
+        "size": "60 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#00FF00",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "泵2运行时间",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -287,
+        "loc": "184 185.50000000000003"
+    }, {
+        "text": "实时值",
+        "figure": "val",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "valCase",
+        "size": "60 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#00FF00",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "变2电流",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -288,
+        "loc": "104.00000000000001 184.00000000000003"
+    }, {
+        "text": "Hz",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "20 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "10",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 10pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -289,
+        "loc": "56 184.00000000000003"
+    }, {
+        "text": "h",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "23 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "10",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 10pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -290,
+        "loc": "224.00000000000006 184.00000000000003"
+    }, {
+        "text": "A",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "25 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "10",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 10pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -291,
+        "loc": "136 184.00000000000003"
+    }, {
+        "text": "实时值",
+        "figure": "val",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "valCase",
+        "size": "56 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#00FF00",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "2#变频器运行频率",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -292,
+        "loc": "24 184.00000000000003"
+    }, {
+        "text": "2#泵",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "50 29",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -293,
+        "loc": "40 152"
+    }, {
+        "text": "二供指标",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "解锁",
+        "imgSrc": "二维\\二供设备\\二供指标.svg",
+        "scale": 1,
+        "ratio": 2.8426395939086295,
+        "width": 86,
+        "height": 30,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -294,
+        "loc": "192 184",
+        "size": "88 30"
+    }, {
+        "text": "二供指标",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "解锁",
+        "imgSrc": "二维\\二供设备\\二供指标.svg",
+        "scale": 1,
+        "ratio": 2.8426395939086295,
+        "width": 70,
+        "height": 30,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -295,
+        "loc": "111 184",
+        "size": "75 30"
+    }, {
+        "text": "二供指标",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "解锁",
+        "imgSrc": "二维\\二供设备\\二供指标.svg",
+        "scale": 1,
+        "ratio": 2.8426395939086295,
+        "width": 70,
+        "height": 30,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -296,
+        "loc": "32 184"
+    }, {
+        "text": "状态",
+        "figure": "modal",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "category": "pointCase",
+        "type": "锁定",
+        "width": 12,
+        "height": 12,
+        "ratio": 1,
+        "fillColor": {
+            "class": "go.Brush",
+            "type": "Linear",
+            "start": {
+                "class": "go.Spot",
+                "x": 0.5,
+                "y": 0,
+                "offsetX": 0,
+                "offsetY": 0
+            },
+            "end": {
+                "class": "go.Spot",
+                "x": 0.5,
+                "y": 1,
+                "offsetX": 0,
+                "offsetY": 0
+            },
+            "colorStops": {
+                "0": "#6D7A97",
+                "1": "#9FB3BF"
+            }
+        },
+        "strokeWidth": 2,
+        "stroke": "#808080",
+        "showName": "泵2状态",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -297,
+        "loc": "8 152.00000000000003"
+    }, {
+        "text": "1#泵",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "50 29",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -298,
+        "loc": "40 256"
+    }, {
+        "text": "实时值",
+        "figure": "val",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "valCase",
+        "size": "56 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#00FF00",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "1#变频器运行频率",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -299,
+        "loc": "24 288"
+    }, {
+        "text": "A",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "25 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "10",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 10pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -300,
+        "loc": "136 288"
+    }, {
+        "text": "h",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "23 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "10",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 10pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -301,
+        "loc": "224.00000000000006 288"
+    }, {
+        "text": "Hz",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "20 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "10",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 10pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -302,
+        "loc": "56 288"
+    }, {
+        "text": "实时值",
+        "figure": "val",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "valCase",
+        "size": "60 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#00FF00",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "变1电流",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -303,
+        "loc": "104.00000000000001 288"
+    }, {
+        "text": "实时值",
+        "figure": "val",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "valCase",
+        "size": "60 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#00FF00",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "泵1运行时间",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -307,
+        "loc": "184 288"
+    }, {
+        "text": "状态",
+        "figure": "modal",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "category": "pointCase",
+        "type": "锁定",
+        "width": 12,
+        "height": 12,
+        "ratio": 1,
+        "fillColor": {
+            "class": "go.Brush",
+            "type": "Linear",
+            "start": {
+                "class": "go.Spot",
+                "x": 0.5,
+                "y": 0,
+                "offsetX": 0,
+                "offsetY": 0
+            },
+            "end": {
+                "class": "go.Spot",
+                "x": 0.5,
+                "y": 1,
+                "offsetX": 0,
+                "offsetY": 0
+            },
+            "colorStops": {
+                "0": "#6D7A97",
+                "1": "#9FB3BF"
+            }
+        },
+        "strokeWidth": 2,
+        "stroke": "#808080",
+        "showName": "泵1状态",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -308,
+        "loc": "8 256.00000000000006"
+    }, {
+        "text": "二供指标",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "解锁",
+        "imgSrc": "二维\\二供设备\\二供指标.svg",
+        "scale": 1,
+        "ratio": 2.8426395939086295,
+        "width": 70,
+        "height": 30,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -310,
+        "loc": "32 287.99999999999994"
+    }, {
+        "text": "二供指标",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "解锁",
+        "imgSrc": "二维\\二供设备\\二供指标.svg",
+        "scale": 1,
+        "ratio": 2.8426395939086295,
+        "width": 70,
+        "height": 30,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -311,
+        "loc": "110 287.99999999999994",
+        "size": "75 30"
+    }, {
+        "text": "二供指标",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "解锁",
+        "imgSrc": "二维\\二供设备\\二供指标.svg",
+        "scale": 1,
+        "ratio": 2.8426395939086295,
+        "width": 86,
+        "height": 30,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -312,
+        "loc": "192 287.99999999999994",
+        "size": "88 30"
+    }, {
+        "text": "二供压力表-02",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\二供设备\\二供压力表-02.svg",
+        "scale": 1,
+        "ratio": 1.0527306967984933,
+        "width": 43,
+        "height": 40.8,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -314,
+        "loc": "480.4999999999999 316.50000000000006",
+        "size": "43 58"
+    }, {
+        "text": "二供稳压罐-02",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\二供设备\\二供稳压罐-02.svg",
+        "scale": 1,
+        "ratio": 0.7267857142857144,
+        "width": 38,
+        "height": 52.3,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -18,
+        "loc": "408 294.3500000000001",
+        "size": "38 57"
+    }, {
+        "text": "二供流量计-02",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\二供设备\\二供流量计-02.svg",
+        "scale": 1,
+        "ratio": 1.108910891089109,
+        "width": 43,
+        "height": 38.8,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -315,
+        "loc": "557 320.5",
+        "size": "44 64"
+    }, {
+        "text": "实时值",
+        "figure": "val",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "valCase",
+        "size": "60 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#00FF00",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "泵1运行时间",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备B",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -313,
+        "loc": "176 -168"
+    }, {
+        "text": "实时值",
+        "figure": "val",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "valCase",
+        "size": "60 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#00FF00",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "变1电流",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备C",
+        "authoControl": "否",
+        "pointName": "熊猫二供泵房.V12",
+        "isAttr": true,
+        "key": -316,
+        "loc": "96 -168"
+    }, {
+        "text": "Hz",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "25 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "10",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 10pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -317,
+        "loc": "50.500000000000014 -168"
+    }, {
+        "text": "h",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "23 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "10",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 10pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -318,
+        "loc": "216.00000000000003 -168"
+    }, {
+        "text": "A",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "25 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "10",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 10pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -319,
+        "loc": "128 -168"
+    }, {
+        "text": "实时值",
+        "figure": "val",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "valCase",
+        "size": "47 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#00FF00",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "1#变频器运行频率",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备C",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -320,
+        "loc": "20.5 -168"
+    }, {
+        "text": "1#泵",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "50 29",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -321,
+        "loc": "32 -200"
+    }, {
+        "text": "2#泵",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "50 29",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -322,
+        "loc": "32 -303.99999999999994"
+    }, {
+        "text": "实时值",
+        "figure": "val",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "valCase",
+        "size": "43 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#00FF00",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "2#变频器运行频率",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备C",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -323,
+        "loc": "22.5 -272"
+    }, {
+        "text": "A",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "25 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "10",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 10pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -324,
+        "loc": "128 -272"
+    }, {
+        "text": "h",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "23 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "10",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 10pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -325,
+        "loc": "216.00000000000003 -272"
+    }, {
+        "text": "Hz",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "31 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "10",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 10pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -326,
+        "loc": "51.50000000000003 -272"
+    }, {
+        "text": "实时值",
+        "figure": "val",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "valCase",
+        "size": "60 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#00FF00",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "变2电流",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备C",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -327,
+        "loc": "96 -272"
+    }, {
+        "text": "实时值",
+        "figure": "val",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "valCase",
+        "size": "60 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#00FF00",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "泵2运行时间",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备B",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -328,
+        "loc": "176 -272"
+    }, {
+        "text": "实时值",
+        "figure": "val",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "valCase",
+        "size": "60 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#00FF00",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "泵3运行时间",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备C",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -329,
+        "loc": "176 -384"
+    }, {
+        "text": "实时值",
+        "figure": "val",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "valCase",
+        "size": "60 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#00FF00",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "变3电流",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备C",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -330,
+        "loc": "96 -384"
+    }, {
+        "text": "Hz",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "24 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "10",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 10pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -332,
+        "loc": "51 -384"
+    }, {
+        "text": "h",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "23 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "10",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 10pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -335,
+        "loc": "216.00000000000003 -384"
+    }, {
+        "text": "A",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "25 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "10",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 10pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -336,
+        "loc": "128 -384"
+    }, {
+        "text": "实时值",
+        "figure": "val",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "valCase",
+        "size": "49 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#00FF00",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "3#变频器运行频率",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备C",
+        "authoControl": "否",
+        "pointName": "熊猫二供泵房.V12",
+        "isAttr": true,
+        "key": -337,
+        "loc": "24.5 -384"
+    }, {
+        "text": "3#泵",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "50 29",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -338,
+        "loc": "32 -416"
+    }, {
+        "text": "至用户",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "32 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "15",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 15pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -339,
+        "loc": "672.0000000000001 -308.9999999999999"
+    }, {
+        "text": "二供流量计-02",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\二供设备\\二供流量计-02.svg",
+        "scale": 1,
+        "ratio": 1.108910891089109,
+        "width": 43,
+        "height": 38.8,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -340,
+        "loc": "528.0000000000001 -243",
+        "size": "44 64"
+    }, {
+        "text": "二供稳压罐-02",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\二供设备\\二供稳压罐-02.svg",
+        "scale": 1,
+        "ratio": 0.7267857142857144,
+        "width": 38,
+        "height": 52.3,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -341,
+        "loc": "384 -268.99999999999994",
+        "size": "38 57"
+    }, {
+        "text": "二供压力表-02",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\二供设备\\二供压力表-02.svg",
+        "scale": 1,
+        "ratio": 1.0527306967984933,
+        "width": 43,
+        "height": 40.8,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -342,
+        "loc": "448.00000000000006 -252.5",
+        "size": "43 49"
+    }, {
+        "text": "二供指标",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "解锁",
+        "imgSrc": "二维\\二供设备\\二供指标.svg",
+        "scale": 1,
+        "ratio": 2.8426395939086295,
+        "width": 86,
+        "height": 30,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -343,
+        "loc": "184 -168",
+        "size": "88 30"
+    }, {
+        "text": "二供指标",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "解锁",
+        "imgSrc": "二维\\二供设备\\二供指标.svg",
+        "scale": 1,
+        "ratio": 2.8426395939086295,
+        "width": 70,
+        "height": 30,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -344,
+        "loc": "104 -168",
+        "size": "75 30"
+    }, {
+        "text": "二供指标",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "解锁",
+        "imgSrc": "二维\\二供设备\\二供指标.svg",
+        "scale": 1,
+        "ratio": 2.8426395939086295,
+        "width": 70,
+        "height": 30,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -345,
+        "loc": "26.999999999999993 -168",
+        "size": "70 30"
+    }, {
+        "text": "状态",
+        "figure": "modal",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "category": "pointCase",
+        "type": "锁定",
+        "width": 12,
+        "height": 12,
+        "ratio": 1,
+        "fillColor": {
+            "class": "go.Brush",
+            "type": "Linear",
+            "start": {
+                "class": "go.Spot",
+                "x": 0.5,
+                "y": 0,
+                "offsetX": 0,
+                "offsetY": 0
+            },
+            "end": {
+                "class": "go.Spot",
+                "x": 0.5,
+                "y": 1,
+                "offsetX": 0,
+                "offsetY": 0
+            },
+            "colorStops": {
+                "0": "#6D7A97",
+                "1": "#9FB3BF"
+            }
+        },
+        "strokeWidth": 2,
+        "stroke": "#808080",
+        "showName": "泵1状态",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备B",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -346,
+        "loc": "2.220446049250313e-16 -199.99999999999994"
+    }, {
+        "text": "状态",
+        "figure": "modal",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "category": "pointCase",
+        "type": "锁定",
+        "width": 12,
+        "height": 12,
+        "ratio": 1,
+        "fillColor": {
+            "class": "go.Brush",
+            "type": "Linear",
+            "start": {
+                "class": "go.Spot",
+                "x": 0.5,
+                "y": 0,
+                "offsetX": 0,
+                "offsetY": 0
+            },
+            "end": {
+                "class": "go.Spot",
+                "x": 0.5,
+                "y": 1,
+                "offsetX": 0,
+                "offsetY": 0
+            },
+            "colorStops": {
+                "0": "#6D7A97",
+                "1": "#9FB3BF"
+            }
+        },
+        "strokeWidth": 2,
+        "stroke": "#808080",
+        "showName": "泵2状态",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备B",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -347,
+        "loc": "2.220446049250313e-16 -304"
+    }, {
+        "text": "二供指标",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "解锁",
+        "imgSrc": "二维\\二供设备\\二供指标.svg",
+        "scale": 1,
+        "ratio": 2.8426395939086295,
+        "width": 70,
+        "height": 30,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -348,
+        "loc": "27.499999999999993 -272",
+        "size": "71 30"
+    }, {
+        "text": "二供指标",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "解锁",
+        "imgSrc": "二维\\二供设备\\二供指标.svg",
+        "scale": 1,
+        "ratio": 2.8426395939086295,
+        "width": 70,
+        "height": 30,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -349,
+        "loc": "104 -272",
+        "size": "75 30"
+    }, {
+        "text": "二供指标",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "解锁",
+        "imgSrc": "二维\\二供设备\\二供指标.svg",
+        "scale": 1,
+        "ratio": 2.8426395939086295,
+        "width": 86,
+        "height": 30,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -350,
+        "loc": "184 -272",
+        "size": "88 30"
+    }, {
+        "text": "二供指标",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "解锁",
+        "imgSrc": "二维\\二供设备\\二供指标.svg",
+        "scale": 1,
+        "ratio": 2.8426395939086295,
+        "width": 86,
+        "height": 30,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -351,
+        "loc": "184 -384",
+        "size": "88 30"
+    }, {
+        "text": "二供指标",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "解锁",
+        "imgSrc": "二维\\二供设备\\二供指标.svg",
+        "scale": 1,
+        "ratio": 2.8426395939086295,
+        "width": 70,
+        "height": 30,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -352,
+        "loc": "104 -384",
+        "size": "75 30"
+    }, {
+        "text": "二供指标",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "解锁",
+        "imgSrc": "二维\\二供设备\\二供指标.svg",
+        "scale": 1,
+        "ratio": 2.8426395939086295,
+        "width": 70,
+        "height": 30,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -353,
+        "loc": "28 -384",
+        "size": "68 30"
+    }, {
+        "text": "二供泵-02",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\二供设备\\二供泵-02.svg",
+        "scale": 1,
+        "ratio": 0.39999999999999997,
+        "width": 32,
+        "height": 80,
+        "showName": "泵3状态",
+        "controlType": "开关展示",
+        "controlName": "",
+        "openVal": "2,4",
+        "startVal": "1,3",
+        "stationName": "设备B",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -354,
+        "loc": "-40 -352",
+        "size": "34 143"
+    }, {
+        "text": "二供泵-02",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\二供设备\\二供泵-02.svg",
+        "scale": 1,
+        "ratio": 0.39999999999999997,
+        "width": 32,
+        "height": 80,
+        "showName": "泵2状态",
+        "controlType": "开关展示",
+        "controlName": "",
+        "openVal": "2,4",
+        "startVal": "1,3",
+        "stationName": "设备B",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -355,
+        "loc": "-40 -240",
+        "size": "32 140"
+    }, {
+        "text": "二供流量计-02",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\二供设备\\二供流量计-02.svg",
+        "scale": 1,
+        "ratio": 1.108910891089109,
+        "width": 43,
+        "height": 38.8,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -356,
+        "loc": "-135.99999999999994 -125.5",
+        "size": "56 72"
+    }, {
+        "text": "二供压力表-02",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\二供设备\\二供压力表-02.svg",
+        "scale": 1,
+        "ratio": 1.0527306967984933,
+        "width": 43,
+        "height": 40.8,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -357,
+        "loc": "-239.99999999999994 -131.5",
+        "size": "43 68"
+    }, {
+        "text": "状态",
+        "figure": "modal",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "category": "pointCase",
+        "type": "锁定",
+        "width": 12,
+        "height": 12,
+        "ratio": 1,
+        "fillColor": {
+            "class": "go.Brush",
+            "type": "Linear",
+            "start": {
+                "class": "go.Spot",
+                "x": 0.5,
+                "y": 0,
+                "offsetX": 0,
+                "offsetY": 0
+            },
+            "end": {
+                "class": "go.Spot",
+                "x": 0.5,
+                "y": 1,
+                "offsetX": 0,
+                "offsetY": 0
+            },
+            "colorStops": {
+                "0": "#6D7A97",
+                "1": "#9FB3BF"
+            }
+        },
+        "strokeWidth": 2,
+        "stroke": "#808080",
+        "showName": "泵3状态",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备B",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -359,
+        "loc": "2.220446049250313e-16 -416"
+    }, {
+        "text": "箭头",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\基本符号\\箭头-01.svg",
+        "scale": 1,
+        "ratio": 2.4444444444444446,
+        "width": 44,
+        "height": 18,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供泵房.V12",
+        "isAttr": true,
+        "key": -360,
+        "loc": "680 -277.00000000000006"
+    }, {
+        "text": "二供泵-02",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\二供设备\\二供泵-02.svg",
+        "scale": 1,
+        "ratio": 0.39999999999999997,
+        "width": 32,
+        "height": 80,
+        "showName": "泵1状态",
+        "controlType": "开关展示",
+        "controlName": "",
+        "openVal": "2,4",
+        "startVal": "1,3",
+        "stationName": "设备B",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -364,
+        "loc": "-40 -133.5",
+        "size": "32 145"
+    }, {
+        "text": "实时值",
+        "figure": "val",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "valCase",
+        "size": "56 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#00FF00",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "1#水箱液位",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备C",
+        "authoControl": "否",
+        "pointName": "熊猫二供泵房.V12",
+        "isAttr": true,
+        "key": -268,
+        "loc": "-597.9999999999998 375.9999999999999"
+    }, {
+        "text": "m",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "22 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "10",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 10pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -269,
+        "loc": "-563.9999999999999 376.00000000000006"
+    }, {
+        "text": "二供指标",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "解锁",
+        "imgSrc": "二维\\二供设备\\二供指标.svg",
+        "scale": 1,
+        "ratio": 2.8426395939086295,
+        "width": 74,
+        "height": 30,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -270,
+        "loc": "-592.0000000000001 376.00000000000017"
+    }, {
+        "text": "二供标签",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\二供设备\\二供标签.svg",
+        "scale": 1,
+        "ratio": 1.9112627986348123,
+        "width": 40,
+        "height": 20.9,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -7,
+        "loc": "-128 111.65000000000003"
+    }, {
+        "text": "01",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "47 32",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -429,
+        "loc": "-126.50000000000003 113.60354461669922"
+    }, {
+        "text": "02",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "47 28",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -430,
+        "loc": "-128 -334.5"
+    }, {
+        "text": "二供标签",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\二供设备\\二供标签.svg",
+        "scale": 1,
+        "ratio": 1.9112627986348123,
+        "width": 40,
+        "height": 20.9,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -431,
+        "loc": "-128 -336.0000000000001"
+    }, {
+        "text": "节点",
+        "category": "linkPort",
+        "size": "50 4",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "isAttr": true,
+        "key": -436,
+        "loc": "-963.9999999999995 320.8499999999999",
+        "stationName": "设备A",
+        "pointName": "熊猫二供机组.V11",
+        "angle": 90
+    }, {
+        "text": "节点",
+        "category": "linkPort",
+        "size": "50 4",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "isAttr": true,
+        "key": -439,
+        "loc": "704 -242.5",
+        "stationName": "设备A",
+        "pointName": "熊猫二供机组.V11",
+        "angle": 270
+    }, {
+        "text": "节点",
+        "category": "linkPort",
+        "size": "50 4",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "isAttr": true,
+        "key": -440,
+        "loc": "712 320.49999999999994",
+        "stationName": "设备A",
+        "pointName": "熊猫二供机组.V11",
+        "angle": 270
+    }, {
+        "text": "实时值",
+        "figure": "val",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "valCase",
+        "size": "60 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#00FF00",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "泵4运行时间",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -145,
+        "loc": "184 -40"
+    }, {
+        "text": "实时值",
+        "figure": "val",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "valCase",
+        "size": "59 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#00FF00",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "变4电流",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -146,
+        "loc": "103.5 -40"
+    }, {
+        "text": "Hz",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "20 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "10",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 10pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -147,
+        "loc": "56 -40"
+    }, {
+        "text": "h",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "23 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "10",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 10pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -148,
+        "loc": "224 -40"
+    }, {
+        "text": "A",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "23 23",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "10",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 10pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -149,
+        "loc": "135 -41.5"
+    }, {
+        "text": "实时值",
+        "figure": "val",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "valCase",
+        "size": "56 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#00FF00",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "4#变频器运行频率",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -150,
+        "loc": "24 -40"
+    }, {
+        "text": "4#泵",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "50 29",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -151,
+        "loc": "40 -72"
+    }, {
+        "text": "二供指标",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "解锁",
+        "imgSrc": "二维\\二供设备\\二供指标.svg",
+        "scale": 1,
+        "ratio": 2.8426395939086295,
+        "width": 86,
+        "height": 30,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -152,
+        "loc": "192 -40",
+        "size": "88 30"
+    }, {
+        "text": "二供指标",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "解锁",
+        "imgSrc": "二维\\二供设备\\二供指标.svg",
+        "scale": 1,
+        "ratio": 2.8426395939086295,
+        "width": 70,
+        "height": 30,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -153,
+        "loc": "110 -40",
+        "size": "75 30"
+    }, {
+        "text": "二供指标",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "解锁",
+        "imgSrc": "二维\\二供设备\\二供指标.svg",
+        "scale": 1,
+        "ratio": 2.8426395939086295,
+        "width": 70,
+        "height": 30,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -154,
+        "loc": "32 -40"
+    }, {
+        "text": "状态",
+        "figure": "modal",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "category": "pointCase",
+        "type": "锁定",
+        "width": 12,
+        "height": 12,
+        "ratio": 1,
+        "fillColor": {
+            "class": "go.Brush",
+            "type": "Linear",
+            "start": {
+                "class": "go.Spot",
+                "x": 0.5,
+                "y": 0,
+                "offsetX": 0,
+                "offsetY": 0
+            },
+            "end": {
+                "class": "go.Spot",
+                "x": 0.5,
+                "y": 1,
+                "offsetX": 0,
+                "offsetY": 0
+            },
+            "colorStops": {
+                "0": "#6D7A97",
+                "1": "#9FB3BF"
+            }
+        },
+        "strokeWidth": 2,
+        "stroke": "#808080",
+        "showName": "泵4状态",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -155,
+        "loc": "8 -72"
+    }, {
+        "text": "二供泵-02",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\二供设备\\二供泵-02.svg",
+        "scale": 1,
+        "ratio": 0.39999999999999997,
+        "width": 32,
+        "height": 80,
+        "showName": "泵4状态",
+        "controlType": "开关展示",
+        "controlName": "",
+        "openVal": "2,4",
+        "startVal": "1,3",
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -156,
+        "loc": "-40 -8.5",
+        "size": "34 142"
+    }, {
+        "text": "MPa",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "32 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "9",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 9pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -127,
+        "loc": "502.00000000000006 352.0000000000001"
+    }, {
+        "text": " m³/h ",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "32 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "10",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 10pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -128,
+        "loc": "592 352.0000000000001"
+    }, {
+        "text": "实时值",
+        "figure": "val",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "valCase",
+        "size": "56 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#00FF00",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "出水压力",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -132,
+        "loc": "459 352.0000000000001"
+    }, {
+        "text": "实时值",
+        "figure": "val",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "valCase",
+        "size": "64 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#00FF00",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "出水瞬时流量",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -133,
+        "loc": "552 352.0000000000001"
+    }, {
+        "text": "实时值",
+        "figure": "val",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "valCase",
+        "size": "64 22",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#00FF00",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "出水累计流量",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -134,
+        "loc": "504.00000000000006 391.99999999999994"
+    }, {
+        "text": " m³ ",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "34 23",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "10",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 10pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -135,
+        "loc": "592 392.0000000000001"
+    }, {
+        "text": "实时值",
+        "figure": "val",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "valCase",
+        "size": "56 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#00FF00",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "进水压力",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -142,
+        "loc": "-245 352"
+    }, {
+        "text": "MPa",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "32 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "9",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 9pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -144,
+        "loc": "-202 352"
+    }, {
+        "text": "二供指标",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "解锁",
+        "imgSrc": "二维\\二供设备\\二供指标.svg",
+        "scale": 1,
+        "ratio": 2.8426395939086295,
+        "width": 86,
+        "height": 30,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -136,
+        "loc": "471.99999999999994 352"
+    }, {
+        "text": "二供指标",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "解锁",
+        "imgSrc": "二维\\二供设备\\二供指标.svg",
+        "scale": 1,
+        "ratio": 2.8426395939086295,
+        "width": 86,
+        "height": 30,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -137,
+        "loc": "568 352",
+        "size": "92 30"
+    }, {
+        "text": "二供指标",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "解锁",
+        "imgSrc": "二维\\二供设备\\二供指标.svg",
+        "scale": 1,
+        "ratio": 2.8426395939086295,
+        "width": 180,
+        "height": 30,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -138,
+        "loc": "520.0000000000001 392",
+        "size": "185 33"
+    }, {
+        "text": "二供指标",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "解锁",
+        "imgSrc": "二维\\二供设备\\二供指标.svg",
+        "scale": 1,
+        "ratio": 2.8426395939086295,
+        "width": 86,
+        "height": 30,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -171,
+        "loc": "-232 352"
+    }, {
+        "text": "MPa",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "32 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "9",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 9pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -394,
+        "loc": "-201.99999999999997 -101.99999999999999"
+    }, {
+        "text": "实时值",
+        "figure": "val",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "valCase",
+        "size": "56 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#00FF00",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "进水压力",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备C",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -392,
+        "loc": "-244.99999999999994 -101.99999999999999"
+    }, {
+        "text": "",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "34 23",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "10",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 10pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -386,
+        "loc": "-112.00000000000001 -61.999999999999986"
+    }, {
+        "text": "二供指标",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "解锁",
+        "imgSrc": "二维\\二供设备\\二供指标.svg",
+        "scale": 1,
+        "ratio": 2.8426395939086295,
+        "width": 86,
+        "height": 30,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -424,
+        "loc": "-232.00000000000006 -102.00000000000003"
+    }, {
+        "text": " m³ ",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "34 23",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "10",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 10pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -62,
+        "loc": "568 -173"
+    }, {
+        "text": "实时值",
+        "figure": "val",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "valCase",
+        "size": "64 22",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#00FF00",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "控制泵房风机停止温度",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备B",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -61,
+        "loc": "480.00000000000006 -173.00000000000003"
+    }, {
+        "text": "实时值",
+        "figure": "val",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "valCase",
+        "size": "64 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#00FF00",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "出水瞬时流量",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备B",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -60,
+        "loc": "527.9999999999999 -213"
+    }, {
+        "text": "实时值",
+        "figure": "val",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "valCase",
+        "size": "56 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#00FF00",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "出水压力",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备B",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -59,
+        "loc": "435 -213"
+    }, {
+        "text": " m³/h ",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "32 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "10",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 10pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -58,
+        "loc": "568 -213"
+    }, {
+        "text": "MPa",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "32 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "9",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 9pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -57,
+        "loc": "478.00000000000006 -213"
+    }, {
+        "text": "二供指标",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "解锁",
+        "imgSrc": "二维\\二供设备\\二供指标.svg",
+        "scale": 1,
+        "ratio": 2.8426395939086295,
+        "width": 180,
+        "height": 30,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -65,
+        "loc": "496.0000000000001 -173",
+        "size": "185 33"
+    }, {
+        "text": "二供指标",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "解锁",
+        "imgSrc": "二维\\二供设备\\二供指标.svg",
+        "scale": 1,
+        "ratio": 2.8426395939086295,
+        "width": 86,
+        "height": 30,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -64,
+        "loc": "544 -213",
+        "size": "92 30"
+    }, {
+        "text": "二供指标",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "解锁",
+        "imgSrc": "二维\\二供设备\\二供指标.svg",
+        "scale": 1,
+        "ratio": 2.8426395939086295,
+        "width": 86,
+        "height": 30,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -63,
+        "loc": "447.99999999999994 -213"
+    }, {
+        "text": "累计电量",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "120 31",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -463,
+        "loc": "-594.0000000000002 23.000000000000114"
+    }, {
+        "text": "kWh",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "39 27",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "10",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 10pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -464,
+        "loc": "-346.0000000000001 21.000000000000114"
+    }, {
+        "text": "实时值",
+        "figure": "val",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "valCase",
+        "size": "133 31",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#00ff00",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "累计电量",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备C",
+        "authoControl": "否",
+        "pointName": "熊猫二供泵房.V12",
+        "isAttr": true,
+        "key": -465,
+        "loc": "-425.9999999999998 20.999999999999886"
+    }, {
+        "text": "出水累计流量",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "120 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -467,
+        "loc": "-578 79.00000000000011"
+    }, {
+        "text": "实时值",
+        "figure": "val",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "valCase",
+        "size": "133 22",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#00FF00",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "出水累计流量",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备C",
+        "authoControl": "否",
+        "pointName": "熊猫二供泵房.V12",
+        "isAttr": true,
+        "key": -468,
+        "loc": "-425.9999999999998 79.00000000000011"
+    }, {
+        "text": "",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "39 27",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "10",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 10pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -469,
+        "loc": "-346.0000000000001 62.999999999999886"
+    }, {
+        "text": " m³ ",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "33 19",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "10",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 10pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -471,
+        "loc": "-346.0000000000001 78.99999999999989"
+    }, {
+        "text": "矩形框",
+        "figure": "modal",
+        "category": "modelCase",
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框"]
+        },
+        "size": "348 197",
+        "opacity": "82",
+        "fillAlpha": 0.82,
+        "fillColor": "rgba(4,15,51,0.82)",
+        "fill": "#040f33",
+        "strokeWidth": 1,
+        "stroke": "#0d2c63",
+        "isAttr": false,
+        "key": -4,
+        "loc": "-482.0000000000002 22.5",
+        "stationName": "设备A",
+        "pointName": "熊猫二供机组.V11"
+    }, {
+        "text": "二供指标",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "解锁",
+        "imgSrc": "二维\\二供设备\\二供指标.svg",
+        "scale": 1,
+        "ratio": 2.8426395939086295,
+        "width": 174,
+        "height": 30,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -466,
+        "loc": "-410.0000000000002 23.000000000000227",
+        "size": "179 42"
+    }, {
+        "text": "二供指标",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "解锁",
+        "imgSrc": "二维\\二供设备\\二供指标.svg",
+        "scale": 1,
+        "ratio": 2.8426395939086295,
+        "width": 174,
+        "height": 30,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -470,
+        "loc": "-410.0000000000002 79",
+        "size": "179 38"
+    }, {
+        "text": "矩形框",
+        "figure": "modal",
+        "category": "modelCase",
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框"]
+        },
+        "size": "295 318",
+        "opacity": "82",
+        "fillAlpha": 0.82,
+        "fillColor": "rgba(4,15,51,0.82)",
+        "fill": "#040f33",
+        "strokeWidth": 1,
+        "stroke": "#0d2c63",
+        "isAttr": false,
+        "key": -460,
+        "loc": "-824.9999999999995 -259.99999999999994",
+        "stationName": "设备A",
+        "pointName": "熊猫二供机组.V11"
+    }, {
+        "text": "矩形框",
+        "figure": "modal",
+        "category": "modelCase",
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框"]
+        },
+        "size": "296 40",
+        "opacity": "22",
+        "fillAlpha": 0.22,
+        "fillColor": "rgba(8,53,121,0.22)",
+        "fill": "#083579",
+        "strokeWidth": 0,
+        "stroke": "#808080",
+        "isAttr": false,
+        "key": -5,
+        "loc": "-826.4999999999995 -400",
+        "stationName": "设备A",
+        "pointName": "熊猫二供机组.V11"
+    }, {
+        "text": "环境量数据",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "131 31",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#ffffff",
+        "fillColor": "rgba(4,185,175,0)",
+        "fill": "#04b9af",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -472,
+        "loc": "-904.5 -398.5000000000002"
+    }, {
+        "text": "温度",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "59 25",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "13",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 13pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#54a1ff",
+        "fillColor": "rgba(4,185,175,0)",
+        "fill": "#04b9af",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -473,
+        "loc": "-889.3548387096773 -347"
+    }, {
+        "text": "30.7",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "58 31",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "bold",
+        "fontSize": "13",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "bold 13pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#13e5ff",
+        "fillColor": "rgba(4,185,175,0)",
+        "fill": "#04b9af",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -474,
+        "loc": "-888.5 -322"
+    }, {
+        "text": "烟感",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "58 31",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "13",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 13pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#54a1ff",
+        "fillColor": "rgba(4,185,175,0)",
+        "fill": "#04b9af",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -480,
+        "loc": "-888 -272.0000000000001"
+    }, {
+        "text": "风机",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "120 31",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "13",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 13pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#54a1ff",
+        "fillColor": "rgba(4,185,175,0)",
+        "fill": "#04b9af",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -481,
+        "loc": "-887 -208.00000000000006"
+    }, {
+        "text": "矩形框",
+        "figure": "modal",
+        "category": "modelCase",
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框"]
+        },
+        "size": "340 315",
+        "opacity": "82",
+        "fillAlpha": 0.82,
+        "fillColor": "rgba(4,15,51,0.82)",
+        "fill": "#040f33",
+        "strokeWidth": 1,
+        "stroke": "#0d2c63",
+        "isAttr": false,
+        "key": -486,
+        "loc": "-484.4999999999998 -259.49999999999994",
+        "stationName": "设备A",
+        "pointName": "熊猫二供机组.V11"
+    }, {
+        "text": "矩形框",
+        "figure": "modal",
+        "category": "modelCase",
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框"]
+        },
+        "size": "336 40",
+        "opacity": "22",
+        "fillAlpha": 0.22,
+        "fillColor": "rgba(8,53,121,0.22)",
+        "fill": "#083579",
+        "strokeWidth": 0,
+        "stroke": "#808080",
+        "isAttr": false,
+        "key": -487,
+        "loc": "-487.5 -397.00000000000006",
+        "stationName": "设备A",
+        "pointName": "熊猫二供机组.V11"
+    }, {
+        "text": "水质数据",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "120 31",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#ffffff",
+        "fillColor": "rgba(4,185,175,0)",
+        "fill": "#04b9af",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -488,
+        "loc": "-598.0000000000005 -397.00000000000006"
+    }, {
+        "text": "浊度",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "55 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "13",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 13pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#54a1ff",
+        "fillColor": "rgba(4,185,175,0)",
+        "fill": "#04b9af",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -491,
+        "loc": "-407.5000000000002 -342.89645538330075"
+    }, {
+        "text": "矩形框",
+        "figure": "modal",
+        "category": "modelCase",
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框"]
+        },
+        "size": "290 199",
+        "opacity": "82",
+        "fillAlpha": 0.82,
+        "fillColor": "rgba(4,15,51,0.82)",
+        "fill": "#040f33",
+        "strokeWidth": 1,
+        "stroke": "#0d2c63",
+        "isAttr": false,
+        "key": -501,
+        "loc": "-823.5 22.5",
+        "stationName": "设备A",
+        "pointName": "熊猫二供机组.V11"
+    }, {
+        "text": "矩形框",
+        "figure": "modal",
+        "category": "modelCase",
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框"]
+        },
+        "size": "290 40",
+        "opacity": "22",
+        "fillAlpha": 0.22,
+        "fillColor": "rgba(8,53,121,0.22)",
+        "fill": "#083579",
+        "strokeWidth": 0,
+        "stroke": "#808080",
+        "isAttr": false,
+        "key": -502,
+        "loc": "-824.4999999999998 -56.99999999999997",
+        "stationName": "设备A",
+        "pointName": "熊猫二供机组.V11"
+    }, {
+        "text": "安防数据",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "120 31",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#ffffff",
+        "fillColor": "rgba(4,185,175,0)",
+        "fill": "#04b9af",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -503,
+        "loc": "-910.0000000000005 -55"
+    }, {
+        "text": "视频",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "120 31",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "13",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 13pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#54a1ff",
+        "fillColor": "rgba(4,185,175,0)",
+        "fill": "#04b9af",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -504,
+        "loc": "-880.0000000000005 8"
+    }, {
+        "text": "门禁",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "120 31",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "13",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 13pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#54a1ff",
+        "fillColor": "rgba(4,185,175,0)",
+        "fill": "#04b9af",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -507,
+        "loc": "-880.0000000000005 72.00000000000006"
+    }, {
+        "text": "0.31",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "55 22",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "bold",
+        "fontSize": "13",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "bold 13pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#13e5ff",
+        "fillColor": "rgba(4,185,175,0)",
+        "fill": "#04b9af",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -492,
+        "loc": "-408 -318.5"
+    }, {
+        "text": "溶解氧",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "41 25",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "13",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 13pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#54a1ff",
+        "fillColor": "rgba(4,185,175,0)",
+        "fill": "#04b9af",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -496,
+        "loc": "-401.0000000000002 -277"
+    }, {
+        "text": "1.12",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "59 14",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "bold",
+        "fontSize": "13",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "bold 13pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#13e5ff",
+        "fillColor": "rgba(4,185,175,0)",
+        "fill": "#04b9af",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -497,
+        "loc": "-410 -253.5"
+    }, {
+        "text": "温度2#",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\小图标\\温度2#&&&小图标&&&.svg",
+        "scale": 1,
+        "ratio": 1,
+        "width": 32,
+        "height": 32,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "hBarControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -34,
+        "loc": "-927.9999999999993 -336"
+    }, {
+        "text": "取水量-01",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\小图标\\取水量-01.svg",
+        "scale": 1,
+        "ratio": 0.9666607142857143,
+        "width": 28,
+        "height": 29,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "hBarControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -24,
+        "loc": "-791.9499999999998 -336"
+    }, {
+        "text": "56.6",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "56 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "bold",
+        "fontSize": "13",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "bold 13pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#13e5ff",
+        "fillColor": "rgba(4,185,175,0)",
+        "fill": "#04b9af",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -475,
+        "loc": "-752.5 -321.5"
+    }, {
+        "text": "湿度",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "55 31",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "13",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 13pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#54a1ff",
+        "fillColor": "rgba(4,185,175,0)",
+        "fill": "#04b9af",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -476,
+        "loc": "-750.7741935483871 -346"
+    }, {
+        "text": "烟感2#",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\小图标\\烟感2#&&&小图标&&&.svg",
+        "scale": 1,
+        "ratio": 1,
+        "width": 28,
+        "height": 28,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "hBarControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -36,
+        "loc": "-928.0000000000007 -272"
+    }, {
+        "text": "水淹2#",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\小图标\\水淹2#&&&小图标&&&.svg",
+        "scale": 1,
+        "ratio": 1,
+        "width": 28,
+        "height": 28,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "hBarControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -31,
+        "loc": "-790 -275"
+    }, {
+        "text": "水淹",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "59 31",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "13",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 13pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#54a1ff",
+        "fillColor": "rgba(4,185,175,0)",
+        "fill": "#04b9af",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -477,
+        "loc": "-751 -272.0000000000001"
+    }, {
+        "text": "风机2#",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\小图标\\风机2#&&&小图标&&&.svg",
+        "scale": 1,
+        "ratio": 1,
+        "width": 28,
+        "height": 28,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "hBarControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -478,
+        "loc": "-927.4999999999998 -210.50000000000009"
+    }, {
+        "text": "除湿机2#",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\小图标\\除湿机2#&&&小图标&&&.svg",
+        "scale": 1,
+        "ratio": 1,
+        "width": 28,
+        "height": 28,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "hBarControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -479,
+        "loc": "-791.0000000000003 -208.99999999999997",
+        "size": "28 28"
+    }, {
+        "text": "除湿机",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "50 31",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "13",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 13pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#54a1ff",
+        "fillColor": "rgba(4,185,175,0)",
+        "fill": "#04b9af",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -482,
+        "loc": "-744.5000000000002 -207.00000000000003"
+    }, {
+        "text": "空调2#",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\小图标\\空调2#&&&小图标&&&.svg",
+        "scale": 1,
+        "ratio": 1,
+        "width": 33,
+        "height": 33,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "hBarControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -20,
+        "loc": "-927.4999999999993 -147.99999999999994",
+        "size": "33 40"
+    }, {
+        "text": "余氯2#",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\小图标\\余氯2#&&&小图标&&&.svg",
+        "scale": 1,
+        "ratio": 1,
+        "width": 21,
+        "height": 21,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "hBarControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -39,
+        "loc": "-611 -332.5"
+    }, {
+        "text": "空调",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "44 25",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "13",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 13pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#54a1ff",
+        "fillColor": "rgba(4,185,175,0)",
+        "fill": "#04b9af",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -483,
+        "loc": "-885.5000000000002 -155.00000000000003"
+    }, {
+        "text": "26.0",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "58 31",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "bold",
+        "fontSize": "13",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "bold 13pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#13e5ff",
+        "fillColor": "rgba(4,185,175,0)",
+        "fill": "#04b9af",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -484,
+        "loc": "-888 -129.99999999999997"
+    }, {
+        "text": "余氯",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "52 31",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "13",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 13pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#54a1ff",
+        "fillColor": "rgba(4,185,175,0)",
+        "fill": "#04b9af",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -485,
+        "loc": "-566.5000000000002 -344"
+    }, {
+        "text": "0.42",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "53 31",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "bold",
+        "fontSize": "13",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "bold 13pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#13e5ff",
+        "fillColor": "rgba(4,185,175,0)",
+        "fill": "#04b9af",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -489,
+        "loc": "-567.5 -321"
+    }, {
+        "text": "浊度2#",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\小图标\\浊度2#&&&小图标&&&.svg",
+        "scale": 1,
+        "ratio": 1,
+        "width": 26,
+        "height": 26,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "hBarControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -41,
+        "loc": "-449.994979858398 -334.5"
+    }, {
+        "text": "PH2#",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\小图标\\PH2#&&&小图标&&&.svg",
+        "scale": 1,
+        "ratio": 1,
+        "width": 26,
+        "height": 26,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "hBarControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -490,
+        "loc": "-608.0000000000009 -269.5"
+    }, {
+        "text": "pH",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "59 31",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "13",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 13pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#54a1ff",
+        "fillColor": "rgba(4,185,175,0)",
+        "fill": "#04b9af",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -493,
+        "loc": "-570.0000000000002 -277"
+    }, {
+        "text": "5.56",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "48 17",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "bold",
+        "fontSize": "13",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "bold 13pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#13e5ff",
+        "fillColor": "rgba(4,185,175,0)",
+        "fill": "#04b9af",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -494,
+        "loc": "-565 -254"
+    }, {
+        "text": "溶解氧2#",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\小图标\\溶解氧2#&&&小图标&&&.svg",
+        "scale": 1,
+        "ratio": 1,
+        "width": 28,
+        "height": 28,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "hBarControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -26,
+        "loc": "-450.0000000000002 -273"
+    }, {
+        "text": "电导率2#",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\小图标\\电导率2#&&&小图标&&&.svg",
+        "scale": 1,
+        "ratio": 1,
+        "width": 20,
+        "height": 20,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "hBarControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -8,
+        "loc": "-610.5000000000002 -200.8964553833008"
+    }, {
+        "text": "电导率",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "63 31",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "13",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 13pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#54a1ff",
+        "fillColor": "rgba(4,185,175,0)",
+        "fill": "#04b9af",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -495,
+        "loc": "-558.0000000000007 -209"
+    }, {
+        "text": "1.16",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "54 20",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "bold",
+        "fontSize": "13",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "bold 13pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#13e5ff",
+        "fillColor": "rgba(4,185,175,0)",
+        "fill": "#04b9af",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -498,
+        "loc": "-567.9999999999999 -187.50000000000003"
+    }, {
+        "text": "红外2#",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\小图标\\红外2#&&&小图标&&&.svg",
+        "scale": 1,
+        "ratio": 1,
+        "width": 30,
+        "height": 30,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "hBarControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -17,
+        "loc": "-796 68.84999999999991"
+    }, {
+        "text": "门禁2#",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\小图标\\门禁2#&&&小图标&&&.svg",
+        "scale": 1,
+        "ratio": 1,
+        "width": 32,
+        "height": 32,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "hBarControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -499,
+        "loc": "-919.9999999999993 71"
+    }, {
+        "text": "视频2#",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\小图标\\视频2#&&&小图标&&&.svg",
+        "scale": 1,
+        "ratio": 1,
+        "width": 32,
+        "height": 32,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "hBarControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -30,
+        "loc": "-918.9999999999995 8.561428571428564"
+    }, {
+        "text": "对讲机",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "55 31",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "13",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 13pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#54a1ff",
+        "fillColor": "rgba(4,185,175,0)",
+        "fill": "#04b9af",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -500,
+        "loc": "-742.9999999999999 7.000000000000114"
+    }, {
+        "text": "红外",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "55 31",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "13",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 13pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#54a1ff",
+        "fillColor": "rgba(4,185,175,0)",
+        "fill": "#04b9af",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -505,
+        "loc": "-752 71"
+    }, {
+        "text": "横管",
+        "category": "HBar",
+        "size": "219 1",
+        "list": {
+            "drawInfo": ["水管", "水流"]
+        },
+        "stroke": "#209bfb",
+        "strokeWidth": 8,
+        "waterStroke": "#FFFFFF",
+        "waterWidth": 4,
+        "width": 219,
+        "dashes": [20, 40],
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "isAttr": true,
+        "key": -213,
+        "loc": "-81 -241",
+        "stationName": "设备A",
+        "pointName": "熊猫二供机组.V11",
+        "unstroke": "#41BFEC",
+        "unwaterStroke": "#FFFFFF",
+        "authoControl": "否",
+        "hBarControl": "否",
+        "angle": 90
+    }, {
+        "text": "横管",
+        "category": "HBar",
+        "size": "214 0",
+        "list": {
+            "drawInfo": ["水管", "水流"]
+        },
+        "stroke": "#209bfb",
+        "strokeWidth": 8,
+        "waterStroke": "#FFFFFF",
+        "waterWidth": 4,
+        "width": 214,
+        "dashes": [20, 40],
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "isAttr": true,
+        "key": -214,
+        "loc": "264 -240",
+        "stationName": "设备A",
+        "pointName": "熊猫二供机组.V11",
+        "unstroke": "#41BFEC",
+        "unwaterStroke": "#FFFFFF",
+        "authoControl": "否",
+        "hBarControl": "否",
+        "angle": 90
+    }, {
+        "text": "℃",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "59 31",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "11",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 11pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#54a1ff",
+        "fillColor": "rgba(4,185,175,0)",
+        "fill": "#04b9af",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -215,
+        "loc": "-859.9999999999999 -322.00000000000006"
+    }, {
+        "text": "%rh",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "59 31",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "11",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 11pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#54a1ff",
+        "fillColor": "rgba(4,185,175,0)",
+        "fill": "#04b9af",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -216,
+        "loc": "-714.9999999999999 -323.99999999999994"
+    }, {
+        "text": "℃",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "59 31",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "11",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 11pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#54a1ff",
+        "fillColor": "rgba(4,185,175,0)",
+        "fill": "#04b9af",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -217,
+        "loc": "-859.4999999999997 -129"
+    }, {
+        "text": "mg/L",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "49 31",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "11",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 11pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#54a1ff",
+        "fillColor": "rgba(4,185,175,0)",
+        "fill": "#04b9af",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -218,
+        "loc": "-528 -321"
+    }, {
+        "text": "NTU",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "54 23",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "11",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 11pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#54a1ff",
+        "fillColor": "rgba(4,185,175,0)",
+        "fill": "#04b9af",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -219,
+        "loc": "-372.5 -318"
+    }, {
+        "text": "mg/L",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "59 17",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "11",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 11pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#54a1ff",
+        "fillColor": "rgba(4,185,175,0)",
+        "fill": "#04b9af",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -220,
+        "loc": "-373 -254"
+    }, {
+        "text": "S/m",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "49 16",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "11",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 11pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#54a1ff",
+        "fillColor": "rgba(4,185,175,0)",
+        "fill": "#04b9af",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -221,
+        "loc": "-532 -185.5"
+    }, {
+        "text": "矩形框",
+        "figure": "modal",
+        "category": "modelCase",
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框"]
+        },
+        "size": "341 40",
+        "opacity": "22",
+        "fillAlpha": 0.22,
+        "fillColor": "rgba(8,53,121,0.22)",
+        "fill": "#083579",
+        "strokeWidth": 0,
+        "stroke": "#808080",
+        "isAttr": false,
+        "key": -222,
+        "loc": "-481.5 -56",
+        "stationName": "设备A",
+        "pointName": "熊猫二供机组.V11"
+    }, {
+        "text": "累计数据",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "131 31",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#ffffff",
+        "fillColor": "rgba(4,185,175,0)",
+        "fill": "#04b9af",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -223,
+        "loc": "-598 -56"
+    }, {
+        "text": "横管",
+        "category": "HBar",
+        "size": "451 0",
+        "list": {
+            "drawInfo": ["水管", "水流"]
+        },
+        "stroke": "#209bfb",
+        "strokeWidth": 8,
+        "waterStroke": "#FFFFFF",
+        "waterWidth": 4,
+        "width": 451,
+        "dashes": [20, 40],
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "isAttr": true,
+        "key": -224,
+        "loc": "-288 93.5",
+        "stationName": "设备A",
+        "pointName": "熊猫二供机组.V11",
+        "unstroke": "#41BFEC",
+        "unwaterStroke": "#FFFFFF",
+        "authoControl": "否",
+        "hBarControl": "否",
+        "angle": 90
+    }, {
+        "text": "二供泵-02",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\二供设备\\二供泵-02.svg",
+        "scale": 1,
+        "ratio": 0.39999999999999997,
+        "width": 32,
+        "height": 80,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "hBarControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -225,
+        "loc": "463.99999999999955 168.5",
+        "size": "32 145"
+    }, {
+        "text": "1#泵",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "50 29",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -226,
+        "loc": "463.99999999999955 54.396455383300804"
+    }, {
+        "text": "状态",
+        "figure": "modal",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "category": "pointCase",
+        "type": "锁定",
+        "width": 20,
+        "height": 20,
+        "ratio": 1,
+        "fillColor": {
+            "class": "go.Brush",
+            "type": "Linear",
+            "start": {
+                "class": "go.Spot",
+                "x": 0.5,
+                "y": 0,
+                "offsetX": 0,
+                "offsetY": 0
+            },
+            "end": {
+                "class": "go.Spot",
+                "x": 0.5,
+                "y": 1,
+                "offsetX": 0,
+                "offsetY": 0
+            },
+            "colorStops": {
+                "0": "#6D7A97",
+                "1": "#9FB3BF"
+            }
+        },
+        "strokeWidth": 0,
+        "stroke": "#808080",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "hBarControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -12,
+        "loc": "463.99999999999955 80"
+    }, {
+        "text": "二供压力表-02",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\二供设备\\二供压力表-02.svg",
+        "scale": 1,
+        "ratio": 1.0527306967984933,
+        "width": 43,
+        "height": 40.8,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -231,
+        "loc": "327.9999999999998 167.5",
+        "size": "43 68"
+    }, {
+        "text": "二供流量计-02",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\二供设备\\二供流量计-02.svg",
+        "scale": 1,
+        "ratio": 1.108910891089109,
+        "width": 43,
+        "height": 38.8,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -232,
+        "loc": "400.5 172.5",
+        "size": "56 72"
+    }, {
+        "text": "节点",
+        "category": "linkPort",
+        "size": "50 4",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "isAttr": true,
+        "key": -230,
+        "loc": "481.00000000000045 -32",
+        "stationName": "设备A",
+        "pointName": "熊猫二供机组.V11",
+        "angle": 270
+    }, {
+        "text": "二供流量计-02",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\二供设备\\二供流量计-02.svg",
+        "scale": 1,
+        "ratio": 1.108910891089109,
+        "width": 43,
+        "height": 38.8,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -233,
+        "loc": "608 175",
+        "size": "56 72"
+    }, {
+        "text": "二供压力表-02",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\二供设备\\二供压力表-02.svg",
+        "scale": 1,
+        "ratio": 1.0527306967984933,
+        "width": 43,
+        "height": 40.8,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -234,
+        "loc": "671 168.8964553833008",
+        "size": "43 68"
+    }, {
+        "text": "2#泵",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "50 29",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -235,
+        "loc": "528 54"
+    }, {
+        "text": "状态",
+        "figure": "modal",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "category": "pointCase",
+        "type": "锁定",
+        "width": 20,
+        "height": 20,
+        "ratio": 1,
+        "fillColor": {
+            "class": "go.Brush",
+            "type": "Linear",
+            "start": {
+                "class": "go.Spot",
+                "x": 0.5,
+                "y": 0,
+                "offsetX": 0,
+                "offsetY": 0
+            },
+            "end": {
+                "class": "go.Spot",
+                "x": 0.5,
+                "y": 1,
+                "offsetX": 0,
+                "offsetY": 0
+            },
+            "colorStops": {
+                "0": "#6D7A97",
+                "1": "#9FB3BF"
+            }
+        },
+        "strokeWidth": 0,
+        "stroke": "#808080",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "hBarControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -236,
+        "loc": "528 81"
+    }, {
+        "text": "二供泵-02",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\二供设备\\二供泵-02.svg",
+        "scale": 1,
+        "ratio": 0.39999999999999997,
+        "width": 32,
+        "height": 80,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "hBarControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -237,
+        "loc": "528 169",
+        "size": "32 145"
+    }, {
+        "text": "节点",
+        "category": "linkPort",
+        "size": "50 4",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "isAttr": true,
+        "key": -238,
+        "loc": "481.00000000000045 -32",
+        "stationName": "设备A",
+        "pointName": "熊猫二供机组.V11",
+        "angle": 90
+    }, {
+        "text": "节点",
+        "category": "linkPort",
+        "size": "50 4",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "isAttr": true,
+        "key": -239,
+        "loc": "495 -103",
+        "stationName": "设备A",
+        "pointName": "熊猫二供机组.V11",
+        "angle": 180
+    }, {
+        "text": "二供标签",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "解锁",
+        "imgSrc": "二维\\二供设备\\二供标签.svg",
+        "scale": 1,
+        "ratio": 1.9112627986348123,
+        "width": 78,
+        "height": 36,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "hBarControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -240,
+        "loc": "494.5 7"
+    }, {
+        "text": "排污泵",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "50 29",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -241,
+        "loc": "494.11001739501955 7"
+    }, {
+        "text": "二供指标",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "解锁",
+        "imgSrc": "二维\\二供设备\\二供指标.svg",
+        "scale": 1,
+        "ratio": 2.8426395939086295,
+        "width": 74,
+        "height": 30,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -242,
+        "loc": "632 -64"
+    }, {
+        "text": "m",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "22 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "10",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 10pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -243,
+        "loc": "664 -64"
+    }, {
+        "text": "实时值",
+        "figure": "val",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "valCase",
+        "size": "56 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#00FF00",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "1#水箱液位",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备E",
+        "authoControl": "否",
+        "pointName": "熊猫二供泵房.V12",
+        "isAttr": true,
+        "key": -244,
+        "loc": "624 -64"
+    }, {
+        "text": "污水液位",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "50 29",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -245,
+        "loc": "552 -63"
+    }, {
+        "text": "启动",
+        "figure": "val",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": 100,
+        "fillAlpha": 1,
+        "category": "switchCase",
+        "size": "80 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": 10,
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 10pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(8,39,64,1)",
+        "fill": "#082740",
+        "strokeWidth": 1,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "开关控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "switchType": "开",
+        "authoControl": "否",
+        "hBarControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -246,
+        "loc": "354.50502014160156 43.396455383300804"
+    }, {
+        "text": "停止",
+        "figure": "val",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": 100,
+        "fillAlpha": 1,
+        "category": "switchCase",
+        "size": "80 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": 10,
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 10pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(186, 27, 59, 1)",
+        "fill": "#2e3343",
+        "strokeWidth": 1,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "开关控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "switchType": "关",
+        "authoControl": "否",
+        "hBarControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -247,
+        "loc": "354.50502014160156 80"
+    }, {
+        "text": "远控",
+        "figure": "val",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": 100,
+        "fillAlpha": 1,
+        "category": "switchCase",
+        "size": "80 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": 10,
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 10pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(8,39,64,1)",
+        "fill": "#082740",
+        "strokeWidth": 1,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "开关控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "switchType": "开",
+        "authoControl": "否",
+        "hBarControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -248,
+        "loc": "640 46"
+    }, {
+        "text": "本地",
+        "figure": "val",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": 100,
+        "fillAlpha": 1,
+        "category": "switchCase",
+        "size": "80 26",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": 10,
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 10pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(186, 27, 59, 1)",
+        "fill": "#2e3343",
+        "strokeWidth": 1,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "开关控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "switchType": "关",
+        "authoControl": "否",
+        "hBarControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -249,
+        "loc": "640 78"
+    }, {
+        "text": "本地/远控",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "50 29",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "11",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 11pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -250,
+        "loc": "641 22.792910766601608"
+    }, {
+        "text": "矩形框",
+        "figure": "modal",
+        "category": "modelCase",
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框"]
+        },
+        "size": "1684 101",
+        "opacity": "58",
+        "fillAlpha": 0.58,
+        "fillColor": "rgba(3,12,47,0.58)",
+        "fill": "#030c2f",
+        "strokeWidth": 1,
+        "stroke": "#030c2f",
+        "isAttr": false,
+        "key": -251,
+        "loc": "-128 -491.3964553833007",
+        "stationName": "设备A",
+        "pointName": "熊猫二供机组.V11"
+    }, {
+        "text": "图标框-01",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "小图标\\小图标\\图标框-01.svg",
+        "scale": 1,
+        "ratio": 1,
+        "width": 42,
+        "height": 42,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "hBarControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -33,
+        "loc": "-847.5000000000005 -505.5",
+        "size": "43 45"
+    }, {
+        "text": "安防报警",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "120 13",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -252,
+        "loc": "-848.0000000000005 -468.5000000000001"
+    }, {
+        "text": "图标框-01",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "小图标\\小图标\\图标框-01.svg",
+        "scale": 1,
+        "ratio": 1,
+        "width": 42,
+        "height": 42,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "hBarControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -256,
+        "loc": "-615.4999999999998 -506.0000000000001",
+        "size": "43 45"
+    }, {
+        "text": "水淹排水报警",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "120 24",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -255,
+        "loc": "-615.4999999999998 -467.5"
+    }, {
+        "text": "图标框-01",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "小图标\\小图标\\图标框-01.svg",
+        "scale": 1,
+        "ratio": 1,
+        "width": 42,
+        "height": 42,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "hBarControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -253,
+        "loc": "-369.0000000000002 -506.0000000000001",
+        "size": "43 45"
+    }, {
+        "text": "水淹断电报警",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "94 14",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -254,
+        "loc": "-373 -465.5"
+    }, {
+        "text": "图标框-01",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "小图标\\小图标\\图标框-01.svg",
+        "scale": 1,
+        "ratio": 1,
+        "width": 42,
+        "height": 42,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "hBarControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -257,
+        "loc": "-118.5 -506.0000000000001",
+        "size": "43 45"
+    }, {
+        "text": "烟感报警",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "120 9",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -258,
+        "loc": "-120 -468"
+    }, {
+        "text": "图标框-01",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "小图标\\小图标\\图标框-01.svg",
+        "scale": 1,
+        "ratio": 1,
+        "width": 42,
+        "height": 42,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "hBarControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -259,
+        "loc": "110.5 -507.0000000000001",
+        "size": "43 45"
+    }, {
+        "text": "爆管急停报警",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "120 22",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -260,
+        "loc": "112 -466"
+    }, {
+        "text": "图标框-01",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "小图标\\小图标\\图标框-01.svg",
+        "scale": 1,
+        "ratio": 1,
+        "width": 42,
+        "height": 42,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "hBarControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -261,
+        "loc": "336 -508.0000000000001",
+        "size": "43 45"
+    }, {
+        "text": "高温高湿排风报警",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "116 12",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -262,
+        "loc": "338 -466.5"
+    }, {
+        "text": "图标框-01",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "小图标\\小图标\\图标框-01.svg",
+        "scale": 1,
+        "ratio": 1,
+        "width": 42,
+        "height": 42,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "hBarControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -263,
+        "loc": "576 -506.0000000000001",
+        "size": "43 45"
+    }, {
+        "text": "水箱液位报警",
+        "figure": "name",
+        "aggre": [{
+            "name": "fontStyle",
+            "info": "字体样式",
+            "type": "font"
+        }, {
+            "name": "fontStroke",
+            "info": "字体颜色",
+            "type": "color"
+        }, {
+            "name": "fill",
+            "info": "容器颜色",
+            "type": "color"
+        }, {
+            "name": "strokeWidth",
+            "info": "边框宽度",
+            "type": "default"
+        }, {
+            "name": "stroke",
+            "info": "边框颜色",
+            "type": "color"
+        }],
+        "list": {
+            "drawInfo": ["颜色", "透明度", "边框", "文字颜色", "样式"]
+        },
+        "opacity": "0",
+        "fillAlpha": 0,
+        "category": "nameCase",
+        "size": "120 11",
+        "width": 50,
+        "height": 60,
+        "fontWeight": "normal",
+        "fontSize": "14",
+        "fontFamily": "Helvetica, Arial, sans-serif",
+        "fontStyle": "normal 14pt Helvetica, Arial, sans-serif",
+        "fontStroke": "#FFFFFF",
+        "fillColor": "rgba(46,51,67,0)",
+        "fill": "#2e3343",
+        "strokeWidth": 0,
+        "stroke": "#6d7da2",
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": false,
+        "key": -264,
+        "loc": "576 -465.5"
+    }, {
+        "text": "烟感2#",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\小图标\\烟感2#&&&小图标&&&.svg",
+        "scale": 1,
+        "ratio": 1,
+        "width": 24,
+        "height": 24,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "hBarControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -37,
+        "loc": "-116 -504.5000000000001",
+        "size": "30 26"
+    }, {
+        "text": "安防2#",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\小图标\\安防2#.svg",
+        "scale": 1,
+        "ratio": 1,
+        "width": 26,
+        "height": 26,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "hBarControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -265,
+        "loc": "-848.0000000000005 -506.5000000000001"
+    }, {
+        "text": "报警1#",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\小图标\\报警1#.svg",
+        "scale": 1,
+        "ratio": 1,
+        "width": 28,
+        "height": 28,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "hBarControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -266,
+        "loc": "-826 -496"
+    }, {
+        "text": "风扇1#",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\小图标\\风扇1#.svg",
+        "scale": 1,
+        "ratio": 1,
+        "width": 26,
+        "height": 26,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "hBarControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -267,
+        "loc": "335 -509.5000000000001"
+    }, {
+        "text": "断电1#",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\小图标\\断电1#.svg",
+        "scale": 1,
+        "ratio": 1,
+        "width": 26,
+        "height": 26,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "hBarControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -14,
+        "loc": "-369.5 -507.5000000000001"
+    }, {
+        "text": "爆管1#",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\小图标\\爆管1#.svg",
+        "scale": 1,
+        "ratio": 1,
+        "width": 26,
+        "height": 26,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "hBarControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -271,
+        "loc": "111.5 -508.5000000000001",
+        "size": "31 26"
+    }, {
+        "text": "排水1#",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\小图标\\排水1#.svg",
+        "scale": 1,
+        "ratio": 1,
+        "width": 26,
+        "height": 26,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "hBarControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -32,
+        "loc": "-616.0000000000001 -508.5000000000001"
+    }, {
+        "text": "液位2#",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\小图标\\液位2#.svg",
+        "scale": 1,
+        "ratio": 1,
+        "width": 26,
+        "height": 26,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "hBarControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -51,
+        "loc": "576 -508.5000000000001",
+        "size": "26 24"
+    }, {
+        "text": "报警1#",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\小图标\\报警1#.svg",
+        "scale": 1,
+        "ratio": 1,
+        "width": 28,
+        "height": 28,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "hBarControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -272,
+        "loc": "-96.5 -497",
+        "size": "29 28"
+    }, {
+        "text": "报警1#",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\小图标\\报警1#.svg",
+        "scale": 1,
+        "ratio": 1,
+        "width": 28,
+        "height": 28,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "hBarControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -273,
+        "loc": "597.5 -496.6035446166992",
+        "size": "29 28"
+    }, {
+        "text": "对讲机3#",
+        "category": "svgCase",
+        "list": {
+            "drawInfo": ["宽度", "高度"]
+        },
+        "fill": "lightskyblue",
+        "type": "锁定",
+        "imgSrc": "二维\\小图标\\对讲机3#.svg",
+        "scale": 1,
+        "ratio": 1,
+        "width": 36,
+        "height": 36,
+        "showName": "",
+        "controlType": "不控制",
+        "controlName": "",
+        "openVal": 1,
+        "startVal": 0,
+        "stationName": "设备A",
+        "authoControl": "否",
+        "hBarControl": "否",
+        "pointName": "熊猫二供机组.V11",
+        "isAttr": true,
+        "key": -274,
+        "loc": "-794.9949798583984 5"
+    }]
+
+    let linkDataArray = [
+        {
+        "from": -281,
+        "to": -279,
+        "fromPort": "R",
+        "toPort": "",
+        "points": [-23, 101, -13, 101, 110.5, 101, 110.5, 101, 234, 101, 244, 101],
+        "stroke": "#209bfb",
+        "strokeWidth": 8,
+        "waterStroke": "#FFFFFF",
+        "waterWidth": 4,
+        "isAttr": true,
+        "stationName": "设备A",
+        "pointName": "熊猫二供机组.V11",
+        "list": {
+            "drawInfo": ["水管", "水流"]
+        },
+        "controlType": "不控制",
+        "controlName": "",
+        "unstroke": "#41BFEC",
+        "unwaterStroke": "#FFFFFF",
+        "openVal": 1,
+        "startVal": 0,
+        "authoControl": "否",
+        "hBarControl": "否"
+    }, {
+        "from": -280,
+        "to": -279,
+        "fromPort": "R",
+        "toPort": "",
+        "points": [-24, 215.83671875, -14, 215.83671875, 110, 215.83671875, 110, 215.83671875, 234, 215.83671875, 244, 215.83671875],
+        "stroke": "#209bfb",
+        "strokeWidth": 8,
+        "waterStroke": "#FFFFFF",
+        "waterWidth": 4,
+        "isAttr": false
+    }, {
+        "from": -6,
+        "to": -279,
+        "fromPort": "R",
+        "toPort": "",
+        "points": [-24, 321.5, -14, 321.5, 110, 321.5, 110, 321.5, 234, 321.5, 244, 321.5],
+        "stroke": "#209bfb",
+        "strokeWidth": 8,
+        "waterStroke": "#FFFFFF",
+        "waterWidth": 4,
+        "isAttr": false
+    }, {
+        "from": -315,
+        "fromPort": "R",
+        "toPort": "T",
+        "points": [579, 320.5, 589, 320.5, 643.5, 320.5, 643.5, 320.5, 698, 320.5, 708, 320.5],
+        "stroke": "#209bfb",
+        "strokeWidth": 8,
+        "waterStroke": "#FFFFFF",
+        "waterWidth": 4,
+        "isAttr": false,
+        "to": -440
+    }, {
+        "from": -340,
+        "fromPort": "R",
+        "toPort": "T",
+        "points": [550, -243, 560, -243, 625, -243, 625, -242.5, 690, -242.5, 700, -242.5],
+        "stroke": "#209bfb",
+        "strokeWidth": 8,
+        "waterStroke": "#FFFFFF",
+        "waterWidth": 4,
+        "isAttr": false,
+        "to": -439
+    }, {
+        "to": -16,
+        "fromPort": "T",
+        "toPort": "L",
+        "points": [-959.9999999999998, 320.84999999999985, -949.9999999999998, 320.84999999999985, -822.9499999999998, 320.84999999999985, -822.9499999999998, 320.85, -695.9, 320.85, -685.9, 320.85],
+        "stroke": "#209bfb",
+        "strokeWidth": 8,
+        "waterStroke": "#FFFFFF",
+        "waterWidth": 4,
+        "isAttr": false,
+        "from": -436
+    }, {
+        "from": -156,
+        "to": -279,
+        "fromPort": "R",
+        "toPort": "",
+        "stroke": "#209bfb",
+        "strokeWidth": 8,
+        "waterStroke": "#FFFFFF",
+        "waterWidth": 4,
+        "isAttr": true,
+        "points": [-23, -8.5, -13, -8.5, 110.5, -8.5, 110.5, -8.5, 234, -8.5, 244, -8.5],
+        "stationName": "设备A",
+        "pointName": "熊猫二供机组.V11",
+        "list": {
+            "drawInfo": ["水管", "水流"]
+        },
+        "controlType": "不控制",
+        "controlName": "",
+        "unstroke": "#41BFEC",
+        "unwaterStroke": "#FFFFFF",
+        "openVal": 1,
+        "startVal": 0,
+        "authoControl": "否",
+        "hBarControl": "否"
+    }, {
+        "from": -279,
+        "to": -315,
+        "fromPort": "",
+        "toPort": "L",
+        "stroke": "#209bfb",
+        "strokeWidth": 8,
+        "waterStroke": "#FFFFFF",
+        "waterWidth": 4,
+        "isAttr": false,
+        "points": [252, 320.5, 262, 320.5, 393.5, 320.5, 393.5, 320.5, 525, 320.5, 535, 320.5]
+    }, {
+        "from": -21,
+        "to": -1,
+        "fromPort": "R",
+        "toPort": "",
+        "stroke": "#209bfb",
+        "strokeWidth": 8,
+        "waterStroke": "#FFFFFF",
+        "waterWidth": 4,
+        "isAttr": false,
+        "points": [-210.50000000000003, 320.99999999999994, -200.50000000000003, 320.99999999999994, -92, 320.99999999999994]
+    }, {
+        "from": -1,
+        "to": -6,
+        "fromPort": "",
+        "toPort": "L",
+        "stroke": "#209bfb",
+        "strokeWidth": 8,
+        "waterStroke": "#FFFFFF",
+        "waterWidth": 4,
+        "isAttr": true,
+        "points": [-84, 321.5, -66, 321.5, -56, 321.5],
+        "stationName": "设备A",
+        "pointName": "熊猫二供机组.V11",
+        "list": {
+            "drawInfo": ["水管", "水流"]
+        },
+        "controlType": "不控制",
+        "controlName": "",
+        "unstroke": "#41BFEC",
+        "unwaterStroke": "#FFFFFF",
+        "openVal": 1,
+        "startVal": 0,
+        "authoControl": "否",
+        "hBarControl": "否"
+    }, {
+        "from": -1,
+        "to": -280,
+        "fromPort": "",
+        "toPort": "L",
+        "stroke": "#209bfb",
+        "strokeWidth": 8,
+        "waterStroke": "#FFFFFF",
+        "waterWidth": 4,
+        "isAttr": true,
+        "points": [-84, 215.83671875, -66, 215.83671875, -56, 215.83671875],
+        "stationName": "设备A",
+        "pointName": "熊猫二供机组.V11",
+        "list": {
+            "drawInfo": ["水管", "水流"]
+        },
+        "controlType": "不控制",
+        "controlName": "",
+        "unstroke": "#41BFEC",
+        "unwaterStroke": "#FFFFFF",
+        "openVal": 1,
+        "startVal": 0,
+        "authoControl": "否",
+        "hBarControl": "否"
+    }, {
+        "from": -1,
+        "to": -281,
+        "fromPort": "",
+        "toPort": "L",
+        "stroke": "#209bfb",
+        "strokeWidth": 8,
+        "waterStroke": "#FFFFFF",
+        "waterWidth": 4,
+        "isAttr": false,
+        "points": [-84, 101, -67, 101, -57, 101]
+    }, {
+        "from": -1,
+        "fromPort": "",
+        "toPort": "",
+        "stroke": "#41BFEC",
+        "strokeWidth": 6,
+        "waterStroke": "#FFFFFF",
+        "waterWidth": 3,
+        "isAttr": false,
+        "points": [-92, 168.0000000000001, -91.00000000000011, 168.0000000000001]
+    }, {
+        "from": -357,
+        "to": -213,
+        "fromPort": "R",
+        "toPort": "",
+        "stationName": "设备A",
+        "pointName": "熊猫二供机组.V11",
+        "stroke": "#209bfb",
+        "strokeWidth": 8,
+        "waterStroke": "#FFFFFF",
+        "waterWidth": 4,
+        "isAttr": true,
+        "list": {
+            "drawInfo": ["水管", "水流"]
+        },
+        "controlType": "不控制",
+        "controlName": "",
+        "unstroke": "#41BFEC",
+        "unwaterStroke": "#FFFFFF",
+        "openVal": 1,
+        "startVal": 0,
+        "authoControl": "否",
+        "hBarControl": "否",
+        "points": [-218.5, -131.5, -208.5, -131.5, -85, -131.5]
+    }, {
+        "from": -213,
+        "to": -214,
+        "fromPort": "",
+        "toPort": "",
+        "stationName": "设备B",
+        "pointName": "熊猫二供机组.V11",
+        "stroke": "#209bfb",
+        "strokeWidth": 8,
+        "waterStroke": "#FFFFFF",
+        "waterWidth": 4,
+        "isAttr": true,
+        "list": {
+            "drawInfo": ["水管", "水流"]
+        },
+        "controlType": "不控制",
+        "controlName": "",
+        "unstroke": "#41BFEC",
+        "unwaterStroke": "#FFFFFF",
+        "openVal": 1,
+        "startVal": 0,
+        "authoControl": "否",
+        "hBarControl": "否",
+        "points": [-77, -240.01159420289855, 260, -240.98840579710145],
+        "showName": ""
+    }, {
+        "from": -213,
+        "fromPort": "",
+        "toPort": "",
+        "stationName": "设备B",
+        "pointName": "熊猫二供机组.V11",
+        "stroke": "#209bfb",
+        "strokeWidth": 8,
+        "waterStroke": "#FFFFFF",
+        "waterWidth": 4,
+        "isAttr": true,
+        "list": {
+            "drawInfo": ["水管", "水流"]
+        },
+        "controlType": "不控制",
+        "controlName": "",
+        "unstroke": "#41BFEC",
+        "unwaterStroke": "#FFFFFF",
+        "openVal": 1,
+        "startVal": 0,
+        "authoControl": "否",
+        "hBarControl": "否",
+        "points": [-77, -349.92595016883126, 265.3210299152454, -349.92595016883126],
+        "showName": ""
+    }, {
+        "from": -213,
+        "fromPort": "",
+        "toPort": "",
+        "stationName": "设备B",
+        "pointName": "熊猫二供机组.V11",
+        "stroke": "#209bfb",
+        "strokeWidth": 8,
+        "waterStroke": "#FFFFFF",
+        "waterWidth": 4,
+        "isAttr": true,
+        "list": {
+            "drawInfo": ["水管", "水流"]
+        },
+        "controlType": "不控制",
+        "controlName": "",
+        "unstroke": "#41BFEC",
+        "unwaterStroke": "#FFFFFF",
+        "openVal": 1,
+        "startVal": 0,
+        "authoControl": "否",
+        "hBarControl": "否",
+        "points": [-77, -131.30683623356532, 266.6747086393027, -131.30683623356532],
+        "showName": ""
+    }, {
+        "from": -1,
+        "to": -156,
+        "fromPort": "",
+        "toPort": "L",
+        "stationName": "设备A",
+        "pointName": "熊猫二供机组.V11",
+        "stroke": "#209bfb",
+        "strokeWidth": 8,
+        "waterStroke": "#FFFFFF",
+        "waterWidth": 4,
+        "isAttr": true,
+        "list": {
+            "drawInfo": ["水管", "水流"]
+        },
+        "controlType": "不控制",
+        "controlName": "",
+        "unstroke": "#41BFEC",
+        "unwaterStroke": "#FFFFFF",
+        "openVal": 1,
+        "startVal": 0,
+        "authoControl": "否",
+        "hBarControl": "否",
+        "points": [-84, -8.5, -67, -8.5, -57, -8.5]
+    }, {
+        "from": -214,
+        "to": -340,
+        "fromPort": "",
+        "toPort": "L",
+        "stationName": "设备A",
+        "pointName": "熊猫二供机组.V11",
+        "stroke": "#209bfb",
+        "strokeWidth": 8,
+        "waterStroke": "#FFFFFF",
+        "waterWidth": 4,
+        "isAttr": true,
+        "list": {
+            "drawInfo": ["水管", "水流"]
+        },
+        "controlType": "不控制",
+        "controlName": "",
+        "unstroke": "#41BFEC",
+        "unwaterStroke": "#FFFFFF",
+        "openVal": 1,
+        "startVal": 0,
+        "authoControl": "否",
+        "hBarControl": "否",
+        "points": [268, -243, 496, -243, 506, -243]
+    }, {
+        "from": -16,
+        "to": -21,
+        "fromPort": "R",
+        "toPort": "L",
+        "stationName": "设备A",
+        "pointName": "熊猫二供机组.V11",
+        "stroke": "#209bfb",
+        "strokeWidth": 8,
+        "waterStroke": "#FFFFFF",
+        "waterWidth": 4,
+        "isAttr": true,
+        "list": {
+            "drawInfo": ["水管", "水流"]
+        },
+        "controlType": "不控制",
+        "controlName": "",
+        "unstroke": "#41BFEC",
+        "unwaterStroke": "#FFFFFF",
+        "openVal": 1,
+        "startVal": 0,
+        "authoControl": "否",
+        "hBarControl": "否",
+        "points": [-495.9, 320.85, -485.9, 320.85, -374.7, 320.85, -374.7, 320.99999999999994, -263.5, 320.99999999999994, -253.50000000000003, 320.99999999999994]
+    }, {
+        "from": -224,
+        "to": -357,
+        "fromPort": "",
+        "toPort": "L",
+        "stationName": "设备A",
+        "pointName": "熊猫二供机组.V11",
+        "stroke": "#209bfb",
+        "strokeWidth": 8,
+        "waterStroke": "#FFFFFF",
+        "waterWidth": 4,
+        "isAttr": true,
+        "list": {
+            "drawInfo": ["水管", "水流"]
+        },
+        "controlType": "不控制",
+        "controlName": "",
+        "unstroke": "#41BFEC",
+        "unwaterStroke": "#FFFFFF",
+        "openVal": 1,
+        "startVal": 0,
+        "authoControl": "否",
+        "hBarControl": "否",
+        "points": [-284, -131.5, -271.5, -131.5, -261.5, -131.5]
+    }, {
+        "from": -237,
+        "to": -234,
+        "fromPort": "R",
+        "toPort": "L",
+        "stationName": "设备A",
+        "pointName": "熊猫二供机组.V11",
+        "stroke": "#209bfb",
+        "strokeWidth": 8,
+        "waterStroke": "#FFFFFF",
+        "waterWidth": 4,
+        "isAttr": true,
+        "list": {
+            "drawInfo": ["水管", "水流"]
+        },
+        "controlType": "不控制",
+        "controlName": "",
+        "unstroke": "#41BFEC",
+        "unwaterStroke": "#FFFFFF",
+        "openVal": 1,
+        "startVal": 0,
+        "authoControl": "否",
+        "hBarControl": "否",
+        "points": [544, 169, 554, 169, 596.75, 169, 596.75, 168.8964553833008, 639.5, 168.8964553833008, 649.5, 168.8964553833008]
+    }, {
+        "from": -234,
+        "to": -238,
+        "fromPort": "R",
+        "toPort": "T",
+        "stationName": "设备A",
+        "pointName": "熊猫二供机组.V11",
+        "stroke": "#209bfb",
+        "strokeWidth": 8,
+        "waterStroke": "#FFFFFF",
+        "waterWidth": 4,
+        "isAttr": true,
+        "list": {
+            "drawInfo": ["水管", "水流"]
+        },
+        "controlType": "不控制",
+        "controlName": "",
+        "unstroke": "#41BFEC",
+        "unwaterStroke": "#FFFFFF",
+        "openVal": 1,
+        "startVal": 0,
+        "authoControl": "否",
+        "hBarControl": "否",
+        "points": [692.5, 168.8964553833008, 702.5, 168.8964553833008, 702.5, -32, 598.7500000000002, -32, 495.00000000000045, -32, 485.00000000000045, -32]
+    }, {
+        "from": -238,
+        "to": -239,
+        "fromPort": "T",
+        "toPort": "T",
+        "stationName": "设备A",
+        "pointName": "熊猫二供机组.V11",
+        "stroke": "#209bfb",
+        "strokeWidth": 8,
+        "waterStroke": "#FFFFFF",
+        "waterWidth": 4,
+        "isAttr": true,
+        "list": {
+            "drawInfo": ["水管", "水流"]
+        },
+        "controlType": "不控制",
+        "controlName": "",
+        "unstroke": "#41BFEC",
+        "unwaterStroke": "#FFFFFF",
+        "openVal": 1,
+        "startVal": 0,
+        "authoControl": "否",
+        "hBarControl": "否",
+        "points": [485.00000000000045, -32, 495.00000000000045, -32, 495.00000000000045, -66.5, 495, -66.5, 495, -89, 495, -99]
+    }, {
+        "from": -225,
+        "to": -231,
+        "fromPort": "L",
+        "toPort": "R",
+        "stationName": "设备A",
+        "pointName": "熊猫二供机组.V11",
+        "stroke": "#209bfb",
+        "strokeWidth": 8,
+        "waterStroke": "#FFFFFF",
+        "waterWidth": 4,
+        "isAttr": true,
+        "list": {
+            "drawInfo": ["水管", "水流"]
+        },
+        "controlType": "不控制",
+        "controlName": "",
+        "unstroke": "#41BFEC",
+        "unwaterStroke": "#FFFFFF",
+        "openVal": 1,
+        "startVal": 0,
+        "authoControl": "否",
+        "hBarControl": "否",
+        "points": [447.99999999999955, 168.5, 437.99999999999955, 168.5, 398.74999999999966, 168.5, 398.74999999999966, 167.5, 359.4999999999998, 167.5, 349.4999999999998, 167.5]
+    }, {
+        "from": -231,
+        "to": -230,
+        "fromPort": "L",
+        "toPort": "T",
+        "stationName": "设备A",
+        "pointName": "熊猫二供机组.V11",
+        "stroke": "#209bfb",
+        "strokeWidth": 8,
+        "waterStroke": "#FFFFFF",
+        "waterWidth": 4,
+        "isAttr": true,
+        "list": {
+            "drawInfo": ["水管", "水流"]
+        },
+        "controlType": "不控制",
+        "controlName": "",
+        "unstroke": "#41BFEC",
+        "unwaterStroke": "#FFFFFF",
+        "openVal": 1,
+        "startVal": 0,
+        "authoControl": "否",
+        "hBarControl": "否",
+        "points": [306.4999999999998, 167.5, 296.4999999999998, 167.5, 296.4999999999998, -32, 381.7500000000001, -32, 467.00000000000045, -32, 477.00000000000045, -32]
+    }]
+    
+    let newNodes = []
+    for (let i = 0; i < nodeDataArray.length; i++) {
+      newNodes.push({
+        "key": nodeDataArray[i].key,
+        "pos": nodeDataArray[i].loc,
+        "pos": nodeDataArray[i].loc,
+        "text": nodeDataArray[i].text,
+        "icon":"natgas",
+        "color":"blue",
+      })
+    }
+    console.log(newNodes)
+
+    let newLinks = []
+    for (let i = 0; i < linkDataArray.length; i++) {
+      newLinks.push({
+        "from": linkDataArray[i].from,
+        "to": linkDataArray[i].to,
+        "points": linkDataArray[i].points,
+        "fromSpot": linkDataArray[i].fromPort,
+        "toSpot": linkDataArray[i].toPort,
+      })
+    }
+    console.log(newLinks)
+      
     },
   }
 };

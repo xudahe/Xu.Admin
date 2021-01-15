@@ -342,6 +342,12 @@ Vue.prototype.$defaultConfig = defaultConfig
  */
 Vue.prototype.$isNull = isNull //非空验证
 
+/**
+ * @description 全局element-resize-detector监听DOM元素
+ */
+import ElementResizeDetectorMaker from "element-resize-detector"
+Vue.prototype.$erd = ElementResizeDetectorMaker()
+
 // 传入实例化后的router，和插件的全局配置,`<router-view>`上添加v-transition="false"，可以禁用动画
 Vue.use(vueg, new Router(), defaultConfig.option)
 

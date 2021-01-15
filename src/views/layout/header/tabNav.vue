@@ -74,17 +74,13 @@ export default {
     display: inline-block;
     transition: all 0.5s;
   }
-
   .list-enter, .list-leave-to {
     opacity: 0;
     transform: translateY(30px);
-
   }
-
   .list-enter-active {
     transition: all 0.5s;
   }
-
   .list-leave-active {
     position: absolute;
     transition: all 1s;
@@ -96,40 +92,35 @@ export default {
   $left: left;
   $right: right;
   $leftright: ($left, $right);
-
   %w100 {
     width: 100%;
   }
-
   %h100 {
     height: 100%;
   }
-
   %cursor {
     cursor: pointer;
   }
-
   @mixin set-value($side, $value) {
     @each $prop in $leftright {
       #{$side}-#{$prop}: $value;
     }
   }
-
   .tabnavBox {
     @extend %w100;
     background-color: #fff;
     height: 42px;
-    min-height: 42px;
+    line-height: 42px;
     overflow: hidden;
     border-#{$top}: 1px solid #f6f6f6;
     border-#{$bottom}: 1px solid #d8dce5;
-
     -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 0 3px 0 rgba(0, 0, 0, 0.04);
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 0 3px 0 rgba(0, 0, 0, 0.04);
     ul {
       display: flex;
       justify-content: flex-start;
-      padding-#{$left}: 20px;
+      padding-#{$left}: 5px;
+      padding-#{$right}: 5px;
       flex-wrap: nowrap;
       overflow-x: auto;
       li {
@@ -141,9 +132,7 @@ export default {
         @extend %cursor;
         margin-#{$top}: 6px;
         margin-#{$right}: 5px;
-
         border: 1px solid #cccccc;
-
         overflow: hidden;
         &:not(:first-child) {
           padding-#{$right}: 10px;
@@ -177,7 +166,6 @@ export default {
       }
     }
   }
-
   .menuBox {
     margin: 0;
     background: #fff;

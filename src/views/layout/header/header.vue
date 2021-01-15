@@ -60,17 +60,19 @@
         <!-- <li class="icon"><img :src="avatar"/></li> -->
       </ul>
     </el-header>
-    <tabNav></tabNav>
+    <!-- <tabNav></tabNav> -->
+    <tagNav></tagNav>
   </div>
 </template>
 
 <script>
 import Cookies from "js-cookie"
 import tabNav from "./tabNav"
+import tagNav from "./tagNav"
 
 export default {
   name: "Header",
-  components: {tabNav},
+  components: {tabNav,tagNav},
   computed: {
     tooltipContent () {
       return  this.$store.getters.errorLogList.length == 0 ? `无异常`:`${this.$store.getters.errorLogList.length} 个异常`

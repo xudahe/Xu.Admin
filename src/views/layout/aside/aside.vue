@@ -115,7 +115,7 @@ $right: right;
     width: 200px;
     @extend %h100;
     overflow-y: scroll;
-    overflow-x: enabled;
+    overflow-x: hidden;
   }
   .el-menu {
     flex: 1;

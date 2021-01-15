@@ -1,8 +1,8 @@
 <template>
   <div class="v-header">
-    <div class="v-left-text">
-      <Icon size="20" :type="icon" />
-      <span>{{text}}</span>
+    <div class="v-left-text" v-if="text != ''">
+      <Icon size="20" :type="icon" v-if="icon != ''" />
+      <span>{{ text }}</span>
     </div>
     <div class="content">
       <slot name="content"></slot>
@@ -22,7 +22,7 @@ export default {
     },
     text: {
       type: String,
-      default: "未定义名称"
+      default: ""
     }
   }
 };
@@ -30,7 +30,7 @@ export default {
 <style lang="less" scoped>
 .v-header {
   display: flex;
-  padding-bottom: 7px;
+  padding-bottom: 5px;
   border-bottom: 1px solid #dcdee2;
   .v-left-text {
     cursor: pointer;
@@ -40,14 +40,11 @@ export default {
     font-size: 0.15rem;
     color: #57a3f3;
     white-space: nowrap;
-    // border-bottom: 2px solid #57a3f3;
     > span {
       position: relative;
-      // top: 2px;
     }
   }
   .content {
-    line-height: 25px;
     padding-left: 10px;
     padding: 6px 0 0 10px;
   }

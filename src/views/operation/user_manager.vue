@@ -22,14 +22,16 @@
             </el-col>
             <el-col :sm="24" :md="5" style="height:100%;">
                 <el-card class="box-card" shadow="hover">
-                  <div slot="header" class="clearfix">
-                    <span class="header">{{sels.loginName}}&nbsp;--&nbsp;角色分配</span>
-                    <el-tooltip content="保存">
-                        <el-button type="primary" style="float: right; padding: 5px 10px" :disabled="!showButton" @click.native="saveRole">
-                            <i class="el-icon-check el-icon--left"  ></i>
-                        </el-button>
-                    </el-tooltip>
-                  </div>
+                    <v-header text="角色分配">
+                      <div slot="content">{{sels.loginName}}</div>
+                      <div style="text-align: right;">
+                        <el-tooltip content="保存">
+                            <el-button type="primary" icon="el-icon-check" circle :disabled="!showButton" @click.native="saveRole">
+                            </el-button>
+                        </el-tooltip>
+                      </div>
+                    </v-header>
+
                   <div class="tree-box"> 
                     <el-tree ref="roletree" :data="roleData" :props="defaultProps" @node-click="nodeclick" default-expand-all show-checkbox node-key="id" />
                   </div>

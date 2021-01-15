@@ -34,14 +34,16 @@
       </el-col>
       <el-col :sm="24" :md="5" style="height:100%;">
         <el-card class="box-card" shadow="hover">
-          <div slot="header" class="clearfix">
-            <span class="header">{{sels.roleName}}&nbsp;--&nbsp;菜单分配</span>
-            <el-tooltip content="保存">
-              <el-button type="primary" style="float: right; padding: 5px 10px" :disabled="!showButton" @click.native="saveMenu">
-                <i class="el-icon-check el-icon--left" style="margin-right:0px;"></i>
-              </el-button>
-            </el-tooltip>
-          </div>
+          <v-header text="角色分配">
+            <div slot="content">{{sels.roleName}}</div>
+            <div style="text-align: right;">
+              <el-tooltip content="保存">
+                <el-button type="primary" icon="el-icon-check" circle :disabled="!showButton" @click.native="saveMenu">
+                </el-button>
+              </el-tooltip>
+            </div>
+          </v-header>
+
           <div class="tree-box"> 
             <el-tree ref="menutree" :data="menuData" :check-strictly="checkStrictly" :props="defaultProps" @node-click="nodeclick" default-expand-all show-checkbox node-key="id" />
           </div>

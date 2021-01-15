@@ -168,7 +168,7 @@ export default {
     },
     initialTable(){
       let docm1 = document.getElementsByClassName("el-card")
-      this.tableHeight = docm1 != undefined ? docm1[docm1.length-1].offsetHeight - 105: _this.tableHeight;
+      this.tableHeight = docm1 != undefined ? docm1[docm1.length-1].offsetHeight - 90: _this.tableHeight;
     }
   },
   created(){

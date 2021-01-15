@@ -285,7 +285,6 @@ export default {
         leaf: true // 是否无子节点
       },
       oldFileName: "", // 旧的文件名称
-      dialogFileUrl: "", // 模态窗文件显示路径
       folderName: "新建文件夹", // 记录新建文件夹名称
       subscript: 1 // 重复文件下标
     };
@@ -298,6 +297,7 @@ export default {
   created() {
     // 初始值
     this.startId = this.NODE_ID_START;
+    this.subscript = 1;
   },
   methods: {
     handleNodeClick(data, node) {
@@ -426,7 +426,7 @@ export default {
       obj.fileName = _self.folderName; //当前节点名称
       obj.parentId = data.parentId; // 父级节点id
       obj.parentName = data.fileName; //父级节点名称
-      obj.level = node.level + 1; //父级节点显示等级
+      obj.level = node.level + 1; //当前节点显示等级
 
       // 新增数据
       data.children.push(obj);

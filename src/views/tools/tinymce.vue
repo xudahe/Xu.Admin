@@ -5,7 +5,6 @@
 </template>
 
 <script>
-
 export default {
     name: 't-tinymce',
     data(){
@@ -16,10 +15,8 @@ export default {
     methods: {
        
     },
-
 };
 </script>
 
 <style scoped>
-
 </style>

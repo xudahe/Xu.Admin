@@ -37,8 +37,8 @@
       </el-form>
     </div>
     
-    <el-row>
-      <el-col :span="5">
+    <el-row style="height:calc(100% - 40px);">
+      <el-col :span="5" style="height: 100%;">
         <div ref="paperLeft" class="paper-left">
           <div class="paper-title">
             <h1><i class="el-icon-s-grid"></i>答题卡</h1>
@@ -48,12 +48,12 @@
               <template slot="title">
                 <h2>{{item.name}}</h2><span>（共{{item.count}}题）</span>
               </template>
-              <el-button  class="answer-button" circle size="small" v-for="index of item.count"  :key="'answer'+item.code+index" :id="'answer'+item.code+index"  @click.native="jump(item.code+index)">{{index}}</el-button>
+              <el-button style="margin-left:10px;margin-bottom: 5px;" class="answer-button" circle size="small" v-for="index of item.count" :key="'answer'+item.code+index" :id="'answer'+item.code+index"  @click.native="jump(item.code,index)">{{index}}</el-button>
             </el-collapse-item>
           </el-collapse>
         </div>
       </el-col>
-      <el-col :span="19">
+      <el-col :span="19" style="height: 100%;">
         <div ref="paperContent" class="paper-content">
           <div class="subject" v-for="item in convertDatas">
             <div class="subject-title" >
@@ -105,16 +105,17 @@
               </div>
             </el-card>
           </div>
+          <div class="paper-footer">
+            <el-button v-if="type===1" type="success" @click.native="btnClick('handPaper')">交卷</el-button>
+            <el-button v-if="type===2" type="success" @click.native="btnClick('readPaper')">阅卷</el-button>
+            <el-button v-if="type===2" type="success" @click.native="btnClick('readPaperUpper')">上一个</el-button>
+            <el-button v-if="type===2" type="success" @click.native="btnClick('readPaperNext')">下一个</el-button>
+          </div>
         </div>
       </el-col>
     </el-row>
     
-    <div class="paper-footer">
-      <el-button v-if="type===1" type="success" @click.native="btnClick('handPaper')">交卷</el-button>
-      <el-button v-if="type===2" type="success" @click.native="btnClick('readPaper')">阅卷</el-button>
-      <el-button v-if="type===2" type="success" @click.native="btnClick('readPaperUpper')">上一个</el-button>
-      <el-button v-if="type===2" type="success" @click.native="btnClick('readPaperNext')">下一个</el-button>
-    </div>
+   
   </div>
 </template>
 
@@ -260,15 +261,13 @@
       /**
        * 锚点定位
        */
-      jump(postion) {
-        let jump = this.$refs.paperContent.querySelectorAll("#"+postion);
+      jump(code,index) {
+        let jump = this.$refs.paperContent.querySelectorAll("#"+code+index);
         // 获取需要滚动的距离
-        let total = jump[0].offsetTop;
+        let total = index ==1 ? jump[0].offsetTop - 55:jump[0].offsetTop;
 
         this.$nextTick(() => {
-          debugger
           //实现form锚点定位
-          document.querySelector(".el-main").scrollTop = anchor.offsetTop;
           this.$refs.paperContent.scrollTop = total;
         })
       },
@@ -498,20 +497,18 @@
   }
 
   .paper-left {
-    padding: 5px;
+    height: 100%;
     overflow-x: hidden;
     overflow-y: auto;
     border: 1px solid #e4e4e4;
-    border-top: none;
   }
 
   .paper-content {
-    padding: 5px;
+    height: 100%;
     overflow-x: hidden;
     overflow-y: auto;
     box-sizing: border-box;
     border: 1px solid #e4e4e4;
-    border-top: none;
   }
 
   .paper-footer {
@@ -547,7 +544,6 @@
     color: #0a0a0a;
     background-color: #ffffff;
     border-color: #e4e4e4;
-    margin-left: 10px;
     width: 30px;
     height: 30px;
   }

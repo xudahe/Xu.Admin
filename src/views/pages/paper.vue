@@ -76,6 +76,96 @@ export default {
             score: 5
           },
           {
+            //题目类型 1.单选题2.多选题 3.判断题 4.填空题 5.简答题
+            type: 1,
+            no: 3,
+            subject:
+              "在营销系统中查询客户有无欠费、余额及抄表数据接待客户时应做到哪些最基本的礼仪？",
+            totalScore: 5,
+            answers: [
+              { no: "A", answer: "起身、微笑、示坐、问候客户" },
+              { no: "B", answer: "坐着，问候客户" },
+              { no: "C", answer: "请问需要办理什么业务" }
+            ],
+            examineAnswer: "",
+            correctAnswer: "A",
+            answerAnalysis: "答案解析.......",
+            isHook: null,
+            score: 5
+          },
+          {
+            //题目类型 1.单选题2.多选题 3.判断题 4.填空题 5.简答题
+            type: 1,
+            no: 4,
+            subject:
+              "在营销系统中查询客户有无欠费、余额及抄表数据接待客户时应做到哪些最基本的礼仪？",
+            totalScore: 5,
+            answers: [
+              { no: "A", answer: "起身、微笑、示坐、问候客户" },
+              { no: "B", answer: "坐着，问候客户" },
+              { no: "C", answer: "请问需要办理什么业务" }
+            ],
+            examineAnswer: "",
+            correctAnswer: "A",
+            answerAnalysis: "答案解析.......",
+            isHook: null,
+            score: 5
+          },
+          {
+            //题目类型 1.单选题2.多选题 3.判断题 4.填空题 5.简答题
+            type: 1,
+            no: 5,
+            subject:
+              "在营销系统中查询客户有无欠费、余额及抄表数据接待客户时应做到哪些最基本的礼仪？",
+            totalScore: 5,
+            answers: [
+              { no: "A", answer: "起身、微笑、示坐、问候客户" },
+              { no: "B", answer: "坐着，问候客户" },
+              { no: "C", answer: "请问需要办理什么业务" }
+            ],
+            examineAnswer: "",
+            correctAnswer: "A",
+            answerAnalysis: "答案解析.......",
+            isHook: null,
+            score: 5
+          },
+          {
+            //题目类型 1.单选题2.多选题 3.判断题 4.填空题 5.简答题
+            type: 1,
+            no: 6,
+            subject:
+              "在营销系统中查询客户有无欠费、余额及抄表数据接待客户时应做到哪些最基本的礼仪？",
+            totalScore: 5,
+            answers: [
+              { no: "A", answer: "起身、微笑、示坐、问候客户" },
+              { no: "B", answer: "坐着，问候客户" },
+              { no: "C", answer: "请问需要办理什么业务" }
+            ],
+            examineAnswer: "",
+            correctAnswer: "A",
+            answerAnalysis: "答案解析.......",
+            isHook: null,
+            score: 5
+          },
+          {
+            //题目类型 1.单选题2.多选题 3.判断题 4.填空题 5.简答题
+            type: 1,
+            no: 7,
+            subject:
+              "在营销系统中查询客户有无欠费、余额及抄表数据接待客户时应做到哪些最基本的礼仪？",
+            totalScore: 5,
+            answers: [
+              { no: "A", answer: "起身、微笑、示坐、问候客户" },
+              { no: "B", answer: "坐着，问候客户" },
+              { no: "C", answer: "请问需要办理什么业务" }
+            ],
+            examineAnswer: "",
+            correctAnswer: "A",
+            answerAnalysis: "答案解析.......",
+            isHook: null,
+            score: 5
+          },
+          {
             //题目类型 1.单选题 2.多选题 3.判断题 4.填空题 5.简答题
             type: 3,
             no: 1,

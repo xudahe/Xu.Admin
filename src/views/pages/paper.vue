@@ -212,6 +212,13 @@ export default {
     paperHand(value) {
       this.type = 2;
       this.submissionTime = this.$formatDate(new Date(), true);
+
+      this.paperData.list.forEach(function(item){
+        if(item.examineAnswer == "" || item.examineAnswer.length == 0) {
+          item.isHook = 2;
+          item.score = 0;
+        }
+      })
     },
     paperRead(value) {
       this.type = 3;

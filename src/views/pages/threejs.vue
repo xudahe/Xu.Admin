@@ -18,7 +18,6 @@
       <span style="color:white;font-size: 10px;padding: 5px">楼宇名称：</span>
       <span style="font-size: 11px;font-weight: bold">XXX大厦</span>
       <p style="padding: 5px;margin-top: -3px;">占地面积：25541平方米</p>
-      ;
     </div>
   </div>
 </template>
@@ -27,11 +26,11 @@
 import * as THREE from "three";
 import Stats from "three/examples/jsm/libs/stats.module.js"; //性能检测插件
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader.js";
+
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
 import { MTLLoader } from "three/examples/jsm/loaders/MTLLoader.js";
-import { TGALoader } from "three/examples/jsm/loaders/TGALoader.js";
 
 /**
  *
@@ -158,7 +157,7 @@ export default {
       this.controls = new OrbitControls(camera, this.renderer.domElement);
 
       /* 属性参数默认 */
-      this.controls.enableDamping = true; // 惯性
+      // this.controls.enableDamping = true; // 惯性
       // this.controls.dampingFactor = 0.25; // 动态阻尼系数 就是鼠标拖拽旋转灵敏度
       // this.controls.enableZoom = true; // 缩放
       // this.controls.enablePan = true; // 右键拖拽
@@ -177,34 +176,30 @@ export default {
     // 加载 gltf 格式的模型
     initContent() {
       let that = this;
+      var p;
 
       let loader = new GLTFLoader(); /*实例化加载器*/
       loader.load(
         "../../static/threejs/ep_e04.gltf",
         function(gltf) {
-          console.log(gltf, "gltf");
-
           var mesh = gltf.scene;
 
-          mesh.traverse(object => {
-            // 修改模型材质
-            if (object.isMesh) {
-              object.castShadow = true;
-            }
-          });
+          console.log(gltf, "gltf");
+          that.scene.add(mesh);
 
-          let group = new THREE.Group();
-          group.add(mesh);
+          // let group = new THREE.Group();
+          // group.add(mesh);
 
-          let box = new THREE.Box3();
-          box.setFromObject(group);
+          // let box = new THREE.Box3();
+          // box.setFromObject(group);
 
-          let wrapper = new THREE.Object3D();
-          wrapper.add(group);
-          wrapper.position.set(100, -300, 120); // 根据自己模型的大小设置位置
+          // let wrapper = new THREE.Object3D();
+          // wrapper.add(group);
+          // wrapper.position.set(100, -300, 120); // 根据自己模型的大小设置位置
 
-          that.scene.add(wrapper); // 将模型加入到场景中 ! important
+          // that.scene.add(wrapper); // 将模型加入到场景中 ! important
 
+          // 调用动画
           // that.mixer = new THREE.AnimationMixer(mesh);
           // that.mixer.clipAction(gltf.animations[0]).play();
           // that.render();
@@ -212,7 +207,7 @@ export default {
         function(xhr) {
           // 模型加载期间的回调函数
           console.log(
-            (xhr.loaded / xhr.total) * 100 + "% building model loaded"
+            "模型加载 " + parseInt((xhr.loaded / xhr.total) * 100) + "%"
           );
         },
         function(error) {
@@ -289,6 +284,8 @@ export default {
 
       this.timer = requestAnimationFrame(this.animate);
       this.renderer.render(this.scene, camera);
+
+      // 重复播放动画
       var delta = this.clock.getDelta();
       if (this.mixer) {
         this.mixer.update(delta);
@@ -312,6 +309,7 @@ export default {
   },
   beforeDestroy() {
     cancelAnimationFrame(this.timer);
+    window.removeEventListener("resize", this.onWindowResize);
   }
 };
 </script>

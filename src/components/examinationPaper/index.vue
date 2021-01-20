@@ -48,7 +48,7 @@
               <template slot="title">
                 <h2>{{item.name}}</h2><span>（共{{item.count}}题）</span>
               </template>
-              <el-button style="margin-left:10px;margin-bottom: 5px;" class="answer-button" circle size="small" v-for="index of item.count" :key="'answer'+item.code+index" :id="'answer'+item.code+index"  @click.native="jump(item.code,index)">{{index}}</el-button>
+              <el-button style="margin-bottom: 5px;margin-left: 10px;" class="answer-button" circle size="small" v-for="index of item.count" :key="'answer'+item.code+index" :id="'answer'+item.code+index"  @click.native="jump(item.code,index)">{{index}}</el-button>
             </el-collapse-item>
           </el-collapse>
         </div>
@@ -64,16 +64,16 @@
                 <el-tag effect="dark"> {{sub.no}} </el-tag>
                 <span>{{sub.subject}}</span>
                 <span>({{sub.totalScore}}分)</span>
-                <div v-if="type===2 || type===3" style="float: right; padding: 3px 0">
-                  <el-radio-group v-model="sub.isHook">
-                    <el-radio-button :disabled="disabledRead" :label="1"  @change.native="isHookButtionCheck(sub)"><i class="el-icon-check"/></el-radio-button>
-                    <el-radio-button :disabled="disabledRead" :label="2"  @change.native="isHookButtionCheck(sub)"><i class="el-icon-close"/></el-radio-button>
+                <div v-if="type===2 || type===3" style="float: right;">
+                  <el-radio-group v-model="sub.isHook" size="mini">
+                    <el-radio-button :disabled="disabledRead" :label="1" @change.native="isHookButtionCheck(sub)"><i class="el-icon-check"/></el-radio-button>
+                    <el-radio-button :disabled="disabledRead" :label="2" @change.native="isHookButtionCheck(sub)"><i class="el-icon-close"/></el-radio-button>
                   </el-radio-group>
                   <div v-if="sub.type===1 ||sub.type===2||sub.type===3" style="display: inline;">
-                    <el-input :disabled="true" v-model="sub.score" style="width:50px" ></el-input><span>分</span>
+                    <el-input :disabled="true" v-model="sub.score" style="width:40px" size="medium"></el-input><span>分</span>
                   </div>
                   <div v-else style="display: inline;">
-                    <el-input :disabled="disabledRead" v-model="sub.score" style="width:50px" ></el-input><span>分</span>
+                    <el-input :disabled="disabledRead" v-model="sub.score" style="width:40px" size="medium"></el-input><span>分</span>
                   </div>
                 </div>
               </div>
@@ -108,8 +108,8 @@
           <div class="paper-footer">
             <el-button v-if="type===1" type="success" @click.native="btnClick('handPaper')">交卷</el-button>
             <el-button v-if="type===2" type="success" @click.native="btnClick('readPaper')">阅卷</el-button>
-            <el-button v-if="type===2" type="success" @click.native="btnClick('readPaperUpper')">上一个</el-button>
-            <el-button v-if="type===2" type="success" @click.native="btnClick('readPaperNext')">下一个</el-button>
+            <el-button v-if="type===3" type="success" @click.native="btnClick('readPaperUpper')">上一张</el-button>
+            <el-button v-if="type===3" type="success" @click.native="btnClick('readPaperNext')">下一张</el-button>
           </div>
         </div>
       </el-col>
@@ -294,11 +294,12 @@
         console.log(value,parent,child)
         let answerId='answer'+parent.code+child.no
         let but = this.$refs.paperLeft.querySelectorAll("#"+answerId);
+        
         if(but.length>0)
         {
            if(but[0].className.indexOf('answer-button-check')>-1)
            {
-              if(child.examineAnswer && child.examineAnswer.length==0){
+              if(!child.examineAnswer || child.examineAnswer == "" || child.examineAnswer.length==0){
                 but[0].classList.remove("answer-button-check");
               }
            }
@@ -480,6 +481,18 @@
 
   }
 </script>
+
+<style lang="less">
+.paper-main{
+  .el-collapse-item__content{
+    padding: 0 10px 5px !important;
+  }
+  .el-input__inner{
+    text-align: center;
+    padding: 0 5px !important;
+  }
+}
+</style>
 
 <style scoped>
   .paper-main {

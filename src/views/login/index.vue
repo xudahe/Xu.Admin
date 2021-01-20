@@ -28,7 +28,7 @@
                         <Icon type="md-images" :size="20" />&nbsp;验证码：
                     </el-col>
                     <el-col :span="12">
-                        <el-input type="text" v-model="loginForm.code" autocomplete="off" placeholder="请输入验证码" clearable/>
+                        <el-input type="text" v-model="identifyCode" autocomplete="off" placeholder="请输入验证码" clearable/>
                     </el-col>
                     <el-col :span="6">
                         <div class="login-code" @click="setRefreshCode">
@@ -70,7 +70,6 @@ export default {
             loginForm: {
                 username: 'admin',
                 password: '111111',
-                code:''
             },
             checkboxValue: true
         }
@@ -107,8 +106,8 @@ export default {
             }, 1000);
         },
         cookies() {
-			let name = Cookies.get('username');
-			let psw = Cookies.get('password');
+			let name = Cookies.get('UID');
+			let psw = Cookies.get('PSW');
 			if (name && name != undefined) {
 				this.loginForm.username = name;
 			}
@@ -147,6 +146,12 @@ export default {
                         _this.loginError();
                         _this.$errorMsg(res.data.message)
                     } else {
+
+                        if (_this.checkboxValue == true) {
+							Cookies.set('UID', _this.loginForm.username, { expires: 3 });
+							Cookies.set('PSW', encrypt(_this.loginForm.password), { expires: 3 });
+                        }
+                        
                         var token = res.data.token;
                         _this.$store.commit("saveToken", token); // 保存token
 
@@ -179,13 +184,8 @@ export default {
                         _this.loginError();
                         _this.$errorMsg(res.data.message)
                     } else {
-                        
                         let userinfo = res.data.response;
                         window.localStorage.userInfo = JSON.stringify(userinfo)
-                        if (this.checkboxValue == true) {
-							Cookies.set('username', this.loginForm.username, { expires: 7 });
-							Cookies.set('password', encrypt(this.loginForm.password), { expires: 7 });
-						}
                        
                         if (userinfo.id > 0) {
                             _this.getRoleData(userinfo)

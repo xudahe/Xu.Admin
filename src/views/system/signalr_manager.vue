@@ -10,13 +10,10 @@
             </el-form-item>
         </el-form>
         <ul v-for="(item, index) in messages" v-bind:key="index + 'itemMessage'" style="width:100%;">
-            <li><b>Name: </b>{{item.user}}</li>
-            <li><b>Message: </b>{{item.message}}</li>
-            <li><b>：</b>{{item.item1}}</li>
-            <li><b>：</b>{{item.item2}}</li>
+            <li><b>返回信息：</b>User：{{item.user}}&nbsp;&nbsp;Message：{{item.message}}</li>
         </ul>
-        <el-button type="primary" @click="submitCard">登录</el-button>
-        <el-button type="primary" @click="getLogs">查询</el-button>
+        <el-button type="primary" @click="submitCard">发送</el-button>
+        <el-button type="primary" @click="getLogs"></el-button>
     </div>
 </template>
 
@@ -32,7 +29,6 @@
                 filters: {
                     LinkUrl: ''
                 },
-                loading: true,
                 tableData: [],
                 userName: "Tom",
                 userMessage: "123",
@@ -42,96 +38,69 @@
             }
         },
         methods: {
-            getRoles() {
-                let _this=this;
-                let para = {
-                    page: this.page,
-                    key: this.filters.LinkUrl
-                };
-                this.loading = true;
-
-                // getLogs(para).then((res) => {
-                    // 开始通讯，并成功呼叫服务器
-                    _this.connection.start().then(() => {
-                        _this.connection.invoke('GetLatestCount', 1).catch(function (err) {
-                            return console.error(err);
-                        });
-
+            initStart() {
+                let _this = this;
+        
+                // 打开连接
+                this.connection.start().then(() => {
+                    _this.connection.invoke('GetLatestCount', 1).catch(function (err) {
+                        return console.error(err);
                     });
-                // });
+                });
             },
-            submitCard: function () {
+            submitCard() {
                 if (this.userName && this.userMessage) {
                     this.connection.invoke('SendMessage', this.userName, this.userMessage).catch(function (err) {
                         return console.error(err);
                     });
                 }
             },
-            getLogs: function () {
-                this.loading = true;
+            getLogs() {
                 this.connection.invoke('GetLatestCount', 1).catch(function (err) {
                     return console.error(err);
                 });
             }
         },
-        created: function () {
+        created() {
             let _this = this;
             //参考案列：https://www.cnblogs.com/laozhang-is-phi/p/netcore-vue-signalr.html#autoid-4-1-0
             //1、首先我们实例化一个连接器
-            _this.connection = new signalR.HubConnectionBuilder()
+            this.connection = new signalR.HubConnectionBuilder()
                 .withUrl(`http://localhost:1082/api/chatHub`,{
                     skipNegotiation: true,
-                    transport: signalR.HttpTransportType.WebSockets
+                    transport: signalR.HttpTransportType.WebSockets //通讯方式：webSockets
                 })  //然后配置通道路由
                 .configureLogging(signalR.LogLevel.Information) //日志信息
                 .build(); //创建
 
-            _this.connection.on('ReceiveMessage', function (user, message) {
-                 console.info(message)
-                _this.messages.push({user, message, item1: encrypt(user),item2: decrypt(encrypt(user))});
+            this.connection.on('ReceiveMessage', function (user, message) {
+                console.info('ReceiveMessage')
+                _this.messages.push({user, message});
             });
 
-            _this.connection.on('ReceiveUpdate', function (update) {
-                console.info('update success!')
+            this.connection.on('ReceiveUpdate', function (update) {
+                console.info('ReceiveUpdate')
                 console.info(update)
-                _this.loading = false;
                 _this.tableData = update;
                 window.clearInterval(this.t)
             })
         },
         mounted() {
-            this.getRoles();
+            this.initStart();
 
-            //  this.t =  setTimeout(() => {
-            //      this.getLogs();
+            // this.t =  setTimeout(() => {
+            //      this.initStart();
             // }, 1000);
 
         },
         beforeDestroy() {
             window.clearInterval(this.t)
-            this.connection.stop();
+            this.connection.stop(); //关闭连接
         }
     }
 
 </script>
 
 <style scoped>
-    .demo-table-expand {
-        font-size: 0;
-    }
 
-    .demo-table-expand label {
-        width: 90px;
-        color: #99a9bf;
-    }
-
-    .demo-table-expand .el-form-item {
-        margin-right: 0;
-        margin-bottom: 0;
-        width: 30%;
-    }
-
-    .EXC {
-        color: red;
-    }
 </style>

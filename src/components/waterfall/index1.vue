@@ -18,7 +18,7 @@
         top: img.top + 'px',
         left: img.left + 'px',
         width: imageWidth + 'px',
-        height: img.height
+        height: img.height + 'px'
       }"
     >
       <!-- 图片卡片 -->
@@ -116,7 +116,7 @@ export default {
       let maxColNum = Math.floor(
         fullWidth / (this.imageWidth + this.waterfallImgRight)
       );
-      console.log("可视宽度：" + fullWidth + ",列数：" + maxColNum);
+      // console.log("可视宽度：" + fullWidth + ",列数：" + maxColNum);
       if (maxColNum == 0) {
         maxColNum = 1;
       }
@@ -175,7 +175,7 @@ export default {
         let imgData = {};
         imgData.height =
           (this.imageWidth / moreList[i].width) * moreList[i].height;
-        // console.log('第' + i + '张图片的高度是：'+imgData.height );
+        // console.log("第" + i + "张图片的高度是：" + imgData.height);
         imgData.id = moreList[i].id;
         //获取随机占位背景色
         imgData.colour = this.suijicolour[i % 9];
@@ -239,7 +239,13 @@ export default {
     float: left;
   }
 
+  .el-card,
+  .el-card__body {
+    height: 100%;
+  }
+
   .image {
+    height: 100%;
     display: flex !important;
   }
 

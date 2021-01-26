@@ -23,7 +23,7 @@
              </el-card>
         </el-col> -->
      </el-row>
-   
+    <echartMap></echartMap>
     <v-dialog  ref="dialog" v-model="dialog.show" :title="dialog.title" :buttons="dialog.buttons" :bodyshow="dialog.bodyshow" >
 	    <div style="height: 300px;">
       
@@ -38,8 +38,11 @@
 import dialog1 from "../../components/dialog/dialog1"
 import slide from "../../components/slideverify/slide"
 
+import echartMap from '../../components/ehcart/index1'
+
 export default {
   components: {
+    echartMap,
     dialog1,
     slide
   },

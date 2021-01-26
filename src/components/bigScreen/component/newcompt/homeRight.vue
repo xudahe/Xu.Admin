@@ -458,6 +458,7 @@ import resize from "@/api/mixins/echart.js";
                       color: "#F02FC2"
                     }
                   },
+                  showSymbol: false,
                   data: cdata.rateData
                 },
                 {

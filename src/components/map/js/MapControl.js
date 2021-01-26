@@ -2586,6 +2586,86 @@ MapControl.identifyAllServices = function (_this) {
     });
 };
 
+MapControl.addToolTip = function (infoTem, point) {
+  esriLoader.loadModules(["esri/symbols/SimpleLineSymbol",
+    "esri/symbols/SimpleMarkerSymbol",
+    "esri/symbols/SimpleFillSymbol",
+    "esri/symbols/Font",
+    "esri/symbols/TextSymbol",
+    "esri/geometry/Point",
+    "esri/graphic",
+    "dojo/_base/Color",
+    "dojo/dom",
+    "dojo/on",
+    "dojo/domReady!"
+  ]).then(([SimpleLineSymbol, SimpleMarkerSymbol, SimpleFillSymbol, Font, TextSymbol, Point, Graphic, Color, dom, on]) => {
+    MapControl.graphicLayers['gralyr1'].clear();
+    var fontsize = 14;
+    var radius = 6;
+    infoTem = infoTem + "";
+
+    var bglineSymbol = new SimpleLineSymbol("solid", new Color([17, 91, 122, 1]), 1);
+    var width = (MapControl.chkstrlen(infoTem)) * 0.6 * (fontsize + 1);
+    var height = fontsize * 1.6;
+
+    //设置背景框的大小
+    var path = "M0" + " " + radius + "L0" + " " + (height - radius) + "Q0" + " " + height + " " + radius + " " + height + "L" + (width - radius) + " " + height + "Q" + width + " " + height + " " + width + " " + (height - radius) + "L" + width + " " + radius + "Q" + width + " " + "0" + " " + (width - radius) + " " + "0L" + radius + " " + "0Q0" + " " + "0" + " " + "0" + " " + radius;
+    var bgSymbol = new SimpleMarkerSymbol();
+    bgSymbol.setPath(path);
+    bgSymbol.setColor(new Color([17, 91, 122, 0.7]));
+    bgSymbol.setOutline(bglineSymbol);
+
+    var size = Math.max(height, width);
+    bgSymbol.setSize(size);
+    bgSymbol.xoffset = 60;
+    bgSymbol.yoffset = 0;
+    var bgGraphic = new Graphic(point, bgSymbol);
+    MapControl.graphicLayers['gralyr1'].add(bgGraphic);
+
+    var font = new Font(fontsize + "px", Font.STYLE_NORMAL, Font.VARIANT_NORMAL, Font.WEIGHT_LIGHTER);
+    var textSymbol = new TextSymbol(infoTem, font.setWeight(Font.WEIGHT_BOLD), new Color([122, 122, 122, 1]));
+    textSymbol.setOffset(60, -5);
+    textSymbol.setColor(new Color([255, 255, 255, 0.7]));
+    var tempGra = new Graphic(point, textSymbol, null, null);
+    MapControl.graphicLayers['gralyr1'].add(tempGra);
+
+    // var txtColor = '#f7f7f7',
+    //   sysColor = '#03a1e2';
+    // var fontsize = 14;
+    // var radius = 6;
+    // var infoTem = item.czfs;
+    // var width = (MapControl.chkstrlen(infoTem)) * 0.5 * (fontsize + 1) - 10;
+    // var height = fontsize * 1.6;
+
+    // var path = "M0" + " " + radius + "L0" + " " + (height - radius) + "Q0" + " " + height + " " + radius + " " + height + "L" + (width - radius) + " " + height + "Q" + width + " " + height + " " + width + " " + (height - radius) + "L" + width + " " + radius + "Q" + width + " " + "0" + " " + (width - radius) + " " + "0L" + radius + " " + "0Q0" + " " + "0" + " " + "0" + " " + radius;
+    // var bgSymbol = new esri.symbol.SimpleMarkerSymbol();
+    // bgSymbol.setPath(path);
+    // bgSymbol.setColor(new esri.Color(sysColor));
+    // bgSymbol.setSize(Math.max(height, width));
+    // bgSymbol.setOffset(0, 20);
+
+    // var bgGraphic = new esri.Graphic(wkt, bgSymbol);
+    // MapControl.graphicLayers['gralyr3'].add(bgGraphic);
+
+    // var txtSym = new esri.symbol.TextSymbol();
+    // txtSym.setAlign(esri.symbol.TextSymbol.ALIGN_MIDDLE);
+    // txtSym.setText(infoTem);
+    // txtSym.setColor(new esri.Color(txtColor));
+    // txtSym.setOffset(0, 16);
+
+    // var font = new esri.symbol.Font();
+    // font.setSize('12px');
+    // font.setWeight(esri.symbol.Font.WEIGHT_BOLD);
+    // font.setFamily('微软雅黑');
+    // txtSym.setFont(font);
+    // txtSym.setOffset(0, 16); //字体偏移
+
+    // var graphic1 = new esri.Graphic(wkt, txtSym);
+    // // graphic1.setAttributes(item);
+    // MapControl.graphicLayers['gralyr3'].add(graphic1);
+  });
+};
+
 //获取包含汉字字符串长度
 MapControl.chkstrlen = function (str) {
   var strlen = 0;

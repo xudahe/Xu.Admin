@@ -284,7 +284,7 @@ export default {
 		    		}
           })
           .catch(err => {})
-      },1000),
+      },2000),
       jobStatus(row){
         let _this = this;
         let apiUrl = "", state = ""; 

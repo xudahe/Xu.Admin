@@ -313,7 +313,7 @@ export default {
 					    }
             })
             .catch(err => {})
-        },1000),
+        },2000),
         refreshData(){
           this.$loading.showLoading()
           this.searchData();

@@ -139,8 +139,8 @@ ivu-tabs ivu-tabs-card .app-right-bottom {
 <script>
 import esriLoader from "esri-loader";
 import bus from "../../eventBus.js";
-import { MapControl } from "../map/js/MapControl";
-import mapconfig from "../map/js/mapconfig";
+import { MapControl } from "../arcgis_map/js/MapControl";
+import mapconfig from "../arcgis_map/js/mapconfig";
 
 var map, navToolbar;
 export default {

@@ -112,14 +112,14 @@
 </template>
 <script>
 import esriLoader from 'esri-loader'
-import { MapControl } from "../map/js/MapControl";
-import mapconfig from '../map/js/mapconfig';
-import layermanage from '../map/child/layerManage'
-import bottombar from "../map/child/bottombar";
+import { MapControl } from "../arcgis_map/js/MapControl";
+import mapconfig from '../arcgis_map/js/mapconfig';
+import layermanage from '../arcgis_map/child/layerManage'
+import bottombar from "../arcgis_map/child/bottombar";
 
 var map, navToolbar
 export default {
-  name: 'baseMap',
+  name: 'arcgisMap',
   components: {
     layermanage,
     bottombar

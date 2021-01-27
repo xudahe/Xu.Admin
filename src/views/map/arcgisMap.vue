@@ -1,15 +1,16 @@
 <template>
-  <div class="baseMap" style="height: 100%; width: 100%;">
-    <!-- <baseMap></baseMap> -->
+  <div class="arcgisMap" style="height: 100%; width: 100%;">
+    <!-- <arcgisMap></arcgisMap> -->
     <splitview ref="splitview" :items="this.$store.state.mapitems"></splitview>
   </div>
 </template>
 
 <script>
-import splitview from "../../components/map/splitview.vue";
+import splitview from "../../components/arcgis_map/splitview.vue";
+import arcgisMap from "../../components/arcgis_map/index1.vue";
 export default {
-  name: "t-baseMap",
-  components: { splitview },
+  name: "t-arcgisMap",
+  components: { splitview, arcgisMap },
   data() {
     return {
       items: [

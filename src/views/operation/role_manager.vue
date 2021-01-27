@@ -335,7 +335,7 @@ export default {
 					    }
             })
             .catch(err => {})
-        },1000),
+        },2000),
         refreshData(){
           let _this = this;
 

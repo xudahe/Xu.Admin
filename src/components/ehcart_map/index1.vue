@@ -70,6 +70,8 @@ export default {
       // 实例
       var chart = echarts.init(document.getElementById(id));
 
+      var curGeoJson = {};
+
       //直辖市和特别行政区-只有二级地图，没有三级地图
       var special = ["北京", "天津", "上海", "重庆", "香港", "澳门"];
 
@@ -133,7 +135,6 @@ export default {
          **/
         resetOption: function(i, o, n) {
           var breadcrumb = this.createBreadcrumb(n);
-          debugger
           var j = name.indexOf(n);
           var l = o.graphic.length;
           if (j < 0) {
@@ -174,7 +175,6 @@ export default {
          * name 地图名
          **/
         createBreadcrumb: function(name) {
-          debugger;
           var breadcrumb = {
             type: "group",
             id: name,
@@ -465,7 +465,7 @@ export default {
           {
             type: "effectScatter",
             coordinateSystem: "geo",
-            showEffectOn: "render",
+            showEffectOn: "render", //高亮时显示特效
             rippleEffect: {
               //涟漪特效
               period: 15, //动画时间，值越小速度越快
@@ -509,6 +509,7 @@ export default {
       chart.setOption(option);
       // 添加事件
       chart.on("click", function(params) {
+        debugger
         console.info(params);
         var _self = this;
         if (opt.goDown && params.name !== name[idx]) {
@@ -521,6 +522,19 @@ export default {
                 handleEvents.resetOption(_self, option, params.name);
               });
           }
+          // else{ // 下钻到县区级
+          //     var data = {features: [],name: params.name};
+          //     var temp = curGeoJson.features;
+          //     for(var i = 0;i < temp.length;i++){
+          //         if(temp[i].properties.name === params.name){
+          //             data.features.push(temp[i]);
+          //             break;
+          //         }
+          //     };
+          //     // console.log(data);
+          //     echarts.registerMap(params.name, data);
+          //     handleEvents.resetOption(_self, option, params.name);
+          // }
         }
       });
 
@@ -533,6 +547,7 @@ export default {
           var url = "./map/" + citySource + ".json";
           axios.get(url, function(response) {
             console.log(response);
+            curGeoJson = response;
             echarts.registerMap(mapName, response);
             handleEvents.resetOption(_self, option, mapName);
           });

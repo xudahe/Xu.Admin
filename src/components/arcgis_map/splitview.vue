@@ -30,8 +30,8 @@
 <script>
 import mapview from "./splitsceen";
 import bus from "../../eventBus.js";
-import { MapControl } from "../map/js/MapControl";
-import mapconfig from "../map/js/mapconfig";
+import { MapControl } from "../arcgis_map/js/MapControl";
+import mapconfig from "../arcgis_map/js/mapconfig";
 
 export default {
   components: { mapview },

@@ -31,6 +31,7 @@
 /**
  * 高德地图API: https://lbs.amap.com/api/javascript-api/example/map/click-to-get-lnglat
  * 申请的key："e83f64300a2a55a33fa8e4ab9a46bca6","73cddabc2173e0166a622f4483d3592a","2d00cf810203e90c91261b1ae4ebacdd"
+ * vue-amap：https://github.com/ElemeFE/vue-amap
  */
 
 import remoteLoad from "@/api/script/remoteLoad.js";
@@ -90,7 +91,7 @@ export default {
           function() {
             map.addControl(new AMap.ToolBar()); //工具条
             map.addControl(new AMap.Scale()); //左下角地图比例尺
-            // map.addControl(new AMap.MapType()); // 卫星和标准切换，可加路况显示
+            map.addControl(new AMap.MapType()); // 卫星和标准切换，可加路况显示
             // map.addControl(new AMap.ControlBar()); // 组合了旋转、倾斜、复位、缩放在内的地图控件，在3D地图模式下会显示
           }
         );
@@ -202,8 +203,8 @@ export default {
   position: absolute;
   display: flex;
   align-items: center;
-  right: 28px;
-  top: 100px;
+  right: 100px;
+  top: 108px;
   width: 250px;
   height: 40px;
   box-sizing: border-box;

@@ -8,9 +8,9 @@
         ></layoutHeader>
         <el-main id="elmain" class="elmain">
           <transition name="main" mode="out-in">
-            <!-- <keep-alive> -->
+            <keep-alive :include="$store.getters.cachedViews">
               <router-view v-transition></router-view>
-            <!-- </keep-alive> -->
+            </keep-alive>
           </transition>
           <back-top :options="{ target: '#elmain', isMove: true }" />
         </el-main>

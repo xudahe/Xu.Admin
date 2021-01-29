@@ -3,7 +3,7 @@
   <div class="v-card">
     <el-row>
       <template v-for="(item,index) in datalist">
-        <el-col  v-bind="colProps" style="padding: 0.05rem;" :key="index">
+        <el-col  v-bind="colProps" style="padding: 0.05rem;" :key="index" class="img-scale">
           <el-card class="box-card" shadow="hover" style="border: 1px solid #ebeef5;">
              <div class="panel_body">
                 <div class="data-item">
@@ -135,6 +135,7 @@
 @deep: ~'>>>';
 
 .v-card {
+  padding: 0.1rem 0.5rem;
   height: 100%;
   width: 100%;
 
@@ -246,6 +247,22 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 4;
     overflow: hidden;
+  }
+
+    /*效果二：放大 修改scale(放大的值)*/
+  .img-scale {
+    transition: All 0.4s ease-in-out;
+    -webkit-transition: All 0.4s ease-in-out;
+    -moz-transition: All 0.4s ease-in-out;
+    -o-transition: All 0.4s ease-in-out;
+  }
+  .img-scale:hover {
+    z-index: 9;
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    -ms-transform: scale(1.1);
   }
 
 }

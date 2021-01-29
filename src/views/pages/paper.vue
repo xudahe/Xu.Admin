@@ -213,12 +213,23 @@ export default {
       this.type = 2;
       this.submissionTime = this.$formatDate(new Date(), true);
 
-      this.paperData.list.forEach(function(item){
-        if(item.examineAnswer == "" || item.examineAnswer.length == 0) {
+      this.paperData.list.forEach(function(item) {
+        if (item.examineAnswer == "" || item.examineAnswer.length == 0) {
           item.isHook = 2;
           item.score = 0;
+        } else {
+          if (item.type == 1 || item.type == 3) {
+            //单选题，判断题
+            if (item.examineAnswer == item.correctAnswer) {
+              item.isHook = 1;
+              item.score = item.totalScore;
+            } else {
+              item.isHook = 2;
+              item.score = 0;
+            }
+          }
         }
-      })
+      });
     },
     paperRead(value) {
       this.type = 3;
@@ -226,10 +237,10 @@ export default {
       let data = value.list.map(item => {
         return item.score;
       });
-      
-      this.paperData.score = sum(data)
+
+      this.paperData.score = sum(data);
       function sum(arr) {
-        return arr.reduce(function(prev, curr, idx, arr){
+        return arr.reduce(function(prev, curr, idx, arr) {
           return parseFloat(prev) + parseFloat(curr);
         });
       }

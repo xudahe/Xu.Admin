@@ -3,77 +3,138 @@
 </template>
 
 <script>
-import axios from "axios";
 import echarts from "echarts";
-import resize from "@/api/mixins/echart.js";
 
 import reginCode from "../../../static/data/mapjson/reginCode";
 import province from "../../../static/data/mapjson/province";
 
 export default {
   name: "EchartMap",
-  mixins: [resize],
   data() {
-    return {};
+    return {
+      adcode: 100000,
+      parentJson: null,
+      cityName: "全国",
+      parentCode: [100000]
+    };
   },
-  mounted() {
-    let _this = this;
-
-    axios
-      .get("../../../static/data/mapjson/china.geoJson")
-      .then(function(res) {
-        echarts.registerMap("中国", res.data); //注册
-        _this.extendsMap("chart-panel", {
-          bgColor: "#154e90", // 画布背景色
-          mapName: "中国", // 地图名
-          goDown: true, // 是否下钻
-          // 下钻回调
-          callback: function(name, option, instance) {
-            console.log(name, option, instance);
-          },
-          // 数据展示
-          data: [
-            {
-              name: "南昌",
-              value: 10,
-              level: 1
-            },
-            {
-              name: "景德镇",
-              value: 12,
-              level: 2
-            },
-            {
-              name: "萍乡",
-              value: 11,
-              level: 3
-            },
-            {
-              name: "赣州",
-              value: 16,
-              level: 2
-            },
-            {
-              name: "吉安",
-              value: 12,
-              level: 1
-            }
-          ]
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
+  async created() {
+    if (window.AMap && window.AMapUI) {
+      this.getGeoJson(this.adcode);
+    } else {
+      await remoteLoad(
+        `http://webapi.amap.com/maps?v=1.4.15&key=2d00cf810203e90c91261b1ae4ebacdd`,
+        true
+      ),
+        await remoteLoad(`http://webapi.amap.com/ui/1.1/main.js`);
+      await this.getGeoJson(this.adcode);
+    }
   },
+  mounted() {},
   methods: {
+    /**
+     *  利用高德api获取行政区边界geoJson
+     *   adcode 行政区code 编号
+     **/
+    getGeoJson(adcode) {
+      let _this = this;
+      let AMapUI = window.AMapUI;
+      let AMap = window.AMap;
+
+      var map = new AMap.Map("map", {
+        resizeEnable: true,
+        center: [116.30946, 39.937629],
+        zoom: 3
+      });
+      AMapUI.loadUI(["geo/DistrictExplorer"], DistrictExplorer => {
+        var districtExplorer = (window.districtExplorer = new DistrictExplorer({
+          eventSupport: true, //打开事件支持
+          map: map
+        }));
+        districtExplorer.loadAreaNode(adcode, function(error, areaNode) {
+          if (error) {
+            console.error(error);
+            return;
+          }
+
+          let Json = areaNode.getSubFeatures();
+          if (Json.length > 0 && Json[0].properties.level == "district") {
+            _this.parentJson = Json;
+          }
+          //说明当前是区县
+          //这里还有个问题就是获取mapData数据，这里调用getMapData方法又会重新生成一次value值
+          //其实应该为之前的数据，不过这只是测试数据，用的随机数，实际项目肯定会调接口
+          else if (Json.length == 0) {
+            Json = _this.parentJson.filter(item => {
+              if (item.properties.adcode == adcode) {
+                return item;
+              }
+            });
+          }
+
+          //随机数模拟数据
+          let mapData = Json.map(item => {
+            return {
+              name: item.properties.name,
+              value: Math.random() * 1000,
+              level: item.properties.level,
+              cityCode: item.properties.adcode
+            };
+          });
+          //geoJson必须这种格式
+          let mapJson = { features: Json, type: "FeatureCollection" };
+
+          if (_this.cityName == "全国") {
+            _this.initMap(mapData, mapJson);
+          } else {
+            echarts.registerMap(_this.cityName, mapJson); //注册
+          }
+        });
+      });
+    },
+    initMap(mapData, mapJson) {
+      echarts.registerMap(this.cityName, mapJson); //注册
+      this.extendsMap("chart-panel", {
+        bgColor: "#154e90", // 画布背景色
+        mapName: "全国", // 地图名
+        goDown: true, // 是否下钻
+        // 下钻回调
+        callback: function(name, option, instance) {
+          // console.log(name, option, instance);
+        },
+        // 数据展示
+        data: [
+          // {
+          //   name: "南昌",
+          //   value: 10,
+          //   level: 1
+          // },
+          // {
+          //   name: "景德镇",
+          //   value: 12,
+          //   level: 2
+          // },
+          // {
+          //   name: "萍乡",
+          //   value: 11,
+          //   level: 3
+          // },
+          // {
+          //   name: "赣州",
+          //   value: 16,
+          //   level: 2
+          // },
+          // {
+          //   name: "吉安",
+          //   value: 12,
+          //   level: 1
+          // }
+        ]
+      });
+    },
     extendsMap(id, opt) {
-      // 实例
+      let _this = this;
       var chart = echarts.init(document.getElementById(id));
-
-      var curGeoJson = {};
-
-      //直辖市和特别行政区-只有二级地图，没有三级地图
-      var special = ["北京", "天津", "上海", "重庆", "香港", "澳门"];
 
       var geoCoordMap = {
         南昌: [115.89, 28.48],
@@ -89,9 +150,9 @@ export default {
         上饶: [117.92, 28.22]
       };
       var levelColorMap = {
-        "1": "rgba(241, 109, 115, .8)",
-        "2": "rgba(255, 235, 59, .7)",
-        "3": "rgba(147, 235, 248, 1)"
+        1: "rgba(241, 109, 115, .8)",
+        2: "rgba(255, 235, 59, .7)",
+        3: "rgba(147, 235, 248, 1)"
       };
 
       var defaultOpt = {
@@ -128,19 +189,41 @@ export default {
       };
 
       var handleEvents = {
+        //获取字符串长度
+        chkstrlen: function(str) {
+          var strlen = 0;
+          for (var i = 0; i < str.length; i++) {
+            if (str.charCodeAt(i) > 255)
+              //如果是汉字，则字符串长度加2
+              strlen += 2;
+            else strlen++;
+          }
+          return strlen;
+        },
+
         /**
          * i 实例对象
          * o option
          * n 地图名
          **/
         resetOption: function(i, o, n) {
-          var breadcrumb = this.createBreadcrumb(n);
-          var j = name.indexOf(n);
-          var l = o.graphic.length;
+          var j = name.indexOf(n),
+            l = o.graphic.length,
+            strlen0 = 0,
+            strlen1 = 0;
           if (j < 0) {
+            for (let k = 1; k < o.graphic.length; k++) {
+              strlen0 += this.chkstrlen(o.graphic[k].id) * 15;
+            }
+            pos.leftCur = 200 + strlen0;
+            var breadcrumb = this.createBreadcrumb(n);
+
             o.graphic.push(breadcrumb);
-            o.graphic[0].children[0].shape.x2 = 145;
-            o.graphic[0].children[1].shape.x2 = 145;
+            o.graphic[0].children[0].shape.x2 =
+              strlen0 + this.chkstrlen(n) * 15;
+            o.graphic[0].children[1].shape.x2 =
+              strlen0 + this.chkstrlen(n) * 15;
+
             if (o.graphic.length > 2) {
               for (var x = 0; x < opt.data.length; x++) {
                 if (n === opt.data[x].name + "市") {
@@ -153,14 +236,22 @@ export default {
             idx++;
           } else {
             o.graphic.splice(j + 2, l);
+
+            for (let k = 1; k < o.graphic.length; k++) {
+              strlen0 += this.chkstrlen(o.graphic[k].id) * 15;
+              strlen1 += this.chkstrlen(o.graphic[k].id) * 15;
+            }
+            o.graphic[0].children[0].shape.x2 = strlen0;
+            o.graphic[0].children[1].shape.x2 = strlen1;
+
             if (o.graphic.length <= 2) {
-              o.graphic[0].children[0].shape.x2 = 60;
-              o.graphic[0].children[1].shape.x2 = 60;
+              // o.graphic[0].children[0].shape.x2 = 60;
+              // o.graphic[0].children[1].shape.x2 = 60;
               o.series[0].data = handleEvents.initSeriesData(opt.data);
             }
             name.splice(j + 1, l);
             idx = j;
-            pos.leftCur -= pos.leftPlus * (l - j - 1);
+            // pos.leftCur -= pos.leftPlus * (l - j - 1);
           }
 
           o.geo.map = n;
@@ -178,7 +269,7 @@ export default {
           var breadcrumb = {
             type: "group",
             id: name,
-            left: pos.leftCur + pos.leftPlus,
+            left: pos.leftCur,
             top: pos.top + 3,
             children: [
               {
@@ -197,7 +288,7 @@ export default {
                   var name = this.style.key;
                   handleEvents.resetOption(chart, option, name);
                 }
-              },
+              }, // ">"箭头
               {
                 type: "text",
                 left: -68,
@@ -212,28 +303,26 @@ export default {
                   var name = this.style.text;
                   handleEvents.resetOption(chart, option, name);
                 }
-              },
+              }, //文字
               {
                 type: "text",
                 left: -68,
                 top: 10,
                 style: {
-                  name: name,
                   text: province[name] ? province[name].toUpperCase() : "",
                   textAlign: "center",
                   fill: style.textColor,
                   font: '12px "Microsoft YaHei", sans-serif'
                 },
                 onclick: function() {
-                  // console.log(this.style);
                   var name = this.style.name;
                   handleEvents.resetOption(chart, option, name);
                 }
-              }
+              } //拼音
             ]
           };
 
-          pos.leftCur += pos.leftPlus;
+          // pos.leftCur += this.chkstrlen(name) * 15;
 
           return breadcrumb;
         },
@@ -333,7 +422,7 @@ export default {
                 },
                 onclick: function() {
                   var name = this.style.key;
-                  console.log("polyline", name);
+                  console.log("polyline", name[0]);
                   handleEvents.resetOption(chart, option, name);
                 }
               },
@@ -348,8 +437,8 @@ export default {
                   font: style.font
                 },
                 onclick: function() {
-                  console.log("text", name);
-                  handleEvents.resetOption(chart, option, "中国");
+                  console.log("text", name[0]);
+                  handleEvents.resetOption(chart, option, name[0]);
                 }
               },
               {
@@ -363,8 +452,8 @@ export default {
                   font: '12px "Microsoft YaHei", sans-serif'
                 },
                 onclick: function() {
-                  console.log("text", name);
-                  handleEvents.resetOption(chart, option, "中国");
+                  console.log("text", name[0]);
+                  handleEvents.resetOption(chart, option, name[0]);
                 }
               }
             ]
@@ -506,53 +595,21 @@ export default {
         ]
       };
 
-      chart.setOption(option);
+      chart.setOption(option, true);
       // 添加事件
       chart.on("click", function(params) {
-        debugger
-        console.info(params);
-        var _self = this;
+        let _self = this;
         if (opt.goDown && params.name !== name[idx]) {
           var code = reginCode[params.name];
-          if (code) {
-            axios
-              .get(`../../../static/data/mapjson/province/${code}.geoJson`)
-              .then(function(res) {
-                echarts.registerMap(params.name, res.data);
-                handleEvents.resetOption(_self, option, params.name);
-              });
-          }
-          // else{ // 下钻到县区级
-          //     var data = {features: [],name: params.name};
-          //     var temp = curGeoJson.features;
-          //     for(var i = 0;i < temp.length;i++){
-          //         if(temp[i].properties.name === params.name){
-          //             data.features.push(temp[i]);
-          //             break;
-          //         }
-          //     };
-          //     // console.log(data);
-          //     echarts.registerMap(params.name, data);
-          //     handleEvents.resetOption(_self, option, params.name);
-          // }
+          if (code == null || code == undefined) return;
+          _this.cityName = params.name;
+          _this.getGeoJson(code);
+
+          setTimeout(() => {
+            handleEvents.resetOption(_self, option, params.name);
+          }, 500);
         }
       });
-
-      chart.setMap = function(mapName) {
-        debugger;
-        var _self = this;
-        if (mapName.indexOf("市") < 0) mapName = mapName + "市";
-        var citySource = reginCode[mapName];
-        if (citySource) {
-          var url = "./map/" + citySource + ".json";
-          axios.get(url, function(response) {
-            console.log(response);
-            curGeoJson = response;
-            echarts.registerMap(mapName, response);
-            handleEvents.resetOption(_self, option, mapName);
-          });
-        }
-      };
 
       return chart;
     }

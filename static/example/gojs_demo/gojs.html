@@ -26,10 +26,10 @@
           {
             initialContentAlignment: go.Spot.Center,  //模型图的中心位置所在坐标
             initialAutoScale: go.Diagram.Uniform, // scale to show all of the contents
-            ChangedSelection: onSelectionChanged, // view additional information
             "grid.visible": true, //画布上面是否出现网格
+            allowMove: true, //允许拖动
             maxSelectionCount: 1, // don't allow users to select more than one thing at a time
-            isReadOnly: true,
+            // isReadOnly: true,
           }
         );
 
@@ -12461,24 +12461,6 @@
         }, 60);
       }
 
-      function onSelectionChanged() {
-        var node = myDiagram.selection.first();
-        if (!(node instanceof go.Node)) return;
-        var data = node.data;
-        var image = document.getElementById("Image");
-        var title = document.getElementById("Title");
-        var description = document.getElementById("Description");
-
-        if (data.imgsrc) {
-          image.src = data.imgsrc;
-          image.alt = data.caption;
-        } else {
-          image.src = "";
-          image.alt = "";
-        }
-        title.textContent = data.text;
-        description.textContent = data.description;
-      }
     </script>
   </head>
 

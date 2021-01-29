@@ -293,7 +293,7 @@ export default {
           if(this.menuForm.className.slice(0,1) != "/"){
             this.menuForm.className = "/"+this.menuForm.className;
           }
-          this.menuForm.icon = "el-icon-edit-outline"; //暂时写死
+          this.menuForm.icon = "el-icon-edit-outline"; //图标暂时写死
           
           if(this.$isNull(this.menuForm.className)) 
             return this.$warnMsg("组件名称不能为空！")

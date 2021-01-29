@@ -13,6 +13,9 @@ const store = new Vuex.Store({
     token: null,
     tokenExpire: null,
 
+    //缓存组件，该值是组件中定义的name值，include 名称匹配的组件会被缓存，exclude 名称匹配的组件不被缓存。
+    cachedViews: ["t-gdmap", "t-arcgisMap", "t-tinymce"],
+
     drag_com: "",
     drag_ref: "",
     mapitems: Array, //地图窗口组件id名称
@@ -54,6 +57,7 @@ const store = new Vuex.Store({
   getters: {
     token: state => state.token,
     addRouters: state => state.router.addRouters,
+    cachedViews: state => state.cachedViews,
     routers: state => state.router.routers,
     info: state => state.user.info,
     isCollapse: state => state.layout.isCollapse,

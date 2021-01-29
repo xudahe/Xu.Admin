@@ -1,5 +1,30 @@
 <template>
-  <div id="js-container" :style="{ width: '100%', height: '95%' }"></div>
+  <section>
+    <div style="height:100%;width:100%" id="container" width tabindex="0"></div>
+    <div class="search-div">
+      <el-input
+        id="tipInput"
+        v-model="inputSearchVal"
+        placeholder="请输入搜索名称"
+      >
+      </el-input>
+    </div>
+    <div class="geolocation">
+      <el-tooltip
+        class="item"
+        effect="dark"
+        content="定位到当前位置"
+        placement="left"
+      >
+        <el-button
+          type="primary"
+          icon="el-icon-location-outline"
+          circle
+          @click.native="Geolocation"
+        ></el-button>
+      </el-tooltip>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -10,14 +35,29 @@
 
 import remoteLoad from "@/api/script/remoteLoad.js";
 
+var AMapUI = null;
+var AMap = null;
+
 export default {
   name: "gdmap",
   props: {},
   components: {},
   data() {
     return {
-      AMapUI: null,
-      AMap: null
+      mapConfig: {
+        zoom: 19,
+        // pitch: 75,
+        // rotation: 45,
+        resizeEnable: true,
+        viewMode: "3D", //开启3D视图,默认为关闭
+        buildingAnimation: true //楼块出现是否带动画
+        // center: [118.767413, 32.041544]
+      },
+
+      map: null,
+
+      inputSearchVal: "",
+      placeSearch: null
     };
   },
   async created() {
@@ -32,51 +72,41 @@ export default {
       await this.init();
     }
   },
+  mounted() {},
   methods: {
     init() {
       let _this = this;
-      let AMapUI = (this.AMapUI = window.AMapUI);
-      let AMap = (this.AMap = window.AMap);
+      AMapUI = this.AMapUI = window.AMapUI;
+      AMap = this.AMap = window.AMap;
 
       // console.log("AMapUI", AMapUI);
 
       //loadUI的路径参数为模块名中 'ui/' 之后的部分
       AMapUI.loadUI(["misc/PositionPicker"], PositionPicker => {
-        let mapConfig = {
-          // zoom: 16,
-          // pitch: 75,
-          // rotation: 45,
-          resizeEnable: true,
-          viewMode: "3D", //开启3D视图,默认为关闭
-          buildingAnimation: true //楼块出现是否带动画
-          // center: [118.767413, 32.041544]
-        };
-        let map = new AMap.Map("js-container", mapConfig);
+        let map = new AMap.Map("container", this.mapConfig);
 
-        ////加载工具条
-        AMap.plugin(["AMap.ToolBar"], function() {
-          map.addControl(
-            new AMap.ToolBar({
-              position: "LT" // LT:左上角;RT:右上角;LB:左下角;RB:右下角;
-            })
-          );
+        AMap.plugin(
+          ["AMap.ToolBar", "AMap.Scale", "AMap.MapType", "AMap.ControlBar"],
+          function() {
+            map.addControl(new AMap.ToolBar()); //工具条
+            map.addControl(new AMap.Scale()); //左下角地图比例尺
+            // map.addControl(new AMap.MapType()); // 卫星和标准切换，可加路况显示
+            // map.addControl(new AMap.ControlBar()); // 组合了旋转、倾斜、复位、缩放在内的地图控件，在3D地图模式下会显示
+          }
+        );
+        this.map = map;
+
+        //单击事件
+        AMap.event.addListener(map, "click", function(e) {
+          console.info("click", e);
         });
+        //双击事件
+        // AMap.event.addListener(map, "dblclick", function(e) {
+        //   console.info("dblclick", e);
+        // });
 
-        // 从高德地图api获取浏览器定位
-        AMap.plugin(["AMap.Geolocation"], function() {
-          let geolocation = new AMap.Geolocation({
-            enableHighAccuracy: true, // 是否使用高精度定位，默认：true
-            timeout: 10000 // 设置定位超时时间，默认：无穷大
-          });
-
-          geolocation.getCurrentPosition();
-          AMap.event.addListener(geolocation, "complete", function(result) {
-            console.log(result);
-          });
-          AMap.event.addListener(geolocation, "error", function(result) {
-            _this.getLatLng();
-          });
-        });
+        this.Geolocation();
+        this.PlaceSearch();
 
         let positionPicker = new PositionPicker({
           mode: "dragMap", //设定为拖拽地图模式，可选'dragMap'、'dragMarker'，默认为'dragMap'
@@ -93,33 +123,52 @@ export default {
         });
         positionPicker.on("fail", function(result) {});
         // positionPicker.start(); //显示拖拽图标
+      });
+    },
+    PlaceSearch() {
+      let _this = this;
+      AMap.plugin(["AMap.Autocomplete", "AMap.PlaceSearch"], () => {
+        let autoOptions = {
+          output: "show",
+          input: "tipInput" // 输入框ID
+        };
+        let autoComplete = new AMap.Autocomplete(autoOptions);
 
-        // // AMap.Autocomplete是输入提示插件，详情参考https://lbs.amap.com/api/javascript-api/reference/search#m_AMap.Autocomplete
-        // AMap.plugin("AMap.Autocomplete", () => {
-        //   let autoOptions = {
-        //     city: this.shopDatadetail.city,
-        //     input: "addressInput" // 输入框ID
-        //   };
-        //   let autoComplete = new AMap.Autocomplete(autoOptions);
-        //   // select为输入框提示之后的选择事件，监听事件用法详情参考https://lbs.amap.com/api/javascript-api/reference/event/
-        //   AMap.event.addListener(autoComplete, "select", e => {
-        //     this.chooseAddressSelect = e; // e为回调函数返回的下拉框选择的参数
-        //     this.accuratePos = e.poi.name; // accuratePos为输入框v-model绑定的值
-        //     AMap.service("AMap.PlaceSearch", () => {
-        //       let searchOptions = {
-        //         city: "全国",
-        //         map: this.map
-        //       };
-        //       let searchRes = new AMap.PlaceSearch(searchOptions);
-        //       // 搜索服务，详情参考https://lbs.amap.com/api/javascript-api/reference/search#m_AMap.PlaceSearch
-        //       searchRes.search(this.chooseAddressSelect.poi.name, () => {
-        //         // 其实这个地方是我最主要讲的，请往下看
-        //         searchRes.render.markerList.clear(); // 这个为清除搜索结果的点，不想清除注释即可
-        //         console.log("搜索完成打印", searchRes); // searchRes为搜索的结果
-        //       });
-        //     });
-        //   });
-        // });
+        AMap.event.addListener(autoComplete, "select", data => {
+          if (data.poi.location != undefined) {
+            _this.map.setCenter(data.poi.location); //定位到中心点
+          }
+          this.inputSearchVal = data.poi.name; // inputSearchVal为输入框v-model绑定的值
+
+          let searchOptions = {
+            map: _this.map
+          };
+          let searchRes = new AMap.PlaceSearch(searchOptions);
+          searchRes.search(data.poi.name, (status, info) => {
+            searchRes.render.markerList.clear(); // 这个为清除搜索结果的点，不想清除注释即可
+            console.log("搜索完成打印", status, info); // searchRes为搜索的结果
+          });
+        });
+      });
+    },
+    Geolocation() {
+      let _this = this;
+
+      // 从高德地图api获取浏览器当前定位
+      AMap.plugin(["AMap.Geolocation"], function() {
+        let geolocation = new AMap.Geolocation({
+          enableHighAccuracy: true, // 是否使用高精度定位，默认：true
+          timeout: 10000 // 设置定位超时时间，默认：无穷大
+        });
+
+        geolocation.getCurrentPosition();
+        AMap.event.addListener(geolocation, "complete", function(result) {
+          console.log(result);
+          _this.map.setCenter(result.position); //定位到中心点
+        });
+        AMap.event.addListener(geolocation, "error", function(result) {
+          _this.getLatLng();
+        });
       });
     },
     getLatLng() {
@@ -149,8 +198,22 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.map {
-  width: 500px;
-  height: 300px;
+.search-div {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  right: 28px;
+  top: 100px;
+  width: 250px;
+  height: 40px;
+  box-sizing: border-box;
+}
+.geolocation {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  right: 28px;
+  bottom: 100px;
+  box-sizing: border-box;
 }
 </style>

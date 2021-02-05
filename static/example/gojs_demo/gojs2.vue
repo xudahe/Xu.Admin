@@ -1,24 +1,40 @@
 <template>
-<div style="width: 100%;height: 100%">
-<!--  <div style="position: absolute; z-index: 999;">-->
-<!--    <Button @click="btnclick" >输出画布json</Button>-->
-<!--    <Button @click="btngetkey">选中key</Button>-->
-<!--  </div>-->
-  <div
-    id="myDiagramDiv"
-    style="width: 100%;height: 100%;background-image: linear-gradient(to bottom, #023f4b, #02161d);"
-  >
-
+  <div style="width: 100%;height: 100%">
+    <!--  <div style="position: absolute; z-index: 999;">-->
+    <!--    <Button @click="btnclick" >输出画布json</Button>-->
+    <!--    <Button @click="btngetkey">选中key</Button>-->
+    <!--  </div>-->
+    <div id="myDiagramDiv" style="width: 100%;height: 100%;">
+      <!-- background-image: linear-gradient(to bottom, #023f4b, #02161d); -->
+    </div>
   </div>
-</div>
-
 </template>
 
 <script>
+import mqtt from "mqtt";
 import go from "gojs";
 const $ = go.GraphObject.make;
 
 import axios from "axios";
+
+function _createGuid() {
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"
+    .replace(/[xy]/g, function(c) {
+      var r = (Math.random() * 16) | 0,
+        v = c == "x" ? r : (r & 0x3) | 0x8;
+      return v.toString(16);
+    })
+    .toUpperCase();
+}
+
+var client;
+const options = {
+  connectTimeout: 40000,
+  clientId: "PandaWeb-" + _createGuid(),
+  username: "mqtt_js",
+  password: "B66FY1jRMAtyOwO2j99l",
+  clean: true
+};
 
 export default {
   name: "gojs",
@@ -34,44 +50,66 @@ export default {
     };
   },
   mounted() {
-    let _self = this;
     this.getjson();
-    setTimeout(() => {
-      _self.initWebsocket();
-    }, 1000);
+    this.mqttMsg();
   },
   methods: {
-    btngetkey(){
+    mqttMsg() {
+      if (client == null)
+        client = mqtt.connect("ws://36.156.142.83:8083/mqtt", options);
+
+      client.on("connect", e => {
+        console.log("连接成功！！！");
+        client.subscribe(
+          "Topic/flexem/fbox/" + 301020112779 + "/system/MonitorData",
+          {},
+          error => {
+            if (!error) {
+              console.log("订阅成功");
+            } else {
+              console.log("订阅失败");
+            }
+          }
+        );
+      });
+
+      // 接收消息处理
+
+      client.on("message", (topic, message) => {
+        console.log("收到来自", topic, "的消息", message.toString());
+        this.msg = message.toString();
+      });
+    },
+    btngetkey() {
       var person = prompt("请输入key：", "-10");
       if (person != null && person != "") {
-        var nodekey = this.myDiagram.model.findNodeDataForKey(person);//通过节点key获取节点
-        var nodekeyselect=this.myDiagram.findNodeForData(nodekey);//查找结点
-        this.myDiagram.select(nodekeyselect);//反选此节点
+        var nodekey = this.myDiagram.model.findNodeDataForKey(person); //通过节点key获取节点
+        var nodekeyselect = this.myDiagram.findNodeForData(nodekey); //查找结点
+        this.myDiagram.select(nodekeyselect); //反选此节点
       }
     },
-    btnclick(){
-      var model= this.myDiagram.model.toJson();//获得整个画布的json
-      var nodes=model.nodeDataArray;//取出所有节点
-      var Links=model.linkDataArray;//取出所有线
-      console.log(model)
+    btnclick() {
+      var model = this.myDiagram.model.toJson(); //获得整个画布的json
+      var nodes = model.nodeDataArray; //取出所有节点
+      var Links = model.linkDataArray; //取出所有线
+      console.log(model);
     },
-    changebeijing(node){
+    changebeijing(node) {
       //选中改变事件
       // debugger
       // var nodekey = this.myDiagram.model.findNodeDataForKey('-2222');//通过节点key获取节点
-      var nodekeyselect=this.myDiagram.findNodeForData(node);//查找结点
-      this.myDiagram.select(nodekeyselect);//反选此节点
-
+      var nodekeyselect = this.myDiagram.findNodeForData(node); //查找结点
+      this.myDiagram.select(nodekeyselect); //反选此节点
     },
-    getjson(){
+    getjson() {
       let _self = this;
       axios
-        .get("../../../static/二供设备/json_海安泵站2.json")
+        .get("../../../static/二供设备/json_海安泵站.json")
         // .get("../../../static/二供设备/json_东北明珠.json")
         .then(function(res) {
-          _self.keys = []
-          res.data.nodeDataArray.forEach(function(item){
-            if(item.category == "valCase") _self.keys.push(item.key)
+          _self.keys = [];
+          res.data.nodeDataArray.forEach(function(item) {
+            if (item.category == "valCase") _self.keys.push(item.key);
           });
 
           _self.init(res.data);
@@ -81,50 +119,42 @@ export default {
         });
     },
     initWebsocket() {
+      var _this = this;
+      this.websocket = new WebSocket("ws://58.213.48.106/lyg/ws");
 
-			var _this = this;
-			this.websocket = new WebSocket("ws://58.213.48.106/lyg/ws");
-
-			this.websocket.onopen = function (evt) {
-
+      this.websocket.onopen = function(evt) {
         var msg = {
-            action: 'getData',
-            PumpName: _this.keys.join(","),
+          action: "getData",
+          PumpName: _this.keys.join(",")
         };
         _this.websocket.send(JSON.stringify(msg));
-			};
-
-			this.websocket.onmessage = function (msg) {
-        // console.log(msg)
-        var data = eval('(' + msg.data + ')')
-        if(data.source.length == 0) return;
-        data.source.forEach(function(item){
-          var node = _this.myDiagram.model.findNodeDataForKey(item.key);
-          _this.myDiagram.model.setDataProperty(node, 'realVal', item.value);
-          _this.myDiagram.model.setDataProperty(node, 'showVal', item.value);
-        })
-
-			};
-
-			this.websocket.onerror = function (evt) {
-			};
-
-			this.websocket.onclose = function (evt) {
       };
 
+      this.websocket.onmessage = function(msg) {
+        // console.log(msg)
+        var data = eval("(" + msg.data + ")");
+        if (data.source.length == 0) return;
+        data.source.forEach(function(item) {
+          var node = _this.myDiagram.model.findNodeDataForKey(item.key);
+          _this.myDiagram.model.setDataProperty(node, "realVal", item.value);
+          _this.myDiagram.model.setDataProperty(node, "showVal", item.value);
+        });
+      };
 
+      this.websocket.onerror = function(evt) {};
 
-      },
+      this.websocket.onclose = function(evt) {};
+    },
     handlerDC(e, obj) {
       //双击事件
-        var node = obj.part;//拿到节点的json对象，后面要拿什么值就直接.出来
-        var procTaskId = node.data.key;
-        var procTaskName = node.data.text;
+      var node = obj.part; //拿到节点的json对象，后面要拿什么值就直接.出来
+      var procTaskId = node.data.key;
+      var procTaskName = node.data.text;
       var procTaskloc = node.data.loc;
-        console.log(procTaskName+' key:'+procTaskId+' 坐标'+procTaskloc)
+      console.log(procTaskName + " key:" + procTaskId + " 坐标" + procTaskloc);
     },
     init(jsonStr) {
-      var _this=this;
+      var _this = this;
       var o,
         opacity = 1,
         down = true,
@@ -135,10 +165,10 @@ export default {
       this.myDiagram = $(go.Diagram, "myDiagramDiv", {
         initialAutoScale: go.Diagram.Uniform,
         initialContentAlignment: go.Spot.Center, // 画布内居中显示
-        "grid.visible": true,//显示网格
+        "grid.visible": true, //显示网格
         allowZoom: true, //画布是否可以缩放
         maxSelectionCount: 1,
-        allowMove:false,//选中节点
+        allowMove: false //选中节点
         // "undoManager.isEnabled": true //撤销
         // "dragSelectingTool.isEnabled" : false,//禁止鼠标拖动区域选中
         //  isReadOnly: true, //只读
@@ -151,7 +181,7 @@ export default {
         $(go.Shape, "LineH", { stroke: "rgba(7, 87, 102, 0.6)" }),
         $(go.Shape, "LineV", { stroke: "rgba(7, 87, 102, 0.6)" })
       );
-// console.log('11')
+      // console.log('11')
       go.Shape.defineFigureGenerator("Pool", function(shape, w, h) {
         var geo = new go.Geometry();
         var fig = new go.PathFigure(0, 0, true);
@@ -164,8 +194,9 @@ export default {
       });
 
       this.myDiagram.nodeTemplateMap.add(
-        'pic',
-        $( go.Node,
+        "pic",
+        $(
+          go.Node,
           "Spot",
           { locationSpot: go.Spot.Center, zOrder: 1 },
           new go.Binding("location", "loc", go.Point.parse).makeTwoWay(
@@ -175,11 +206,11 @@ export default {
           $(
             go.Picture,
             { width: 56, height: 56, column: 0, scale: 1, source: "" },
-            new go.Binding("source","imgSrc").makeTwoWay(),
+            new go.Binding("source", "imgSrc").makeTwoWay(),
             new go.Binding("scale", "scale").makeTwoWay(),
             new go.Binding("width", "width").makeTwoWay(),
             new go.Binding("height", "height").makeTwoWay()
-          ),
+          )
         )
       );
 
@@ -188,7 +219,11 @@ export default {
         $(
           go.Node,
           "Spot",
-          {doubleClick : function (e,node) {_this.handlerDC(e,node)}},//双击事件
+          {
+            doubleClick: function(e, node) {
+              _this.handlerDC(e, node);
+            }
+          }, //双击事件
           { locationSpot: go.Spot.Center, zOrder: 1 },
           // { selectionChanged: _this.changebeijing },
 
@@ -206,7 +241,7 @@ export default {
             $(
               go.Picture,
               { width: 56, height: 56, column: 0, scale: 1, source: "" },
-              new go.Binding("source","imgSrc").makeTwoWay(),
+              new go.Binding("source", "imgSrc").makeTwoWay(),
               new go.Binding("scale", "scale").makeTwoWay(),
               new go.Binding("width", "width").makeTwoWay(),
               new go.Binding("height", "height").makeTwoWay()
@@ -230,7 +265,11 @@ export default {
           "Auto",
           this.nodeStyle(),
           "Spot",
-          {doubleClick : function (e,node) {_this.handlerDC(e,node)}},//双击事件
+          {
+            doubleClick: function(e, node) {
+              _this.handlerDC(e, node);
+            }
+          }, //双击事件
           { locationSpot: go.Spot.Center, zOrder: 1 },
           new go.Binding("location", "loc", go.Point.parse).makeTwoWay(
             go.Point.stringify
@@ -261,7 +300,11 @@ export default {
           "Auto",
           this.nodeStyle(),
           "Spot",
-          {doubleClick : function (e,node) {_this.handlerDC(e,node)}},//双击事件
+          {
+            doubleClick: function(e, node) {
+              _this.handlerDC(e, node);
+            }
+          }, //双击事件
           { locationSpot: go.Spot.Center, zOrder: 1 },
           new go.Binding("location", "loc", go.Point.parse).makeTwoWay(
             go.Point.stringify
@@ -290,7 +333,11 @@ export default {
           "Auto",
           this.nodeStyle(),
           "Spot",
-          {doubleClick : function (e,node) { _this.handlerDC(e,node) }},//双击事件
+          {
+            doubleClick: function(e, node) {
+              _this.handlerDC(e, node);
+            }
+          }, //双击事件
           { locationSpot: go.Spot.Center, zOrder: 3 },
 
           new go.Binding("location", "loc", go.Point.parse).makeTwoWay(
@@ -334,7 +381,11 @@ export default {
           "Auto",
           this.nodeStyle(),
           "Spot",
-          {doubleClick : function (e,node) {_this.handlerDC(e,node)}},//双击事件
+          {
+            doubleClick: function(e, node) {
+              _this.handlerDC(e, node);
+            }
+          }, //双击事件
           { locationSpot: go.Spot.Center, zOrder: 1 },
           new go.Binding("location", "loc", go.Point.parse).makeTwoWay(
             go.Point.stringify
@@ -395,7 +446,11 @@ export default {
           "Auto",
           this.nodeStyle(),
           "Spot",
-          {doubleClick : function (e,node) {_this.handlerDC(e,node)}},//双击事件
+          {
+            doubleClick: function(e, node) {
+              _this.handlerDC(e, node);
+            }
+          }, //双击事件
           { locationSpot: go.Spot.Center, zOrder: 2 },
           new go.Binding("location", "loc", go.Point.parse).makeTwoWay(
             go.Point.stringify
@@ -442,7 +497,11 @@ export default {
           "Auto",
           this.nodeStyle(),
           "Spot",
-          {doubleClick : function (e,node) {_this.handlerDC(e,node)}},//双击事件
+          {
+            doubleClick: function(e, node) {
+              _this.handlerDC(e, node);
+            }
+          }, //双击事件
           { locationSpot: go.Spot.Center, zOrder: 1 },
           new go.Binding("location", "loc", go.Point.parse).makeTwoWay(
             go.Point.stringify
@@ -594,7 +653,11 @@ export default {
           "Auto",
           this.nodeStyle(),
           "Spot",
-          {doubleClick : function (e,node) {_this.handlerDC(e,node)}},//双击事件
+          {
+            doubleClick: function(e, node) {
+              _this.handlerDC(e, node);
+            }
+          }, //双击事件
           { locationSpot: go.Spot.Center, zOrder: 2 },
           new go.Binding("location", "loc", go.Point.parse).makeTwoWay(
             go.Point.stringify
@@ -624,7 +687,11 @@ export default {
           "Auto",
           this.nodeStyle(),
           "Spot",
-          {doubleClick : function (e,node) {_this.handlerDC(e,node)}},//双击事件
+          {
+            doubleClick: function(e, node) {
+              _this.handlerDC(e, node);
+            }
+          }, //双击事件
           { locationSpot: go.Spot.Center, zOrder: 2 },
           new go.Binding("location", "loc", go.Point.parse).makeTwoWay(
             go.Point.stringify
@@ -669,15 +736,11 @@ export default {
               // if (item.switchState == "开" || item.realVal == "--") return false;
               var controlName = item.controlName || item.showName;
 
-
               _self.$Modal.confirm({
-                title: '操作',
-                content: "确定要" + item.text + controlName + "吗？" ,
-                onOk: () => {
-
-                }
-              })
-
+                title: "操作",
+                content: "确定要" + item.text + controlName + "吗？",
+                onOk: () => {}
+              });
             }
           }
         )
@@ -987,6 +1050,9 @@ export default {
     }
   },
   beforeDestroy() {
+    client.end();
+    client = null;
+
     if (this.poolWater) {
       clearInterval(this.poolWater);
       this.poolWater = null;

@@ -42,15 +42,11 @@
                 <el-option label="顶部" value="顶部"></el-option>
               </el-select>
             </el-form-item>
-            <el-form-item label="图标" prop="icon">
-              <el-popover placement="bottom-start" width="400" trigger="click" @show="$refs['iconSelect'].reset()">
-                <IconSelect ref="iconSelect" @selected="selected" />
-                <el-input slot="reference" v-model="menuForm.icon" placeholder="点击选择图标" readonly>
-                  <svg-icon v-if="menuForm.icon" slot="prefix" :icon-class="menuForm.icon" class="el-input__icon" style="height: 32px;width: 16px;" />
-                  <i v-else slot="prefix" class="el-icon-search el-input__icon" />
-                  <i slot="suffix" class="el-icon-circle-close el-input__icon" v-if="menuForm.icon" style="cursor: pointer" @click="menuForm.icon=''"/>
-                </el-input>
-              </el-popover>
+            <el-form-item label="缓存组件" prop="cache">
+              <el-radio-group v-model="menuForm.cache">
+                <el-radio :label="true">要缓存</el-radio>
+                <el-radio :label="false">不缓存</el-radio>
+              </el-radio-group>
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -65,7 +61,7 @@
             <el-form-item label="加载序号" prop="index">
               <el-input v-model="menuForm.index" autocomplete="off" placeholder="请输入加载序号" clearable></el-input>
             </el-form-item>
-            <el-form-item label="状态" prop="enabled">
+            <el-form-item label="菜单状态" prop="enabled">
               <el-radio-group v-model="menuForm.enabled">
                 <el-radio :label="false">正常</el-radio>
                 <el-radio :label="true">禁用</el-radio>
@@ -73,6 +69,16 @@
             </el-form-item>
           </el-col>
           <el-col :span="24">
+            <el-form-item label="菜单图标" prop="icon">
+              <el-popover placement="bottom-start" width="400" trigger="click" @show="$refs['iconSelect'].reset()">
+                <IconSelect ref="iconSelect" @selected="selected" />
+                <el-input slot="reference" v-model="menuForm.icon" placeholder="点击选择图标" readonly>
+                  <svg-icon v-if="menuForm.icon" slot="prefix" :icon-class="menuForm.icon" class="el-input__icon" style="height: 32px;width: 16px;" />
+                  <i v-else slot="prefix" class="el-icon-search el-input__icon" />
+                  <i slot="suffix" class="el-icon-circle-close el-input__icon" v-if="menuForm.icon" style="cursor: pointer" @click="menuForm.icon=''"/>
+                </el-input>
+              </el-popover>
+            </el-form-item>
             <el-form-item label="备注" prop="remark">
               <el-input v-model="menuForm.remark" autocomplete="off" type="textarea"></el-input>
             </el-form-item>
@@ -185,6 +191,7 @@ export default {
               index: '',
               enabled: false,
               remark: '',
+              cache:'',
             }
         }
     },
@@ -283,6 +290,7 @@ export default {
               index: '',
               enabled: false,
               remark: '',
+              cache:'',
             };
         },
         // 选择icon

@@ -16,8 +16,7 @@
       <div class="homePageDiv" style="height: 100%;position: relative;overflow-y: hidden;width: 100%;">
           <Carousel v-model="overviewPage">
             <CarouselItem :key="inde" v-for="(item,inde) in maxPage">
-               <!-- <component :is="item.classname"></component> -->
-              <carouselPage1></carouselPage1>
+               <component :is="item.pageName"></component>
             </CarouselItem>
           </Carousel>
       </div>
@@ -28,16 +27,19 @@
 <script>
 
 import carouselPage1 from "../component/publics/carouselPage1.vue";
+import carouselPage2 from "../component/publics/carouselPage2.vue";
 
 export default {
     components: {
-      carouselPage1
+      carouselPage1,
+      carouselPage2
     },
     data() {
       return {
         overviewPage: 0,
         maxPage: [
-          {id:1},
+          {id:1, pageName:"carouselPage1"},
+          {id:2, pageName:"carouselPage2"},
         ],
 
         time: null,
@@ -106,6 +108,27 @@ export default {
     }
   };
 </script>
+<style >
+  .UnitFrame {
+    padding: 0 0.05rem 0.05rem 0.05rem;
+  }
+
+  .UnitDiv {
+    position: relative;
+    height: 100%;
+  }
+
+  .UnitDiv_bg6 {
+    height: 100%;
+    background: url("../../../../static/img/newhome/04/6.png") no-repeat;
+    background-size: 100% 100%;
+  }
+  .UnitDiv_bg3 {
+    height: 100%;
+    background: url("../../../../static/img/newhome/04/3.png") no-repeat;
+    background-size: 100% 100%;
+  }
+</style>
 
 <style lang="less" scoped>
   @deep: ~'>>>';  //深度选择器

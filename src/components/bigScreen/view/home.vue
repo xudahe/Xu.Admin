@@ -1,19 +1,19 @@
 <!-- 入口页面 -->
 <template>
   <div id="homemain" style="height: 100%;width: 100%;">
-    <header2></header2>
+    <header1></header1>
     <router-view />
   </div>
 </template>
 
 <script>
 import Vue from "vue";
-import header2 from "../component/header.vue";
+import header1 from "../component/header.vue";
 import NavConfig from "../router/nav.configCompent.yml";
 
 export default {
   components: {
-    header2
+    header1
   },
   watch: {
     $route(to, from) {}

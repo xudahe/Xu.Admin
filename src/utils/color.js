@@ -38,7 +38,7 @@ export function toColorHex(color) {
 };
 
 /**
- * @description 将颜色转换为rgb数组
+ * @description 将十六进制转换为rgb颜色
  */
 export function toColorRgb(color) {
   var reg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;

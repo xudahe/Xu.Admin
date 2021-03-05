@@ -55,7 +55,7 @@
 export default {
     data() {
       return {
-        ptTitle: '',
+        ptTitle: '大屏管理',
 		  	
 		  	ismeunNumLeft: null,
         ismeunNumRight: null,
@@ -166,6 +166,18 @@ export default {
 
 .header {
   width: 100%;
+
+  .ptname {
+    font-family: 'title';
+    color: #fff;
+    font-size: 0.32rem;
+    font-weight: initial;
+    position: relative;
+    background-image: -webkit-gradient(linear, 0 0, 0 bottom, from(#ffffff), to(#7fc3c3));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+  }
 
   .homePageTitle{
     height: 0.6rem;

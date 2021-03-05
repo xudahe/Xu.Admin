@@ -4,7 +4,7 @@ Vue.use(Router)
 
 import Login from "@/views/login/index"
 import Layout from "@/views/layout/index"
-import bigScreen from "@/components/bigScreen/view/home"
+import bighome from "@/components/bigScreen/view/home"
 import homePage from "@/components/bigScreen/view/homePage"
 import application from "@/components/bigScreen/view/application"
 import platform from "@/components/bigScreen/view/platform"
@@ -129,13 +129,13 @@ let defaultRouter = [{
     children: []
   },
   {
-    path: '/bigScreen',
-    name: 'bigScreen',
+    path: '/bighome',
+    name: 'bighome',
     meta: {
       title: "大屏"
     },
     hidden: true,
-    component: bigScreen,
+    component: bighome,
     children: [{
         path: '/homePage',
         name: 'homePage',

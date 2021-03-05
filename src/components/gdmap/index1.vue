@@ -67,7 +67,7 @@ export default {
       this.init();
     } else {
       await remoteLoad(
-        `http://webapi.amap.com/maps?v=1.4.15&key=2d00cf810203e90c91261b1ae4ebacdd`,
+        `http://webapi.amap.com/maps?v=1.4.15&key=73cddabc2173e0166a622f4483d3592a`,
         true
       ),
         await remoteLoad(`http://webapi.amap.com/ui/1.1/main.js`);

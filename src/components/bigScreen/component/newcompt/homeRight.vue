@@ -275,80 +275,19 @@ import resize from "@/api/mixins/echart.js";
                  "川东",
                  "检修"
               ],
-              lineData: [
-                 18092,
-                 20728,
-                 24045,
-                 28348,
-                 32808,
-                 36097,
-                 39867,
-                 44715,
-                 48444,
-                 50415,
-                 56061,
-                 62677,
-                 59521,
-                 67560,
-                 18092,
-                 20728,
-                 24045,
-                 28348,
-                 32808,
-                 36097,
-                 39867,
-                 44715,
-                 48444,
-                 50415,
-                 36097,
-                 39867,
-                 44715,
-                 48444,
-                 50415,
-                 50061,
-                 32677,
-                 49521,
-                 32808
-              ],
-              barData: [
-                 4600,
-                 5000,
-                 5500,
-                 6500,
-                 7500,
-                 8500,
-                 9900,
-                 12500,
-                 14000,
-                 21500,
-                 23200,
-                 24450,
-                 25250,
-                 33300,
-                 4600,
-                 5000,
-                 5500,
-                 6500,
-                 7500,
-                 8500,
-                 9900,
-                 22500,
-                 14000,
-                 21500,
-                 8500,
-                 9900,
-                 12500,
-                 14000,
-                 50415,
-                 23200,
-                 24450,
-                 25250,
-                 7500
-              ],
+              lineData: [],
+              barData: [],
               rateData: []
             }
 
-            for (let i = 0; i < cdata.barData.length -1; i++) {
+            for (let i = 0; i < 33; i++) {
+              let num1 = Math.floor(Math.random()* 1000 +1)
+              let num2 = Math.floor(Math.random()* num1 +1)
+              cdata.lineData.push(num1)
+              cdata.barData.push(num2)
+            }
+
+            for (let i = 0; i < cdata.barData.length; i++) {
               let rate = cdata.barData[i] / cdata.lineData[i];
               cdata.rateData.push(rate.toFixed(2));
             }
@@ -402,9 +341,27 @@ import resize from "@/api/mixins/echart.js";
               ],
               xAxis: {
                 data: cdata.category,
-                axisLine: {
+                nameTextStyle: {
+                 color: "#6ea7da",
+                 fontSize: "12"
+                },
+                splitLine: {
+                  show: false,
                   lineStyle: {
-                    color: "#B4B4B4"
+                    type: "dashed",
+                    color: "#dfdfdf"
+                  }
+                },
+                axisLabel: {
+                  textStyle: {
+                    color: "#00cffe"
+                  },
+                  margin: 20
+                },
+                axisLine: {
+                  show: true,
+                  lineStyle: {
+                    color: "#2a6192"
                   }
                 },
                 axisTick: {
@@ -413,13 +370,27 @@ import resize from "@/api/mixins/echart.js";
               },
               yAxis: [
                 {
-                  splitLine: { show: false },
-                  axisLine: {
+                  splitLine: {
+                    show: false,
                     lineStyle: {
-                      color: "#B4B4B4"
+                      type: "dashed",
+                      color: "#dfdfdf"
                     }
                   },
+                  axisLine: {
+                    show: true,
+                    lineStyle: {
+                      color: "#2a6192"
+                    }
+                  },
+                  nameTextStyle: {
+                    color: "#00cffe",
+                    fontSize: "12"
+                  },
                   axisLabel: {
+                    textStyle: {
+                      color: "#00cffe"
+                    },
                     formatter: function (value, index) {
                         if (value >= 10000 && value < 100000) {
                             value = value / 10000 + "万";
@@ -433,32 +404,47 @@ import resize from "@/api/mixins/echart.js";
                   }
                 },
                 {
-                  splitLine: { show: false },
-                  axisLine: {
+                  splitLine: {
+                    show: false,
                     lineStyle: {
-                      color: "#B4B4B4"
+                      type: "dashed",
+                      color: "#dfdfdf"
                     }
                   },
                   axisLabel: {
+                    textStyle: {
+                      color: "#00cffe"
+                    },
                     formatter: "{value} "
-                  }
+                  },
+                  axisLine: {
+                    show: true,
+                    lineStyle: {
+                      color: "#2a6192"
+                    }
+                  },
+                  nameTextStyle: {
+                    color: "#00cffe",
+                    fontSize: "12"
+                  },
+                 
                 }
               ],
               series: [
                 {
                   name: "贯通率",
                   type: "line",
-                  smooth: true,
+                  smooth: true, //true 为平滑曲线，false为直线
                   showAllSymbol: true,
                   symbol: "emptyCircle",
-                  symbolSize: 8,
+                  symbolSize: 6,
                   yAxisIndex: 1,
                   itemStyle: {
                     normal: {
                       color: "#F02FC2"
                     }
                   },
-                  showSymbol: false,
+                  showSymbol: true, //显示折线图中的节点
                   data: cdata.rateData
                 },
                 {
@@ -513,8 +499,8 @@ import resize from "@/api/mixins/echart.js";
           }
           let dom = document.getElementsByClassName("pipeRightMidBot");
           if (dom.length > 0) {
-            dom[0].classList.remove("active-transform");
-            dom[0].classList.add("active-transform");
+            dom[0].classList.remove("active-transform1");
+            dom[0].classList.add("active-transform1");
             _this.noticeTopsb = -dom[0].clientHeight;
           }
 
@@ -524,7 +510,7 @@ import resize from "@/api/mixins/echart.js";
             _this.datalist2.shift();
             _this.animate  = false;
             _this.noticeTopsb = 0;
-            if (dom.length > 0) dom[0].classList.remove("active-transform");
+            if (dom.length > 0) dom[0].classList.remove("active-transform1");
           }, 2000);
           index++;
         }, 5000);
@@ -552,24 +538,5 @@ import resize from "@/api/mixins/echart.js";
 </script>
 
 <style lang="less" scoped>
-.homeRight {
-  .UnitFrame{
-    padding: 0 0.05rem 0.05rem 0.05rem;
-	}
-	
-  .UnitDiv {
-    position: relative;
-    height: 100%;
-	}
 
-	.UnitDiv_bg6 {
-		background: url("../../../../../static/img/newhome/04/6.png") no-repeat;
-		background-size: 100% 100%;
-	}
-	.UnitDiv_bg3 {
-		background: url("../../../../../static/img/newhome/04/3.png") no-repeat;
-		background-size: 100% 100%;
-  }
- 
-}
 </style>

@@ -196,13 +196,13 @@ export default {
 	components: {},
 	data() {
 		return {
-            ptTitle: 'X',
+            ptTitle: '项目管理平台',
 			user: this.$store.getters.info.userinfo,
 			platform: [
-                {name:'综合展示', imgurl:'../../../../static/img/menus/11.png'},
-                {name:'综合展示', imgurl:'../../../../static/img/menus/22.png'},
-                {name:'综合展示', imgurl:'../../../../static/img/menus/33.png'},
-            ], //绑定的平台集合
+                {name:'综合展示', imgurl:'../../../../static/img/menus/11.png',path: "/bighome"},
+                {name:'综合展示', imgurl:'../../../../static/img/menus/22.png',path: "/bighome"},
+                {name:'综合展示', imgurl:'../../../../static/img/menus/33.png',path: "/bighome"},
+            ],
 			weathers: {
 				type: '晴',
 				txtInfo: ''
@@ -236,7 +236,7 @@ export default {
 			);
 		},
 		goHome(item) {
-	    	this.$router.push({path: "/bigScreen"});
+	    	this.$router.push({path: item.path});
 		},
 		logout() {
 			this.$router.push({path: "/login"});

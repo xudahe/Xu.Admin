@@ -2,9 +2,9 @@
   <div class="homeMiddleBot" style="height: 100%; width: 100%;">
     <div
       class="UnitFrame rotate-in-x"
-      style="height: 100%;float: left;width: 50%;"
+      style="height: 100%;float: left;width: 50%;padding:0 0 0.05rem 0"
     >
-      <div class="UnitDiv">
+      <div class="UnitDiv UnitDiv_bg6">
         <div
           id="echart_visite_bot1"
           class="echart_visite_bot1"
@@ -15,9 +15,15 @@
 
     <div
       class="UnitFrame rotate-in-x"
-      style="height: 100%;float: left;width: 50%;"
+      style="height: 100%;float: left;width: 50%;padding:0 0 0.05rem 0"
     >
-      <div class="UnitDiv"></div>
+      <div class="UnitDiv UnitDiv_bg6">
+        <div
+          id="echart_visite_bot2"
+          class="echart_visite_bot2"
+          :style="{ height: '100%', width: '100%' }"
+        ></div>
+      </div>
     </div>
   </div>
 </template>
@@ -31,7 +37,10 @@ export default {
   data() {
     return {
       myChart1: null,
-      options1: null
+      options1: null,
+
+      myChart2: null,
+      options2: null
     };
   },
   methods: {
@@ -49,20 +58,33 @@ export default {
           show: false
         },
         xAxis: {
-          show: false,
-          max: maxData
-        },
-        yAxis: {
-          data: ["2020", "2019", "2018", "2017"],
-          inverse: true,
-          axisTick: { show: false },
-          axisLine: { show: false },
+          splitLine: {
+            show: false
+          },
+          axisLine: {
+            show: false
+          },
           axisLabel: {
-            margin: 10,
-            color: "#999",
-            fontSize: 16
+            show: false
+          },
+          axisTick: {
+            show: false
           }
         },
+        yAxis: [
+          {
+            data: ["2020", "2019", "2018", "2017"],
+            type: "category",
+            inverse: true,
+            axisTick: { show: false },
+            axisLine: { show: false },
+            axisLabel: {
+              margin: 10,
+              color: "#fff",
+              fontSize: 16
+            }
+          }
+        ],
         grid: {
           top: "18%",
           right: "22%",
@@ -78,18 +100,31 @@ export default {
             symbolClip: true,
             symbolSize: 15, //图标大小
             symbolBoundingData: maxData,
+            symbolPosition: "start",
+            label: {
+              normal: {
+                show: true,
+                position: "insideRight",
+                offset: [40, 0],
+                color: "yellow",
+                formatter: function(params) {
+                  return params.value;
+                }
+              }
+            },
             data: [891, 1220, 660, 1670],
             markLine: {
+              //警戒线
               symbol: "none",
               label: {
                 formatter: "max: {c}",
                 position: "start",
-                color: "yellow"
+                color: "#7ad87f"
               },
               lineStyle: {
-                color: "#B4B4B4",
+                color: "#7ad87f",
                 type: "dotted",
-                opacity: 0.2,
+                opacity: 0.8,
                 width: 2
               },
               data: [
@@ -138,13 +173,13 @@ export default {
           series: [
             {
               data: dynamicData.slice()
-            },
-            {
-              data: dynamicData.slice()
             }
+            // {
+            //   data: dynamicData.slice()
+            // }
           ]
         });
-      }, 3000);
+      }, 10000);
 
       this.$once("hook:beforeDestroy", () => {
         clearInterval(timer);
@@ -155,32 +190,219 @@ export default {
       window.addEventListener("resize", function() {
         _this.myChart1.resize();
       });
+    },
+
+    initCharts2() {
+      let _this = this;
+
+      var charts = {
+        unit: "户数",
+        names: ["新增户数", "注销户数"],
+        lineX: [
+          "2012年",
+          "2013年",
+          "2014年",
+          "2015年",
+          "2016年",
+          "2017年",
+          "2018年"
+        ],
+        value: [[], []]
+      };
+
+      getData();
+      function getData() {
+        charts.value[0] = [];
+        charts.value[1] = [];
+        for (let i = 0; i < charts.lineX.length; i++) {
+          let num1 = Math.floor(Math.random() * 900);
+          let num2 = Math.floor(Math.random() * num1);
+          charts.value[0].push(num1);
+          charts.value[1].push(num2);
+        }
+      }
+
+      var color = ["rgba(23, 255, 243", "rgba(119,61,190"];
+      var lineY = [];
+
+      for (var i = 0; i < charts.names.length; i++) {
+        var x = i;
+        if (x > color.length - 1) {
+          x = color.length - 1;
+        }
+        var data = {
+          name: charts.names[i],
+          type: "line",
+          color: color[x] + ")",
+          smooth: true,
+          areaStyle: {
+            normal: {
+              color: new echarts.graphic.LinearGradient(
+                0,
+                0,
+                0,
+                1,
+                [
+                  {
+                    offset: 0,
+                    color: color[x] + ", 0.5)"
+                  },
+                  {
+                    offset: 1,
+                    color: color[x] + ", 0)"
+                  }
+                ],
+                false
+              ),
+              shadowColor: "rgba(0, 0, 0, 0.1)",
+              shadowBlur: 10
+            }
+          },
+          symbol: "circle",
+          symbolSize: 5,
+          data: charts.value[i]
+        };
+        lineY.push(data);
+      }
+
+      lineY[0].markLine = {
+        silent: true,
+        data: [
+          {
+            yAxis: 150
+          },
+          {
+            yAxis: 400
+          }
+        ]
+      };
+
+      this.options2 = {
+        tooltip: {
+          trigger: "axis"
+        },
+        legend: {
+          data: charts.names,
+          textStyle: {
+            fontSize: 12,
+            color: "rgb(0,253,255,0.6)"
+          },
+          right: "4%"
+        },
+        grid: {
+          top: "23%",
+          left: "4%",
+          right: "8%",
+          bottom: "0%",
+          containLabel: true
+        },
+        xAxis: {
+          type: "category",
+          boundaryGap: false,
+          data: charts.lineX,
+          nameTextStyle: {
+            color: "#6ea7da",
+            fontSize: "12"
+          },
+          splitLine: {
+            show: false,
+            lineStyle: {
+              type: "dashed",
+              color: "#dfdfdf"
+            }
+          },
+          axisLabel: {
+            textStyle: {
+              color: "#00cffe"
+            },
+            formatter: function(params) {
+              return params.split(" ")[0];
+            }
+          },
+          axisLine: {
+            show: true,
+            lineStyle: {
+              color: "#2a6192"
+            }
+          },
+          axisTick: {
+            show: false
+          }
+        },
+        yAxis: {
+          name: charts.unit,
+          type: "value",
+
+          splitLine: {
+            show: false,
+            lineStyle: {
+              type: "dashed",
+              color: "#dfdfdf"
+            }
+          },
+          axisLabel: {
+            formatter: "{value}",
+            textStyle: {
+              color: "#00cffe"
+            }
+          },
+          axisLine: {
+            show: true,
+            lineStyle: {
+              color: "#2a6192"
+            }
+          },
+          nameTextStyle: {
+            color: "#00cffe",
+            fontSize: "12"
+          },
+          axisTick: {
+            show: true
+          }
+        },
+        series: lineY
+      };
+
+      var timer = setInterval(() => {
+        getData();
+
+        _this.myChart2.setOption({
+          series: [
+            {
+              data: charts.value[0]
+            },
+            {
+              data: charts.value[1]
+            }
+          ]
+        });
+      }, 10000);
+
+      this.$once("hook:beforeDestroy", () => {
+        clearInterval(timer);
+      });
+
+      this.myChart2.setOption(this.options2, true);
+      this.myChart2.resize();
+      window.addEventListener("resize", function() {
+        _this.myChart2.resize();
+      });
     }
   },
   mounted() {
     var _this = this;
 
     this.myChart1 = echarts.init(document.getElementById("echart_visite_bot1"));
+    this.myChart2 = echarts.init(document.getElementById("echart_visite_bot2"));
 
     setTimeout(() => {
       _this.initCharts1();
+      _this.initCharts2();
     }, 500);
   }
 };
 </script>
 
 <style lang="less" scoped>
-.homeMiddleBot {
-  .UnitFrame {
-    padding-bottom: 0.05rem;
-  }
 
-  .UnitDiv {
-    position: relative;
-    height: 100%;
-    background: url("../../../../../static/img/newhome/04/6.png");
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-  }
-}
 </style>

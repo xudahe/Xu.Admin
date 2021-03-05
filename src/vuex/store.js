@@ -14,12 +14,10 @@ const store = new Vuex.Store({
     tokenExpire: null,
 
     //缓存组件，该值是组件中定义的name值，include 名称匹配的组件会被缓存，exclude 名称匹配的组件不被缓存。
-    cachedViews: ["t-gdmap", "t-arcgisMap", "t-tinymce"],
+    cachedViews: ["t-gdmap", "t-arcgisMap", "t-tinymce", "t-echartMap"],
 
     drag_com: "",
     drag_ref: "",
-    mapitems: Array, //地图窗口组件id名称
-    mapitemsload: Object, //分屏预加载图层
   },
   // 执行同步操作改变state   this.$store.commit("saveToken", data)
   mutations: {

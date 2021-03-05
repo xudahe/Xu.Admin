@@ -36,6 +36,7 @@ import { MTLLoader } from "three/examples/jsm/loaders/MTLLoader.js";
  *
  * https://blog.csdn.net/qq_36266612/article/details/89851618
  * https://blog.csdn.net/mmiaochong/article/details/111045265
+ * https://blog.csdn.net/qq_37540004/article/details/102862348
  */
 
 var camera = null;
@@ -61,7 +62,7 @@ export default {
       controls: null,
       clock: new THREE.Clock(),
       mixer: null,
-
+  
       width: null,
       height: null,
       timer: null
@@ -180,7 +181,7 @@ export default {
 
       let loader = new GLTFLoader(); /*实例化加载器*/
       loader.load(
-        "../../static/threejs/ep_e04.gltf",
+        "../../static/threejs/floor.gltf",
         function(gltf) {
           var mesh = gltf.scene;
 

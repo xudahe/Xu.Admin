@@ -22,7 +22,6 @@ const mapconfig = {
 		xmax: 331744.7149,
 		ymax: 356750.94739999995
 	},// 初始化定位
-	MapControl: {}, //用来控制地图是否同步
 };
 
 export default mapconfig

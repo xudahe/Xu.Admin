@@ -41,7 +41,7 @@
             @close="removeTab(item)"
             @click="$router.push({ path: item.path })"
             @contextmenu.native.prevent="openMenu(item, $event, index)"
-            style="margin:0 3px; cursor: pointer;"
+            style="margin:0 3px; cursor: pointer;display: inline-block;"
             >{{ item.title }}</el-tag
           >
         </transition-group>
@@ -170,6 +170,7 @@ export default {
 
 <style lang="less" scoped>
 .tags-nav {
+  width: 100%;
   height: 42px !important;
   line-height: 42px;
   position: relative;

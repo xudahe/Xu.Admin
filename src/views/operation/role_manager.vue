@@ -296,7 +296,7 @@ export default {
           this.roleForm = this.sels
           this.roleForm.menuIds = ids.join(',')
           
-          this.formTitle = "编辑"
+          this.formTitle = "菜单绑定"
           this.handleSubmit()
         },
         //显示编辑界面
@@ -323,7 +323,7 @@ export default {
             return this.$warnMsg("角色名称不能为空！")
 
           let _this = this;
-          let apiUrl = this.formTitle=='编辑' ? this.$apiSet.putRole:this.$apiSet.postRole;
+          let apiUrl = this.formTitle !='编辑' ? this.$apiSet.putRole:this.$apiSet.postRole;
           this.$ajax(apiUrl, this.roleForm)
             .then(res => {
               if (!res.data.success) {
@@ -331,7 +331,10 @@ export default {
               } else {
                   _this.formVisible = false;
                   _this.searchData();
-                  _this.$successMsg(res.data.message)
+                  if(_this.formTitle == "菜单绑定")
+                    _this.$successMsg("菜单绑定成功，请重新登录！")
+                  else
+                    _this.$successMsg(res.data.message)
 					    }
             })
             .catch(err => {})

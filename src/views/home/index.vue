@@ -15,13 +15,6 @@
                 <slide></slide>
              </el-card>
         </el-col>
-        <!-- <el-col :span="12">
-             <el-card class="box-card" shadow="hover">
-                 <div style="height: 300px;">
-                   <v-video></v-video>
-                 </div>
-             </el-card>
-        </el-col> -->
      </el-row>
    
     <v-dialog  ref="dialog" v-model="dialog.show" :title="dialog.title" :buttons="dialog.buttons" :bodyshow="dialog.bodyshow" >

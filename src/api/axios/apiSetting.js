@@ -157,6 +157,18 @@ const FileModule = {
   },
 }
 
+const VideoModule = {
+  getwaterlistData: {
+		url: "http://36.156.142.83:8086/LYG/api/Monitor/YSY_AddressList",
+		method: "get"
+	},
+	getaddress_kh: {
+		url: 'http://36.156.142.83:8086/LYG/api/Monitor/GetAddressList',
+		method: 'get'
+	},
+  
+}
+
 const ApiSetting = {
   ...LoginModule,
   ...UserModule,
@@ -166,6 +178,7 @@ const ApiSetting = {
   ...TasksQzModule,
   ...LogModule,
   ...FileModule,
+  ...VideoModule,
 }
 
 export default ApiSetting

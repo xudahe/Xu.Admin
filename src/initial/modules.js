@@ -7,7 +7,7 @@ import vueg from 'vueg'
 // Markdown （mavonEditor）编辑器
 import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
-// 引入videojs
+// 引入videojs的css样式
 import 'video.js/dist/video-js.css'
 // 引入前端错误日志
 import './other/error_log'

@@ -317,6 +317,7 @@ export default {
               } else {
                 _this.formVisible = false;
                 _this.searchData();
+                _this.getParentData();
                 _this.$successMsg(res.data.message)
 					    }
             })

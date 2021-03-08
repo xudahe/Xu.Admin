@@ -25,13 +25,14 @@ const system_routes = getRoutes(require.context('@/views/system', true, /\.vue$/
 const tools_routes = getRoutes(require.context('@/views/tools', true, /\.vue$/));
 const page_routes = getRoutes(require.context('@/views/pages', true, /\.vue$/));
 const map_routes = getRoutes(require.context('@/views/map', true, /\.vue$/));
+const video_routes = getRoutes(require.context('@/views/video', true, /\.vue$/));
 
 let addRouter = [{
   path: "/index",
   iconCls: "el-icon-tickets", // 图标样式class
   name: "系统设置",
   component: Layout,
-  children: operation_routes.concat(system_routes).concat(tools_routes).concat(page_routes).concat(map_routes)
+  children: operation_routes.concat(system_routes).concat(tools_routes).concat(page_routes).concat(map_routes).concat(video_routes)
 }];
 
 //自动注册路由

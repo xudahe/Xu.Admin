@@ -1,7 +1,7 @@
 <template>
     <div class="v-video"> 
-        <video :id="videoId" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto" style='width: 100%;height: 100%' poster="auto">
-			<!-- <source id="source" src="http://58.213.48.106/CCTV/无人机河道巡检/大庙沟视频/大庙沟_20200512/Index.m3u8" type="application/x-mpegURL"> -->
+        <video :id="videoId" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto"  width="400" height="300" poster="auto" autoplay
+			data-setup="{}">
         </video>
     </div>
 </template>
@@ -18,7 +18,7 @@ export default {
     props: {
       videoUrl: {
         type: String,
-        default:  'http://cctvalih5ca.v.myalicdn.com/live/cctv1_2/index.m3u8'
+        default:  'http://221.178.195.2:83/openUrl/wsKmyKA/live.m3u8'
       },
     },
     watch: {
@@ -41,14 +41,23 @@ export default {
     methods: {
         initialVideo() {
             this.myVideojs = videojs(this.videoId, {
-              bigPlayButton: true,
-              textTrackDisplay: false,
-              posterImage: false,
-              errorDisplay: false,
-              hls: {
-                withCredentials: true
-              }
+              aspectRatio: "4:3", //视频的宽高比
+				bigPlayButton: true,
+				textTrackDisplay: false,
+				posterImage: false,
+				errorDisplay: false,
+				controlBar: {
+					captionsButton: false,
+					chaptersButton: false,
+					subtitlesButton: false,
+					liveDisplay: false,
+					playbackRateMenuButton: false
+				},
+				hls: {
+					withCredentials: true
+				}
             }, function(){
+                console.log(this)
                 console.log('videojs播放器初始化成功')
             });
         },

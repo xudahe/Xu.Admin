@@ -284,7 +284,7 @@ export default {
       _this.waterList = [];
       _this.selectlist = [];
 
-      this.$ajax(this.$apiSet.getwaterlistData, {
+      this.$ajax(this.$apiSet.getwaterlistData1, {
         type: "",
         isgroup: 1
       }).then(
@@ -352,7 +352,7 @@ export default {
           name +
           "</span></div></div>";
 
-        this.$ajax(this.$apiSet.getaddress_kh, {
+        this.$ajax(this.$apiSet.getaddress_kh1, {
           indexcode: url,
           protocol: "hls"
         }).then(
@@ -371,7 +371,7 @@ export default {
                       src: khurl,
                       type: "application/x-mpegURL"
                     });
-                    _this.khmyVideojs[ss].play();
+                    // _this.khmyVideojs[ss].play();
                   }
                 }
               }
@@ -394,6 +394,7 @@ export default {
         var khvideojsid = khvideojs[ss].getAttribute("id");
         _this.khmyVideojs.push(
           videojs(khvideojsid, {
+            autoplay: true, //是否自动播放
             bigPlayButton: true,
             textTrackDisplay: false,
             posterImage: false,

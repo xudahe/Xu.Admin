@@ -158,12 +158,23 @@ const FileModule = {
 }
 
 const VideoModule = {
-  getwaterlistData: {
+  // 连云港
+  getwaterlistData1: {
 		url: "http://36.156.142.83:8086/LYG/api/Monitor/YSY_AddressList",
 		method: "get"
 	},
-	getaddress_kh: {
+	getaddress_kh1: {
 		url: 'http://36.156.142.83:8086/LYG/api/Monitor/GetAddressList',
+		method: 'get'
+	},
+
+  // 鼓楼
+  getwaterlistData2:{
+		url: "http://58.213.48.106/DrainageManagement/Main/BDataQuery/DataQuery.ashx?cmd=Get_SpStation_l",
+		method: "post"
+	},
+  getaddress_kh2: {
+		url: 'http://58.213.48.106/PSManageServices/HKSP/hksp_address.ashx?action=getaddress_kh',
 		method: 'get'
 	},
   

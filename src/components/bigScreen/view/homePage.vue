@@ -28,11 +28,13 @@
 
 import carouselPage1 from "../component/publics/carouselPage1.vue";
 import carouselPage2 from "../component/publics/carouselPage2.vue";
+import carouselPage3 from "../component/publics/carouselPage3.vue";
 
 export default {
     components: {
       carouselPage1,
-      carouselPage2
+      carouselPage2,
+      carouselPage3,
     },
     data() {
       return {
@@ -40,6 +42,7 @@ export default {
         maxPage: [
           {id:1, pageName:"carouselPage1"},
           {id:2, pageName:"carouselPage2"},
+          {id:3, pageName:"carouselPage3"},
         ],
 
         time: null,

@@ -60,8 +60,8 @@
         <!-- <li class="icon"><img :src="avatar"/></li> -->
       </ul>
     </el-header>
-    <!-- <tabNav></tabNav> -->
-    <tagNav></tagNav>
+    <tabNav></tabNav>
+    <!-- <tagNav></tagNav> -->
   </div>
 </template>
 

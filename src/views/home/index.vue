@@ -19,7 +19,7 @@
    
     <v-dialog  ref="dialog" v-model="dialog.show" :title="dialog.title" :buttons="dialog.buttons" :bodyshow="dialog.bodyshow" >
 	    <div style="height: 300px;">
-      
+        <countdown></countdown>
 	    </div>
     </v-dialog>
     <dialog1 ref="dragdialog" v-show="showDialog"></dialog1>
@@ -30,11 +30,13 @@
 
 import dialog1 from "../../components/dialog/dialog1"
 import slide from "../../components/slideverify/slide"
+import countdown from "../../components/countdown/index1"
 
 export default {
   components: {
     dialog1,
-    slide
+    slide,
+    countdown
   },
   data() {
     return {

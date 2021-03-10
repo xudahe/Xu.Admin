@@ -400,8 +400,8 @@ export default {
           "grid.visible": true, //画布上面是否出现网格
           // scale: scale, //初始视图大小比例
           // minScale:0.6,//最小视图的缩小比例
+          padding:30,
           autoScale:go.Diagram.Uniform, //自适应
-          padding:50,
           allowHorizontalScroll: false,//禁止水平拖动画布  禁止水平滚动条
           allowVerticalScroll: false,//禁止垂直拖动画布 禁止垂直滚动条
           // maxScale:1.2,//最大视图的放大比例
@@ -472,8 +472,8 @@ export default {
               fill: "rgba(255,255,255,0)" /* green */,
               stroke: null,
               portId: "",
-              width: 50,
-              height: 50,
+              width: 52,
+              height: 52,
               cursor: "pointer"
             },
             new go.Binding("fill", "Outsidecolor")
@@ -484,8 +484,8 @@ export default {
             {
               fill: colors.blue /* green */,
               stroke: null,
-              width: 28,
-              height: 28,
+              width: 29,
+              height: 29,
               portId: "",
               cursor: "pointer"
             },
@@ -1001,11 +1001,16 @@ export default {
             stroke: colors.green,
             strokeWidth: 5,
             name: "PIPE",
-            strokeDashArray: [20, 20]
+            strokeDashArray: [20, 20],
           },
           new go.Binding("stroke", "watercolor")
-        )
+        ),
+        //箭头
+        // $(go.TextBlock, ">>>>", {  font: "Bold 22px Lato, sans-serif",segmentIndex: 1, segmentFraction: 0.5, stroke:"#38ff0e",segmentOrientation: go.Link.OrientUpright}),
+        // $(go.TextBlock, ">>>>", {  font: "Bold 22px Lato, sans-serif",segmentIndex: 2, segmentFraction: 0.5, stroke:"#38ff0e",segmentOrientation: go.Link.OrientUpright}),
+        // $(go.TextBlock, ">>>>", {  font: "Bold 22px Lato, sans-serif",segmentIndex: 3, segmentFraction: 0.8, stroke:"#38ff0e",segmentOrientation: go.Link.OrientUpright}),
       );
+
       function tetxXY(dir, d) {
         if (d == "alignment") {
           if (dir === "left") return go.Spot.LeftCenter;

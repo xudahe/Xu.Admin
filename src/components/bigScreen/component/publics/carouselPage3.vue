@@ -214,114 +214,6 @@ export default {
           )
         )
       );
-      this.myDiagram.nodeTemplateMap.add(
-        "valCase2",
-        $(
-          go.Node,
-          "Auto",
-          // { selectable: false },
-          // {doubleClick : function (e,node) {_this.handlerDC(e,node)}},//双击事件
-          new go.Binding("location", "loc", go.Point.parse).makeTwoWay(
-            go.Point.stringify
-          ),
-          $(
-            go.Shape,
-            "Rectangle",
-            { fill: "#000b76", stroke: null },
-            // Shape.fill is bound to Node.data.color
-            new go.Binding("fill", "color")
-          ),
-          $(
-            go.Panel,
-            "Table",
-            { padding: 10 },
-            // $(go.RowColumnDefinition, { column: 0, separatorStroke: "black" }),
-            // $(go.RowColumnDefinition, { column: 1, separatorStroke: "black", background: "#ba0006" }),
-            // $(go.RowColumnDefinition, { row: 0, separatorStroke: "black" }),
-            // $(go.RowColumnDefinition, { row: 1, separatorStroke: "black" }),
-            $(
-              go.TextBlock,
-              "格栅前:",
-              {
-                row: 0,
-                wrap: go.TextBlock.None,
-                isMultiline: false,
-                textAlign: "left",
-                width: 80,
-                font: "12pt  Segoe UI,sans-serif",
-                stroke: "#0780db"
-              }
-              // new go.Binding("text", "player1").makeTwoWay()
-            ),
-            $(
-              go.TextBlock,
-              "格栅后:",
-              {
-                row: 1,
-                wrap: go.TextBlock.None,
-                isMultiline: false,
-                textAlign: "left",
-                width: 80,
-                font: "12pt  Segoe UI,sans-serif",
-                stroke: "#0780db"
-              }
-              // new go.Binding("text", "player2").makeTwoWay()
-            ),
-            $(
-              go.TextBlock,
-              "2222",
-              {
-                column: 1,
-                row: 0,
-                wrap: go.TextBlock.None,
-                isMultiline: false,
-                editable: true,
-                textAlign: "center",
-                width: 60,
-                font: "12pt  Segoe UI,sans-serif",
-                stroke: "#ffffff"
-              },
-              new go.Binding("text", "score1").makeTwoWay()
-            ),
-            $(
-              go.TextBlock,
-              "444",
-              {
-                column: 1,
-                row: 1,
-                wrap: go.TextBlock.None,
-                isMultiline: false,
-                editable: true,
-                textAlign: "center",
-                width: 60,
-                font: "12pt  Segoe UI,sans-serif",
-                stroke: "#ffffff"
-              },
-              new go.Binding("text", "score2").makeTwoWay()
-            ),
-            $(go.TextBlock, "米", {
-              column: 2,
-              row: 0,
-              wrap: go.TextBlock.None,
-              isMultiline: false,
-              editable: true,
-              textAlign: "right",
-              font: "12pt  Segoe UI,sans-serif",
-              stroke: "#0780db"
-            }),
-            $(go.TextBlock, "米", {
-              column: 2,
-              row: 1,
-              wrap: go.TextBlock.None,
-              isMultiline: false,
-              editable: true,
-              textAlign: "right",
-              font: "12pt  Segoe UI,sans-serif",
-              stroke: "#0780db"
-            })
-          )
-        )
-      );
 
       this.myDiagram.nodeTemplateMap.add(
         "valCase",
@@ -601,7 +493,30 @@ export default {
         if (dir === "rightsingle") return go.Spot.Right;
       }
 
-      this.loop();
+      loop();
+      function loop() {
+        var diagram = _this.myDiagram;
+        var opacity = 1;
+        var down = true;
+        setTimeout(function() {
+          var oldskips = diagram.skipsUndoManager;
+          diagram.skipsUndoManager = true;
+          diagram.links.each(function(link) {
+            var shape = link.findObject("PIPE");
+            var off = shape.strokeDashOffset - 3;
+            // 设置（移动）笔划划动画
+            shape.strokeDashOffset = off <= 0 ? 60 : off;
+            // 动画（频闪）不透明度：
+            // if (down) opacity = opacity - 0.01;
+            // else opacity = opacity + 0.003;
+            // if (opacity <= 0) { down = !down; opacity = 0; }
+            // if (opacity > 1) { down = !down; opacity = 1; }
+            // shape.opacity = opacity;
+          });
+          diagram.skipsUndoManager = oldskips;
+          loop();
+        }, 60);
+      }
     },
     mouseLeave(e, obj) {
       //鼠标移出
@@ -652,30 +567,6 @@ export default {
       var nodes = model.nodeDataArray; //取出所有节点
       var Links = model.linkDataArray; //取出所有线
       console.log(model);
-    },
-    loop() {
-      var _this = this;
-      var diagram = this.myDiagram;
-      var opacity = 1;
-      var down = true;
-      setTimeout(function() {
-        var oldskips = diagram.skipsUndoManager;
-        diagram.skipsUndoManager = true;
-        diagram.links.each(function(link) {
-          var shape = link.findObject("PIPE");
-          var off = shape.strokeDashOffset - 3;
-          // 设置（移动）笔划划动画
-          shape.strokeDashOffset = off <= 0 ? 60 : off;
-          // 动画（频闪）不透明度：
-          // if (down) opacity = opacity - 0.01;
-          // else opacity = opacity + 0.003;
-          // if (opacity <= 0) { down = !down; opacity = 0; }
-          // if (opacity > 1) { down = !down; opacity = 1; }
-          // shape.opacity = opacity;
-        });
-        diagram.skipsUndoManager = oldskips;
-        _this.loop();
-      }, 60);
     },
     changejdvalue(newVal) {
       var _this = this;

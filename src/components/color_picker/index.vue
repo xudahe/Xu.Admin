@@ -8,6 +8,9 @@
 </template>
 
 <script>
+/**
+ * 取色器
+ */
 
 export default {
   name: 'colorPicker',

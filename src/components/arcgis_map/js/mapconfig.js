@@ -12,7 +12,7 @@ const mapconfig = {
 	basemapview: 'http://58.213.48.106:6080/arcgis/rest/services/NJ08/NJ08dom1M/MapServer', //基础影像图
 	GeometryService: 'http://58.213.48.106:6080/arcgis/rest/services/Utilities/Geometry/GeometryServer', //ArcGIS Server空间服务
 	extent: {
-		spatialReference: {
+		spatialReference: { // 鼓楼区初始化定位
 			wkid: 0,
 			latestWkid: 0
 		},
@@ -22,6 +22,17 @@ const mapconfig = {
 		xmax: 331744.7149,
 		ymax: 356750.94739999995
 	},// 初始化定位
+	extent_lyg: { // 连云港初始化定位  --天地图
+		spatialReference: {
+			wkid: 0,
+			latestWkid: 0
+		},
+		type: 'extent',
+		xmax: 13311022.447,
+		xmin: 13245171.947,
+		ymax: 4139941.759,
+		ymin: 4108946.544
+	},
 };
 
 export default mapconfig

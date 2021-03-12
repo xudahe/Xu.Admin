@@ -1,55 +1,74 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <!-- <meta name="viewport" content="width=device-width,initial-scale=1.0"> -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />    
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>Xu-Admin</title>
-    <link rel="shortcut icon" type="image/x-icon" href="src/assets/favicon.ico" media="screen" >
-    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
-    <script src="https://cdn.bootcdn.net/ajax/libs/tinymce/5.3.2/tinymce.min.js"></script>  <!-- TinyMCE 是一个采用 JavaScript 编写的、轻量级的、基于浏览器的、所见即所得编辑器。 -->
-    <script type="text/javascript" src="./static/js/modernizr-2.8.3.js"></script>  <!-- Modernizr是一个 JavaScript 库， 用于检测用户浏览器的 HTML5 与 CSS3 特性 -->
-    <script type="text/javascript" src="./static/js/draggabilly.pkgd.min.js"></script>
-    <script type="text/javascript" src="./static/demo/gojs_demo/gojs/go.js"></script>
 
-    <script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
-    <script type="text/javascript">
-      var ip=returnCitySN['cip']
-      var cityname=returnCitySN['cname']
-      console.log(ip)
-      localStorage.setItem('ip', ip) //外网ip
-      localStorage.setItem('cityname', cityname)
-    </script>
-  
-  </head>
-  <body>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+<head>
+  <meta charset="utf-8">
+  <!-- <meta name="viewport" content="width=device-width,initial-scale=1.0"> -->
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>Xu-Admin</title>
+  <link rel="shortcut icon" type="image/x-icon" href="src/assets/favicon.ico" media="screen">
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+
+  <!-- TinyMCE 是一个采用 JavaScript 编写的、轻量级的、基于浏览器的、所见即所得编辑器。 -->
+  <script src="https://cdn.bootcdn.net/ajax/libs/tinymce/5.3.2/tinymce.min.js"></script>
+
+  <!-- Modernizr是一个 JavaScript 库， 用于检测用户浏览器的 HTML5 与 CSS3 特性 -->
+  <script type="text/javascript" src="./static/js/modernizr-2.8.3.js"></script>
+
+  <script type="text/javascript" src="./static/js/draggabilly.pkgd.min.js"></script>
+  <script type="text/javascript" src="./static/demo/gojs_demo/gojs/go.js"></script>
+
+  <script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+  <script type="text/javascript">
+    var ip = returnCitySN['cip']
+    var cityname = returnCitySN['cname']
+    console.log(ip)
+    localStorage.setItem('ip', ip) //外网ip
+    localStorage.setItem('cityname', cityname)
+
+  </script>
+
+</head>
+
+<body>
+  <div id="app"></div>
+  <!-- built files will be auto injected -->
+</body>
+
 </html>
 
 <script>
-  
-let pWidth = 750; //设计图尺寸 
-let prem = 100;   //设置比例是 100px = 1rem
+  var dojoConfig = {
+    parseOnLoad: false,
+    async: true,
+    tlmSiblingOfDojo: false,
+    packages: [{
+      name: "extend",
+      location: "http://58.213.48.106/arcgis_js_api/library/3.27/3.27/ncam"
+    }]
+  };
 
-window.onload = function(){
-  fnResize()
-};
-window.onresize = function () {
-  fnResize();
-}
-// vue页面初始化大小rem，自适应效果设置
-function fnResize() {
-  var oWidth = document.documentElement.clientWidth || window.innerWidth; //// 窗口宽度
-  if (oWidth >= 750) {
-    oWidth = 750;
+  let pWidth = 750; //设计图尺寸 
+  let prem = 100; //设置比例是 100px = 1rem
+
+  window.onload = function () {
+    fnResize()
+  };
+  window.onresize = function () {
+    fnResize();
   }
-  if (oWidth <= 320) {
-    oWidth = 320;
+  // vue页面初始化大小rem，自适应效果设置
+  function fnResize() {
+    var oWidth = document.documentElement.clientWidth || window.innerWidth; //// 窗口宽度
+    if (oWidth >= 750) {
+      oWidth = 750;
+    }
+    if (oWidth <= 320) {
+      oWidth = 320;
+    }
+    document.documentElement.style.fontSize = oWidth / pWidth * prem + "px";
   }
-  document.documentElement.style.fontSize = oWidth / pWidth * prem + "px";
-}
 
 </script>

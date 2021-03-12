@@ -23,7 +23,7 @@ export default {
       this.getGeoJson(this.adcode);
     } else {
       await remoteLoad(
-        `http://webapi.amap.com/maps?v=1.4.15&key=2d00cf810203e90c91261b1ae4ebacdd`,
+        `http://webapi.amap.com/maps?v=1.4.15&key=6c87cc38e8c451572bfefcf7175197a4`,
         true
       ),
         await remoteLoad(`http://webapi.amap.com/ui/1.1/main.js`);

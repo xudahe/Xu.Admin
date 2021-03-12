@@ -47,7 +47,7 @@
     :id="mapId"
     style="position: relative;border-radius: 0.1rem;"
   >
-    <div class="toolbar_info" v-show="isshow" id="toolbar_info">
+    <!-- <div class="toolbar_info" v-show="isshow" id="toolbar_info">
       <Button-group size="large">
         <Tooltip content="放大" :transfer="true">
           <Button @click="toolbar('zoomin')">
@@ -117,15 +117,19 @@
           <i class="fa fa-angle-right" v-else></i>
         </Button>
       </Tooltip>
-    </div>
+    </div> -->
     <component :is="current_com" :ref="current_ref"></component>
     <bottombar :datasource="currentscale"></bottombar>
   </div>
 </template>
 <script>
+/*
+ * 天地图
+ */
+
 import esriLoader from "esri-loader";
-import { MapControl } from "../arcgis_map/js/MapControl";
-import mapconfig from "../arcgis_map/js/mapconfig";
+import { MapControl } from "./js/MapControl";
+import mapconfig from "./js/mapconfig";
 import layermanage from "../arcgis_map/child/layerManage";
 import bottombar from "../arcgis_map/child/bottombar";
 
@@ -161,47 +165,74 @@ export default {
     searchhandle() {
       console.log(this.queryValue);
     },
-    //加载图层
+    //加载地图
     createMap() {
       var _this = this;
       const options = {
-        url: mapconfig.jsapi
+        url: mapconfig.jsapi,
+        css: true
       };
       esriLoader.loadCss(mapconfig.esricss);
       esriLoader.loadCss(mapconfig.clarocss);
       esriLoader
         .loadModules(
           [
+            "dojo/_base/event",
+            "dojo/_base/connect",
+            "dojo/parser",
+            "dojo/on",
+            "dojo/_base/Color",
             "esri/map",
             "esri/geometry/Extent",
             "esri/geometry/scaleUtils",
             "esri/layers/ArcGISTiledMapServiceLayer",
             "esri/layers/ArcGISDynamicMapServiceLayer",
+            "esri/tasks/GeometryService",
+            "esri/tasks/IdentifyTask",
+            "esri/tasks/IdentifyParameters",
             "esri/toolbars/draw",
             "esri/toolbars/navigation",
             "esri/toolbars/edit",
+            "dojo/dom-construct",
+            "dojo/dom",
             "esri/config",
-            "esri/dijit/Scalebar",
-            "dojo/i18n!esri/nls/jsapi",
+            "dojo/fx",
+            "extend/TDTLayer",
+            "extend/TDTAnnoLayer",
             "dojo/domReady!",
-            "dojo/parser"
+            "esri/geometry/Point",
+            "esri/geometry/Polyline",
+            "esri/geometry/Polygon"
           ],
           options
         )
         .then(
           ([
-            Map, // 地图模块
-            Extent, // 范围模块
+            event,
+            connect,
+            parser,
+            on,
+            Color,
+            Map,
+            Extent,
             scaleUtils,
             ArcGISTiledMapServiceLayer,
             ArcGISDynamicMapServiceLayer,
-            Draw, //画图模块
+            GeometryService,
+            IdentifyTask,
+            IdentifyParameters,
+            Draw,
             Navigation,
             Edit,
+            domConstruct,
+            dom,
             esriConfig,
-            Scalebar, //比例尺模块
-            bundle,
-            parser //样式解析模块
+            Fx,
+            TDTLayer,
+            TDTAnnoLayer,
+            Point,
+            Polyline,
+            Polygon
           ]) => {
             //加载地图
             map = new Map(_this.mapId, {
@@ -212,12 +243,10 @@ export default {
               maxZoom: 18 // 最大缩放级别
             });
 
-            const basemapurl = mapconfig.basemap;
-            const basemaplayer = new esri.layers.ArcGISTiledMapServiceLayer(
-              basemapurl
-            );
-            basemaplayer.id = basemapurl;
-            map.addLayer(basemaplayer); //添加底图
+            let verLayer = new TDTLayer();
+            map.addLayer(verLayer);
+            var veranno = new TDTAnnoLayer();
+            map.addLayer(veranno);
 
             var graphicLayer1 = new esri.layers.GraphicsLayer();
             graphicLayer1.id = "graphicLayer1";
@@ -234,7 +263,7 @@ export default {
             map.addLayer(graphicLayer3);
             MapControl.graphicLayers["gralyr3"] = graphicLayer3;
 
-            map.on("load", initFunctionality);
+            map.on("load", initFunctionality());
             map.on("mouse-move", function(event) {
               event.scale = scaleUtils.getScale(map);
               _this.currentscale = {
@@ -261,7 +290,7 @@ export default {
               MapControl.editToolbar[_this.mapId] = editToolbar;
               MapControl.GeometryService = geometryservice;
 
-              let extent = mapconfig.extent;
+              let extent = mapconfig.extent_lyg;
               let mapExtent = new esri.geometry.Extent(
                 extent.xmin,
                 extent.ymin,

@@ -3,7 +3,7 @@
     <div class="mapTop">
       <Row>
         <template v-for="(item, index) in drainageObj">
-          <Col :span="colNum" style="padding-left: 0.1rem;">
+          <Col :span="colNum" style="padding-left: 0.1rem;" :key="index">
             <img :src="mapTopImg" class="topImgBg" />
             <img :src="item.img" class="topImg" />
             <div style="display: inline-block;margin-left: 0.1rem;">
@@ -15,24 +15,20 @@
         </template>
       </Row>
     </div>
-    <div class="mapContent" style="width:100%;height:calc(100% - 0.4rem);position: relative;" >
-      <component :is="componentdiv"></component>
+    <div
+      class="mapContent"
+      style="width:100%;height:calc(100% - 0.5rem);position: relative;"
+    >
+      <arcgisMap></arcgisMap>
     </div>
   </div>
 </template>
 
 <script>
+import arcgisMap from "../../../../components/arcgis_map/index2";
 export default {
   name: "homeMiddleTop",
-  components: {},
-  props: {
-    typename: {
-      type: String,
-      default() {
-        return "河道";
-      }
-    }
-  },
+  components: { arcgisMap },
   data() {
     return {
       colNum: 1,
@@ -69,13 +65,6 @@ export default {
   mounted() {
     var _this = this;
     this.colNum = Number(24 / this.drainageObj.length);
-  },
-  computed: {
-    componentdiv() {
-      let divname = "";
-
-      return divname;
-    }
   }
 };
 </script>

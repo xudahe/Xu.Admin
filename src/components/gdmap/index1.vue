@@ -30,7 +30,7 @@
 <script>
 /**
  * 高德地图API: https://lbs.amap.com/api/javascript-api/example/map/click-to-get-lnglat
- * 申请的key："e83f64300a2a55a33fa8e4ab9a46bca6","73cddabc2173e0166a622f4483d3592a","2d00cf810203e90c91261b1ae4ebacdd"
+ * 申请的key："e83f64300a2a55a33fa8e4ab9a46bca6","73cddabc2173e0166a622f4483d3592a","6c87cc38e8c451572bfefcf7175197a4"
  * vue-amap：https://github.com/ElemeFE/vue-amap
  */
 
@@ -179,7 +179,7 @@ export default {
           // 定位成功之后再定位处添加一个marker
           var marker = new AMap.Marker({
             position: result.position,
-            offset: new AMap.Pixel(0,0),
+            offset: new AMap.Pixel(0, 0),
             icon: "", // marker的图标，可以自定义，不写默认使用高德自带的
             map: _this.map // map ---> 要显示该marker的地图对象
           });

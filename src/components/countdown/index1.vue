@@ -34,6 +34,10 @@
 </template>
 
 <script>
+
+/*
+ * svg倒计时效果
+ */
 export default {
   name: "countdown",
   data() {

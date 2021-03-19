@@ -114,8 +114,8 @@ export default {
 							this.menuDataLeft.push({
 								classname: this.menuList[k].classname,
 								id: this.menuList[k].id,
-								imgT: '',
-								imgF: '',
+								imgT: '../../../../static/img/newhome/ic_waterquality.png',
+								imgF: '../../../../static/img/newhome/ic_waterquality.png',
 								menuname: this.menuList[k].menuname,
 								children: this.menuList[k].children
 							})
@@ -124,8 +124,8 @@ export default {
 							this.menuDataRight.push({
 								classname: this.menuList[l].classname,
 								id: this.menuList[l].id,
-								imgT: '',
-								imgF: '',
+								imgT: '../../../../static/img/newhome/ic_waterquality.png',
+								imgF: '../../../../static/img/newhome/ic_waterquality.png',
 								menuname: this.menuList[l].menuname,
 								children: this.menuList[l].children
 							})
@@ -244,9 +244,9 @@ export default {
       left: 0.12rem;
     }
     .menuImg{
-      width: 0.25rem;
+      width: 0.20rem;
       position: absolute;
-      top: 0.15rem;
+      top: 0.18rem;
     }
     .menuImgRight{
       left: 0.12rem;

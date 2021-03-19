@@ -36,9 +36,6 @@ export default {
   mounted() {
     let _self = this;
     this.getjson();
-    setTimeout(() => {
-      _self.initWebsocket();
-    }, 1000);
   },
   methods: {
     btngetkey(){
@@ -80,42 +77,7 @@ export default {
           console.log(err);
         });
     },
-    initWebsocket() {
-
-			var _this = this;
-			this.websocket = new WebSocket("ws://58.213.48.106/lyg/ws");
-
-			this.websocket.onopen = function (evt) {
-
-        var msg = {
-            action: 'getData',
-            PumpName: _this.keys.join(","),
-        };
-        _this.websocket.send(JSON.stringify(msg));
-			};
-
-			this.websocket.onmessage = function (msg) {
-        // console.log(msg)
-        var data = eval('(' + msg.data + ')')
-        if(data.source.length == 0) return;
-        data.source.forEach(function(item){
-          var node = _this.myDiagram.model.findNodeDataForKey(item.key);
-          _this.myDiagram.model.setDataProperty(node, 'realVal', item.value);
-          _this.myDiagram.model.setDataProperty(node, 'showVal', item.value);
-        })
-
-			};
-
-			this.websocket.onerror = function (evt) {
-			};
-
-			this.websocket.onclose = function (evt) {
-      };
-
-
-
-      },
-    handlerDC(e, obj) {
+     handlerDC(e, obj) {
       //双击事件
         var node = obj.part;//拿到节点的json对象，后面要拿什么值就直接.出来
         var procTaskId = node.data.key;
@@ -1003,7 +965,6 @@ export default {
       clearInterval(this.blenderType);
       this.blenderType = null;
     }
-    this.websocket.close();
   }
 };
 </script>

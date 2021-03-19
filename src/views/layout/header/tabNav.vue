@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="tabNav">
     <div class="tabnavBox">
       <transition-group name="list" tag="ul">
         <li

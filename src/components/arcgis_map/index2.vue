@@ -47,97 +47,26 @@
     :id="mapId"
     style="position: relative;border-radius: 0.1rem;"
   >
-    <!-- <div class="toolbar_info" v-show="isshow" id="toolbar_info">
-      <Button-group size="large">
-        <Tooltip content="放大" :transfer="true">
-          <Button @click="toolbar('zoomin')">
-            <i class="fa fa-plus"></i>
-          </Button>
-        </Tooltip>
-        <Tooltip content="缩小">
-          <Button @click="toolbar('zoomout')">
-            <i class="fa fa-minus"></i>
-          </Button>
-        </Tooltip>
-        <Tooltip content="平移">
-          <Button @click="toolbar('pan')">
-            <i class="fa fa-arrows"></i>
-          </Button>
-        </Tooltip>
-        <Tooltip content="清除">
-          <Button @click="toolbar('clear')">
-            <i class="fa fa-eraser"></i>
-          </Button>
-        </Tooltip>
-        <Tooltip content="距离测量">
-          <Button @click="toolbar('polyline')">
-            <i class="fa fa-compress"></i>
-          </Button>
-        </Tooltip>
-        <Tooltip content="面积测量">
-          <Button @click="toolbar('polygon')">
-            <i class="fa fa-square-o"></i>
-          </Button>
-        </Tooltip>
-        <Tooltip content="信息查询">
-          <Button @click="toolbar('idenfity')">
-            <i class="fa fa-hand-o-up"></i>
-          </Button>
-        </Tooltip>
-        <Tooltip content="书签管理">
-          <Button @click="toolbar('bookmark')">
-            <i class="fa fa-bookmark-o"></i>
-          </Button>
-        </Tooltip>
-        <Tooltip content="图层管理">
-          <Button @click="toolbar('layermanage')">
-            <i class="fa fa-map-o"></i>
-          </Button>
-        </Tooltip>
-        <Tooltip content="快速定位" class="searchbox" :disabled="!queryAuto">
-          <Button @click="queryAuto = !queryAuto" v-show="queryAuto">
-            <i class="fa fa-search"></i>
-          </Button>
-          <Input
-            v-model="queryValue"
-            search
-            enter-button
-            placeholder="请输入定位关键字"
-            v-show="!queryAuto"
-            @on-search="searchhandle"
-            style="width: 200px"
-          />
-        </Tooltip>
-      </Button-group>
-    </div>
-    <div class="toolbar_btn" id="toolbar_btn">
-      <Tooltip :content="info" placement="right">
-        <Button @click="clickToolbar">
-          <i class="fa fa-angle-left" v-if="isshow"></i>
-          <i class="fa fa-angle-right" v-else></i>
-        </Button>
-      </Tooltip>
-    </div> -->
-    <component :is="current_com" :ref="current_ref"></component>
     <bottombar :datasource="currentscale"></bottombar>
   </div>
 </template>
+
 <script>
 /*
- * 天地图
+ * 加载天地图
+ * 天地图服务列表：http://lbs.tianditu.gov.cn/server/MapService.html
  */
 
 import esriLoader from "esri-loader";
 import { MapControl } from "./js/MapControl";
 import mapconfig from "./js/mapconfig";
-import layermanage from "../arcgis_map/child/layerManage";
+
 import bottombar from "../arcgis_map/child/bottombar";
 
 var map, navToolbar;
 export default {
   name: "arcgisMap",
   components: {
-    layermanage,
     bottombar
   },
   props: {
@@ -148,30 +77,32 @@ export default {
   },
   data() {
     return {
-      icon: "chevron-left",
-      numb: 0,
-      isshow: true,
-      info: "展开工具栏",
-      queryData: [],
-      queryValue: "",
-      queryAuto: true,
-
-      current_com: "",
-      current_ref: "",
       currentscale: {}
     };
   },
   methods: {
-    searchhandle() {
-      console.log(this.queryValue);
-    },
     //加载地图
     createMap() {
       var _this = this;
+
       const options = {
-        url: mapconfig.jsapi,
-        css: true
+        url: mapconfig.arcgisUrl, // 需使用的arcgis api版本地址
+        css: true,
+        // 添加dojo配置
+        dojoConfig: {
+          async: true,
+          parseOnLoad: false,
+          tlmSiblingOfDojo: false,
+          packages: [
+            {
+              name: "extend",
+              location: window.location.host + "../../../static/tdtLayer/" + mapconfig.maptype
+              // location: "http://58.213.48.106/arcgis_js_api/library/3.27/3.27/ncam"
+            }
+          ]
+        }
       };
+
       esriLoader.loadCss(mapconfig.esricss);
       esriLoader.loadCss(mapconfig.clarocss);
       esriLoader
@@ -240,7 +171,7 @@ export default {
               slider: false,
               showLabels: true,
               zoom: 10, // 缩放级别
-              maxZoom: 18 // 最大缩放级别
+              maxZoom: 18, // 最大缩放级别
             });
 
             let verLayer = new TDTLayer();
@@ -290,84 +221,18 @@ export default {
               MapControl.editToolbar[_this.mapId] = editToolbar;
               MapControl.GeometryService = geometryservice;
 
-              let extent = mapconfig.extent_lyg;
-              let mapExtent = new esri.geometry.Extent(
-                extent.xmin,
-                extent.ymin,
-                extent.xmax,
-                extent.ymax,
-                map.spatialReference
-              );
-              map.setExtent(mapExtent);
+                let extent = mapconfig.maptype == "01" ? mapconfig.extent_01 : mapconfig.extent_02;
+                let mapExtent = new esri.geometry.Extent(
+                  extent.xmin,
+                  extent.ymin,
+                  extent.xmax,
+                  extent.ymax,
+                  map.spatialReference
+                );
+                map.setExtent(mapExtent);
             }
           }
         );
-    },
-    clickToolbar() {
-      var divwith = document.getElementById("toolbar_info");
-      var but = document.getElementById("toolbar_btn");
-      var _this = this;
-      if (_this.numb == 1) {
-        _this.numb = 0;
-        _this.icon = "chevron-left";
-        _this.isshow = true;
-        _this.info = "关闭工具栏";
-        MapControl.setMapClear();
-      } else {
-        _this.numb = 1;
-        _this.icon = "settings";
-        _this.isshow = false;
-        _this.info = "展开工具栏";
-      }
-    },
-    toolbar(val) {
-      if (MapControl.identifyHandler !== undefined) {
-        MapControl.identifyHandler.remove();
-      }
-      switch (val) {
-        case "zoomin":
-          MapControl.setMapZoomIn();
-          break;
-        case "zoomout":
-          MapControl.setMapZoomOut();
-          break;
-        case "pan":
-          MapControl.setMapPan();
-          break;
-        case "clear":
-          MapControl.setMapClear();
-          break;
-        case "idenfity":
-          MapControl.setMapClear();
-          var _this = this;
-          MapControl.QueryByPoint(_this);
-          break;
-        case "bookmark":
-          MapControl.setMapClear();
-          var rightbar = document.getElementById("rightbar");
-          if (rightbar) {
-            rightbar.style.display = "block";
-          }
-          this.$parent.title_name = "书签管理";
-          this.$parent.$router.replace({
-            name: "bookmark",
-            params: { name: "bookmark", menuname: "书签管理" }
-          });
-          this.$parent.showDialog = false;
-          break;
-        case "polyline":
-          MapControl.MeasureDraw("polyline");
-          break;
-        case "polygon":
-          MapControl.MeasureDraw("polygon");
-          break;
-        case "layermanage":
-          this.current_com = layermanage;
-          this.current_ref = layermanage;
-          break;
-        case "importdata":
-          break;
-      }
     }
   },
   mounted() {

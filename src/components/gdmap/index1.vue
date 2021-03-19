@@ -30,7 +30,6 @@
 <script>
 /**
  * 高德地图API: https://lbs.amap.com/api/javascript-api/example/map/click-to-get-lnglat
- * 申请的key："e83f64300a2a55a33fa8e4ab9a46bca6","73cddabc2173e0166a622f4483d3592a","6c87cc38e8c451572bfefcf7175197a4"
  * vue-amap：https://github.com/ElemeFE/vue-amap
  */
 
@@ -67,7 +66,7 @@ export default {
       this.init();
     } else {
       await remoteLoad(
-        `http://webapi.amap.com/maps?v=1.4.15&key=73cddabc2173e0166a622f4483d3592a`,
+        `http://webapi.amap.com/maps?v=1.4.15&key=6c87cc38e8c451572bfefcf7175197a4`,
         true
       ),
         await remoteLoad(`http://webapi.amap.com/ui/1.1/main.js`);

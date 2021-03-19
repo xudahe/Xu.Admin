@@ -1,10 +1,10 @@
 <template>
   <div class="notes-wrapper">
     <el-row style="width: 100%;height: 100%;">
-      <el-col :span="4" style="height: 100%;border-right: 1px solid #eaeefb;">
+      <el-col :span="5" style="height: 100%;border-right: 1px solid #eaeefb;">
         <sidebar />
       </el-col>
-      <el-col :span="6" style="height: 100%;border-right: 1px solid #eaeefb;">
+      <el-col :span="5" style="height: 100%;border-right: 1px solid #eaeefb;">
         <file-list
           :fileList="fileList"
           @selectItem="selectItem"

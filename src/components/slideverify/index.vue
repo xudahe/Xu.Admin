@@ -27,6 +27,10 @@
 //https://gitee.com/monoplasty/vue-monoplasty-slide-verify
 
 <script>
+    // touchstart : 手指触摸屏幕时触发
+    // touchmove : 手指在屏幕中拖动时触发
+    // touchend : 手指离开屏幕时触发
+
     const PI = Math.PI;
 
     function sum(x, y) {

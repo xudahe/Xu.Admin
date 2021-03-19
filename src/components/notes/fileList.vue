@@ -31,7 +31,7 @@
         @mouseleave="item.showTool = false"
       >
         <i class="el-icon-document" style="font-size:15px;margin-right:3px;" />
-        <p class="item-title">{{ item.title }}</p>
+        <p class="item-title" :title="item.title">{{ item.title }}</p>
         <p class="item-time" v-if="!item.showTool">
           {{ item.time | formatDate("yyyy-mm-dd") }}
         </p>
@@ -107,7 +107,7 @@ export default {
   .file-item {
     display: flex;
     align-items: center;
-    height: 55px;
+    height: 50px;
     border-bottom: 1px solid #eaeefb;
     padding: 0 10px;
     cursor: pointer;
@@ -136,7 +136,7 @@ export default {
   }
   .color,
   .file-item:hover {
-    background-color: rgb(236, 245, 255);
+    background-color: #aae4ea;
   }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>Copyright © 2020 xuAdmin.</p>
+    <p>Copyright © 2020 </p>
   </div>
 </template>
 

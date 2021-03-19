@@ -32,15 +32,11 @@ export default {
   beforeDestroy() {},
   methods: {
     regeisterComponent(NavConfig) {
-      const routes = [];
-      const parentRoutes = {};
-
       Object.keys(NavConfig).forEach((lang, idx) => {
         const pageNavs = NavConfig[lang];
 
         pageNavs.forEach(nav => {
           const parentName = nav.name;
-          const pagetype = nav.type;
 
           if (nav.groups) {
             nav.groups.forEach(group => {

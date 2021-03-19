@@ -63,7 +63,7 @@
         <!-- 中间地图部分 -->
 				<div style="position:absolution;float: left;" :style="{height: mapHeight,width: mapWidth,padding: mapadding}" v-show="isMapShow">
 					<div class="appCompontsContMap scale-in">
-					   <!-- <arcgisMap></arcgisMap> -->
+					   <arcgisMap></arcgisMap>
 					</div>
 				</div>
 
@@ -106,7 +106,7 @@
 
 <script>
   import bus from "../../../eventBus.js";
-  import arcgisMap from "../../../components/arcgis_map/index1.vue";
+  import arcgisMap from "../../../components/arcgis_map/index2.vue";
 	
 	export default {
 		name: "application",

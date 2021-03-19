@@ -1,4 +1,3 @@
-
 <template>
   <div class="v-card">
     <el-row>
@@ -257,6 +256,7 @@
     -o-transition: All 0.4s ease-in-out;
   }
   .img-scale:hover {
+    background-color: azure;
     z-index: 9;
     transform: scale(1.1);
     -webkit-transform: scale(1.1);

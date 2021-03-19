@@ -46,6 +46,8 @@ MapControl.GeometryService = {};
 
 MapControl.MenuForMap = {};
 
+// MapControl.mapId = 'mapbox';
+
 // identify点击事件
 var identifyHandler;
 
@@ -2276,7 +2278,7 @@ MapControl.identify = function (isremove) {
     MapControl.identifyHandler = map.on("click", function (geo) {
       let x = geo.mapPoint.x
       let y = geo.mapPoint.y
-      let xmin = x - Resolution * 10
+      let xmin = x - Resolution * 10 //如果加载地图是经纬度，把 Resolution * 10 替换位 0.000005
       let xmax = x + Resolution * 10
       let ymin = y - Resolution * 10
       let ymax = y + Resolution * 10

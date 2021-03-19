@@ -270,6 +270,39 @@ export default {
               fileName: "2.3 原材料规格书"
             }
           ]
+        },
+        {
+          id: "2",
+          fileName: "2 WA",
+          icon: "el-icon-success",
+          children: [
+            {
+              id: "2.0",
+              fileName: "2.0 生产工艺文件相关",
+              children: [
+                {
+                  id: "2.01",
+                  fileName: "生产规格书"
+                },
+                {
+                  id: "2.02",
+                  fileName: "测试清单"
+                }
+              ]
+            },
+            {
+              id: "2.1",
+              fileName: "2.1 图纸"
+            },
+            {
+              id: "2.2",
+              fileName: "2.2 各阶段评审报告"
+            },
+            {
+              id: "2.3",
+              fileName: "2.3 原材料规格书"
+            }
+          ]
         }
       ],
       defaultProps: {

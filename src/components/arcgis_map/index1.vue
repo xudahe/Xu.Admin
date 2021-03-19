@@ -165,7 +165,7 @@ export default {
     createMap() {
       var _this = this;
       const options = {
-        url: mapconfig.jsapi
+        url: "http://58.213.48.106/arcgis_js_api/library/3.27/3.27/init.js"
       };
       esriLoader.loadCss(mapconfig.esricss);
       esriLoader.loadCss(mapconfig.clarocss);

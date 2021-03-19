@@ -11,8 +11,6 @@ import 'mavon-editor/dist/css/index.css'
 import 'video.js/dist/video-js.css'
 // 引入前端错误日志
 import './other/error_log'
-// 引入表单验证
-import './other/validate'
 // 引入区域loading效果
 import loading from './other/loading'
 Vue.use(loading)

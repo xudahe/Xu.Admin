@@ -126,7 +126,7 @@ export default {
     goto(item, ID) {
       this.selectId = ID;
 
-      let map = MapControl.map["mapbox"];
+      let map = MapControl.map[MapControl.mapId];
       let geometry = "POINT(" + item.x + " " + item.y + ")";
       let geo = MapControl.WktToAgs(geometry);
 

@@ -96,7 +96,10 @@ export default {
           packages: [
             {
               name: "extend",
-              location: window.location.host + "../../../static/tdtLayer/" + mapconfig.maptype
+              location:
+                window.location.host +
+                "../../../static/tdtLayer/" +
+                mapconfig.maptype
               // location: "http://58.213.48.106/arcgis_js_api/library/3.27/3.27/ncam"
             }
           ]
@@ -171,7 +174,7 @@ export default {
               slider: false,
               showLabels: true,
               zoom: 10, // 缩放级别
-              maxZoom: 18, // 最大缩放级别
+              maxZoom: 18 // 最大缩放级别
             });
 
             let verLayer = new TDTLayer();
@@ -194,6 +197,11 @@ export default {
             map.addLayer(graphicLayer3);
             MapControl.graphicLayers["gralyr3"] = graphicLayer3;
 
+            var graphicLayer4 = new esri.layers.GraphicsLayer();
+            graphicLayer4.id = "graphicLayer4";
+            map.addLayer(graphicLayer4);
+            MapControl.graphicLayers["gralyr4"] = graphicLayer4;
+
             map.on("load", initFunctionality());
             map.on("mouse-move", function(event) {
               event.scale = scaleUtils.getScale(map);
@@ -205,6 +213,8 @@ export default {
                 scale: event.scale
               };
             });
+
+            this.map_layer(); //添加轨迹图层
 
             let navToolbar = new esri.toolbars.Navigation(map);
             let drawToolbar = new esri.toolbars.Draw(map);
@@ -221,24 +231,59 @@ export default {
               MapControl.editToolbar[_this.mapId] = editToolbar;
               MapControl.GeometryService = geometryservice;
 
-                let extent = mapconfig.maptype == "01" ? mapconfig.extent_01 : mapconfig.extent_02;
-                let mapExtent = new esri.geometry.Extent(
-                  extent.xmin,
-                  extent.ymin,
-                  extent.xmax,
-                  extent.ymax,
-                  map.spatialReference
-                );
-                map.setExtent(mapExtent);
+              let extent =
+                mapconfig.maptype == "01"
+                  ? mapconfig.extent_01
+                  : mapconfig.extent_02;
+              let mapExtent = new esri.geometry.Extent(
+                extent.xmin,
+                extent.ymin,
+                extent.xmax,
+                extent.ymax,
+                map.spatialReference
+              );
+              map.setExtent(mapExtent);
             }
           }
         );
+    },
+    map_layer() {
+      let map = MapControl.map[MapControl.mapId];
+      if (map.addLayer(lineLayer) == undefined) {
+        MapControl.lineSymbol = new esri.symbol.SimpleLineSymbol(
+          esri.symbol.SimpleLineSymbol.STYLE_SOLID,
+          new dojo.Color("red"),
+          5
+        );
+        MapControl.pointSymbol = new esri.symbol.SimpleMarkerSymbol(
+          esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE,
+          5,
+          new esri.symbol.SimpleLineSymbol(
+            esri.symbol.SimpleLineSymbol.STYLE_SOLID,
+            new dojo.Color([255, 0, 0]),
+            1
+          ),
+          new dojo.Color([255, 0, 0, 1])
+        );
+
+        var lineLayer = new esri.layers.GraphicsLayer({
+          id: "lineLayer"
+        });
+        var carLayer = new esri.layers.GraphicsLayer({
+          id: "carLayer"
+        });
+        map.addLayer(lineLayer);
+        map.addLayer(carLayer);
+      }
     }
   },
   mounted() {
     let _this = this;
 
     _this.createMap();
+  },
+  beforeDestroy() {
+    MapControl.setMapClear();
   }
 };
 </script>

@@ -46,7 +46,7 @@ MapControl.GeometryService = {};
 
 MapControl.MenuForMap = {};
 
-// MapControl.mapId = 'mapbox';
+MapControl.mapId = 'mapbox';
 
 // identify点击事件
 var identifyHandler;
@@ -156,31 +156,17 @@ MapControl.setMapPan = function () {
  */
 MapControl.setMapClear = function (value) {
   if (value !== undefined) {
-    if (value == 2) {
-      MapControl.graphicLayers['gralyr4'].clear();
-      MapControl.graphicLayers['gralyr5'].clear();
-    } else if (value == 3) {
-      MapControl.graphicLayers['gralyr3'].clear();
-      MapControl.graphicLayers['gralyr4'].clear();
-    } else if (value == 5) {
-      MapControl.graphicLayers['gralyr5'].clear();
-    } else if (value == 4) {
-      MapControl.graphicLayers['gralyr1'].clear();
-      MapControl.graphicLayers['gralyr2'].clear();
-      MapControl.graphicLayers['gralyr3'].clear();
-      MapControl.graphicLayers['gralyr4'].clear();
-      MapControl.graphicLayers['gralyr5'].clear();
-      MapControl.graphicLayers['gralyr6'].clear();
-    } else if (value == 1) {
-      MapControl.graphicLayers['gralyr2'].clear();
-      MapControl.graphicLayers['gralyr3'].clear();
-    }
+
   } else {
-    MapControl.graphicLayers['gralyr1'].clear();
-    MapControl.graphicLayers['gralyr2'].clear();
-    MapControl.graphicLayers['gralyr3'].clear();
-    MapControl.graphicLayers['gralyr4'].clear();
-    MapControl.graphicLayers['gralyr5'].clear();
+    for (let i = 1; i < 5; i++) {
+      let gralyr = MapControl.graphicLayers['gralyr' + i]
+      if (gralyr != undefined) {
+        gralyr.clear();
+        gralyr.onMouseOver = function (val) {};
+        gralyr.onMouseOut = function (val) {};
+        gralyr.onClick = function (val) {};
+      }
+    }
   }
 
   if (doSpaceDrawEventHandler !== undefined) {
@@ -348,8 +334,7 @@ MapControl.showGraphic = function (geo, issolid, layer, iscal, color) {
       }
       if (showExtent !== undefined) {
         var tempGra = new esri.Graphic(geo, symbol, null, null);
-        if (layer == undefined) layer = 'gralyr3';
-        MapControl.graphicLayers[layer].add(tempGra);
+        MapControl.graphicLayers[gralyr == undefined ? 'gralyr1' : gralyr].add(tempGra);
         if (iscal == undefined) map.setExtent(showExtent.expand(1.5));
       }
     }
@@ -409,7 +394,7 @@ MapControl.showExtent = function (geo, iscal) {
 
 MapControl.SetExtent = function (x, y) {
   let map = MapControl.map.mapbox;
-  //  let cPoint = map.extent.getCenter();
+  //  let cPoint = map.extent.getCenter(); //地图中心点
   let extent = map.extent;
   let mapExtent = new esri.geometry.Extent(
     extent.xmin - x,
@@ -420,60 +405,51 @@ MapControl.SetExtent = function (x, y) {
   );
   map.setExtent(mapExtent);
 };
+
 /**
  * Geometry高亮显示
  */
-MapControl.showGeometry = function (geo) {
-  esriLoader.loadModules(
-    ['esri/geometry/Point', 'esri/geometry/Polyline', 'esri/geometry/Polygon']).then(
-    ([Point, Polyline, Polygon]) => {
-      MapControl.graphicLayers['gralyr3'].clear();
-      let map = MapControl.map.mapbox;
-      var symbol;
-      var showExtent;
+MapControl.showGeometry = function (geo, isshowExtent, gralyr, color, clear, size, att, extent, outline) {
+  esriLoader.loadModules(['esri/geometry/Point', 'esri/geometry/Polyline', 'esri/geometry/Polygon']).then(([Point, Polyline, Polygon]) => {
+    if (clear == undefined) MapControl.graphicLayers[gralyr == undefined ? 'gralyr3' : gralyr].clear();
+    let map = MapControl.map[MapControl.mapId];
+    var symbol;
+    var showExtent;
+    if (geo.type != undefined && geo.type != '') {
       switch (geo.type) {
         case 'point':
           geo = new Point(geo);
-          var xMin = parseFloat(geo.x) + 50;
-          var yMin = parseFloat(geo.y) + 50;
-          var xMax = parseFloat(geo.x) + 50;
-          var yMax = parseFloat(geo.y) + 50;
-          showExtent = new esri.geometry.Extent(
-            xMin,
-            yMin,
-            xMax,
-            yMax,
-            map.spatialReference
-          );
-          var symbol = new esri.symbol.SimpleMarkerSymbol(
-            esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE,
-            10,
-            new esri.symbol.SimpleLineSymbol(
-              esri.symbol.SimpleLineSymbol.STYLE_CIRCLE,
-              new dojo.Color([255, 87, 34, 5])
-            ),
-            new dojo.Color([255, 87, 34, 5.25])
-          );
+          var xMin = parseFloat(geo.x) - 30;
+          var yMin = parseFloat(geo.y) - 30;
+          var xMax = parseFloat(geo.x) + 30;
+          var yMax = parseFloat(geo.y) + 30;
+          showExtent = new esri.geometry.Extent(xMin, yMin, xMax, yMax, map.spatialReference);
+          var symbol = null;
+          if (outline && outline == true) {
+            //去掉圆点外边框
+            symbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE, size == undefined ? 15 : size, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_NULL, new dojo.Color(color == undefined ? [0, 255, 0, 5] : color)), new dojo.Color(color == undefined ? [0, 255, 0, 5.25] : color));
+          } else {
+            //默认显示
+            symbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE, size == undefined ? 15 : size, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_CIRCLE, new dojo.Color(color == undefined ? [0, 255, 0, 5] : color)), new dojo.Color(color == undefined ? [0, 255, 0, 5.25] : color));
+          }
           break;
         case 'polyline':
           geo = new Polyline(geo);
-          var symbol = new esri.symbol.SimpleLineSymbol(
-            esri.symbol.SimpleLineSymbol.STYLE_SOLID,
-            new dojo.Color([255, 87, 34]),
-            3
-          );
+          var symbol = new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color(color == undefined ? [0, 255, 255] : color), 3);
           showExtent = geo.getExtent();
           break;
       }
-      if (showExtent != undefined) {
-        var tempGra = new esri.Graphic(geo, symbol, null, null);
-        MapControl.graphicLayers['gralyr3'].add(tempGra);
-        map.setExtent(showExtent.expand(1.5));
-      }
     }
-  ).catch(err => {
-    console.error(err);
-  })
+
+    if (showExtent != undefined) {
+      var tempGra = new esri.Graphic(geo, symbol, null, null);
+
+      if (att != undefined) tempGra.setAttributes(att);
+      MapControl.graphicLayers[gralyr == undefined ? 'gralyr3' : gralyr].add(tempGra);
+      if (isshowExtent == undefined)
+        map.setExtent(showExtent.expand(extent == undefined ? 0 : extent));
+    }
+  });
 };
 
 /**
@@ -2493,4 +2469,277 @@ MapControl.chkstrlen = function (str) {
       strlen++;
   }
   return strlen;
+}
+
+//-----------------------------轨迹回放-----------------------------
+
+MapControl.lineSymbol = new esri.symbol.SimpleLineSymbol(
+  esri.symbol.SimpleLineSymbol.STYLE_SOLID,
+  new dojo.Color("red"),
+  5
+);
+MapControl.pointSymbol = new esri.symbol.SimpleMarkerSymbol(
+  esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE,
+  5,
+  new esri.symbol.SimpleLineSymbol(
+    esri.symbol.SimpleLineSymbol.STYLE_SOLID,
+    new dojo.Color([255, 0, 0]),
+    1
+  ),
+  new dojo.Color([255, 0, 0, 1])
+);
+MapControl.carSymbol = new esri.symbol.PictureMarkerSymbol(
+  "../../../static/img/map/gps.png", 24, 24
+);;
+
+MapControl.points = []; //一条轨迹
+MapControl.pointsData = []; //多条轨迹
+MapControl.jieduan = 0; //默认开始第一条轨迹
+
+var timer;
+var isPause = false; // true：轨迹继续  true：轨迹暂停 
+
+MapControl.showLine2 = function () {
+  let map = MapControl.map[MapControl.mapId];
+  var paths = [],
+    poinsts = [];
+  for (var j = 0; j < MapControl.points.length; j++) {
+    var point = [];
+    point.push(MapControl.points[j].geometry.x);
+    point.push(MapControl.points[j].geometry.y);
+    paths.push(point);
+
+    let attr = MapControl.points[j].attributes;
+    if (attr != undefined && attr["photo"] != undefined && attr["photo"] != '') poinsts.push(MapControl.points[j])
+  }
+  var line = new esri.geometry.Polyline({
+    "paths": [paths]
+  });
+  var bglineSymbol = new esri.symbol.SimpleLineSymbol("solid", new dojo.Color([17, 91, 122, 0.4]), 9);
+
+  var lineGriphic = new esri.Graphic(line, bglineSymbol);
+  MapControl.graphicLayers['gralyr4'].add(lineGriphic);
+
+
+  //签到位置
+  for (let i = 0; i < poinsts.length; i++) {
+    MapControl.showGeometry(poinsts[i].geometry, undefined, "gralyr4", "#00f500", true, 10, poinsts[i], 0, undefined);
+  }
+}
+
+let rIndex = 0,
+  tmpPoints1 = [],
+  jindex1 = 0,
+  numdif1 = 0;
+
+// 轨迹清除
+MapControl.Stop2 = function () {
+  let map = MapControl.map[MapControl.mapId];
+  MapControl.Pause(true);
+
+  MapControl.jieduan = 0;
+  MapControl.points = []
+  MapControl.pointsData = []
+  rIndex = 0, tmpPoints1 = [], jindex1 = 0, numdif1 = 0;
+
+  if (timer != null) {
+    clearInterval(timer);
+    timer = null;
+  }
+
+  setTimeout(function () {
+    if (map != undefined) {
+      if (map.getLayer("lineLayer") != undefined) {
+        map.getLayer("lineLayer").clear();
+      }
+      if (map.getLayer("carLayer") != undefined) {
+        map.getLayer("carLayer").clear();
+      }
+    }
+    MapControl.setMapClear();
+  }, 500)
+}
+MapControl.Pause = function (value) {
+  isPause = value;
+}
+//轨迹开始
+MapControl.Start2 = function () {
+  MapControl.graphicLayers['gralyr1'].clear();
+  MapControl.Pause(false);
+  let map = MapControl.map[MapControl.mapId];
+
+  if (map.getLayer("lineLayer") != undefined) {
+    map.getLayer("lineLayer").clear();
+  }
+  if (map.getLayer("carLayer") != undefined) {
+    map.getLayer("carLayer").clear();
+  }
+
+  rIndex = 0, tmpPoints1 = [], jindex1 = 0, numdif1 = 0;
+  if (timer != null) {
+    clearInterval(timer);
+    timer = null;
+  }
+  MapControl.timerfun2(map, rIndex);
+}
+MapControl.timerfun2 = function (map) {
+  if (MapControl.points == undefined) return;
+  if (rIndex >= MapControl.points.length - 1) {
+    clearInterval(timer);
+
+    if (MapControl.jieduan < MapControl.pointsData.length - 1) {
+      MapControl.jieduan += 1;
+      MapControl.points = MapControl.pointsData[MapControl.jieduan];
+      MapControl.Start2();
+    }
+
+    return
+  } else {
+    if (isPause) {
+      return timer = setInterval(function () {
+        if (!isPause) {
+          clearInterval(timer)
+          MapControl.timerfun2(map, rIndex);
+        }
+      }, 1000);
+    }
+
+    console.log(rIndex + "," + (1 + rIndex));
+    var gra1 = MapControl.points[rIndex];
+    var gra2 = MapControl.points[1 + rIndex];
+    var angle = Math.ceil(MapControl.Angle(gra1.geometry.x, gra1.geometry.y, gra2.geometry.x, gra2.geometry.y))
+
+    MapControl.carSymbol.setAngle(angle); //设置小车角度
+
+    let numdif = 0.85,
+      timedif = 0; //默认速度
+
+    //计算两点之间的时间差（秒）
+    if (gra1.attributes != undefined && gra2.attributes != undefined) {
+      let sTime = gra1.attributes["timestr"].split(':')
+      let eTime = gra2.attributes["timestr"].split(':')
+      timedif = (Number(eTime[0] * 60) + Number(eTime[1])) - (Number(sTime[0] * 60) + Number(sTime[1]))
+      // numdif = timedif / (tempPoints.length - 2);
+    }
+
+    let tempPoints = [];
+    if (timedif != 0)
+      tempPoints = MapControl.interpolation2(gra1, gra2, timedif);
+    else
+      tempPoints = MapControl.interpolation2(gra1, gra2, 1);
+
+    console.log("点数：" + timedif)
+
+    MapControl.play2(tempPoints, 0, 1);
+  }
+}
+MapControl.play2 = function (tmpPoints, jindex, numdif) {
+  let map = MapControl.map[MapControl.mapId];
+  if (isPause) {
+    jindex1 = jindex;
+    tmpPoints1 = tmpPoints;
+    numdif1 = numdif;
+    return timer = setInterval(function () {
+      if (!isPause) {
+        clearInterval(timer)
+        MapControl.play2(tmpPoints1, jindex1, numdif1);
+      }
+    }, 1000);
+  }
+  if (jindex < tmpPoints.length - 1) {
+
+    var line = new esri.geometry.Polyline({
+      "paths": [
+        [
+          [tmpPoints[jindex].geometry.x, tmpPoints[jindex].geometry.y],
+          [tmpPoints[jindex + 1].geometry.x, tmpPoints[jindex + 1].geometry.y]
+        ]
+      ]
+    });
+    var lineGriphic = new esri.Graphic(line, MapControl.lineSymbol);
+    map.getLayer("lineLayer").add(lineGriphic);
+
+    map.getLayer("carLayer").clear();
+    var carGriphic = new esri.Graphic(tmpPoints[jindex].geometry, MapControl.carSymbol);
+    map.getLayer("carLayer").add(carGriphic);
+
+    if (tmpPoints[jindex + 1].attributes != undefined)
+      MapControl.addGPSTextSymbol(tmpPoints[jindex + 1].attributes["timestr"], tmpPoints[jindex + 1].geometry);
+
+    map.centerAt(tmpPoints[jindex + 1].geometry);
+
+    setTimeout(function () {
+      MapControl.play2(tmpPoints, jindex + 1, numdif);
+    }, numdif * 1000);
+  } else {
+    return MapControl.timerfun2(map, rIndex++);
+  }
+}
+MapControl.interpolation2 = function (graA, graB, speed) {
+  let map = MapControl.map[MapControl.mapId];
+  var tmp = [],
+    sTime = null;
+
+  if (speed == undefined) {
+    speed = 1;
+  }
+  if (graA.attributes != undefined)
+    sTime = graA.attributes["timestr"].split(':')
+
+  // speed = speed - 0.5; //不能大于播放速度
+  // var count = Math.abs(speed) * 25;
+  var count = speed;
+  var disX = (graB.geometry.x - graA.geometry.x) / count;
+  var disY = (graB.geometry.y - graA.geometry.y) / count;
+  if (disX != 0 || disY != 0) {
+    var i = 0;
+    while (i < count) {
+      var x = parseFloat(graA.geometry.x) + parseFloat(i * disX);
+      var y = parseFloat(graA.geometry.y) + parseFloat(i * disY);
+      var gra = new esri.Graphic(new esri.geometry.Point(x, y, map.spatialReference), null);
+      if (sTime != null) {
+        let timedif = (Number(sTime[0] * 60) + Number(sTime[1])) + i;
+        if (timedif > 60) {
+          let m = parseInt(timedif / 60);
+          let s = Math.ceil(timedif % 60);
+          var ms = (m < 10 ? '0' + m : m) + ":" + (s < 10 ? '0' + s : s)
+          gra.setAttributes({
+            timestr: ms
+          });
+        } else {
+          var ms = "00:" + (timedif < 10 ? '0' + timedif : timedif)
+          gra.setAttributes({
+            timestr: ms
+          });
+        }
+      }
+      tmp.push(gra);
+      i++;
+    }
+  }
+  tmp.push(graB); //防止插值出来的最后一个点到不了B点
+  return tmp;
+}
+
+
+MapControl.Angle = function (startx, starty, endx, endy) {
+  var tan = 0
+  if (endx == startx) {
+    tan = Math.atan(0) * 180 / Math.PI
+  } else {
+    tan = Math.atan(Math.abs((endy - starty) / (endx - startx))) * 180 / Math.PI
+  }
+
+  if (endx >= startx && endy >= starty) //第一象限
+  {
+    return -tan;
+  } else if (endx > startx && endy < starty) //第四象限
+  {
+    return tan;
+  } else if (endx < startx && endy > starty) //第二象限
+  {
+    return tan - 180;
+  } else {
+    return 180 - tan; //第三象限
+  }
 }

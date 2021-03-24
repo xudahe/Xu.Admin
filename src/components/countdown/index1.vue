@@ -35,7 +35,7 @@
 
 <script>
 
-/*
+/**
  * svg倒计时效果
  */
 export default {

@@ -16,7 +16,7 @@
 			<div id="appComponts" class="appComponts" :style="{width:'calc(100% - 1.60rem)'}">
 
         <!-- 左侧列表框 -->
-				<div class="appCompontsContLeft fade-in-right" :style="{width: pageWidth +'rem'}" v-show="isLeftMenu">
+				<div class="appCompontsContLeft fade-in-right" :style="{width: pageWidth +'rem'}" v-if="isLeftMenu">
 					<div class="appCompontsContLeftDiv">
 						<div class="titleCont titleContImg">
 							<div class="titleContText">{{titleName}}</div>
@@ -31,7 +31,7 @@
 				</div>
 
         <!-- 左侧详情框 -->
-				<div class="appCompontsContLeft fade-in-right"  :style="{width: pageWidth +'rem',marginLeft: isDetailDataLeft ? '0.05rem':'0rem'}" v-show="isDetailDataLeft">
+				<div class="appCompontsContLeft fade-in-right"  :style="{width: pageWidth +'rem',marginLeft: isDetailDataLeft ? '0.05rem':'0rem'}" v-if="isDetailDataLeft">
 					<div class="appCompontsContLeftDiv">
 						<div class="titleCont titleContImg">
 							<div class="titleContText">{{titleLeftName}}</div>
@@ -46,7 +46,7 @@
 				</div>
 
 				<!-- 全屏框/半框 -->
-				<div style="float: left;height: 100%;" :style="{width: pageWidth,paddingRight: pageWidth == '49%' ? '0.05rem':'0rem'}" v-show="isDetailScreen">
+				<div style="float: left;height: 100%;" :style="{width: pageWidth,paddingRight: pageWidth == '49%' ? '0.05rem':'0rem'}" v-if="isDetailScreen">
 					<div class="appCompontsScreen scale-in">
 						<div class="titleCont titleContImgT" style="width:100%">
 							<div class="titleContText">{{titleScreenName}}</div>
@@ -61,14 +61,14 @@
 				</div>
         
         <!-- 中间地图部分 -->
-				<div style="position:absolution;float: left;" :style="{height: mapHeight,width: mapWidth,padding: mapadding}" v-show="isMapShow">
+				<div class="mapDiv" style="position:absolution;float: left;" :style="{height: mapHeight,width: mapWidth,padding: mapadding}" v-if="isMapShow">
 					<div class="appCompontsContMap scale-in">
 					   <arcgisMap></arcgisMap>
 					</div>
 				</div>
 
         <!-- 底部详情框 -->
-				<div class="appCompontsContDetail fade-in-up" :class="botmShow ? '':''" :style="{height: botmHeight,width: mapWidth, paddingLeft: isDetailDataBotm && !isDetailScreen ?'0.05rem':'0rem'}" v-show="isDetailDataBotm">
+				<div class="appCompontsContDetail fade-in-up" :class="botmShow ? '':''" :style="{height: botmHeight,width: mapWidth, paddingLeft: isDetailDataBotm && !isDetailScreen ?'0.05rem':'0rem'}" v-if="isDetailDataBotm">
 					<div class="appCompontsContDetailDiv">
 						<div class="titleCont titleContImg" :style="{borderBottom: botmShow ? '1px solid #0161ba':'none'}">
 							<div class="titleContText">{{titleBotmName}}</div>
@@ -84,7 +84,7 @@
 				</div>
 
 				<!-- 右侧详情框 -->
-				<div class="appCompontsContLeft fade-in-left1" :style="{width: pageWidth +'rem'}" v-show="isDetailDataRight">
+				<div class="appCompontsContLeft fade-in-left1" :style="{width: pageWidth +'rem'}" v-if="isDetailDataRight">
 					<div class="appCompontsContLeftDiv">
 						<div class="titleCont titleContImg">
 							<div class="titleContText">{{titleRightName}}</div>
@@ -106,6 +106,7 @@
 
 <script>
   import bus from "../../../eventBus.js";
+  import { MapControl } from "../../arcgis_map/js/MapControl.js";
   import arcgisMap from "../../../components/arcgis_map/index2.vue";
 	
 	export default {
@@ -132,7 +133,7 @@
         menuData: [],
         
         //组件名称
-				componentName: "",
+				componentName: "", //左侧列表
 				componentBotm: "", //底部详情
         componentLeft: "", //左侧详情
         componentRight: "",//右侧详情
@@ -169,7 +170,9 @@
 		methods: {
 			changeMenu(item, index) {
         var _this = this;
-        
+
+        MapControl.setMapClear();
+
         this.menuFlag = index;
 				this.componentName = item.classname;
         this.titleName = item.menuname;
@@ -206,6 +209,7 @@
         this.mapHeight = '100%';
         
 				if (type == "leftMenu") {
+          MapControl.setMapClear();
 					this.isLeftMenu = false;
           this.pageWidth = 0;
           this.mapWidth = '100%';
@@ -217,7 +221,6 @@
 				}
 				else if (type == "leftdetail") {
           this.mapWidth = 'calc(100% - '+ (this.pageWidth) +'rem)';
-   
           this.mapadding = '0 0 0 0.05rem';
           this.isDetailDataLeft = false;
           this.isDetailDataBotm = false;
@@ -251,7 +254,7 @@
 				_this.menuData = [];
 			  let children = [
           {id:1,classname:"test1",menuname:"二级菜单1",img:"",systemid:32,},
-          {id:2,classname:"test1",menuname:"二级菜单2",img:"",systemid:32,},
+          // {id:2,classname:"test1",menuname:"二级菜单2",img:"",systemid:32,},
           {id:3,classname:"test4",menuname:"二级菜单3",img:"",systemid:32,},
           {id:3,classname:"test2",menuname:"二级菜单4",img:"",systemid:32,},
           {id:3,classname:"test3",menuname:"二级菜单5",img:"",systemid:32,},

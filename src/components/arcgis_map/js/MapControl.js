@@ -49,7 +49,7 @@ MapControl.MenuForMap = {};
 MapControl.mapId = 'mapbox';
 
 // identify点击事件
-var identifyHandler;
+MapControl.identifyHandler = {};
 
 /**
  * 地图绘制事件
@@ -64,6 +64,7 @@ var doAttMapDrawEventHandler;
 var domapOnclickEventHandler;
 
 var centerPoint;
+
 /**
  * 设置初始化地图全图
  * @param mapId
@@ -1672,11 +1673,23 @@ MapControl.addGraphic = function ($graphic) {
       geometry = new esri.geometry.Polygon(geometry);
       break;
   }
-  let gra = new esri.Graphic(geometry, symbol, null, null);
-  if ($graphic.isClear == true) {
-    MapControl.setMapClear();
+
+  if ($graphic.isdeviation == true) { //点位偏移量
+    symbol.setOffset(0, 15);
   }
-  //MapControl.AddPop(gra, $graphic.InfoTemplate)
+
+  let gra = new esri.Graphic(geometry, symbol, null, null);
+  if ($graphic.attributes !== null) {
+    gra.setAttributes($graphic.attributes)
+  }
+
+  if ($graphic.isClear == true) {
+    MapControl.graphicLayers[$graphic.layer].clear()
+  }
+  if ($graphic.InfoTemplate !== undefined) {
+    MapControl.AddPop(gra, $graphic.InfoTemplate)
+  }
+
   MapControl.graphicLayers[$graphic.layer].add(gra);
 };
 
@@ -2473,25 +2486,30 @@ MapControl.chkstrlen = function (str) {
 
 //-----------------------------轨迹回放-----------------------------
 
-MapControl.lineSymbol = new esri.symbol.SimpleLineSymbol(
-  esri.symbol.SimpleLineSymbol.STYLE_SOLID,
-  new dojo.Color("red"),
-  5
-);
-MapControl.pointSymbol = new esri.symbol.SimpleMarkerSymbol(
-  esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE,
-  5,
-  new esri.symbol.SimpleLineSymbol(
+MapControl.lineSymbol = function () {
+  return new esri.symbol.SimpleLineSymbol(
     esri.symbol.SimpleLineSymbol.STYLE_SOLID,
-    new dojo.Color([255, 0, 0]),
-    1
-  ),
-  new dojo.Color([255, 0, 0, 1])
-);
-MapControl.carSymbol = new esri.symbol.PictureMarkerSymbol(
-  "../../../static/img/map/gps.png", 24, 24
-);;
-
+    new dojo.Color("red"),
+    5
+  );
+}
+MapControl.pointSymbol = function () {
+  return new esri.symbol.SimpleMarkerSymbol(
+    esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE,
+    5,
+    new esri.symbol.SimpleLineSymbol(
+      esri.symbol.SimpleLineSymbol.STYLE_SOLID,
+      new dojo.Color([255, 0, 0]),
+      1
+    ),
+    new dojo.Color([255, 0, 0, 1])
+  );
+}
+MapControl.carSymbol = function () {
+  return new esri.symbol.PictureMarkerSymbol(
+    "../../../static/img/map/gps.png", 24, 24
+  );
+}
 MapControl.points = []; //一条轨迹
 MapControl.pointsData = []; //多条轨迹
 MapControl.jieduan = 0; //默认开始第一条轨迹
@@ -2521,7 +2539,7 @@ MapControl.showLine2 = function () {
   MapControl.graphicLayers['gralyr4'].add(lineGriphic);
 
 
-  //签到位置
+  //签到位置点
   for (let i = 0; i < poinsts.length; i++) {
     MapControl.showGeometry(poinsts[i].geometry, undefined, "gralyr4", "#00f500", true, 10, poinsts[i], 0, undefined);
   }

@@ -40,6 +40,91 @@
   height: 33px;
   width: 40px;
 }
+
+.app-right-bottom {
+  z-index: 4;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+#mapType {
+  height: 46px;
+  cursor: pointer;
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+  background-color: rgba(249, 248, 248, 0);
+}
+
+#mapType:hover {
+  width: 120px;
+  background-color: rgba(249, 248, 248, 0.8);
+}
+
+#mapType:hover .earth {
+  right: 60px;
+}
+#mapType:hover .scape {
+  right: 120px;
+}
+
+#mapType .mapTypeCard {
+  height: 36px;
+  width: 53px;
+  position: absolute;
+  border-radius: 2px;
+  top: 5px;
+  box-sizing: border-box;
+  border: 1px solid rgba(153, 153, 153, 0.42);
+  background: url(../../../static/img/map/maptype.png);
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+
+#mapType .mapTypeCard.active span,
+#mapType .mapTypeCard:hover span {
+  background-color: #3385ff;
+}
+
+#mapType .mapTypeCard span {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: inline-block;
+  font-size: 12px;
+  height: 12px;
+  line-height: 12px;
+  color: #fff;
+  border-top-left-radius: 2px;
+}
+
+#mapType .mapTypeCard:hover {
+  border: 1px solid #3385ff;
+}
+
+#mapType .earth {
+  right: 0px;
+  z-index: 1;
+}
+#mapType .normal {
+  z-index: 2;
+  background-position: 0 0;
+  right: 0px;
+}
+
+#mapType .earth {
+  background-position: 0 -181px;
+}
+#mapType .threeD {
+  right: 0px;
+  z-index: 0;
+}
+#mapType:hover .threeD {
+  right: 120px;
+}
+#mapType .threeD {
+  background-position: 0 -362px;
+}
 </style>
 <template>
   <div
@@ -48,6 +133,35 @@
     style="position: relative;border-radius: 0.1rem;"
   >
     <bottombar :datasource="currentscale"></bottombar>
+
+    <div class="app-right-bottom">
+      <div id="mapType">
+        <div
+          class="mapTypeCard normal"
+          id="wu1"
+          @click="getLayer('wu1')"
+          title="地图"
+        >
+          <span>地图</span>
+        </div>
+        <div
+          class="mapTypeCard earth"
+          id="wu2"
+          @click="getLayer('wu2')"
+          title="影像"
+        >
+          <span>影像</span>
+        </div>
+        <div
+          class="mapTypeCard threeD"
+          id="wu3"
+          @click="getLayer('wu3')"
+          title="三维"
+        >
+          <span>三维</span>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -178,8 +292,10 @@ export default {
             });
 
             let verLayer = new TDTLayer();
+            verLayer.id = "tdtLayer";
             map.addLayer(verLayer);
             var veranno = new TDTAnnoLayer();
+            veranno.id = "tdtAnnoLayer";
             map.addLayer(veranno);
 
             var graphicLayer1 = new esri.layers.GraphicsLayer();
@@ -243,6 +359,12 @@ export default {
                 map.spatialReference
               );
               map.setExtent(mapExtent);
+
+              //css滤镜 修改地图样式
+              // document.getElementById("mapbox_tdtLayer").style.filter =
+              //   "contrast(75%) sepia(100%) invert(100%) brightness(170%) hue-rotate(2deg) saturate(200%)";
+              // document.getElementById("mapbox_tdtAnnoLayer").style.filter =
+              //   "contrast(75%) sepia(100%) invert(100%) brightness(170%) hue-rotate(2deg) saturate(200%)";
             }
           }
         );
@@ -274,6 +396,35 @@ export default {
         });
         map.addLayer(lineLayer);
         map.addLayer(carLayer);
+      }
+    },
+    getLayer(id) {
+      if (id == "wu2") {
+        MapControl.SetLayerbaseload([
+          {
+            url: "", //基础底图
+            isshow: false
+          },
+          {
+            url: "", //影像底图
+            isshow: true
+          }
+        ]);
+        document.getElementById("wu2").style.zIndex = 2;
+        document.getElementById("wu1").style.zIndex = 1;
+      } else if (id == "wu1") {
+        MapControl.SetLayerbaseload([
+          {
+            url: "", //基础底图
+            isshow: true
+          },
+          {
+            url: "", //影像底图
+            isshow: false
+          }
+        ]);
+        document.getElementById("wu2").style.zIndex = 1;
+        document.getElementById("wu1").style.zIndex = 2;
       }
     }
   },

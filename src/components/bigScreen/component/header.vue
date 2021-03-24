@@ -52,6 +52,8 @@
 
 <script>
 
+import { MapControl } from "../../arcgis_map/js/MapControl.js";
+
 export default {
     data() {
       return {
@@ -133,6 +135,7 @@ export default {
 					}
 	  	},
 			changeMenu_left(id) {
+        MapControl.setMapClear();
 				this.ismeunNumRight = null;
 				this.ismeunNumLeft = id;
 
@@ -144,6 +147,7 @@ export default {
         });
 			},
 			changeMenu_Right(id) {
+        MapControl.setMapClear();
 				this.ismeunNumLeft = null;
 				this.ismeunNumRight = id;
         

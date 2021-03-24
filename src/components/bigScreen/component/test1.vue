@@ -107,13 +107,13 @@ export default {
         current: 1, //当前页码
         total: 0,
         pageList: [
-          { title: "某某1", x: "118.75596318", y: "32.04079632" },
-          { title: "某某2", x: "118.80705517", y: "32.10048969" },
-          { title: "某某3", x: "118.80566318", y: "32.10449283" },
-          { title: "某某4", x: "118.80070507", y: "32.10006197" },
-          { title: "某某5", x: "118.79423849", y: "32.09702295" },
-          { title: "某某6", x: "118.89153772", y: "32.0583244" },
-          { title: "某某7", x: "118.8925205", y: "32.05729316" }
+          { id: 1, title: "某某1", x: "118.75596318", y: "32.04079632" },
+          { id: 2, title: "某某2", x: "118.80705517", y: "32.10048969" },
+          { id: 3, title: "某某3", x: "118.80566318", y: "32.10449283" },
+          { id: 4, title: "某某4", x: "118.80070507", y: "32.10006197" },
+          { id: 5, title: "某某5", x: "118.79423849", y: "32.09702295" },
+          { id: 6, title: "某某6", x: "118.89153772", y: "32.05832442" },
+          { id: 7, title: "某某7", x: "118.89252052", y: "32.05729316" }
         ]
       },
       selectId: -1, //已选择的编号
@@ -143,6 +143,26 @@ export default {
       );
       map.setExtent(showExtent.expand(0));
 
+      var gralyr1 = MapControl.graphicLayers["gralyr1"];
+      var gralyrList = gralyr1.graphics;
+      for (var k = 0; k < gralyrList.length; k++) {
+        var url = gralyrList[k].symbol.url;
+        if (url == "../../../static/img/map/ic_flowmeter_online2.png") {
+          gralyrList[k].symbol.url =
+            "../../../static/img/map/ic_flowmeter_online1.png";
+          gralyr1.redraw();
+        }
+      }
+
+      for (var l = 0; l < gralyrList.length; l++) {
+        var url = gralyrList[l].symbol.url;
+        if (gralyrList[l].attributes.id == item.id) {
+          gralyrList[l].symbol.url =
+            "../../../static/img/map/ic_flowmeter_online2.png";
+          gralyr1.redraw();
+        }
+      }
+
       // bus.$emit("rightDetail","test1",item,item.title)
       // bus.$emit("leftDetail","test1",item,item.title)
       // bus.$emit("botmDetail", "test1", item, item.title);
@@ -158,8 +178,9 @@ export default {
     loadData() {
       let _this = this;
       this.changePage(1);
-
-      this.page.pageList.forEach(item => {
+      
+      let datalist = JSON.parse(JSON.stringify(this.page.pageList));
+      datalist.forEach(item => {
         let geometry = "POINT(" + item.x + " " + item.y + ")";
         let shape = MapControl.WktToAgs(geometry);
         var obj = {
@@ -170,7 +191,7 @@ export default {
             height: 27, //图片高度(类型为PictureMarkerSymbol)
             width: 27 //图片宽度(类型为PictureMarkerSymbol)
           },
-          isClear: false, //是否清除当前地图元素
+          isClear: false, //是否清除当前地图元素f
           attributes: item, //元素属性(可选)
           layer: "gralyr1",
           isdeviation: false
@@ -184,10 +205,11 @@ export default {
   },
   mounted() {
     var _this = this;
-
     this.loadData();
   },
-  beforeDestroy() {},
+  beforeDestroy() {
+    MapControl.setMapClear();
+  },
   created() {}
 };
 </script>

@@ -280,7 +280,7 @@ export default {
     width: 100%;
     height: 100%;
     padding: 8% 50%;
-    background-image: linear-gradient(135deg, #00a7f5 10%, #0cb3ff);
+    background-image: linear-gradient(120deg, #00a7f5 45%, #0cb3ff 40%); //渐变背景
 
     .el-input__inner{
         border: none !important;

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import arcgisMap from "../../components/arcgis_map/index1.vue";
+import arcgisMap from "../../components/arcgis_map/index4.vue";
 
 export default {
   name: "t-arcgisMap",

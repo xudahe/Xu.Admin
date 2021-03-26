@@ -128,7 +128,7 @@
 </style>
 <template>
   <div
-    class="map-conent"
+    class="map-content"
     :id="mapId"
     style="position: relative;border-radius: 0.1rem;"
   >
@@ -167,8 +167,8 @@
 
 <script>
 /*
- * 加载天地图
- * 天地图服务列表：http://lbs.tianditu.gov.cn/server/MapService.html
+ * 天地图服务
+ * 天地图服务Api：http://lbs.tianditu.gov.cn/server/MapService.html
  */
 
 import esriLoader from "esri-loader";
@@ -179,7 +179,7 @@ import bottombar from "../arcgis_map/child/bottombar";
 
 var map, navToolbar;
 export default {
-  name: "arcgisMap",
+  name: "GisTdtMap",
   components: {
     bottombar
   },

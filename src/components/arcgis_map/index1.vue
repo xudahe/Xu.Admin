@@ -43,7 +43,7 @@
 </style>
 <template>
   <div
-    class="map-conent"
+    class="map-content"
     :id="mapId"
     style="position: relative;border-radius: 0.1rem;"
   >
@@ -122,7 +122,12 @@
     <bottombar :datasource="currentscale"></bottombar>
   </div>
 </template>
+
 <script>
+/*
+ * 在线地图服务
+ */
+
 import esriLoader from "esri-loader";
 import { MapControl } from "../arcgis_map/js/MapControl";
 import mapconfig from "../arcgis_map/js/mapconfig";
@@ -131,7 +136,7 @@ import bottombar from "../arcgis_map/child/bottombar";
 
 var map, navToolbar;
 export default {
-  name: "arcgisMap",
+  name: "GisServerMap ",
   components: {
     layermanage,
     bottombar

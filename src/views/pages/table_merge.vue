@@ -10,9 +10,15 @@
     :span-method="handleSpan"
   ></Table>
 </template>
+
 <script>
+/**
+ * 需求：如果同一列相邻的数据相同，则合并成一个单元格
+ * 参考方法：https://blog.csdn.net/wakaka112233/article/details/107210611/
+ */
+
 export default {
-  name:"table_merge",
+  name: "table_merge",
   data() {
     return {
       columns11: [
@@ -396,7 +402,13 @@ export default {
       });
     },
     handleSpan({ row, column, rowIndex, columnIndex }) {
+      /**
+       *  合并和被合并的区别，返回值不是[0,0]的，其内容显示在合并后的单元格中。
+       *  返回值是[0,0]的是被合并的单元格，内容相当于删除。
+       */
+
       if (columnIndex == 0) {
+        //合并第1列
         //计算合并的行数列数
         let x = row.num == 0 ? 0 : row.num;
         let y = row.num == 0 ? 0 : 1;
@@ -404,6 +416,7 @@ export default {
       }
 
       if (columnIndex == 1) {
+        //合并第2列
         //计算合并的行数列数
         let x = row.agenum == 0 ? 0 : row.agenum;
         let y = row.agenum == 0 ? 0 : 1;

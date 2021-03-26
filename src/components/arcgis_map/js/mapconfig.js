@@ -12,6 +12,7 @@ const mapconfig = {
   tzbasemap: 'http://58.213.48.106/arcgis/rest/services/TZPS/TZDXT/MapServer', //通州
   jnbasemap: 'http://58.213.48.106/arcgis/rest/services/NJ08/JNDXT/MapServer', //江宁
 
+  //在线地图服务： http://map.geoq.cn/arcgis/rest/services
   basemap: 'http://58.213.48.106:6080/arcgis/rest/services/NJ08/NJDXT20180830/MapServer', //南京市基础底图
   basemapview: 'http://58.213.48.106:6080/arcgis/rest/services/NJ08/NJ08dom1M/MapServer', //基础影像图
   GeometryService: 'http://58.213.48.106:6080/arcgis/rest/services/Utilities/Geometry/GeometryServer', //ArcGIS Server空间服务

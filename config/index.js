@@ -14,9 +14,9 @@ module.exports = {
     assetsSubDirectory: 'static',  // 编译输出的二级目录
     assetsPublicPath: '/',  // 编译发布上线路径的根目录，可配置为资源服务器域名或 CDN 域名
     proxyTable: {
-        '/api': {
-          target: 'http://localhost:1081', //源地址 
-          changeOrigin: true, //改变源 
+        '/api': { //替换代理地址名称
+          target: 'http://localhost:1081', //代理地址 
+          changeOrigin: true, //可否跨域 
           pathRewrite: { 
             '^/api': '' //路径重写 
             } 

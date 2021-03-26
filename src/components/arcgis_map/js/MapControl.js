@@ -265,11 +265,10 @@ MapControl.changeLayer = function (item, newIndex) {
 /**
  *地图高亮显示
  */
-MapControl.showGraphic = function (geo, issolid, layer, iscal, color) {
+MapControl.showGraphic = function (geo, issolid, gralyr, isshowExtent, color) {
   esriLoader.loadModules(
     ['esri/geometry/Point', 'esri/geometry/Polyline', 'esri/geometry/Polygon']).then(
     ([Point, Polyline, Polygon]) => {
-      //MapControl.graphicLayers['gralyr1'].clear();
       let map = MapControl.map.mapbox;
       var symbol;
       var showExtent;
@@ -336,7 +335,7 @@ MapControl.showGraphic = function (geo, issolid, layer, iscal, color) {
       if (showExtent !== undefined) {
         var tempGra = new esri.Graphic(geo, symbol, null, null);
         MapControl.graphicLayers[gralyr == undefined ? 'gralyr1' : gralyr].add(tempGra);
-        if (iscal == undefined) map.setExtent(showExtent.expand(1.5));
+        if (isshowExtent == undefined) map.setExtent(showExtent.expand(1.5));
       }
     }
   ).catch(err => {
@@ -2278,6 +2277,40 @@ MapControl.identify = function (isremove) {
   }).catch(err => {
     console.error(err);
   })
+};
+
+//根据地图比例尺计算容差值返回范围面
+MapControl.identifyNew = function () {
+  esriLoader.loadModules(
+    ['esri/geometry/scaleUtils', 'esri/geometry/geometryEngine']).then(
+    ([scaleUtils, geometryEngine]) => {
+      const map = MapControl.map[MapControl.mapId];
+      const scale = scaleUtils.getScale(map);
+      const PPI = 96
+      let Resolution = scale / (PPI / 0.0254)
+      MapControl.identifyHandler = map.on("click", function (geo) {
+        const buffer = geometryEngine.geodesicBuffer(geo.mapPoint, 5, "meters", false) //缓冲范围5m
+
+        let geom = ''
+        for (var i = 0; i < buffer.rings[0].length; i++) {
+          geom = buffer.rings[0][i][0] + ' ' + buffer.rings[0][i][1] + ',' + geom;
+        }
+        geom = geom + buffer.rings[0][0][0] + ' ' + buffer.rings[0][0][1];
+        geom = 'POLYGON((' + geom + '))';
+        let wkt = MapControl.WktToAgs(geom)
+        // MapControl.showGraphic(wkt, undefined, "gralyr4")
+
+        let extent = buffer.getExtent();
+        let xmin = extent.xmin;
+        let xmax = extent.xmax;
+        let ymin = extent.ymin;
+        let ymax = extent.ymax;
+        let geometry = 'POLYGON ((' + xmin + ' ' + ymin + ',' + xmax + ' ' + ymin + ',' + xmax + ' ' + ymax + ',' + xmin + ' ' + ymax + ',' + xmin + ' ' + ymin + '))';
+        MapControl.identifyHandler.remove()
+        bus.$emit('identify', geometry);
+      });
+    }
+  );
 };
 
 MapControl.multipolygonExtent = function (geolist) {

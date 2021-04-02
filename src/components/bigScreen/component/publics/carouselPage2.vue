@@ -1,4 +1,3 @@
-<!-- 中间主体部分 -->
 <template>
   <div class="middlePageDiv" style="width: 100%;height: 100%;">
     <!-- 左侧 -->

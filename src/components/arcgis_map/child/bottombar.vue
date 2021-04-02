@@ -25,9 +25,9 @@
 					}
 					this.$refs.bottom_label.innerHTML =
 						'<div style="line-height:30px;color:rgba(0,0,0,0.8)"><strong>X坐标：' +
-						x.toFixed(3) +
+						x.toFixed(6) +
 						"</strong><span>&nbsp;&nbsp;</span><strong>Y坐标：" +
-						y.toFixed(3) +
+						y.toFixed(6) +
 						"</strong><strong>&nbsp;&nbsp;&nbsp;比例尺: 1:" + scale + "</strong></div>";
 				},
 				deep: true

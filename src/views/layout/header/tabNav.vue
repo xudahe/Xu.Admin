@@ -155,6 +155,7 @@ $leftright: ($left, $right);
     padding-#{$right}: 5px;
     flex-wrap: nowrap;
     overflow-x: auto;
+    overflow-y: hidden;
     li {
       border-radius: 5px;
       height: 30px;

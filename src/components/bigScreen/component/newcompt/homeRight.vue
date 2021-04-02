@@ -13,7 +13,7 @@
             <div style="float: left;">
               <div style='position: relative;'>
                 <Tooltip class="setTips" :content="item.shortname" placement="right">
-                  <img style="margin:0.1rem 0 0.1rem 0.05rem;height: 0.2rem;width: 0.2rem;" src="../../../../../static/img/newhome/ic_waterquality.png"/>
+                  <img style="margin:0.1rem 0 0.1rem 0.05rem;height: 0.2rem;width: 0.2rem;" src="../../../../../static/img/map/ic_flowmeter_online2.png"/>
                 </Tooltip>
               </div>
             </div>

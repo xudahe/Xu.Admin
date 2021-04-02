@@ -130,7 +130,7 @@ export default {
                     else this.imgIndex--;
                 })
             },30)
-          },
+        },
         toDots(index){
             this.dotsIndex=this.imgIndex=index;
         },

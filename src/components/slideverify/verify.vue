@@ -6,7 +6,7 @@
           <div class="code-box" id="code-box">
             <input type="text" name="code" class="code-input" />
             <p></p>
-            <span>>>></span>
+            <span>>></span>
             {{sliderText}}
           </div>
         </div>
@@ -19,7 +19,7 @@
 export default {
   data() {
     return {
-      sliderText:'向右滑动验证'
+      sliderText:'拖动滑块验证'
     };
   },
   mounted() {

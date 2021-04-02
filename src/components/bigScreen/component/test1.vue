@@ -181,8 +181,8 @@ export default {
       
       let datalist = JSON.parse(JSON.stringify(this.page.pageList));
       datalist.forEach(item => {
-        let geometry = "POINT(" + item.x + " " + item.y + ")";
-        let shape = MapControl.WktToAgs(geometry);
+        item.geometry = "POINT(" + item.x + " " + item.y + ")";
+        let shape = MapControl.WktToAgs(item.geometry);
         var obj = {
           geometry: shape,
           symbol: {
@@ -200,7 +200,24 @@ export default {
       });
 
       var gralyr3 = MapControl.graphicLayers["gralyr1"];
-      gralyr3.onClick = function(val) {};
+      gralyr3.onClick = function(val) {
+        let value = val.graphic.attributes;
+
+        let map = MapControl.map[MapControl.mapId];
+				let geo = MapControl.WktToAgs(value.geometry);
+				var xMin = parseFloat(geo.x) - 1;
+				var yMin = parseFloat(geo.y) - 1;
+				var xMax = parseFloat(geo.x) + 1;
+				var yMax = parseFloat(geo.y) + 1;
+				var showExtent = new esri.geometry.Extent(
+					xMin,
+					yMin,
+					xMax,
+					yMax,
+					map.spatialReference
+				);
+				map.setExtent(showExtent.expand(0));
+      };
     }
   },
   mounted() {

@@ -10,7 +10,7 @@ export default {
   props: {
     identifyCode: {
       type: String,
-      default: "1234"
+      default: "xudh"
     },
     fontSizeMin: {
       type: Number,

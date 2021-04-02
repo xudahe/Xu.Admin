@@ -44,20 +44,21 @@
       },
       // 显示列数，支持响应式对象设置 {xxl,xl,lg,md,sm,xs}
       columns: {
-        type: [Number, Object],
+        type: [Number, Object], //多个可能的类型
         default: 3,
         validator(val) {
-          return typeof val === 'number' ? 24 % val === 0 : true
+          return typeof val === 'number' ? 24 % val === 0 : true // 自定义验证函数
         }
       },
     },
     watch: {
       columns: {
-        immediate: true,
         handler() {
           this.setupResponsive()
           this.currentColumn = this.getResponsiveValue()
-        }
+        },
+        immediate: true,
+        deep:true,
       },
       screens() {
         this.currentColumn = this.getResponsiveValue()

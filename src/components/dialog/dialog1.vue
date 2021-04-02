@@ -154,6 +154,12 @@ export default {
         }
       }
     },
+    retresize(){
+      var dragPanel = document.getElementById("dragPanel");
+      dragPanel.style.top = "100px";
+      dragPanel.style.height = "70%";
+      dragPanel.style.width = "60%";
+    }
   },
   mounted() {
     var elem = document.querySelector(".draggable");

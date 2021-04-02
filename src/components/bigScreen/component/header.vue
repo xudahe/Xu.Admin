@@ -1,8 +1,7 @@
 <template>
-	<div class="header" style="z-index: 99;">
+	<div class="header" style="z-index: 9;position: relative;">
 	
 		<div class="homePageTitle">
-			<div style="height: 100%;">
 
 				<div class="left-div" style="width:33.3%;float: left;height: 100%;">
           <div class="leftTool">
@@ -40,11 +39,25 @@
 				    </a>
 			  	</div>
           <div class="rightTool">
-
+							<ul class="right-menu" style="display: inline-block;vertical-align: middle;">
+								<li class="eui-nav-item">
+									<Dropdown trigger="click" style="" @on-click='accountSwitches'>
+										<span style='cursor: pointer;color: #fff'>
+											<img src="../../../assets/user.jpg" class="logo-img" />
+											<span>{{$store.getters.info.userinfo.loginName}}</span>
+											<Icon type="arrow-down-b"></Icon>
+										</span>
+										<DropdownMenu slot="list" style="color: #ffffff">
+											<Dropdown-item name="密码修改">密码修改</Dropdown-item>
+											<Dropdown-item name="平台切换">平台切换</Dropdown-item>
+											<Dropdown-item name="退出登录">退出登录</Dropdown-item>
+										</DropdownMenu>
+									</Dropdown>
+								</li>
+							</ul>
 					</div>
 	    	</div>
 
-    	</div>
     </div>
 
   </div>
@@ -95,44 +108,43 @@ export default {
 			}
 		},
 		methods: {
-				// 返回综合
-				goHomepage(){
-					this.$router.push({
-						name: 'homePage',
-            query: {
-			      	id: 11
-			      }
-					});
-				},
-				getSysList() {
+			goHomepage(){
+				this.$router.push({
+					name: 'homePage',
+          query: {
+			    	id: 11
+			    }
+				});
+			},
+			getSysList() {
 
-				  this.menuDataLeft = [];
-				  this.menuDataRight = [];
-			    
-					if (this.menuList.length > 0) {
-						var len = this.menuList.length % 2 == 0 ? this.menuList.length / 2 : parseInt(this.menuList.length / 2 + 1);
+			  this.menuDataLeft = [];
+			  this.menuDataRight = [];
+			  
+				if (this.menuList.length > 0) {
+					var len = this.menuList.length % 2 == 0 ? this.menuList.length / 2 : parseInt(this.menuList.length / 2 + 1);
 	
-						for (let k = 0; k < len; k++) {
-							this.menuDataLeft.push({
-								classname: this.menuList[k].classname,
-								id: this.menuList[k].id,
-								imgT: '../../../../static/img/newhome/ic_waterquality.png',
-								imgF: '../../../../static/img/newhome/ic_waterquality.png',
-								menuname: this.menuList[k].menuname,
-								children: this.menuList[k].children
-							})
-						}
-						for (let l = len; l < this.menuList.length; l++) {
-							this.menuDataRight.push({
-								classname: this.menuList[l].classname,
-								id: this.menuList[l].id,
-								imgT: '../../../../static/img/newhome/ic_waterquality.png',
-								imgF: '../../../../static/img/newhome/ic_waterquality.png',
-								menuname: this.menuList[l].menuname,
-								children: this.menuList[l].children
-							})
-						}
+					for (let k = 0; k < len; k++) {
+						this.menuDataLeft.push({
+							classname: this.menuList[k].classname,
+							id: this.menuList[k].id,
+							imgT: '../../../../static/img/map/ic_flowmeter_online1.png',
+							imgF: '../../../../static/img/map/ic_flowmeter_online1.png',
+							menuname: this.menuList[k].menuname,
+							children: this.menuList[k].children
+						})
 					}
+					for (let l = len; l < this.menuList.length; l++) {
+						this.menuDataRight.push({
+							classname: this.menuList[l].classname,
+							id: this.menuList[l].id,
+							imgT: '../../../../static/img/map/ic_flowmeter_online1.png',
+							imgF: '../../../../static/img/map/ic_flowmeter_online1.png',
+							menuname: this.menuList[l].menuname,
+							children: this.menuList[l].children
+						})
+					}
+				}
 	  	},
 			changeMenu_left(id) {
         MapControl.setMapClear();
@@ -158,6 +170,25 @@ export default {
           }
         });
 			},
+      accountSwitches(name) {
+        switch (name) {
+          case "密码修改":
+            
+            break;
+          case "平台切换":
+            this.$router.push({
+					  	name: 'platform'
+					  });
+            break;
+          case "退出登录":
+            this.$router.push({
+					  	name: 'login'
+					  });
+            break;
+          default:
+            break;
+        }
+      }
 		},
 		mounted() {
 			var _this = this;
@@ -166,7 +197,7 @@ export default {
 	}
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 
 .header {
   width: 100%;
@@ -270,6 +301,35 @@ export default {
       top: 0.098389rem;
       width: 40%;
       height: 100%;
+
+      .logo-img{
+	    	width:0.2rem;
+	    	border-radius: 0.3rem;
+	    	margin: 0 auto;
+	    	vertical-align: middle;
+	    }
+	    .right-menu{
+	    	position: absolute;
+	    	right: 0.05rem;
+	    }
+
+      .eui-nav-item {
+          line-height: 0.15rem;
+      }
+
+    }
+
+    .ivu-select-dropdown {
+      background-color: #003786 !important;
+      left: -17px  !important;
+    }
+    .ivu-dropdown-item {
+      padding: 7px 10px !important;
+      color: #fff !important;
+      font-size: 0.12rem  !important;
+    }
+    .ivu-dropdown-item:hover{
+    	background: #7db2ea !important;
     }
 }
 </style>

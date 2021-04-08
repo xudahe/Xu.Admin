@@ -9,8 +9,6 @@ function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
 
-
-
 module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: ['babel-polyfill', './src/main.js'], // 编译文件入口,它将是整个依赖关系的根
@@ -19,8 +17,8 @@ module.exports = {
   // },
   output: {
     path: config.build.assetsRoot, //使用chonfig/index.js中build的assetsRoot作为输出根路径
-    filename: '[name].js',  //编译输入的文件名
-    publicPath: process.env.NODE_ENV === 'production' ?  // 正式发布环境下编译输出的发布路径
+    filename: '[name].js', //编译输入的文件名
+    publicPath: process.env.NODE_ENV === 'production' ? // 正式发布环境下编译输出的发布路径
       config.build.assetsPublicPath : config.dev.assetsPublicPath,
     sourcePrefix: ' ' //正确缩进多行字符串
   },
@@ -28,8 +26,8 @@ module.exports = {
     toUrlUndefined: true //添加amd模式支持
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json'],   // 自动补全的扩展名,能够使用户在引入模块时不带扩展
-    alias: {    // 默认路径代理，例如 import Vue from 'vue$'，会自动到 'vue/dist/vue.esm.js'中寻找
+    extensions: ['.js', '.vue', '.json'], // 自动补全的扩展名,能够使用户在引入模块时不带扩展
+    alias: { // 默认路径代理，例如 import Vue from 'vue$'，会自动到 'vue/dist/vue.esm.js'中寻找
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
     }
@@ -51,8 +49,8 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-        loader: 'url-loader',
         exclude: [resolve('src/icons')], //只处理除此文件夹之外的所以 svg
+        loader: 'url-loader',
         options: {
           limit: 10000, //字节
           name: utils.assetsPath('img/[name].[hash:7].[ext]')
@@ -83,8 +81,8 @@ module.exports = {
         }
       }
     ],
-    unknownContextCritical: /^.\/.*$/,  //打印载入特定库时候的警告
-    unknownContextCritical: false   //解决Error: Cannot find module "."
+    unknownContextCritical: /^.\/.*$/, //打印载入特定库时候的警告
+    unknownContextCritical: false //解决Error: Cannot find module "."
   },
   node: {
     // prevent webpack from injecting useless setImmediate polyfill because Vue

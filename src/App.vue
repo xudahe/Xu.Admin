@@ -7,23 +7,41 @@
 </template>
 
 <script>
+import { location } from "@/utils/location";
 
-import Cookies from "js-cookie";
 export default {
   name: "app",
   components: {},
-    data() {
-        return {
-        }
-    },
+  data() {
+    return {};
+  },
   mounted() {
     // document.getElementById('app').style.width = window.innerWidth + 'px';
     // document.getElementById('app').style.height = window.innerHeight + 'px';
-    
+
     // window.addEventListener("resize", function() {
-		//   document.getElementById("app").style.width = window.innerWidth + "px";
-		//   document.getElementById("app").style.height = window.innerHeight + "px";
+    //   document.getElementById("app").style.width = window.innerWidth + "px";
+    //   document.getElementById("app").style.height = window.innerHeight + "px";
     // });
+
+    if (window.AMap && window.AMapUI) {
+      let geolocation = location.initMap("map-container"); //定位
+      AMap.event.addListener(geolocation, "complete", function(result) {
+        console.log("定位成功信息：", result);
+      });
+      AMap.event.addListener(geolocation, "error", function(result) {
+        console.log("定位失败错误：", result);
+
+        AMap.plugin("AMap.CitySearch", function() {
+          var citySearch = new AMap.CitySearch();
+          citySearch.getLocalCity(function(status, result) {
+            if (status === "complete" && result.info === "OK") {
+              console.log("通过ip获取当前城市：", result);
+            }
+          });
+        });
+      });
+    }
 
     function checkIE() {
       return (
@@ -32,10 +50,11 @@ export default {
       );
     }
     if (checkIE()) {
-
       //①当URL的片段标识符更改时，将触发hashchange事件（跟在#符号后面的URL部分，包括#符号）
       //②hashchange事件触发时，事件对象会有hash改变前的URL（e.oldURL）和hash改变后的URL（e.newURL）两个属性：
-      window.addEventListener("hashchange", (e) => {
+      window.addEventListener(
+        "hashchange",
+        e => {
           var currentPath = window.location.hash.slice(1);
           if (this.$route.path !== currentPath) {
             this.$router.push(currentPath);
@@ -47,34 +66,27 @@ export default {
   },
 
   //生命周期函数--实例销毁之前调用
-  //假设有三个页面，分别为A、B、C页面，其中B页面定义了beforeDestroy生命周期函数。
-  //页面执行顺序是A -> B -> C,当从B到C时，beforeDestroy 函数会执行，但由B点击浏览器返回按钮时返回A时，beforeDestroy 不触发。
   beforeDestroy() {
-    
-  },
-  created() {
-  },
-  methods: {
-
+    /**
+     * 假设有三个页面，分别为A、B、C页面，其中B页面定义了beforeDestroy生命周期函数。
+     * 页面执行顺序是A -> B -> C,当从B到C时，beforeDestroy 函数会执行，但由B点击浏览器返回按钮时返回A时，beforeDestroy 不触发。
+     */
   }
 };
 
 /**
- *   （1）window.location.href  得到的是完整的URL
- *       比如：window.location.href = ' www.baidu.com'
- *
- *   （2）window.location.hash  得到的是锚链接
- *       比如：window.location.hash= ' #all'
- *
- *   （3）window.location.search得到的是URL‘？’号后面的字符串部分
- *       比如：window.location.search= ' ?username=aaa&age=10'
+ *（1）window.location.href  得到的是完整的URL
+ *    比如：window.location.href = ' www.baidu.com'
+ *（2）window.location.hash  得到的是锚链接
+ *    比如：window.location.hash= ' #all'
+ *（3）window.location.search得到的是URL‘？’号后面的字符串部分
+ *    比如：window.location.search= ' ?username=aaa&age=10'
  */
 </script>
 
-
 <style lang="scss">
-  #app {
-    height: 100%;
-    width: 100%;
-  }
+#app {
+  height: 100%;
+  width: 100%;
+}
 </style>

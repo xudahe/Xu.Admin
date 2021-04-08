@@ -62,16 +62,17 @@ export default {
     };
   },
   async created() {
-    if (window.AMap && window.AMapUI) {
-      this.init();
-    } else {
-      await remoteLoad(
-        `http://webapi.amap.com/maps?v=1.4.15&key=6c87cc38e8c451572bfefcf7175197a4`,
-        true
-      ),
-        await remoteLoad(`http://webapi.amap.com/ui/1.1/main.js`);
-      await this.init();
-    }
+    // if (window.AMap && window.AMapUI) {
+    //   this.init();
+    // } else {
+    //   await remoteLoad(
+    //     `http://webapi.amap.com/maps?v=1.4.15&key=6c87cc38e8c451572bfefcf7175197a4`,
+    //     true
+    //   ),
+    //     await remoteLoad(`http://webapi.amap.com/ui/1.1/main.js`);
+    //   await this.init();
+    // }
+    this.init();
   },
   mounted() {},
   methods: {

@@ -4,18 +4,8 @@
       <span class="hideAside" @click="collapse">
         <i :class="$store.getters.isCollapse ? 'el-icon-s-unfold':'el-icon-s-fold'" style="font-size:0.24rem;"></i>
       </span>
-      <el-menu  class="el-menu-demo"
-        mode="horizontal" 
-        @select="selectMenu" 
-        background-color="#f2f2f2" 
-        text-color="#222f3e" 
-        active-text-color="#409EFF"
-      >
-        <template  v-for="(item,index) in  $store.getters.info.menuinfo">
-            <el-menu-item :index="item.menuName+''" :key="index">{{item.menuName}}</el-menu-item>
-        </template>
-      </el-menu>
 
+      <screen-record ></screen-record>
       <ul class="personal">
         <li class="fullScreen" @click="fullScreen">
           <el-tooltip class="item" effect="dark" content="全屏" placement="bottom">
@@ -66,13 +56,13 @@
 </template>
 
 <script>
-import Cookies from "js-cookie"
 import tabNav from "./tabNav"
 import tagNav from "./tagNav"
+import screenRecord from "@/components/recording/index1";
 
 export default {
   name: "Header",
-  components: {tabNav,tagNav},
+  components: {tabNav,tagNav,screenRecord},
   computed: {
     tooltipContent () {
       return  this.$store.getters.errorLogList.length == 0 ? `无异常`:`${this.$store.getters.errorLogList.length} 个异常`
@@ -90,12 +80,6 @@ export default {
   methods: {
     collapse () {
       this.$store.dispatch("collapse")
-    },
-    selectMenu(val) {
-      let data = (this.$store.getters.info.menuinfo).filter(function(item){
-        return item.menuName == val; 
-      })
-      console.log(data)
     },
     // 退出登录
     logout() {

@@ -1,5 +1,5 @@
   /**
-   * 创建script
+   * 创建script,按需加载
    * @param url
    * @param hasCallback
    * @returns {Promise}

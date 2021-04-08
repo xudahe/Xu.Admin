@@ -160,7 +160,6 @@ export default {
           if (!res.data.success) {
             this.$errorMsg(res.data.message);
           } else {
-            debugger;
             // 第二步.将返回的url替换到文本原位置![...](0) -> ![...](url)
             var url = res.data.response;
             /**

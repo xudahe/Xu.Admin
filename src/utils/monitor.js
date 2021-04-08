@@ -55,6 +55,23 @@ function monitorInit() {
     clearError() {
       monitor.errors = []
     },
+    // 上传监控数据
+    upload() {
+      // 自定义上传
+      // axios.post({
+      //     url: monitor.url,
+      //     data: {
+      //         performance,
+      //         resources,
+      //         errors,
+      //         user,
+      //     }
+      // })
+    },
+    // 设置数据上传地址
+    setURL(url) {
+      monitor.url = url
+    },
   }
 
   // 获取性能信息
@@ -172,6 +189,9 @@ function monitorInit() {
 
     console.log('所有的错误信息')
     console.log(monitor.errors)
+
+    // 在错误发生时上报（即时上报）。这样可以避免在收集完错误延时上报还没触发，用户却已经关掉网页导致错误数据丢失的问题。
+    // axios.post({ url: 'xxx', data, })
   }
 
   // 监听 promise 错误 缺点是获取不到行数数据

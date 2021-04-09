@@ -83,7 +83,7 @@ export default {
           {classname:'application',menuname:'菜单3',id:3,children:[]},
           {classname:'application',menuname:'菜单4',id:4,children:[]},
           {classname:'application',menuname:'菜单5',id:5,children:[]},
-          {classname:'application',menuname:'菜单6',id:6,children:[]},
+          {classname:'flooder',menuname:'菜单6',id:6,children:[]},
         ],
       };
     },

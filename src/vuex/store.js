@@ -6,6 +6,7 @@ Vue.use(Vuex);
 import layout from './modules/layout';
 import router from './modules/router';
 import user from './modules/user';
+import map from './modules/map';
 import error from './modules/error'
 
 const store = new Vuex.Store({
@@ -37,6 +38,7 @@ const store = new Vuex.Store({
     layout,
     router,
     user,
+    map,
     error
   },
   // 执行异步操作，但不能直接改变state   this.$store.dispatch("saveToken", data);

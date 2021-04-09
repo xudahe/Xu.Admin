@@ -17,7 +17,7 @@ const UserModule = {
   getUserInfo: { //获取用户数据
     url: '/api/User/GetUser',
     method: 'get'
-  }, 
+  },
   postUser: { //添加用户
     url: '/api/User/PostUser',
     method: 'other'
@@ -160,24 +160,24 @@ const FileModule = {
 const VideoModule = {
   // 连云港
   getwaterlistData1: {
-		url: "http://36.156.142.83:8086/LYG/api/Monitor/YSY_AddressList",
-		method: "get"
-	},
-	getaddress_kh1: {
-		url: 'http://36.156.142.83:8086/LYG/api/Monitor/GetAddressList',
-		method: 'get'
-	},
+    url: "http://36.156.142.83:8086/LYG/api/Monitor/YSY_AddressList", //传参： {type: "",isgroup: 1}
+    method: "get"
+  },
+  getaddress_kh1: {
+    url: 'http://36.156.142.83:8086/LYG/api/Monitor/GetAddressList', //传参： {indexcode: url, protocol: "hls"}
+    method: 'get'
+  },
 
   // 鼓楼
-  getwaterlistData2:{
-		url: "http://58.213.48.106/DrainageManagement/Main/BDataQuery/DataQuery.ashx?cmd=Get_SpStation_l",
-		method: "post"
-	},
+  getwaterlistData2: {
+    url: "http://58.213.48.106/DrainageManagement/Main/BDataQuery/DataQuery.ashx?cmd=Get_SpStation_l", //传参：{type:"6,1,8,12,14,17,18,15"}
+    method: "post"
+  },
   getaddress_kh2: {
-		url: 'http://58.213.48.106/PSManageServices/HKSP/hksp_address.ashx?action=getaddress_kh',
-		method: 'get'
-	},
-  
+    url: 'http://58.213.48.106/PSManageServices/HKSP/hksp_address.ashx?action=getaddress_kh', //传参：{indexcode: item.hls, protocol: 1, transmode: 1}
+    method: 'get'
+  },
+
 }
 
 const ApiSetting = {

@@ -164,6 +164,20 @@ export default {
       currentscale: {}
     };
   },
+  watch: {
+		currentscale: {
+			handler: function(val, oldVal) {
+				if (val.mapPoint.x != undefined && val.mapPoint.y != undefined && val.mapPoint != undefined) {
+					var scale = parseInt(val.scale)
+					if (scale % 2) {
+						scale = scale + 1
+					}
+          this.$store.state.user.mapscale = scale;
+				}
+			},
+			deep: true,
+		},
+	},
   methods: {
     //加载地图
     createMap() {
@@ -288,6 +302,11 @@ export default {
             map.addLayer(graphicLayer4);
             MapControl.graphicLayers["gralyr4"] = graphicLayer4;
 
+            var graphicLayer5 = new esri.layers.GraphicsLayer();
+            graphicLayer5.id = "graphicLayer5";
+            map.addLayer(graphicLayer5);
+            MapControl.graphicLayers["gralyr5"] = graphicLayer5;
+
             map.on("load", initFunctionality());
             map.on("mouse-move", function(event) {
               event.scale = scaleUtils.getScale(map);
@@ -310,6 +329,8 @@ export default {
             );
 
             function initFunctionality() {
+              this.$store.state.map.mapload = true;
+
               MapControl.map[_this.mapId] = map;
               MapControl.isLoad[_this.mapId] = true;
               MapControl.navToolbar[_this.mapId] = navToolbar;

@@ -234,7 +234,7 @@ export const saveRefreshtime = params => {
 
   //refreshCount 滑动系数：就是你自定义的用户的停止活跃时间段，比如你想用户最大的休眠时间是20分钟，用户可以最多20分钟内不进行操作，
   //如果20分钟后，再操作，就跳转到登录页，如果20分钟内，继续操作，那继续更新时间，休眠时间还是以当前时间 + 20分钟。
-  let refreshCount = 1;
+  let refreshCount = 20;
   if (lastRefreshtime >= nowtime) {
     lastRefreshtime = nowtime > expiretime ? nowtime : expiretime;
     lastRefreshtime.setMinutes(lastRefreshtime.getMinutes() + refreshCount);

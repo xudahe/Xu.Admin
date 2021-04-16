@@ -27,6 +27,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import 'view-design/dist/styles/iview.css'
 // 引入全局自定义样式
 import '@/global/css/index.css'
+import '@/global/css/animation.css'
 // 引入css样式初始化
 import 'normalize.css/normalize.css'
 // 引入第三方图标库：https://www.thinkcmf.com/font/search.html

@@ -64,7 +64,7 @@ module.exports = {
      * Source Maps
      */
 
-    productionSourceMap: true, //生成用于生产构建的源映射, 在开发完成上线打包的时候，就要关闭这个开关，一方面能减少代码包的大小，另一方面也有利于系统安全。
+    productionSourceMap: false, //生成用于生产构建的源映射, 在开发完成上线打包的时候，就要关闭这个开关，一方面能减少代码包的大小，另一方面也有利于系统安全。
     // https://webpack.js.org/configuration/devtool/#production
     devtool: '#source-map',
 

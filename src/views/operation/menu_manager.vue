@@ -6,7 +6,7 @@
         <div slot="content"></div>
         <div style="text-align: right;">
           <!--快速查询字段-->
-          <el-input v-model="filters.name"  style="width:160px;padding-right: 5px;" placeholder="菜单名称"></el-input>
+          <el-input v-model="filters.name" style="width:160px;padding-right: 5px;" placeholder="菜单名称"></el-input>
           <!--快速查询字段-->
           <el-select v-model="filters.parentId" style="width:160px !important;padding-right: 5px;" placeholder="父级菜单" filterable clearable>
             <el-option v-for="(item,index) in parentData" :key="index" :label="item.menuName" :value="item.id"></el-option>
@@ -17,13 +17,13 @@
           <el-button type="primary" icon="el-icon-refresh" circle @click.native="refreshData"></el-button>
         </div>
       </v-header>
-  
+
       <!--列表-->
       <e-table :table-data="tableData" :table-label="tableLabel" :table-option="tableOption" :now-page="nowPage" :now-size="nowSize" @handleButton="handleButton" @handleSelectionChange="handleSelectionChange"></e-table>
     </el-card>
-      
+
     <!--弹出界面-->
-    <el-dialog :title="formTitle" :visible.sync="formVisible" v-model="formVisible" :close-on-click-modal="false" >
+    <el-dialog :title="formTitle" :visible.sync="formVisible" v-model="formVisible" :close-on-click-modal="false">
       <el-form :model="menuForm" label-width="80px" :rules="formRules" ref="menuForm">
         <el-row>
           <el-col :span="12">
@@ -75,7 +75,7 @@
                 <el-input slot="reference" v-model="menuForm.icon" placeholder="点击选择图标" readonly>
                   <svg-icon v-if="menuForm.icon" slot="prefix" :icon-class="menuForm.icon" class="el-input__icon" style="height: 32px;width: 16px;" />
                   <i v-else slot="prefix" class="el-icon-search el-input__icon" />
-                  <i slot="suffix" class="el-icon-circle-close el-input__icon" v-if="menuForm.icon" style="cursor: pointer" @click="menuForm.icon=''"/>
+                  <i slot="suffix" class="el-icon-circle-close el-input__icon" v-if="menuForm.icon" style="cursor: pointer" @click="menuForm.icon=''" />
                 </el-input>
               </el-popover>
             </el-form-item>
@@ -90,253 +90,255 @@
         <el-button type="primary" @click.native="handleSubmit">提交</el-button>
       </div>
     </el-dialog>
-    
+
   </div>
 </template>
 
 <script>
-import {debounce} from '@/api/control/index.js'
+import { debounce } from '@/api/control/index.js'
 
 export default {
-    name: 'menu_manager',
-    data() {
-        return {
-            filters: {
-                name: "",
-                parentId: "",
-            },
-            parentData: [],
-            tableData: [],
-            tableLabel: [
-              { label: '标识', param: 'id',width: '60',},
-              // { label: '系统名称', param: 'systemName'},
-              { label: '组件名称', param: 'className'},
-              { label: '菜单名称', param: 'menuName'},
-              { label: '父级菜单', param: 'parentName'},
-              { label: '备注', param: 'remark' },
-              { label: '更新时间', param: 'createTime', sortable: true, width:'160',
-                formatter: row => {
-                  return this.$formatDate(new Date(this.$isNull(row.modifyTime) ? row.createTime:row.modifyTime), true);
-                } 
-              },
-              { label: '状态', param: 'enabled', width:'80',
-                render: (h, params) => {
-                  if (!params.row.enabled){
-                    return h('el-tag', {
-                      props: {
-                        type: 'success',
-                        size: 'mini',
-                      },
-                      style: {
-							          cursor: 'pointer'
-                      },
-                      on: {
-		            	    	click: e => {
-                          e.stopPropagation(); //阻止row-click事件冒泡
-		            	    		this.disable(params.row)
-		            	    	}
-		            	    }
-                    },'正常')
-                  }
-                  else {
-                    return h('el-tag', {
-                      props: {
-                        type: 'danger',
-                        size: 'mini',
-                      },
-                      style: {
-							         	cursor: 'pointer'
-                      },
-                      on: {
-		            	    	click: e => {
-                          e.stopPropagation(); //阻止row-click事件冒泡
-		            	    		this.disable(params.row)
-		            	    	}
-		            	    }
-                    },'禁用')
-                  }
-                },
-              },
-            ],
-            tableOption: {
-              label: '操作',
-              width: '160',
-              options: [
-                { label: '', type: 'primary', icon: 'el-icon-edit', methods: 'handleEdit' },
-                { label: '', type: 'danger', icon: 'el-icon-delete', methods: 'handleDelete' },
-              ]
-            },
-    
-            loading: false,
-            sels: {}, //列表选中列
-
-            nowPage: 1, // 当前页数
-            nowSize: 15, // 当前页条数
-    
-            formTitle: '',
-            formVisible: false, //界面是否显示
-            formRules: {
-              // className: [{ required: true, message: "请输入菜单类名", trigger: "blur" }],
-              // menuName: [{ required: true, message: "请输入菜单名称", trigger: "blur" }],
-            },
-            //界面数据
-            menuForm: {
-              id: 0,
-              systemName: '',
-              className: '',
-              menuName: '',
-              icon: '',
-              parentId: '',
-              loadWay: '',
-              index: '',
-              enabled: false,
-              remark: '',
-              cache:'',
-            }
-        }
-    },
-    methods: {
-        //获取菜单列表
-        searchData() {
-          let _this = this;
-          this.$ajax(this.$apiSet.getMenuInfo,{
-              menuName: this.filters.name,
-              parentId: this.filters.parentId,
-            })
-            .then(res => {
-              _this.$loading.hideLoading();
-              if (!res.data.success) {
-                 _this.$errorMsg(res.data.message)
-              } else {
-                  _this.tableData = res.data.response;
-				      }
-            })
-            .catch(err => {})
-        },
-        getParentData() {
-          let _this = this;
-          this.$ajax(this.$apiSet.getMenuInfo)
-            .then(res => {
-                if (!res.data.success) {
-                    _this.$errorMsg(res.data.message)
-                } else {
-                    _this.parentData = res.data.response.filter(val => val.parentId == null);
-				       	}
-            })
-            .catch(err => {})
-        },
-        handleButton (val) {
-          if(val.methods == 'handleEdit') this.handleEdit(val.index,val.row)
-          if(val.methods == 'handleDelete') this.handleDelete(val.index,val.row)
-        },
-        handleSelectionChange (val) {
-          this.sels = val;
-        },
-        disable(row){
-          let _this = this;
-          this.$showMsgBox({
-            msg: `<p>是否${row.enabled ? `启用`:`禁用`}【${row.menuName}】菜单?</p>`,
-            type: 'warning',
-            isHTML: true
-          }).then(() => {
-            _this.$ajax(this.$apiSet.disableMenu,{
-                id: row.id,
-                falg: !row.enabled
-            }).then(res => {
-                if (!res.data.success) {
-                    _this.$errorMsg(res.data.message)
-                } else {
-                    _this.searchData();
-                    _this.$successMsg(res.data.message)
-				  	    }
-            })
-            .catch(err => {})
-          }).catch(()=>{});
-        },
-        //删除
-        handleDelete(index, row) {
-          let _this = this
-          this.$ajax(this.$apiSet.deleteMenu,{
-            id: row.id
-          }) .then(res => {
-            if (!res.data.success) {
-              _this.$errorMsg(res.data.message)
-            } else {
-              _this.searchData();
-              _this.$successMsg(res.data.message)
-				    }
-          })
-          .catch(err => {})
-        },
-        //显示编辑界面
-        handleEdit(index, row) {
-          this.formTitle = "编辑";
-          this.formVisible = true;
-          this.menuForm = Object.assign({},row);
-        },
-        //显示新增界面
-        plusData() {
-            this.formTitle = "新增";
-            this.formVisible = true;
-
-            this.menuForm = {
-              id: 0,
-              systemName: '应用',
-              className: '',
-              menuName: '',
-              icon: '',
-              parentId: '',
-              loadWay: '',
-              index: '',
-              enabled: false,
-              remark: '',
-              cache:'',
-            };
-        },
-        // 选择icon
-        selected(name) {
-          this.menuForm.icon = name;
-        },
-        handleSubmit:debounce(function() {
-          if(this.menuForm.className.slice(0,1) != "/"){
-            this.menuForm.className = "/"+this.menuForm.className;
+  name: 'menu_manager',
+  data() {
+    return {
+      filters: {
+        name: "",
+        parentId: "",
+      },
+      parentData: [],
+      tableData: [],
+      tableLabel: [
+        { label: '标识', param: 'id', width: '60', },
+        // { label: '系统名称', param: 'systemName'},
+        { label: '组件名称', param: 'className' },
+        { label: '菜单名称', param: 'menuName' },
+        { label: '父级菜单', param: 'parentName' },
+        { label: '备注', param: 'remark' },
+        {
+          label: '更新时间', param: 'createTime', sortable: true, width: '160',
+          formatter: row => {
+            return this.$formatDate(new Date(this.$isNull(row.modifyTime) ? row.createTime : row.modifyTime), true);
           }
-          this.menuForm.icon = "el-icon-edit-outline"; //图标暂时写死
-          
-          if(this.$isNull(this.menuForm.className)) 
-            return this.$warnMsg("组件名称不能为空！")
-          if(this.$isNull(this.menuForm.menuName)) 
-            return this.$warnMsg("菜单名称不能为空！")
-          
-          let apiUrl = this.formTitle=='编辑' ? this.$apiSet.putMenu:this.$apiSet.postMenu;
-          let _this = this;
-          this.$ajax(apiUrl, this.menuForm)
-            .then(res => {
-              if (!res.data.success) {
-                _this.$errorMsg(res.data.message)
-              } else {
-                _this.formVisible = false;
-                _this.searchData();
-                _this.getParentData();
-                _this.$successMsg(res.data.message)
-					    }
-            })
-            .catch(err => {})
-        },2000),
-        refreshData(){
-          this.$loading.showLoading()
-          this.searchData();
-          this.getParentData();
         },
-    },
-    mounted() {
-      this.refreshData();
+        {
+          label: '状态', param: 'enabled', width: '80',
+          render: (h, params) => {
+            if (!params.row.enabled) {
+              return h('el-tag', {
+                props: {
+                  type: 'success',
+                  size: 'mini',
+                },
+                style: {
+                  cursor: 'pointer'
+                },
+                on: {
+                  click: e => {
+                    e.stopPropagation(); //阻止row-click事件冒泡
+                    this.disable(params.row)
+                  }
+                }
+              }, '正常')
+            }
+            else {
+              return h('el-tag', {
+                props: {
+                  type: 'danger',
+                  size: 'mini',
+                },
+                style: {
+                  cursor: 'pointer'
+                },
+                on: {
+                  click: e => {
+                    e.stopPropagation(); //阻止row-click事件冒泡
+                    this.disable(params.row)
+                  }
+                }
+              }, '禁用')
+            }
+          },
+        },
+      ],
+      tableOption: {
+        label: '操作',
+        width: '160',
+        options: [
+          { label: '', type: 'primary', icon: 'el-icon-edit', methods: 'handleEdit' },
+          { label: '', type: 'danger', icon: 'el-icon-delete', methods: 'handleDelete' },
+        ]
+      },
+
+      loading: false,
+      sels: {}, //列表选中列
+
+      nowPage: 1, // 当前页数
+      nowSize: 15, // 当前页条数
+
+      formTitle: '',
+      formVisible: false, //界面是否显示
+      formRules: {
+        // className: [{ required: true, message: "请输入菜单类名", trigger: "blur" }],
+        // menuName: [{ required: true, message: "请输入菜单名称", trigger: "blur" }],
+      },
+      //界面数据
+      menuForm: {
+        id: 0,
+        systemName: '',
+        className: '',
+        menuName: '',
+        icon: '',
+        parentId: '',
+        loadWay: '',
+        index: '',
+        enabled: false,
+        remark: '',
+        cache: '',
+      }
     }
+  },
+  methods: {
+    //获取菜单列表
+    searchData() {
+      let _this = this;
+      this.$ajax(this.$apiSet.getMenuInfo, {
+        menuName: this.filters.name,
+        parentId: this.filters.parentId,
+      })
+        .then(res => {
+          _this.$loading.hideLoading();
+          if (!res.data.success) {
+            _this.$errorMsg(res.data.message)
+          } else {
+            _this.tableData = res.data.response;
+          }
+        })
+        .catch(err => { })
+    },
+    getParentData() {
+      let _this = this;
+      this.$ajax(this.$apiSet.getMenuInfo)
+        .then(res => {
+          if (!res.data.success) {
+            _this.$errorMsg(res.data.message)
+          } else {
+            _this.parentData = res.data.response.filter(val => val.parentId == null);
+          }
+        })
+        .catch(err => { })
+    },
+    handleButton(val) {
+      if (val.methods == 'handleEdit') this.handleEdit(val.index, val.row)
+      if (val.methods == 'handleDelete') this.handleDelete(val.index, val.row)
+    },
+    handleSelectionChange(val) {
+      this.sels = val;
+    },
+    disable(row) {
+      let _this = this;
+      this.$showMsgBox({
+        msg: `<p>是否${row.enabled ? `启用` : `禁用`}【${row.menuName}】菜单?</p>`,
+        type: 'warning',
+        isHTML: true
+      }).then(() => {
+        _this.$ajax(this.$apiSet.disableMenu, {
+          id: row.id,
+          falg: !row.enabled
+        }).then(res => {
+          if (!res.data.success) {
+            _this.$errorMsg(res.data.message)
+          } else {
+            _this.searchData();
+            _this.$successMsg(res.data.message)
+          }
+        })
+          .catch(err => { })
+      }).catch(() => { });
+    },
+    //删除
+    handleDelete(index, row) {
+      let _this = this
+      this.$ajax(this.$apiSet.deleteMenu, {
+        id: row.id
+      }).then(res => {
+        if (!res.data.success) {
+          _this.$errorMsg(res.data.message)
+        } else {
+          _this.searchData();
+          _this.$successMsg(res.data.message)
+        }
+      })
+        .catch(err => { })
+    },
+    //显示编辑界面
+    handleEdit(index, row) {
+      this.formTitle = "编辑";
+      this.formVisible = true;
+      this.menuForm = Object.assign({}, row);
+    },
+    //显示新增界面
+    plusData() {
+      this.formTitle = "新增";
+      this.formVisible = true;
+
+      this.menuForm = {
+        id: 0,
+        systemName: '应用',
+        className: '',
+        menuName: '',
+        icon: '',
+        parentId: '',
+        loadWay: '',
+        index: '',
+        enabled: false,
+        remark: '',
+        cache: '',
+      };
+    },
+    // 选择icon
+    selected(name) {
+      this.menuForm.icon = name;
+    },
+    handleSubmit: debounce(function () {
+      if (this.menuForm.className.slice(0, 1) != "/") {
+        this.menuForm.className = "/" + this.menuForm.className;
+      }
+      this.menuForm.icon = "el-icon-edit-outline"; //图标暂时写死
+
+      if (this.$isNull(this.menuForm.className))
+        return this.$warnMsg("组件名称不能为空！")
+      if (this.$isNull(this.menuForm.menuName))
+        return this.$warnMsg("菜单名称不能为空！")
+
+      let apiUrl = this.formTitle == '编辑' ? this.$apiSet.putMenu : this.$apiSet.postMenu;
+      let _this = this;
+      this.$ajax(apiUrl, this.menuForm)
+        .then(res => {
+          if (!res.data.success) {
+            _this.$errorMsg(res.data.message)
+          } else {
+            _this.formVisible = false;
+            _this.searchData();
+            _this.getParentData();
+            _this.$successMsg(res.data.message)
+          }
+        })
+        .catch(err => { })
+    }, 2000),
+    refreshData() {
+      this.$loading.showLoading()
+      this.searchData();
+      this.getParentData();
+    },
+  },
+  mounted() {
+    this.refreshData();
+  }
 };
 </script>
 
 <style scoped>
-.menu_manager{
+.menu_manager {
   height: 100%;
   width: 100%;
 }

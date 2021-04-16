@@ -11,7 +11,7 @@ export default {
 </script>
 
 <style scoped>
-p{
+p {
   height: auto;
   /* line-height: 1.5rem; */
   text-align: left;

@@ -10,7 +10,7 @@ let loadingCount = 0 // 声明一个对象用于存储请求个数
 const startLoading = (options = {}) => {
   loading = Loading.service({
     lock: true,
-    text: "正在加载 . . .",
+    // text: "正在加载 . . .",
     background: 'rgba(0, 0, 0, 0.3)',
     spinner: 'el-icon-loading', //加载图标
     target: document.querySelector('.elmain'), //设置加载动画区域

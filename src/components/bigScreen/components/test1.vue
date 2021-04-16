@@ -1,73 +1,37 @@
 <template>
-  <div
-    style="height:100%;width:100%;"
-    class="test1 bgActive collapse simple_page"
-  >
+  <div style="height:100%;width:100%;" class="test1 bgActive collapse simple_page">
     <div style="padding: 0.05rem;height: 100%;">
-      <div
-        style="overflow: auto;height: calc(100% - 0.4rem);"
-        class="borderdiv"
-      >
-        <div
-          :class="index == selectId ? 'bgActiveT' : 'bgActiveF bgActive'"
-          style="padding:0.05rem;margin-bottom: 0.05rem;cursor:pointer;position: relative;"
-          @click="goto(item, index)"
-          v-for="(item, index) in tableList"
-          :key="index"
-          :id="index"
-        >
+      <div style="overflow: auto;height: calc(100% - 0.4rem);" class="borderdiv">
+        <div :class="index == selectId ? 'bgActiveT' : 'bgActiveF bgActive'" style="padding:0.05rem;margin-bottom: 0.05rem;cursor:pointer;position: relative;" @click="goto(item, index)" v-for="(item, index) in tableList" :key="index" :id="index">
           <div style="display: inline-block;width:100%; height: 0.2rem;">
-            <div
-              class="row at-row no-gutter"
-              style="width: 32px;float: left;position: relative;"
-            >
+            <div class="row at-row no-gutter" style="width: 32px;float: left;position: relative;">
               <div class="circle" />
-              <label
-                style="font-size: 0.12rem;position: absolute; top:0%;left:20%; color:white; white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"
-                v-if="index + 1 == 10"
-                >{{ index + 1 }}</label
-              >
-              <label
-                style="font-size: 0.12rem;position: absolute; top:0%;left: 32%; color:white; white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"
-                v-else
-                >{{ index + 1 }}</label
-              >
+              <label style="font-size: 0.12rem;position: absolute; top:0%;left:20%; color:white; white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" v-if="index + 1 == 10">{{ index + 1 }}</label>
+              <label style="font-size: 0.12rem;position: absolute; top:0%;left: 32%; color:white; white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" v-else>{{ index + 1 }}</label>
             </div>
-            <label
-              style="font-family: '微软雅黑';float: left; font-size: 0.12rem;color: #fff;font-weight: bolder;"
-              >{{ item.title }}</label
-            >
-            <i
-              class="icon icon-map-pin"
-              style="float:right;color: #2d8cf0;"
-            ></i>
+            <label style="font-family: '微软雅黑';float: left; font-size: 0.12rem;color: #fff;font-weight: bolder;">{{ item.title }}</label>
+            <i class="icon icon-map-pin" style="float:right;color: #2d8cf0;"></i>
           </div>
           <div style="float: left;cursor: pointer;">
-            <img
-              :src="require('../../../../static/img/暂无图片.png')"
-              v-viewer
-              style="width: 0.5rem;height: 0.55rem;"
-            />
+            <img :src="require('../../../../static/img/暂无图片.png')" v-viewer style="width: 0.5rem;height: 0.55rem;" />
           </div>
-          <div
-            style="display: inline-block;cursor: pointer;width: calc(100% - 0.7rem);padding-left: 0.05rem;"
-          >
+          <div style="display: inline-block;cursor: pointer;width: calc(100% - 0.7rem);padding-left: 0.05rem;">
             <Row>
               <Col span="24">
-                <span class="resultLable">字段名称：</span>
-                <span :title="item.title" class="rsultValue">{{
+              <span class="resultLable">字段名称：</span>
+              <span :title="item.title" class="rsultValue">{{
                   item.title
                 }}</span>
               </Col>
               <Col span="24">
-                <span class="resultLable">字段名称：</span>
-                <span :title="item.title" class="rsultValue">{{
+              <span class="resultLable">字段名称：</span>
+              <span :title="item.title" class="rsultValue">{{
                   item.title
                 }}</span>
               </Col>
               <Col span="24">
-                <span class="resultLable">字段名称：</span>
-                <span :title="item.title" class="rsultValue">{{
+              <span class="resultLable">字段名称：</span>
+              <span :title="item.title" class="rsultValue">{{
                   item.title
                 }}</span>
               </Col>
@@ -77,18 +41,8 @@
       </div>
 
       <div class="row at-row flex-end" style="padding-top: 0.1rem;">
-        <Page
-          simple
-          show-total
-          :current="page.current"
-          :total="page.total"
-          @on-change="changePage"
-          size="small"
-          style="padding-right: 0.1rem;float: right;"
-        ></Page>
-        <span style="color:#fff;font-size: 0.12rem;padding-left: 0.1rem;"
-          >共{{ page.total }}条</span
-        >
+        <Page simple show-total :current="page.current" :total="page.total" @on-change="changePage" size="small" style="padding-right: 0.1rem;float: right;"></Page>
+        <span style="color:#fff;font-size: 0.12rem;padding-left: 0.1rem;">共{{ page.total }}条</span>
       </div>
     </div>
   </div>
@@ -165,7 +119,7 @@ export default {
 
       // bus.$emit("rightDetail","test1",item,item.title)
       // bus.$emit("leftDetail","test1",item,item.title)
-      // bus.$emit("botmDetail", "test1", item, item.title);
+      bus.$emit("botmDetail", "test1", item, item.title);
     },
     changePage(index) {
       this.page.current = index;
@@ -178,7 +132,7 @@ export default {
     loadData() {
       let _this = this;
       this.changePage(1);
-      
+
       let datalist = JSON.parse(JSON.stringify(this.page.pageList));
       datalist.forEach(item => {
         item.geometry = "POINT(" + item.x + " " + item.y + ")";
@@ -200,23 +154,23 @@ export default {
       });
 
       var gralyr3 = MapControl.graphicLayers["gralyr1"];
-      gralyr3.onClick = function(val) {
+      gralyr3.onClick = function (val) {
         let value = val.graphic.attributes;
 
         let map = MapControl.map[MapControl.mapId];
-				let geo = MapControl.WktToAgs(value.geometry);
-				var xMin = parseFloat(geo.x) - 1;
-				var yMin = parseFloat(geo.y) - 1;
-				var xMax = parseFloat(geo.x) + 1;
-				var yMax = parseFloat(geo.y) + 1;
-				var showExtent = new esri.geometry.Extent(
-					xMin,
-					yMin,
-					xMax,
-					yMax,
-					map.spatialReference
-				);
-				map.setExtent(showExtent.expand(0));
+        let geo = MapControl.WktToAgs(value.geometry);
+        var xMin = parseFloat(geo.x) - 1;
+        var yMin = parseFloat(geo.y) - 1;
+        var xMax = parseFloat(geo.x) + 1;
+        var yMax = parseFloat(geo.y) + 1;
+        var showExtent = new esri.geometry.Extent(
+          xMin,
+          yMin,
+          xMax,
+          yMax,
+          map.spatialReference
+        );
+        map.setExtent(showExtent.expand(0));
       };
     }
   },
@@ -227,7 +181,6 @@ export default {
   beforeDestroy() {
     MapControl.setMapClear();
   },
-  created() {}
 };
 </script>
 

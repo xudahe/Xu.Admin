@@ -6,8 +6,8 @@ drainet:
       - title: bigScreen
         name: bigScreen
         items:
-          - title: component
-            name: component
+          - title: components
+            name: components
             details:
               - title: test1
                 name: test1
@@ -15,3 +15,14 @@ drainet:
                 name: test2
               - title: test3
                 name: test3
+              - title: water
+                name: water
+                pages:
+                - title: waterStation
+                  name: waterStation
+                - title: waterStationBot
+                  name: waterStationBot
+                - title: waterStationLeft
+                  name: waterStationLeft
+                - title: waterStationRight
+                  name: waterStationRight

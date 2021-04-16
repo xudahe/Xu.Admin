@@ -1,86 +1,38 @@
 <template>
   <div class="homeLeft" style="width: 100%;height: 100%;">
-    <div
-      class="UnitFrame fade-in-right1"
-      style="height: 25%;float: left;width: 100%;"
-    >
+    <div class="UnitFrame fade-in-right1" style="height: 25%;float: left;width: 100%;">
       <div class="UnitDiv UnitDiv_bg6">
         <Row style="margin-top:0.3rem;position:absolute;width:100%;">
           <Col span="8" style="text-align: center;">
-            <i-circle
-              :percent="30"
-              trail-color="#1B566E"
-              stroke-color="#ba9520"
-              :size="80"
-              dashboard
-            >
-              <span
-                class="demo-circle-inner"
-                style="font-size:24px;color:#ba9520"
-                >30%</span
-              >
+            <i-circle :percent="20" trail-color="#1B566E" stroke-color="#ba9520" :size="80" dashboard>
+              <span class="demo-circle-inner" style="font-size:24px;color:#ba9520">30%</span>
             </i-circle>
             <div style="color:#ba9520">未处理</div>
           </Col>
           <Col span="8" style="text-align: center;">
-            <i-circle
-              :percent="50"
-              trail-color="#1B566E"
-              stroke-color="#37A2DA"
-              :size="80"
-              dashboard
-            >
-              <span
-                class="demo-circle-inner"
-                style="font-size:24px;color:#37A2DA"
-                >50%</span
-              >
+            <i-circle :percent="50" trail-color="#1B566E" stroke-color="#37A2DA" :size="80" dashboard>
+              <span class="demo-circle-inner" style="font-size:24px;color:#37A2DA">50%</span>
             </i-circle>
             <div style="color:#37A2DA">处理中</div>
           </Col>
           <Col span="8" style="text-align: center;">
-            <i-circle
-              :percent="80"
-              trail-color="#1B566E"
-              stroke-color="#40dd0f"
-              :size="80"
-              dashboard
-            >
-              <span
-                class="demo-circle-inner"
-                style="font-size:24px;color:#40dd0f"
-                >80%</span
-              >
+            <i-circle :percent="80" trail-color="#1B566E" stroke-color="#40dd0f" :size="80" dashboard>
+              <span class="demo-circle-inner" style="font-size:24px;color:#40dd0f">80%</span>
             </i-circle>
             <div style="color:#40dd0f">已处理</div>
           </Col>
         </Row>
       </div>
     </div>
-    <div
-      class="UnitFrame fade-in-right1"
-      style="height: 25%;float: left;width: 100%;"
-    >
+    <div class="UnitFrame fade-in-right1" style="height: 25%;float: left;width: 100%;">
       <div class="UnitDiv UnitDiv_bg6">
         <div style="width: 100%;height: calc(100%);position: relative;">
           <div class="notice">
             <div class="wrap">
-              <div
-                style="height:calc(100% - 0.1rem);overflow: hidden;position: relative;margin: 0.05rem;left: 0.05rem;"
-                :style="{ width: tempWid + 'px' }"
-              >
+              <div style="height:calc(100% - 0.1rem);overflow: hidden;position: relative;margin: 0.05rem;left: 0.05rem;" :style="{ width: tempWid + 'px' }">
                 <!-- 设置外层ul宽度无限大 -->
-                <ul
-                  style="position: absolute;width: 9999px;height: 100%;"
-                  :style="{ left: noticeRight + 'px' }"
-                  :class="{ transitionLeft: animate }"
-                >
-                  <li
-                    :style="{ width: tempWid + 'px', display: 'inline-block' }"
-                    class="carousel_DivList"
-                    v-for="(item, index) in noticeList"
-                    :key="index"
-                  >
+                <ul style="position: absolute;width: 9999px;height: 100%;" :style="{ left: noticeRight + 'px' }" :class="{ transitionLeft: animate }">
+                  <li :style="{ width: tempWid + 'px', display: 'inline-block' }" class="carousel_DivList" v-for="(item, index) in noticeList" :key="index">
                     <div class="carousel_Title">
                       {{ item.number }}
                       (<span style="color: rgb(255,140,0);">待巡查</span>)
@@ -89,26 +41,16 @@
                       {{ item.realstarttime }}
                     </div>
                     <div class="carousel_main">
-                      <div
-                        style="width: 60%;height: 100%;display: inline-block;float: left;padding-left: 20px;"
-                      >
+                      <div style="width: 60%;height: 100%;display: inline-block;float: left;padding-left: 20px;">
                         <Timeline>
                           <TimelineItem>
-                            <p
-                              class="carousel_length"
-                              style="text-align: left;"
-                            >
+                            <p class="carousel_length" style="text-align: left;">
                               <span class="carousel_name">问题数量：</span>
-                              <span class="carousel_value"
-                                >{{ item.problemcount }}个</span
-                              >
+                              <span class="carousel_value">{{ item.problemcount }}个</span>
                             </p>
                           </TimelineItem>
                           <TimelineItem>
-                            <p
-                              class="carousel_length"
-                              style="text-align: left;"
-                            >
+                            <p class="carousel_length" style="text-align: left;">
                               <span class="carousel_name">巡查道路：</span>
                               <span class="carousel_value">{{
                                 item.roadsname
@@ -117,16 +59,9 @@
                           </TimelineItem>
                         </Timeline>
                       </div>
-                      <div
-                        style="width: 40%;height: 100%;display: inline-block;text-align: center;"
-                      >
+                      <div style="width: 40%;height: 100%;display: inline-block;text-align: center;">
                         <div>
-                          <Icon
-                            type="ios-person-outline"
-                            size="30"
-                            color="#307bcc"
-                            style="font-weight: 600;"
-                          />
+                          <Icon type="ios-person-outline" size="30" color="#307bcc" style="font-weight: 600;" />
                         </div>
                         <div style="color:#307bcc">
                           {{ item.xcrname }}
@@ -141,23 +76,15 @@
         </div>
       </div>
     </div>
-    <div
-      class="UnitFrame fade-in-right1"
-      style="height: 50%;float: left;width: 100%;"
-    >
+    <div class="UnitFrame fade-in-right1" style="height: 50%;float: left;width: 100%;">
       <div class="UnitDiv UnitDiv_bg3">
-        <div
-          id="echart_visite_left3"
-          class="echart_visite_left3"
-          :style="{ height: '100%', width: '100%' }"
-        ></div>
+        <div id="echart_visite_left3" class="echart_visite_left3" :style="{ height: '100%', width: '100%' }"></div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import echarts from "echarts";
 
 export default {
   name: "homeRight",
@@ -223,7 +150,7 @@ export default {
         _this.noticeList.push(list[index - 1]);
         _this.animate = true;
 
-        setTimeout(function() {
+        setTimeout(function () {
           _this.animate = false;
           _this.noticeRight = 0;
           _this.noticeList.splice(0, 1);
@@ -582,7 +509,7 @@ export default {
         this.myChart3.setOption(this.options3, true);
         this.myChart3.resize();
         var _this = this;
-        window.addEventListener("resize", function() {
+        window.addEventListener("resize", function () {
           _this.myChart3.resize();
         });
       });
@@ -602,7 +529,6 @@ export default {
 
 <style lang="less" scoped>
 .homeLeft {
-
   .carousel_DivList {
     float: left;
     margin: 0 auto;

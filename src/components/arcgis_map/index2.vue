@@ -97,37 +97,18 @@
 }
 </style>
 <template>
-  <div
-    class="map-content"
-    :id="mapId"
-    style="position: relative;border-radius: 0.1rem;"
-  >
+  <div class="map-content" :id="mapId" style="position: relative;border-radius: 0.1rem;">
     <bottombar :datasource="currentscale"></bottombar>
 
     <div class="app-right-bottom">
       <div id="mapType">
-        <div
-          class="mapTypeCard normal"
-          id="wu1"
-          @click="getLayer('wu1')"
-          title="地图"
-        >
+        <div class="mapTypeCard normal" id="wu1" @click="getLayer('wu1')" title="地图">
           <span>地图</span>
         </div>
-        <div
-          class="mapTypeCard earth"
-          id="wu2"
-          @click="getLayer('wu2')"
-          title="影像"
-        >
+        <div class="mapTypeCard earth" id="wu2" @click="getLayer('wu2')" title="影像">
           <span>影像</span>
         </div>
-        <div
-          class="mapTypeCard threeD"
-          id="wu3"
-          @click="getLayer('wu3')"
-          title="三维"
-        >
+        <div class="mapTypeCard threeD" id="wu3" @click="getLayer('wu3')" title="三维">
           <span>三维</span>
         </div>
       </div>
@@ -165,19 +146,19 @@ export default {
     };
   },
   watch: {
-		currentscale: {
-			handler: function(val, oldVal) {
-				if (val.mapPoint.x != undefined && val.mapPoint.y != undefined && val.mapPoint != undefined) {
-					var scale = parseInt(val.scale)
-					if (scale % 2) {
-						scale = scale + 1
-					}
+    currentscale: {
+      handler: function (val, oldVal) {
+        if (val.mapPoint.x != undefined && val.mapPoint.y != undefined && val.mapPoint != undefined) {
+          var scale = parseInt(val.scale)
+          if (scale % 2) {
+            scale = scale + 1
+          }
           this.$store.state.user.mapscale = scale;
-				}
-			},
-			deep: true,
-		},
-	},
+        }
+      },
+      deep: true,
+    },
+  },
   methods: {
     //加载地图
     createMap() {
@@ -308,7 +289,7 @@ export default {
             MapControl.graphicLayers["gralyr5"] = graphicLayer5;
 
             map.on("load", initFunctionality());
-            map.on("mouse-move", function(event) {
+            map.on("mouse-move", function (event) {
               event.scale = scaleUtils.getScale(map);
               _this.currentscale = {
                 mapPoint: {
@@ -329,7 +310,7 @@ export default {
             );
 
             function initFunctionality() {
-              this.$store.state.map.mapload = true;
+              _this.$store.state.map.mapload = true;
 
               MapControl.map[_this.mapId] = map;
               MapControl.isLoad[_this.mapId] = true;

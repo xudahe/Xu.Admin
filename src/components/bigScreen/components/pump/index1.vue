@@ -2,42 +2,17 @@
 <template>
   <div class="pumpdiv" style="width: 100%;height: 100%;">
     <div class="menus">
-      <div
-        v-show="changemenuindex != 2"
-        :class="
-          changemenuindex == 0
-            ? 'changemenu changemenuC'
-            : 'changemenu changemenuN'
-        "
-        @click="changemenuindex = 0"
-      >
+      <div v-show="changemenuindex != 2" :class="changemenuindex == 0 ? 'changemenu changemenuC': 'changemenu changemenuN'" @click="changemenuindex = 0">
         线路图
       </div>
-      <div
-        v-show="changemenuindex != 2"
-        :class="
-          changemenuindex == 1
-            ? 'changemenu changemenuC'
-            : 'changemenu changemenuN'
-        "
-        @click="changemenuindex = 1"
-      >
+      <div v-show="changemenuindex != 2" :class="changemenuindex == 1 ? 'changemenu changemenuC': 'changemenu changemenuN'" @click="changemenuindex = 1">
         数据板
       </div>
     </div>
-    <div
-      v-show="changemenuindex == 0"
-      id="mygojs"
-      class="menusa"
-      :class="changemenuindex == 0 ? 'fade-in-right2' : 'fade-out-right'"
-    >
+    <div v-show="changemenuindex == 0" id="mygojs" class="menusa" :class="changemenuindex == 0 ? 'fade-in-right2' : 'fade-out-right'">
       <pumpGojs :pumpdata="pumpdata"></pumpGojs>
     </div>
-    <div
-      v-show="changemenuindex == 1"
-      style="height: 100%;width: 100%;"
-      :class="changemenuindex == 1 ? 'fade-in-left2' : 'fade-out-left'"
-    >
+    <div v-show="changemenuindex == 1" style="height: 100%;width: 100%;" :class="changemenuindex == 1 ? 'fade-in-left2' : 'fade-out-left'">
       <pumpList :pumpdata="pumpdata"></pumpList>
     </div>
   </div>
@@ -1178,7 +1153,7 @@ export default {
     };
   },
   methods: {},
-  mounted() {}
+  mounted() { }
 };
 </script>
 
@@ -1209,16 +1184,14 @@ export default {
       cursor: pointer;
     }
     .changemenuC {
-      background: url("../../../../../static/img/pump/功能切换1.png")
-        no-repeat;
+      background: url("../../../../../static/img/pump/功能切换1.png") no-repeat;
       background-size: 100% 100%;
       color: #ffffff;
       text-shadow: 0px 0px 14px #019aff;
       font-weight: bold;
     }
     .changemenuN {
-      background: url("../../../../../static/img/pump/功能切换2.png")
-        no-repeat;
+      background: url("../../../../../static/img/pump/功能切换2.png") no-repeat;
       background-size: 100% 100%;
       color: rgb(124, 156, 255);
       font-weight: bold;

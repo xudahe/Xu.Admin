@@ -42,11 +42,7 @@
 }
 </style>
 <template>
-  <div
-    class="map-content"
-    :id="mapId"
-    style="position: relative;border-radius: 0.1rem;"
-  >
+  <div class="map-content" :id="mapId" style="position: relative;border-radius: 0.1rem;">
     <div class="toolbar_info" v-show="isshow" id="toolbar_info">
       <Button-group size="large">
         <Tooltip content="放大" :transfer="true">
@@ -98,15 +94,7 @@
           <Button @click="queryAuto = !queryAuto" v-show="queryAuto">
             <i class="fa fa-search"></i>
           </Button>
-          <Input
-            v-model="queryValue"
-            search
-            enter-button
-            placeholder="请输入定位关键字"
-            v-show="!queryAuto"
-            @on-search="searchhandle"
-            style="width: 200px"
-          />
+          <Input v-model="queryValue" search enter-button placeholder="请输入定位关键字" v-show="!queryAuto" @on-search="searchhandle" style="width: 200px" />
         </Tooltip>
       </Button-group>
     </div>
@@ -240,7 +228,7 @@ export default {
             MapControl.graphicLayers["gralyr3"] = graphicLayer3;
 
             map.on("load", initFunctionality);
-            map.on("mouse-move", function(event) {
+            map.on("mouse-move", function (event) {
               event.scale = scaleUtils.getScale(map);
               _this.currentscale = {
                 mapPoint: {

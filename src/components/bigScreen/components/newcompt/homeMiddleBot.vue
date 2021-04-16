@@ -1,35 +1,20 @@
 <template>
   <div class="homeMiddleBot" style="height: 100%; width: 100%;">
-    <div
-      class="UnitFrame rotate-in-x"
-      style="height: 100%;float: left;width: 50%;padding:0 0 0.05rem 0"
-    >
+    <div class="UnitFrame rotate-in-x" style="height: 100%;float: left;width: 50%;padding:0 0 0.05rem 0">
       <div class="UnitDiv UnitDiv_bg6">
-        <div
-          id="echart_visite_bot1"
-          class="echart_visite_bot1"
-          :style="{ height: '100%', width: '100%' }"
-        ></div>
+        <div id="echart_visite_bot1" class="echart_visite_bot1" :style="{ height: '100%', width: '100%' }"></div>
       </div>
     </div>
 
-    <div
-      class="UnitFrame rotate-in-x"
-      style="height: 100%;float: left;width: 50%;padding:0 0 0.05rem 0"
-    >
+    <div class="UnitFrame rotate-in-x" style="height: 100%;float: left;width: 50%;padding:0 0 0.05rem 0">
       <div class="UnitDiv UnitDiv_bg6">
-        <div
-          id="echart_visite_bot2"
-          class="echart_visite_bot2"
-          :style="{ height: '100%', width: '100%' }"
-        ></div>
+        <div id="echart_visite_bot2" class="echart_visite_bot2" :style="{ height: '100%', width: '100%' }"></div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import echarts from "echarts";
 
 export default {
   name: "homeMiddleBot",
@@ -107,7 +92,7 @@ export default {
                 position: "insideRight",
                 offset: [40, 0],
                 color: "yellow",
-                formatter: function(params) {
+                formatter: function (params) {
                   return params.value;
                 }
               }
@@ -167,7 +152,7 @@ export default {
       function random() {
         return +(Math.random() * (maxData - 10)).toFixed(1);
       }
-      var timer = setInterval(function() {
+      var timer = setInterval(function () {
         var dynamicData = [random(), random(), random(), random()];
         _this.myChart1.setOption({
           series: [
@@ -187,7 +172,7 @@ export default {
 
       this.myChart1.setOption(this.options1, true);
       this.myChart1.resize();
-      window.addEventListener("resize", function() {
+      window.addEventListener("resize", function () {
         _this.myChart1.resize();
       });
     },
@@ -315,7 +300,7 @@ export default {
             textStyle: {
               color: "#00cffe"
             },
-            formatter: function(params) {
+            formatter: function (params) {
               return params.split(" ")[0];
             }
           },
@@ -384,7 +369,7 @@ export default {
 
       this.myChart2.setOption(this.options2, true);
       this.myChart2.resize();
-      window.addEventListener("resize", function() {
+      window.addEventListener("resize", function () {
         _this.myChart2.resize();
       });
     }
@@ -404,5 +389,4 @@ export default {
 </script>
 
 <style lang="less" scoped>
-
 </style>

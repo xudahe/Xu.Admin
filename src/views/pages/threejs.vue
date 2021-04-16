@@ -62,7 +62,7 @@ export default {
       controls: null,
       clock: new THREE.Clock(),
       mixer: null,
-  
+
       width: null,
       height: null,
       timer: null
@@ -182,7 +182,7 @@ export default {
       let loader = new GLTFLoader(); /*实例化加载器*/
       loader.load(
         "../../static/threejs/floor.gltf",
-        function(gltf) {
+        function (gltf) {
           var mesh = gltf.scene;
 
           console.log(gltf, "gltf");
@@ -205,13 +205,13 @@ export default {
           // that.mixer.clipAction(gltf.animations[0]).play();
           // that.render();
         },
-        function(xhr) {
+        function (xhr) {
           // 模型加载期间的回调函数
           console.log(
             "模型加载 " + parseInt((xhr.loaded / xhr.total) * 100) + "%"
           );
         },
-        function(error) {
+        function (error) {
           console.log("load error!", error);
         }
       );
@@ -235,14 +235,14 @@ export default {
       let objLoader = new OBJLoader();
       let mtlLoader = new MTLLoader();
       mtlLoader.setPath("../../static/threejs/受电柜/");
-      mtlLoader.load("受电柜.mtl", function(mtl) {
+      mtlLoader.load("受电柜.mtl", function (mtl) {
         console.log(mtl, "mtl");
         mtl.preload(); // 预加载
         objLoader.setMaterials(mtl); // 设置当前加载的纹理
         objLoader.setPath("../../static/threejs/受电柜/");
         objLoader.load(
           "受电柜.obj",
-          function(obj) {
+          function (obj) {
             console.log(obj, "obj");
             obj.position.y = 0;
             obj.rotation.y = 0.5;

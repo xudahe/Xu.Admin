@@ -4,6 +4,8 @@ Vue.use(Router)
 
 import Login from "@/views/login/index"
 import Layout from "@/views/layout/index"
+
+//大屏系统路由
 import bighome from "@/components/bigScreen/view/home"
 import homePage from "@/components/bigScreen/view/homePage"
 import application from "@/components/bigScreen/view/application"

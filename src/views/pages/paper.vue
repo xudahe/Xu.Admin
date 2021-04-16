@@ -1,10 +1,5 @@
 <template>
-  <examination-paper
-    :type="type"
-    :data-source="paperData"
-    @paperHand="paperHand"
-    @paperRead="paperRead"
-  ></examination-paper>
+  <examination-paper :type="type" :data-source="paperData" @paperHand="paperHand" @paperRead="paperRead"></examination-paper>
 </template>
 
 <script>
@@ -213,7 +208,7 @@ export default {
       this.type = 2;
       this.submissionTime = this.$formatDate(new Date(), true);
 
-      this.paperData.list.forEach(function(item) {
+      this.paperData.list.forEach(function (item) {
         if (item.examineAnswer == "" || item.examineAnswer.length == 0) {
           item.isHook = 2;
           item.score = 0;
@@ -240,7 +235,7 @@ export default {
 
       this.paperData.score = sum(data);
       function sum(arr) {
-        return arr.reduce(function(prev, curr, idx, arr) {
+        return arr.reduce(function (prev, curr, idx, arr) {
           return parseFloat(prev) + parseFloat(curr);
         });
       }

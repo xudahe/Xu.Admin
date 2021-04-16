@@ -3,7 +3,6 @@
 </template>
 
 <script>
-import echarts from "echarts";
 
 import reginCode from "../../../static/data/mapjson/reginCode";
 import province from "../../../static/data/mapjson/province";

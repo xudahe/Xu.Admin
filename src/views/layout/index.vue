@@ -3,9 +3,7 @@
     <el-container>
       <layoutAside></layoutAside>
       <el-container direction="vertical">
-        <layoutHeader
-          @showErrorLogBox="$refs.errorLogBox.dialogVisible = true"
-        ></layoutHeader>
+        <layoutHeader @showErrorLogBox="$refs.errorLogBox.dialogVisible = true"></layoutHeader>
         <el-main id="elmain" class="elmain">
           <transition name="main" mode="out-in">
             <keep-alive :include="$store.getters.cachedViews">

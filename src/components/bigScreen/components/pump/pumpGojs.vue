@@ -9,7 +9,7 @@
 </template>
 <script>
 const $ = go.GraphObject.make;
-import axios from "axios";
+import axios from 'axios';
 
 export default {
   name: "pumpGojs",
@@ -90,7 +90,7 @@ export default {
 
       axios
         .get("static/demo/gojs_demo/json/泵站拓扑图.json")
-        .then(function(res) {
+        .then(function (res) {
           _this.initgojs(res.data);
         });
     },
@@ -152,12 +152,12 @@ export default {
             go.Point.stringify
           ),
           {
-            doubleClick: function(e, node) {
+            doubleClick: function (e, node) {
               _this.handlerDC(e, node);
             }
           }, //双击事件
           {
-            click: function(e, node) {
+            click: function (e, node) {
               _this.gojsclick(e, node);
             }
           }, //单击事件
@@ -211,10 +211,10 @@ export default {
               // alignmentFocus: go.Spot.BottomCenter,
             },
             new go.Binding("font", "font"),
-            new go.Binding("alignment", "fromSpot", function(d) {
+            new go.Binding("alignment", "fromSpot", function (d) {
               return tetxXY(d, "alignment");
             }),
-            new go.Binding("alignmentFocus", "fromSpot", function(d) {
+            new go.Binding("alignmentFocus", "fromSpot", function (d) {
               return tetxXY(d, "alignmentFocus");
             }),
             new go.Binding("stroke", "color"),
@@ -229,7 +229,7 @@ export default {
           go.Node,
           "Spot",
           {
-            doubleClick: function(e, node) {
+            doubleClick: function (e, node) {
               var procTaskId = node.data.key;
               var procTaskName = node.data.text;
               var procTaskloc = node.data.loc;
@@ -274,7 +274,7 @@ export default {
             new go.Binding("stroke", "fontStroke")
           ),
           {
-            click: function(e, t) {
+            click: function (e, t) {
               t.data;
             }
           }
@@ -291,12 +291,12 @@ export default {
             go.Point.stringify
           ),
           {
-            doubleClick: function(e, node) {
+            doubleClick: function (e, node) {
               _this.handlerDC(e, node);
             }
           }, //双击事件
           {
-            click: function(e, node) {
+            click: function (e, node) {
               _this.gojsclick(e, node);
             }
           }, //单击事件
@@ -339,10 +339,10 @@ export default {
               // alignmentFocus: go.Spot.BottomCenter,
             },
             new go.Binding("font", "font"),
-            new go.Binding("alignment", "fromSpot", function(d) {
+            new go.Binding("alignment", "fromSpot", function (d) {
               return tetxXY(d, "alignment");
             }),
-            new go.Binding("alignmentFocus", "fromSpot", function(d) {
+            new go.Binding("alignmentFocus", "fromSpot", function (d) {
               return tetxXY(d, "alignmentFocus");
             }),
             new go.Binding("text", "text"),
@@ -361,12 +361,12 @@ export default {
             go.Point.stringify
           ),
           {
-            doubleClick: function(e, node) {
+            doubleClick: function (e, node) {
               _this.handlerDC(e, node);
             }
           }, //双击事件
           {
-            click: function(e, node) {
+            click: function (e, node) {
               _this.gojsclick(e, node);
             }
           }, //单击事件
@@ -416,10 +416,10 @@ export default {
               // alignmentFocus: go.Spot.BottomCenter,
             },
             new go.Binding("font", "font"),
-            new go.Binding("alignment", "fromSpot", function(d) {
+            new go.Binding("alignment", "fromSpot", function (d) {
               return tetxXY(d, "alignment");
             }),
-            new go.Binding("alignmentFocus", "fromSpot", function(d) {
+            new go.Binding("alignmentFocus", "fromSpot", function (d) {
               return tetxXY(d, "alignmentFocus");
             }),
             new go.Binding("text", "text"),
@@ -440,10 +440,10 @@ export default {
           toSpot: go.Spot.LeftSide
         },
         // make sure links come in from the proper direction and go out appropriately
-        new go.Binding("fromSpot", "fromSpot", function(d) {
+        new go.Binding("fromSpot", "fromSpot", function (d) {
           return spotConverter(d);
         }),
-        new go.Binding("toSpot", "toSpot", function(d) {
+        new go.Binding("toSpot", "toSpot", function (d) {
           return spotConverter(d);
         }),
         new go.Binding("points").makeTwoWay(),
@@ -476,7 +476,7 @@ export default {
       );
 
       this.myDiagram.model = go.Model.fromJson(data); //加载json
-        this.changejdvalue(this.pumpdata);
+      this.changejdvalue(this.pumpdata);
 
       function tetxXY(dir, d) {
         if (d == "alignment") {
@@ -506,10 +506,10 @@ export default {
         var diagram = _this.myDiagram;
         var opacity = 1;
         var down = true;
-        setTimeout(function() {
+        setTimeout(function () {
           var oldskips = diagram.skipsUndoManager;
           diagram.skipsUndoManager = true;
-          diagram.links.each(function(link) {
+          diagram.links.each(function (link) {
             var shape = link.findObject("PIPE");
             var off = shape.strokeDashOffset - 1;
             // 设置（移动）笔划划动画
@@ -778,7 +778,7 @@ export default {
       clearInterval(timer);
     });
   },
-  beforeDestroy() {}
+  beforeDestroy() { }
 };
 </script>
 

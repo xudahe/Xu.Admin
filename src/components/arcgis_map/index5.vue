@@ -88,21 +88,21 @@ export default {
                 }
               },
 
-              getTileUrl: function(level, row, col) {
+              getTileUrl: function (level, row, col) {
                 return this.urlTemplate
                   .replace("{z}", level)
                   .replace("{x}", col)
                   .replace("{y}", row);
               },
 
-              fetchTile: function(level, row, col) {
+              fetchTile: function (level, row, col) {
                 var url = this.getTileUrl(level, row, col);
 
                 return esriRequest(url, {
                   responseType: "image",
                   allowImageDataAccess: true
                 }).then(
-                  function(response) {
+                  function (response) {
                     var image = response.data;
                     var width = this.tileInfo.size[0];
                     var height = this.tileInfo.size[0];
@@ -168,6 +168,6 @@ export default {
 
     _this.createMap();
   },
-  beforeDestroy() {}
+  beforeDestroy() { }
 };
 </script>

@@ -124,7 +124,7 @@ export default {
               container: "mapDiv3D",
               map: map
             });
-            view_3D.when(function() {
+            view_3D.when(function () {
               var toggle = new BasemapToggle({
                 titleVisible: true,
                 view: view_3D,
@@ -137,7 +137,7 @@ export default {
               container: "mapDiv2D",
               map: map
             });
-            view_2D.when(function() {
+            view_2D.when(function () {
               var toggle = new BasemapToggle({
                 titleVisible: true,
                 view: view_2D,

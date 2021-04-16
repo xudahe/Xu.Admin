@@ -8,7 +8,7 @@
 
 <script>
 import Vue from "vue";
-import header1 from "../component/header.vue";
+import header1 from "../components/header.vue";
 import NavConfig from "../router/nav.configCompent.yml";
 
 export default {
@@ -16,7 +16,7 @@ export default {
     header1
   },
   watch: {
-    $route(to, from) {}
+    $route(to, from) { }
   },
   mounted() {
     this.$router.push({
@@ -29,56 +29,44 @@ export default {
   data() {
     return {};
   },
-  beforeDestroy() {},
+  beforeDestroy() { },
   methods: {
+    //注册组件
     regeisterComponent(NavConfig) {
       Object.keys(NavConfig).forEach((lang, idx) => {
         const pageNavs = NavConfig[lang];
 
         pageNavs.forEach(nav => {
-          const parentName = nav.name;
-
-          if (nav.groups) {
-            nav.groups.forEach(group => {
-              group.items.forEach(item => {
-                regeisterComponent(parentName, item.name, group.name);
-                if (item.details) {
-                  item.details.forEach(item1 => {
-                    regeisterComponent(
-                      parentName,
-                      item1.name,
-                      group.name,
-                      item.name
-                    );
-                  });
-                }
-              });
+          nav.groups && nav.groups.forEach(group => {
+            group.items.forEach(item => {
+              if (item.details) {
+                item.details.forEach(detail => {
+                  if (detail.pages) {
+                    detail.pages.forEach(page => {
+                      Vue.component(page.name, function (resolve) {
+                        require([`@/${nav.name}/${group.name}/${item.name}/${detail.name}/${page.name}.vue`], resolve);
+                      });
+                    });
+                  }
+                  else {
+                    Vue.component(detail.name, function (resolve) {
+                      require([`@/${nav.name}/${group.name}/${item.name}/${detail.name}.vue`], resolve);
+                    });
+                  }
+                });
+              } else {
+                Vue.component(item.name, function (resolve) {
+                  require([`@/${nav.name}/${group.name}/${item.name}.vue`], resolve);
+                });
+              }
             });
-          }
+          });
         });
       });
-
-      function regeisterComponent(
-        parentName,
-        templateName,
-        groupname,
-        itemName
-      ) {
-        Vue.component(templateName, function(resolve) {
-          if (itemName) {
-            require([
-              `@/${parentName}/${groupname}/${itemName}/${templateName}.vue`
-            ], resolve);
-          } else {
-            require([
-              `@/${parentName}/${groupname}/${templateName}.vue`
-            ], resolve);
-          }
-        });
-      }
     }
   },
   created() {
+    // 开始注册组件
     this.regeisterComponent(NavConfig);
   }
 };

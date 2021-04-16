@@ -1,17 +1,12 @@
 <!-- 应用系统登录 -->
 <template>
   <div class="login-container">
-    <el-form
-      :model="loginForm"
-      status-icon
-      ref="loginForm"
-      label-position="left"
-      label-width="0px"
-      class="demo-ruleForm login-page"
-    >
+    <el-form :model="loginForm" status-icon ref="loginForm" label-position="left" label-width="0px" class="demo-ruleForm login-page">
       <Menu mode="horizontal" style="margin-bottom: 30px" active-name="1">
-        <MenuItem name="1"><Icon type="md-contacts" />帐号登陆</MenuItem>
-        <MenuItem name="2"> <Icon type="ios-mail" />短信登陆</MenuItem>
+        <MenuItem name="1">
+        <Icon type="md-contacts" />帐号登陆</MenuItem>
+        <MenuItem name="2">
+        <Icon type="ios-mail" />短信登陆</MenuItem>
       </Menu>
       <el-row :span="24">
         <el-form-item prop="username" style="border-bottom: 1px solid #eeeeee;">
@@ -19,13 +14,7 @@
             <Icon type="ios-people" :size="20" />&nbsp;用户名：
           </el-col>
           <el-col :span="18">
-            <el-input
-              type="text"
-              v-model="loginForm.username"
-              autocomplete="off"
-              placeholder="请输入用户民"
-              clearable
-            />
+            <el-input type="text" v-model="loginForm.username" autocomplete="off" placeholder="请输入用户民" clearable />
           </el-col>
         </el-form-item>
         <el-form-item prop="username" style="border-bottom: 1px solid #eeeeee;">
@@ -33,13 +22,7 @@
             <Icon type="ios-lock" :size="20" />&nbsp;密&nbsp;&nbsp;&nbsp;码：
           </el-col>
           <el-col :span="18">
-            <el-input
-              type="text"
-              v-model="loginForm.password"
-              autocomplete="off"
-              placeholder="请输入密码"
-              show-password
-            />
+            <el-input type="text" v-model="loginForm.password" autocomplete="off" placeholder="请输入密码" show-password />
           </el-col>
         </el-form-item>
         <el-form-item prop="code" style="border-bottom: 1px solid #eeeeee;">
@@ -47,39 +30,21 @@
             <Icon type="md-images" :size="20" />&nbsp;验证码：
           </el-col>
           <el-col :span="12">
-            <el-input
-              type="text"
-              v-model="identifyCode"
-              autocomplete="off"
-              placeholder="请输入验证码"
-              clearable
-            />
+            <el-input type="text" v-model="identifyCode" autocomplete="off" placeholder="请输入验证码" clearable />
           </el-col>
           <el-col :span="6">
             <div class="login-code" @click="setRefreshCode">
-              <s-identify
-                :identifyCode="identifyCode"
-                :fontSizeMax="25"
-                :contentWidth="80"
-              ></s-identify>
+              <s-identify :identifyCode="identifyCode" :fontSizeMax="25" :contentWidth="80"></s-identify>
             </div>
           </el-col>
         </el-form-item>
         <el-form-item style="width:100%;">
           <el-col :span="24">
-            <el-button
-              type="primary"
-              style="width:100%;"
-              @click.native="loginSubmit"
-              :loading="logining"
-              >{{ loadName }}</el-button
-            >
+            <el-button type="primary" style="width:100%;" @click.native="loginSubmit" :loading="logining">{{ loadName }}</el-button>
           </el-col>
         </el-form-item>
         <el-col :span="12">
-          <el-checkbox v-model="checkboxValue" class="rememberme"
-            >记住密码</el-checkbox
-          >
+          <el-checkbox v-model="checkboxValue" class="rememberme">记住密码</el-checkbox>
         </el-col>
         <el-col :span="12" style="text-align: right;">
           <a>忘记密码</a>
@@ -326,9 +291,8 @@ export default {
 
               _this.$notify({
                 type: "success",
-                message: `登录成功 \n 欢迎管理员：${
-                  userinfo.realName
-                }！Token 将在 ${window.localStorage.expires_in /
+                message: `登录成功 \n 欢迎管理员：${userinfo.realName
+                  }！Token 将在 ${window.localStorage.expires_in /
                   60} 分钟后过期！`,
                 duration: 3000
               });
@@ -350,7 +314,7 @@ export default {
   },
   created() {
     var _self = this;
-    document.onkeydown = function(e) {
+    document.onkeydown = function (e) {
       var key = window.event.keyCode;
       if (key == 13 || key == 100) {
         //对主键盘和小键盘的Enter都管用

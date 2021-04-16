@@ -4,21 +4,18 @@
       <Row>
         <template v-for="(item, index) in drainageObj">
           <Col :span="colNum" style="padding-left: 0.1rem;" :key="index">
-            <img :src="mapTopImg" class="topImgBg" />
-            <img :src="item.img" class="topImg" />
-            <div style="display: inline-block;margin-left: 0.1rem;">
-              <div class="topName">{{ item.name }}</div>
-              <div class="topValue">{{ item.value }}</div>
-              <div class="topUnit">{{ item.unit }}</div>
-            </div>
+          <img :src="mapTopImg" class="topImgBg" />
+          <img :src="item.img" class="topImg" />
+          <div style="display: inline-block;margin-left: 0.1rem;">
+            <div class="topName">{{ item.name }}</div>
+            <div class="topValue">{{ item.value }}</div>
+            <div class="topUnit">{{ item.unit }}</div>
+          </div>
           </Col>
         </template>
       </Row>
     </div>
-    <div
-      class="mapContent"
-      style="width:100%;height:calc(100% - 0.5rem);position: relative;"
-    >
+    <div class="mapContent" style="width:100%;height:calc(100% - 0rem);position: relative;">
       <arcgisMap></arcgisMap>
     </div>
   </div>
@@ -74,6 +71,10 @@ export default {
   .mapTop {
     height: 0.45rem;
     overflow-y: hidden;
+    position: absolute;
+    width: 100%;
+    z-index: 9;
+    top: 0.1rem;
   }
 
   .topImgBg {

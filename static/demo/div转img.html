@@ -1,0 +1,229 @@
+﻿<html>
+<meta charset="utf-8">
+
+<head>
+    <!-- jquery库和html2canvas库 -->
+    <script type="text/javascript" src="http://www.boolaw.com/tpl/default/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="http://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/bluebird/latest/bluebird.js"></script>
+    <style>
+        body {
+          background: #ccc
+        }
+
+        #dw {
+          position: absolute;
+          top: 10px;
+          left: 10%;
+          height: 620px;
+          width: 1030px;
+          background: #fff;
+          border: 1px solid black;
+          padding: 10px
+        }
+
+        .close {
+          position: relative;
+          left: 10px;
+          width: 0.2em;
+          height: 1em;
+          background: #333;
+          -webkit-transform: rotate(45deg);
+          -moz-transform: rotate(45deg);
+          -o-transform: rotate(45deg);
+          -ms-transform: rotate(45deg);
+          transform: rotate(45deg);
+          display: inline-block;
+        }
+
+        .close:after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 0.2em;
+          height: 1em;
+          background: #333;
+          -webkit-transform: rotate(270deg);
+          -moz-transform: rotate(270deg);
+          -o-transform: rotate(270deg);
+          -ms-transform: rotate(270deg);
+          transform: rotate(270deg);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 要截图的div main 蓝色区域 -->
+    <div id="main" style="width: 50%; margin-left: 100px;padding: 50px;height: 400px;background: #5a90a0">
+        <div style="height: 200px;width: 200px;background: #ccc;"></div>
+    </div>
+    <div style="height: 30px;width: 168px;border:2px solid black;background: red;text-align: center;"
+         onclick="doScreenShot()">截图</div>
+    <!-- 生成图片展示的DIV dw-->
+    <div id="dw">
+        <div style="float: right;width: 25px;height: 25px;" title="关闭" onclick="closeok()">
+            <span class="close"></span>
+        </div>
+    </div>
+</body>
+
+<script>
+    $("#dw").hide();
+    //关闭图片
+    function closeok() {
+        $("#dw").hide();
+    }
+    //点击报错图片
+    function doScreenShot() {
+        $("#dw").show();
+        //两个参数：所需要截图的元素id，截图后要执行的函数， canvas为截图后返回的最后一个canvas
+        html2canvas($("#main")[0]).then(function (canvas) {
+            canvas.id = "mycanvas";
+            var mainwh = $("#main").width();
+            var mainhg = $("#main").height();
+            var img = convertCanvasToImage(canvas);
+            console.log(img);
+            download(2, canvas, "123123")
+            $("#dw").append(img)
+        });
+    }
+    //绘制显示图片
+    function convertCanvasToImage(canvas) {
+        var image = new Image();
+        image.src = canvas.toDataURL("image/png"); //获得图片地址
+        return image;
+    }
+
+
+    /**
+     *各个版本浏览器下载图片（兼容ie）
+     *
+     * @export
+     * @param {*} type 设置接收数据类型 参数 1 或 2
+     * @param {*} data type为 1 时 data 为文件地址； type为 2 时 data 为canvas对象
+     * @param {*} name 当文件为图片类型时需设置文件名
+     */
+    function download(type, data, name) {
+        if (type == 1) {
+            var url = data;
+            // 通过地址判断是否为图片类型文件
+            var ext = url.slice(url.lastIndexOf('.') + 1).toLowerCase();
+            if (isImage(ext)) {
+                convertUrlToBase64(url).then(function (base64) {
+                    var blob = convertBase64UrlToBlob(base64);
+                    // 下载
+                    if (myBrowser() == 'IE') {
+                        window.navigator.msSaveBlob(blob, name + '.jpg');
+                    } else {
+                        var a = document.createElement('a');
+                        a.download = name;
+                        a.href = URL.createObjectURL(blob);
+                        a.click();
+                    }
+                });
+            } else {
+                var a = document.createElement('a');
+                a.download = name;
+                a.href = url;
+                a.click();
+            }
+        } else {
+            var dataURL = data.toDataURL('image/jpeg', 1.0);
+            var base64 = {
+                dataURL: dataURL,
+                type: 'image/jpg',
+                ext: 'jpg'
+            };
+            var blob = convertBase64UrlToBlob(base64);
+            // 下载
+            if (myBrowser() == 'IE') {
+                window.navigator.msSaveBlob(blob, name + '.jpg');
+            } else {
+                var _a = document.createElement('a');
+                _a.download = name;
+                _a.href = URL.createObjectURL(blob);
+                _a.click();
+            }
+        }
+    }
+
+    /**
+     * 将 base64 转换位 blob 对象
+     * blob 存储 2进制对象的容器
+     * @export
+     * @param {*} base64
+     * @returns
+     */
+    function convertBase64UrlToBlob(base64) {
+        var parts = base64.dataURL.split(';base64,');
+        var contentType = parts[0].split(':')[1];
+        var raw = window.atob(parts[1]);
+        var rawLength = raw.length;
+        var uInt8Array = new Uint8Array(rawLength);
+        for (var i = 0; i < rawLength; i++) {
+            uInt8Array[i] = raw.charCodeAt(i);
+        }
+        return new Blob([uInt8Array], { type: contentType });
+    }
+
+    /**
+     * 将图片地址转换为 base64 格式
+     *
+     * @param {*} url
+     */
+    function convertUrlToBase64(url) {
+        return new Promise(function (resolve, reject) {
+            var img = new Image();
+            img.crossOrigin = 'Anonymous';
+            img.src = url;
+            img.onload = function () {
+                var canvas = document.createElement('canvas');
+                canvas.width = img.width;
+                canvas.height = img.height;
+                var ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, img.width, img.height);
+                var ext = img.src.substring(img.src.lastIndexOf('.') + 1).toLowerCase();
+                var dataURL = canvas.toDataURL('image/' + ext);
+                var base64 = {
+                    dataURL: dataURL,
+                    type: 'image/' + ext,
+                    ext: ext
+                };
+                resolve(base64);
+            };
+        });
+    }
+
+    // 判断浏览器类型
+    function myBrowser() {
+        var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+        if (userAgent.indexOf("OPR") > -1) {
+            return "Opera";
+        }; //判断是否Opera浏览器 OPR/43.0.2442.991
+        if (userAgent.indexOf("Firefox") > -1) {
+            return "FF";
+        } //判断是否Firefox浏览器  Firefox/51.0
+        if (userAgent.indexOf("Trident") > -1) {
+            return "IE";
+        } //判断是否IE浏览器  Trident/7.0; rv:11.0
+        if (userAgent.indexOf("Edge") > -1) {
+            return "Edge";
+        } //判断是否Edge浏览器  Edge/14.14393
+        if (userAgent.indexOf("Chrome") > -1) {
+            return "Chrome";
+        } // Chrome/56.0.2924.87
+        if (userAgent.indexOf("Safari") > -1) {
+            return "Safari";
+        } //判断是否Safari浏览器 AppleWebKit/534.57.2 Version/5.1.7 Safari/534.57.2
+    }
+
+    // 判断文件是否为图片类型
+    function isImage(ext) {
+        if (ext == 'png' || ext == 'jpg' || ext == 'jpeg' || ext == 'gif' || ext == 'bmp') {
+            return true;
+        }
+    }
+</script>
+
+</html>

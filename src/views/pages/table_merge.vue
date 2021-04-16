@@ -1,14 +1,5 @@
 <template>
-  <Table
-    ref="table"
-    :columns="columns11"
-    :data="datalist"
-    border
-    :height="tableheight"
-    show-summary
-    :summary-method="handleSummary"
-    :span-method="handleSpan"
-  ></Table>
+  <Table ref="table" :columns="columns11" :data="datalist" border :height="tableheight" show-summary :summary-method="handleSummary" :span-method="handleSpan"></Table>
 </template>
 
 <script>
@@ -396,7 +387,7 @@ export default {
       var height = document.documentElement.clientHeight;
       this.tableheight = height - 150;
 
-      window.addEventListener("resize", function() {
+      window.addEventListener("resize", function () {
         var height = document.documentElement.clientHeight;
         _this.tableheight = height - 150;
       });

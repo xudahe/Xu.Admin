@@ -2,27 +2,13 @@
   <div class="tabNav">
     <div class="tabnavBox">
       <transition-group name="list" tag="ul">
-        <li
-          v-for="(item, index) in $store.getters.tabnavBox"
-          @contextmenu.prevent="openMenu(item, $event, index)"
-          :key="item.title + index"
-          class="tabnav"
-          :class="{ active_cls: $route.path === item.path }"
-        >
+        <li v-for="(item, index) in $store.getters.tabnavBox" @contextmenu.prevent="openMenu(item, $event, index)" :key="item.title + index" class="tabnav" :class="{ active_cls: $route.path === item.path }">
           <router-link :to="item.path">{{ item.title }}</router-link>
-          <i
-            @click="removeTab(item)"
-            class="el-icon-error"
-            v-if="index !== 0"
-          ></i>
+          <i @click="removeTab(item)" class="el-icon-error" v-if="index !== 0"></i>
         </li>
       </transition-group>
     </div>
-    <ul
-      v-show="this.rightMenuShow"
-      :style="{ left: this.left + 'px', top: this.top + 'px' }"
-      class="menuBox"
-    >
+    <ul v-show="this.rightMenuShow" :style="{ left: this.left + 'px', top: this.top + 'px' }" class="menuBox">
       <li @click="removeTab($store.getters.openNav)">关闭</li>
       <li @click="removeLeftTab($store.getters.openNav)">关闭左侧</li>
       <li @click="removeRightTab($store.getters.openNav)">关闭右侧</li>
@@ -92,7 +78,6 @@ export default {
 </script>
 
 <style>
-
 /*   
   *  transition-group 组件
   *  name 为组件中的属性

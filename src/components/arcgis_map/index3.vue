@@ -11,11 +11,7 @@
 }
 </style>
 <template>
-  <div
-    class="map-content"
-    :id="mapId"
-    style="position: relative;border-radius: 0.1rem;"
-  ></div>
+  <div class="map-content" :id="mapId" style="position: relative;border-radius: 0.1rem;"></div>
 </template>
 
 <script>
@@ -280,6 +276,6 @@ export default {
 
     _this.createMap();
   },
-  beforeDestroy() {}
+  beforeDestroy() { }
 };
 </script>

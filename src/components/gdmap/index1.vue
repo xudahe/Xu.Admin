@@ -2,26 +2,12 @@
   <section>
     <div style="height:100%;width:100%" id="container" width tabindex="0"></div>
     <div class="search-div">
-      <el-input
-        id="tipInput"
-        v-model="inputSearchVal"
-        placeholder="请输入搜索名称"
-      >
+      <el-input id="tipInput" v-model="inputSearchVal" placeholder="请输入搜索名称">
       </el-input>
     </div>
     <div class="geolocation">
-      <el-tooltip
-        class="item"
-        effect="dark"
-        content="定位到当前位置"
-        placement="left"
-      >
-        <el-button
-          type="primary"
-          icon="el-icon-location-outline"
-          circle
-          @click.native="Geolocation"
-        ></el-button>
+      <el-tooltip class="item" effect="dark" content="定位到当前位置" placement="left">
+        <el-button type="primary" icon="el-icon-location-outline" circle @click.native="Geolocation"></el-button>
       </el-tooltip>
     </div>
   </section>
@@ -74,7 +60,7 @@ export default {
     // }
     this.init();
   },
-  mounted() {},
+  mounted() { },
   methods: {
     init() {
       let _this = this;
@@ -89,7 +75,7 @@ export default {
 
         AMap.plugin(
           ["AMap.ToolBar", "AMap.Scale", "AMap.MapType", "AMap.ControlBar"],
-          function() {
+          function () {
             map.addControl(new AMap.ToolBar()); //工具条
             map.addControl(new AMap.Scale()); //左下角地图比例尺
             map.addControl(new AMap.MapType()); // 卫星和标准切换，可加路况显示
@@ -99,7 +85,7 @@ export default {
         this.map = map;
 
         //单击事件
-        AMap.event.addListener(map, "click", function(e) {
+        AMap.event.addListener(map, "click", function (e) {
           console.info("click", e);
         });
         //双击事件
@@ -120,10 +106,10 @@ export default {
             size: [48, 48]
           }
         });
-        positionPicker.on("success", function(result) {
+        positionPicker.on("success", function (result) {
           console.log(result);
         });
-        positionPicker.on("fail", function(result) {});
+        positionPicker.on("fail", function (result) { });
         // positionPicker.start(); //显示拖拽图标
       });
     },
@@ -157,7 +143,7 @@ export default {
       let _this = this;
 
       // 从高德地图api获取浏览器当前定位
-      AMap.plugin(["AMap.Geolocation"], function() {
+      AMap.plugin(["AMap.Geolocation"], function () {
         let geolocation = new AMap.Geolocation({
           enableHighAccuracy: true, //  是否使用高精度定位，默认:true
           timeout: 10000, //  超过10秒后停止定位，默认：无穷大
@@ -173,7 +159,7 @@ export default {
         });
 
         geolocation.getCurrentPosition();
-        AMap.event.addListener(geolocation, "complete", function(result) {
+        AMap.event.addListener(geolocation, "complete", function (result) {
           console.log(result);
 
           // 定位成功之后再定位处添加一个marker
@@ -185,24 +171,24 @@ export default {
           });
           _this.map.setCenter(result.position); //定位到中心点
         });
-        AMap.event.addListener(geolocation, "error", function(result) {
+        AMap.event.addListener(geolocation, "error", function (result) {
           _this.getLatLng();
         });
       });
     },
     getLatLng() {
-      this.AMap.plugin("AMap.CitySearch", function() {
+      this.AMap.plugin("AMap.CitySearch", function () {
         let citySearch = new AMap.CitySearch();
-        citySearch.getLocalCity(function(status, result) {
+        citySearch.getLocalCity(function (status, result) {
           if (status === "complete" && result.info === "OK") {
             // 查询成功，result即为当前所在城市信息
-            AMap.plugin("AMap.Geocoder", function() {
+            AMap.plugin("AMap.Geocoder", function () {
               let geocoder = new AMap.Geocoder({
                 // city 指定进行编码查询的城市，支持传入城市名、adcode 和 citycode
                 city: result.adcode
               });
               let lnglat = result.rectangle.split(";")[0].split(",");
-              geocoder.getAddress(lnglat, function(status, data) {
+              geocoder.getAddress(lnglat, function (status, data) {
                 if (status === "complete" && data.info === "OK") {
                   // data为对应的地理位置详细信息
                   console.log(data);

@@ -95,5 +95,11 @@ module.exports = {
     net: 'empty',
     tls: 'empty',
     child_process: 'empty'
+  },
+  // https://webpack.docschina.org/configuration/externals/
+  // 防止将某些 import 的包(package)打包到 bundle 中，而是在运行时(runtime)再去从外部获取这些扩展依赖(external dependencies)。
+  externals: {
+    'echarts': 'echarts',
+    'jquery': 'jquery',
   }
 }

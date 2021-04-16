@@ -1,23 +1,16 @@
 <template>
   <div>
-    <el-form
-      status-icon
-      ref="userForm"
-      :model="userForm"
-      :rules="rules"
-      size="small"
-      label-width="80px"
-    >
+    <el-form status-icon ref="userForm" :model="userForm" :rules="rules" size="small" label-width="80px">
       <el-form-item label="邮箱" prop="email">
-        <el-input v-model="userForm.email" style="width: 360px;" clearable/>
+        <el-input v-model="userForm.email" style="width: 360px;" clearable />
       </el-form-item>
       <el-form-item label="密码" prop="password">
-        <el-input type="password" v-model="userForm.password" style="width: 360px;" clearable/>
+        <el-input type="password" v-model="userForm.password" style="width: 360px;" clearable />
       </el-form-item>
-			<el-form-item>
-			  <el-button @click.native="resetForm" size="small">重置</el-button>
-			  <el-button type="primary" @click.native="doSubmit" size="small">确认</el-button>
-			</el-form-item>
+      <el-form-item>
+        <el-button @click.native="resetForm" size="small">重置</el-button>
+        <el-button type="primary" @click.native="doSubmit" size="small">确认</el-button>
+      </el-form-item>
     </el-form>
   </div>
 </template>
@@ -41,26 +34,26 @@ export default {
       }
     };
   },
-	computed: {
-		...mapState({
-			user: state => state.user
-		})
-	},
-	watch: {
-		'user.email': {
-			handler() {
-				this.userForm.email = this.user.email
-			},
-			immediate: true
-		}
-	},
+  computed: {
+    ...mapState({
+      user: state => state.user
+    })
+  },
+  watch: {
+    'user.email': {
+      handler() {
+        this.userForm.email = this.user.email
+      },
+      immediate: true
+    }
+  },
   methods: {
     // 重置表单
     resetForm() {
       try {
         this.userForm = { email: "", password: "" };
         this.$refs.userForm.resetFields();
-      } catch (e) {}
+      } catch (e) { }
     },
     doSubmit() {
       // this.$refs.userForm.validate(valid => {
@@ -69,9 +62,9 @@ export default {
       //       url: "/api/user/updateMail",
       //       method: "post",
       //       data: {
-			// 				email: this.userForm.email,
-			// 				password: encrypt(this.userForm.password)
-			// 			}
+      // 				email: this.userForm.email,
+      // 				password: encrypt(this.userForm.password)
+      // 			}
       //     }).then(() => {
       //       this.$successMsg("修改成功");
       //       this.$emit("updateUserInfo");

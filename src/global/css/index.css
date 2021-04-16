@@ -1,4 +1,7 @@
-   /* 液晶字体*/
+   /* 
+    * 液晶字体
+    * 使用方法：font-family: 'DFW';
+   */
    @font-face {
      font-family: 'DFW';
      src: url('../../../static/fonts/digifaceWide.ttf');
@@ -99,7 +102,7 @@
      -webkit-animation-timing-function: ease-out;
      animation-timing-function: ease-out;
      animation-fill-mode: both;
-    
+
      /**延迟动画**/
      -webkit-animation-delay: 0.6s;
      animation-delay: 0.6s;
@@ -130,13 +133,20 @@
    }
 
 
+   .fade-in-left {
+     -webkit-animation: fade-in-left 1s;
+     animation: fade-in-left 1s;
+     -webkit-animation-timing-function: ease-out;
+     animation-timing-function: ease-out;
+     animation-fill-mode: both;
+   }
+
    .fade-in-left1 {
      -webkit-animation: fade-in-left 0.5s;
      animation: fade-in-left 0.5s;
      -webkit-animation-timing-function: ease-out;
      animation-timing-function: ease-out;
      animation-fill-mode: both;
-
    }
 
    .fade-in-left2 {
@@ -322,7 +332,7 @@
        opacity: 0;
      }
    }
-   
+
    .scale-in {
      -webkit-animation: scale-in 1s;
      animation: scale-in 1s;
@@ -341,7 +351,7 @@
      -webkit-animation: scale-in 1s;
      animation: scale-in 1s;
      animation-fill-mode: both;
-      /**延迟动画**/
+     /**延迟动画**/
      -webkit-animation-delay: 2s;
      animation-delay: 2s;
    }

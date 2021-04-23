@@ -17,7 +17,6 @@
         </div>
       </div>
     </div>
-
     <div id="appComponts" class="appComponts" :style="{width: menuScale ? 'calc(100% - 1.80rem)':'calc(100% - 0.15rem)'}">
 
       <!-- 左侧列表框 -->
@@ -41,8 +40,8 @@
           <div class="titleCont titleContImg">
             <div class="titleContText">{{titleLeftName}}</div>
             <div class="titleRight">
-              <Icon class="closeIcon" type="ios-close-circle-outline" @click="detailclose('leftdetail')" v-show="showLeftMenu"/>
-              <Icon class="closeIcon" type="ios-undo" @click="returnMenu" v-show="!showLeftMenu"/>
+              <Icon class="closeIcon" type="ios-close-circle-outline" @click="detailclose('leftdetail')" v-show="showLeftMenu" />
+              <Icon class="closeIcon" type="ios-undo" @click="returnMenu" v-show="!showLeftMenu" />
             </div>
           </div>
           <div :style="{height: 'calc(100% - 0.4rem)',marginTop: '0.4rem'}">
@@ -66,7 +65,6 @@
         </div>
       </div>
 
-     
       <div class="mapDiv" style="position:absolution;float: left;" :style="{height: '100%',width: mapWidth,padding: mapadding}" v-show="isMapShow">
         <!-- 中间地图 -->
         <div class="appCompontsContMap scale-in" :style="{height: mapHeight,width: '100%'}">
@@ -160,7 +158,7 @@ export default {
       screenDetailData: {},
 
       pageWidth: 3.3, //列表宽度
-      mapWidth: '',
+      mapWidth: '100%',
       mapHeight: '100%',
       mapadding: '0', //中间地图边距
       botmHeight: '50%', //底部详情框高度
@@ -292,7 +290,7 @@ export default {
         this.mapHeight = 'calc(100% - ' + (this.botmHeight) + ')'
       }
     },
-    returnMenu(){
+    returnMenu() {
       //隐藏左侧，右侧详情框，同时显示左侧列表框
       this.componentLeft = this.componentRight = "";
       this.showDetailLeft = this.showDetailRight = false;

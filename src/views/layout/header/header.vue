@@ -13,12 +13,10 @@
           </el-tooltip>
         </li>
         <li>
-          <div :key="index" v-for="(item,index) in  weathers">
-            <div style="display:inline-flex;">
-              <img class="weathers_img" :src="'../../static/weather/'+item.type+'.gif'" />
-              <div class="weathers_type">{{item.type}} </div>
-              <div class="weathers_text">{{item.txtInfo}}</div>
-            </div>
+          <div style="display:inline-flex;">
+            <img class="weathers_img" :src="'../../static/weather/'+weathers.type+'.gif'" />
+            <div class="weathers_type">{{weathers.type}} </div>
+            <div class="weathers_text">{{weathers.txtInfo}}</div>
           </div>
         </li>
         <li v-show="$defaultConfig.errorLog">
@@ -118,34 +116,11 @@ export default {
     },
 
     getWeather() {
-      this.$ajax({
-        url: 'http://wthrcdn.etouch.cn/weather_mini?city=南京',
-        dataType: 'jsonp',
-        headers: {
-          'Accept-Encoding': 'gzip'
-        },
-        method: 'get'
-      }).then(
-        res => {
-          if (res) {
-            if (res.data) {
-              var rust = res.data.data.forecast;
-              if (rust) {
-                for (let i = 0; i < 1; i++) {
-                  this.weathers.push({
-                    txtInfo: rust[i].low.replace('低温', '').replace('℃', '') + '~' + rust[i].high.replace('高温 ', ''),
-                    type: rust[i].type, //图片
-                    date: rust[i].date.substring(0, rust[i].date.length - 3)
-                  })
-                }
-              }
-            }
-          }
-        },
-        error => {
-          this.$message.error(error);
-        }
-      );
+      let rust = this.$store.state.weather.forecast;
+      this.weathers = {
+        txtInfo: rust[0].low.replace('低温', '').replace('℃', '') + '~' + rust[0].high.replace('高温 ', ''),
+        type: rust[0].type,
+      }
     },
   },
   mounted() {

@@ -8,7 +8,7 @@
 
 <script>
 /**
- * https://blog.csdn.net/u013451157/article/details/106197912
+ * 视频录制 https://blog.csdn.net/u013451157/article/details/106197912
  */
 
 export default {

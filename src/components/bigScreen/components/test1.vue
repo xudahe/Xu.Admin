@@ -19,21 +19,15 @@
             <Row>
               <Col span="24">
               <span class="resultLable">字段名称：</span>
-              <span :title="item.title" class="rsultValue">{{
-                  item.title
-                }}</span>
+              <span :title="item.title" class="rsultValue">{{ item.title}}</span>
               </Col>
               <Col span="24">
               <span class="resultLable">字段名称：</span>
-              <span :title="item.title" class="rsultValue">{{
-                  item.title
-                }}</span>
+              <span :title="item.title" class="rsultValue">{{item.title}}</span>
               </Col>
               <Col span="24">
               <span class="resultLable">字段名称：</span>
-              <span :title="item.title" class="rsultValue">{{
-                  item.title
-                }}</span>
+              <span :title="item.title" class="rsultValue">{{item.title }}</span>
               </Col>
             </Row>
           </div>

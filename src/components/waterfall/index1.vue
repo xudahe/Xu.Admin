@@ -1,53 +1,20 @@
 <template>
   <!-- 主体瀑布流区域，无限滚动 -->
-  <div
-    id="waterfall"
-    class="v-waterfall-content"
-    ref="abc"
-    v-infinite-scroll="getMoreData"
-    infinite-scroll-disabled="disabled"
-    infinite-scroll-distance="10"
-    style="overflow:auto"
-  >
+  <div id="waterfall" class="v-waterfall-content" ref="abc" v-infinite-scroll="getMoreData" infinite-scroll-disabled="disabled" infinite-scroll-distance="10" style="overflow:auto">
     <back-top :options="{ target: '#waterfall', isMove: true }" />
-    <div
-      v-for="img in waterfallList"
-      :key="img.key"
-      class="v-waterfall-item img-scale"
-      :style="{
-        top: img.top + 'px',
-        left: img.left + 'px',
-        width: imageWidth + 'px',
-        height: img.height + 'px'
-      }"
-    >
+    <div v-for="img in waterfallList" :key="img.key" class="v-waterfall-item img-scale" 
+      :style="{top: img.top + 'px',left: img.left + 'px',width: imageWidth + 'px',height: img.height + 'px'}">
       <!-- 图片卡片 -->
-      <el-card
-        shadow="hover"
-        :body-style="{ padding: '0px', 'border-radius': '10px' }"
-        @click.native="openDialog(img.id)"
-      >
+      <el-card shadow="hover" :body-style="{ padding: '0px', 'border-radius': '10px' }" @click.native="openDialog(img)">
         <!-- 图片懒加载 -->
-        <el-image :src="img.src" class="image" :key="img.src" lazy>
+        <el-image :src="img.src" class="image" :key="img.src" lazy >
           <!-- 加载前占位 -->
           <div slot="placeholder" class="image-slot">
-            <div
-              :style="{
-                height: img.height + 'px',
-                width: imageWidth + 'px',
-                backgroundColor: img.colour
-              }"
-            ></div>
+            <div :style="{height: img.height + 'px',width: imageWidth + 'px', backgroundColor: img.colour}"></div>
           </div>
           <!-- 加载失败占位 -->
           <div slot="error" class="image-slot">
-            <div
-              :style="{
-                height: img.height + 'px',
-                width: imageWidth + 'px',
-                backgroundColor: img.colour
-              }"
-            ></div>
+            <div :style="{height: img.height + 'px',width: imageWidth + 'px',backgroundColor: img.colour }"></div>
           </div>
         </el-image>
       </el-card>
@@ -129,14 +96,7 @@ export default {
       this.waterfallImgCol = maxColNum;
       //获取左边距
       this.colLeft = (fullWidth - contentWhith) / 2;
-      console.log(
-        "总宽度：" +
-          fullWidth +
-          ",内容宽度：" +
-          contentWhith +
-          "左偏移：" +
-          this.colLeft
-      );
+      console.log("总宽度：" + fullWidth + ",内容宽度：" + contentWhith + "左偏移：" + this.colLeft);
       //初始化偏移高度数组
       this.waterfallColHeight = new Array(this.waterfallImgCol);
       for (let i = 0; i < this.waterfallColHeight.length; i++) {
@@ -173,8 +133,7 @@ export default {
         let aImg = new Image();
         //图片渲染列表，先把高宽和占位颜色赋值直接push到waterfallList，图片的实际url等图片加载上了在赋值
         let imgData = {};
-        imgData.height =
-          (this.imageWidth / moreList[i].width) * moreList[i].height;
+        imgData.height = (this.imageWidth / moreList[i].width) * moreList[i].height;
         // console.log("第" + i + "张图片的高度是：" + imgData.height);
         imgData.id = moreList[i].id;
         //获取随机占位背景色
@@ -200,10 +159,7 @@ export default {
       } = this;
 
       //找出当前最短列的索引
-      let minIndex = waterfallColHeight.indexOf(
-        Math.min.apply(null, waterfallColHeight)
-      );
-
+      let minIndex = waterfallColHeight.indexOf(Math.min.apply(null, waterfallColHeight));
       //获取最短列底部高度，既下一张图片的顶部高度
       imgData.top = waterfallColHeight[minIndex];
       //计算左侧偏移，最短列索引*（右边距+列宽度）
@@ -212,8 +168,8 @@ export default {
       waterfallColHeight[minIndex] += imgData.height + waterfallImgBottom;
     },
     //打开图片详情
-    openDialog(picId) {
-      this.picId = picId;
+    openDialog(item) {
+      this.picId = item.id;
     }
   },
   beforeDestroy() {

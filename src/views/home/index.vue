@@ -1,9 +1,10 @@
 <template>
   <div ref="home" class="home card_css">
     <el-row>
-      <el-col :span="12">
+      <el-col :span="8">
         <el-card class="box-card" shadow="hover">
-          <swiper :imgList="imgList"></swiper>
+          <!-- <swiper :imgList="imgList"></swiper> -->
+          <calendar></calendar>
         </el-card>
       </el-col>
       <el-col :span="12">
@@ -35,12 +36,14 @@
 import dialog1 from "../../components/dialog/dialog1";
 import slide from "../../components/slideverify/slide";
 import countdown from "../../components/countdown/index1";
+import calendar from "../../components/calendar/index1";
 
 export default {
   components: {
     dialog1,
     slide,
-    countdown
+    countdown,
+    calendar
   },
   data() {
     return {

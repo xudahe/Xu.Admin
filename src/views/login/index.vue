@@ -283,17 +283,11 @@ export default {
             _this.$router.push({ path: "/home" }); //登录成功之后重定向到首页
 
             setTimeout(() => {
-              let userinfo = JSON.parse(
-                window.localStorage.userInfo
-                  ? window.localStorage.userInfo
-                  : null
-              );
+              let userinfo = JSON.parse(window.localStorage.userInfo ? window.localStorage.userInfo : null);
 
               _this.$notify({
                 type: "success",
-                message: `登录成功 \n 欢迎管理员：${userinfo.realName
-                  }！Token 将在 ${window.localStorage.expires_in /
-                  60} 分钟后过期！`,
+                message: `登录成功 \n 欢迎管理员：${userinfo.realName}！Token 将在 ${window.localStorage.expires_in / 60} 分钟后过期！`,
                 duration: 3000
               });
             }, 1000);
@@ -302,7 +296,32 @@ export default {
         .catch(err => {
           _this.loginError();
         });
-    }
+    },
+    getWeather() {
+      let _this = this;
+      this.$ajax({
+        url: 'http://wthrcdn.etouch.cn/weather_mini?city=南京',
+        dataType: 'jsonp',
+        headers: {
+          'Accept-Encoding': 'gzip'
+        },
+        method: 'get'
+      }).then(
+        res => {
+          if (res) {
+            if (res.data) {
+              var rust = res.data.data;
+              if (rust) {
+                _this.$store.commit("saveWeather", rust); // 保存token过期时间
+              }
+            }
+          }
+        },
+        error => {
+          this.$message.error(error);
+        }
+      );
+    },
   },
   mounted() {
     window.localStorage.clear();
@@ -311,6 +330,7 @@ export default {
 
     this.cookies();
     this.setRefreshCode();
+    this.getWeather();
   },
   created() {
     var _self = this;

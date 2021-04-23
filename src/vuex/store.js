@@ -19,6 +19,7 @@ const store = new Vuex.Store({
 
     drag_com: "",
     drag_ref: "",
+    weather: [], //天气数据
   },
   // 执行同步操作改变state   this.$store.commit("saveToken", data)
   mutations: {
@@ -29,6 +30,9 @@ const store = new Vuex.Store({
     saveTokenExpire(state, data) {
       state.tokenExpire = data;
       window.localStorage.setItem("TokenExpire", data);
+    },
+    saveWeather(state, data) {
+      state.weather = data;
     },
   },
   mounted() {

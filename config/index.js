@@ -21,7 +21,7 @@ module.exports = {
             '^/api': '' //路径重写 
             } 
         } 
-    },  //https://github.com/chimurai/http-proxy-middleware,配置方式, // 需要 proxyTable 代理的接口（可跨域）http://vuejs-templates.github.io/webpack/proxy.html
+    },  //https://github.com/chimurai/http-proxy-middleware, // 配置方式, 需要 proxyTable 代理的接口（可跨域）http://vuejs-templates.github.io/webpack/proxy.html
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST

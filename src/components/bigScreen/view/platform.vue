@@ -215,29 +215,11 @@ export default {
   },
   methods: {
     getWeather() {
-      this.$http({
-        url: 'http://wthrcdn.etouch.cn/weather_mini?city=南京',
-        dataType: 'jsonp',
-        headers: {
-          'Accept-Encoding': 'gzip'
-        },
-        method: 'get'
-      }).then(
-        res => {
-          if (res) {
-            if (res.data) {
-              var rust = res.data.data.forecast;
-              if (rust) {
-                this.weathers.type = rust[0].type;
-                this.weathers.txtInfo = rust[0].low.replace('低温', '') + '~' + rust[0].high.replace('高温 ', '');
-              }
-            }
-          }
-        },
-        error => {
-          this.$Message.error(error);
-        }
-      );
+      let rust = this.$store.state.weather.forecast;
+      this.weathers = {
+        txtInfo: rust[0].low.replace('低温', '').replace('℃', '') + '~' + rust[0].high.replace('高温 ', ''),
+        type: rust[0].type,
+      }
     },
     goHome(item) {
       this.$router.push({ path: item.path });

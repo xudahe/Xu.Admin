@@ -30,7 +30,7 @@ export default {
     // }
     this.getGeoJson(this.adcode);
   },
-  mounted() {},
+  mounted() { },
   methods: {
     /**
      *  利用高德api获取行政区边界geoJson
@@ -51,7 +51,7 @@ export default {
           eventSupport: true, //打开事件支持
           map: map
         }));
-        districtExplorer.loadAreaNode(adcode, function(error, areaNode) {
+        districtExplorer.loadAreaNode(adcode, function (error, areaNode) {
           if (error) {
             console.error(error);
             return;
@@ -99,7 +99,7 @@ export default {
         mapName: "全国", // 地图名
         goDown: true, // 是否下钻
         // 下钻回调
-        callback: function(name, option, instance) {
+        callback: function (name, option, instance) {
           // console.log(name, option, instance);
         },
         // 数据展示
@@ -162,7 +162,7 @@ export default {
         activeArea: [], // 区域高亮,同echarts配置项
         data: [],
         // 下钻回调(点击的地图名、实例对象option、实例对象)
-        callback: function(name, option, instance) {}
+        callback: function (name, option, instance) { }
       };
       if (opt) opt = echarts.util.extend(defaultOpt, opt);
 
@@ -190,13 +190,13 @@ export default {
 
       var handleEvents = {
         //获取字符串长度
-        chkstrlen: function(str) {
+        chkstrlen: function (str) {
           var strlen = 0;
           for (var i = 0; i < str.length; i++) {
-            if (str.charCodeAt(i) > 255)
-              //如果是汉字，则字符串长度加2
+            if (str.charCodeAt(i) > 255) //如果是汉字，则字符串长度加2
               strlen += 2;
-            else strlen++;
+            else
+              strlen++;
           }
           return strlen;
         },
@@ -206,7 +206,7 @@ export default {
          * o option
          * n 地图名
          **/
-        resetOption: function(i, o, n) {
+        resetOption: function (i, o, n) {
           var j = name.indexOf(n),
             l = o.graphic.length,
             strlen0 = 0,
@@ -219,10 +219,8 @@ export default {
             var breadcrumb = this.createBreadcrumb(n);
 
             o.graphic.push(breadcrumb);
-            o.graphic[0].children[0].shape.x2 =
-              strlen0 + this.chkstrlen(n) * 15;
-            o.graphic[0].children[1].shape.x2 =
-              strlen0 + this.chkstrlen(n) * 15;
+            o.graphic[0].children[0].shape.x2 = strlen0 + this.chkstrlen(n) * 15;
+            o.graphic[0].children[1].shape.x2 = strlen0 + this.chkstrlen(n) * 15;
 
             if (o.graphic.length > 2) {
               for (var x = 0; x < opt.data.length; x++) {
@@ -265,7 +263,7 @@ export default {
         /**
          * name 地图名
          **/
-        createBreadcrumb: function(name) {
+        createBreadcrumb: function (name) {
           var breadcrumb = {
             type: "group",
             id: name,
@@ -284,7 +282,7 @@ export default {
                   key: name
                   // lineWidth: 2,
                 },
-                onclick: function() {
+                onclick: function () {
                   var name = this.style.key;
                   handleEvents.resetOption(chart, option, name);
                 }
@@ -299,7 +297,7 @@ export default {
                   fill: style.textColor,
                   font: style.font
                 },
-                onclick: function() {
+                onclick: function () {
                   var name = this.style.text;
                   handleEvents.resetOption(chart, option, name);
                 }
@@ -314,7 +312,7 @@ export default {
                   fill: style.textColor,
                   font: '12px "Microsoft YaHei", sans-serif'
                 },
-                onclick: function() {
+                onclick: function () {
                   var name = this.style.name;
                   handleEvents.resetOption(chart, option, name);
                 }
@@ -328,7 +326,7 @@ export default {
         },
 
         // 设置effectscatter
-        initSeriesData: function(data) {
+        initSeriesData: function (data) {
           var temp = [];
           for (var i = 0; i < data.length; i++) {
             var geoCoord = geoCoordMap[data[i].name];
@@ -343,9 +341,9 @@ export default {
           return temp;
         },
 
-        zoomAnimation: function() {
+        zoomAnimation: function () {
           var count = null;
-          var zoom = function(per) {
+          var zoom = function (per) {
             if (!count) count = per;
             count = count + per;
             // console.log(per,count);
@@ -355,11 +353,11 @@ export default {
               }
             });
             if (count < 1)
-              window.requestAnimationFrame(function() {
+              window.requestAnimationFrame(function () {
                 zoom(0.2);
               });
           };
-          window.requestAnimationFrame(function() {
+          window.requestAnimationFrame(function () {
             zoom(0.2);
           });
         }
@@ -420,7 +418,7 @@ export default {
                   stroke: "transparent",
                   key: name[0]
                 },
-                onclick: function() {
+                onclick: function () {
                   var name = this.style.key;
                   console.log("polyline", name[0]);
                   handleEvents.resetOption(chart, option, name);
@@ -436,7 +434,7 @@ export default {
                   fill: style.textColor,
                   font: style.font
                 },
-                onclick: function() {
+                onclick: function () {
                   console.log("text", name[0]);
                   handleEvents.resetOption(chart, option, name[0]);
                 }
@@ -451,7 +449,7 @@ export default {
                   fill: style.textColor,
                   font: '12px "Microsoft YaHei", sans-serif'
                 },
-                onclick: function() {
+                onclick: function () {
                   console.log("text", name[0]);
                   handleEvents.resetOption(chart, option, name[0]);
                 }
@@ -519,7 +517,7 @@ export default {
               borderWidth: 0
             }
           },
-          regions: opt.activeArea.map(function(item) {
+          regions: opt.activeArea.map(function (item) {
             if (typeof item !== "string") {
               return {
                 name: item.name,
@@ -566,7 +564,7 @@ export default {
                 show: false,
                 position: "right", //显示位置
                 offset: [5, 0], //偏移设置
-                formatter: function(params) {
+                formatter: function (params) {
                   //圆环显示文字
                   return params.data.name;
                 },
@@ -577,13 +575,13 @@ export default {
               }
             },
             symbol: "circle",
-            symbolSize: function(val) {
+            symbolSize: function (val) {
               return 10 + val[2] * 0; //圆环大小
             },
             hoverAnimation: true,
             itemStyle: {
               normal: {
-                color: function(params) {
+                color: function (params) {
                   return levelColorMap[params.value[3]];
                 },
                 shadowBlur: 10,
@@ -597,7 +595,7 @@ export default {
 
       chart.setOption(option, true);
       // 添加事件
-      chart.on("click", function(params) {
+      chart.on("click", function (params) {
         let _self = this;
         if (opt.goDown && params.name !== name[idx]) {
           var code = reginCode[params.name];

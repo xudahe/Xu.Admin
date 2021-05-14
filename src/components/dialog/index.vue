@@ -81,7 +81,7 @@ export default {
           domview.offsetLeft;
         var y = domview.offsetTop;
         this.$refs.popup.style.left = "300px";
-        this.$refs.popup.style.top =  "50px";
+        this.$refs.popup.style.top = "50px";
       });
     },
 
@@ -91,7 +91,7 @@ export default {
     },
     close() {
       this.$emit("input", false);
-   
+
     },
     changemax(val) {
       this.$parent.dialog.bodyshow = val;
@@ -124,7 +124,7 @@ export default {
   mounted() {
     var that = this;
     bus.$off("onshowdialog")
-    bus.$on("onshowdialog", function(isshwo) {
+    bus.$on("onshowdialog", function (isshwo) {
       if (that.isshow != undefined) {
         if (that.$parent.dialog) that.$parent.dialog.show = true;
       }
@@ -141,7 +141,7 @@ export default {
 </script>
 
 <style scoped>
-.xa-popup .popup>.title>.name {
+.xa-popup .popup > .title > .name {
   text-align: left;
   margin-left: 10px;
   line-height: 35px;
@@ -159,7 +159,7 @@ export default {
 
 .xa-popup .popup {
   min-width: 300px;
-  background-color: #064598  !important;
+  background-color: #064598 !important;
   z-index: 1001;
   position: fixed;
   left: 15%;
@@ -168,7 +168,7 @@ export default {
   border-radius: 5px;
 }
 
-.xa-popup .popup>.title {
+.xa-popup .popup > .title {
   width: 100%;
   height: 35px;
   line-height: 35px;
@@ -179,7 +179,7 @@ export default {
   background: none !important;
 }
 
-.xa-popup .popup>.title>.close {
+.xa-popup .popup > .title > .close {
   height: 35px;
   width: 35px;
   position: absolute;
@@ -189,41 +189,41 @@ export default {
   font-size: 30px;
 }
 
-.xa-popup .popup>.title>.close:after {
+.xa-popup .popup > .title > .close:after {
   content: "×";
   display: block;
 }
 
-.xa-popup .popup>.title>.closemin:after {
+.xa-popup .popup > .title > .closemin:after {
   content: "-";
   display: block;
   line-height: 30px;
 }
 
-.xa-popup .popup>.title>.closemax:after {
+.xa-popup .popup > .title > .closemax:after {
   content: "□";
   display: block;
   line-height: 30px;
 }
 
-.xa-popup .popup>.title>.close:hover {
+.xa-popup .popup > .title > .close:hover {
   background-color: rgba(0, 120, 189, 0.85) !important;
 }
 
-.xa-popup .popup>.main {
+.xa-popup .popup > .main {
   overflow-y: auto;
   overflow-x: hidden;
   max-height: 600px;
 }
 
-.xa-popup .popup>.buttons {
+.xa-popup .popup > .buttons {
   display: flex;
   justify-content: s center;
   padding: 10px 10px;
   box-shadow: 0 0 6px #ccc;
 }
 
-.xa-popup .popup>.buttons .button {
+.xa-popup .popup > .buttons .button {
   flex: 1;
   max-width: 170px;
   text-align: center;

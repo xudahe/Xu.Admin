@@ -31,9 +31,7 @@
         </li>
         <li>
           <el-dropdown size="large" class="avatar-dropdown">
-            <span class="el-dropdown-link">
-              {{user.loginName}}
-            </span>
+            <span class="el-dropdown-link"> {{user.loginName}}</span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item @click.native="$router.push('/home')">
                 <i class="el-icon-s-home" />首页

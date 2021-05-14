@@ -2,12 +2,11 @@
   <!-- 主体瀑布流区域，无限滚动 -->
   <div id="waterfall" class="v-waterfall-content" ref="abc" v-infinite-scroll="getMoreData" infinite-scroll-disabled="disabled" infinite-scroll-distance="10" style="overflow:auto">
     <back-top :options="{ target: '#waterfall', isMove: true }" />
-    <div v-for="img in waterfallList" :key="img.key" class="v-waterfall-item img-scale" 
-      :style="{top: img.top + 'px',left: img.left + 'px',width: imageWidth + 'px',height: img.height + 'px'}">
+    <div v-for="img in waterfallList" :key="img.key" class="v-waterfall-item img-scale" :style="{top: img.top + 'px',left: img.left + 'px',width: imageWidth + 'px',height: img.height + 'px'}">
       <!-- 图片卡片 -->
       <el-card shadow="hover" :body-style="{ padding: '0px', 'border-radius': '10px' }" @click.native="openDialog(img)">
         <!-- 图片懒加载 -->
-        <el-image :src="img.src" class="image" :key="img.src" lazy >
+        <el-image :src="img.src" class="image" :key="img.src" lazy>
           <!-- 加载前占位 -->
           <div slot="placeholder" class="image-slot">
             <div :style="{height: img.height + 'px',width: imageWidth + 'px', backgroundColor: img.colour}"></div>

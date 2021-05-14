@@ -6,41 +6,21 @@
       <el-dropdown style="margin-left:5px;">
         <el-button type="primary" icon="el-icon-circle-plus-outline" circle />
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item @click.native="createFile"
-            >新建笔记</el-dropdown-item
-          >
-          <el-dropdown-item divided @click.native="importFile"
-            >导入文件</el-dropdown-item
-          >
+          <el-dropdown-item @click.native="createFile">新建笔记</el-dropdown-item>
+          <el-dropdown-item divided @click.native="importFile">导入文件</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
 
-    <el-scrollbar
-      class="scrollbar-list"
-      wrap-class="scrollbar-wrapper"
-      :noresize="false"
-      tag="ul"
-    >
-      <li
-        v-for="(item, index) in fileList"
-        :key="index"
-        :class="selectIndex == index ? 'file-item color' : 'file-item'"
-        @click="selectClick(item, index)"
-        @mouseenter="item.showTool = true"
-        @mouseleave="item.showTool = false"
-      >
+    <el-scrollbar class="scrollbar-list" wrap-class="scrollbar-wrapper" :noresize="false" tag="ul">
+      <li v-for="(item, index) in fileList" :key="index" :class="selectIndex == index ? 'file-item color' : 'file-item'" @click="selectClick(item, index)" @mouseenter="item.showTool = true" @mouseleave="item.showTool = false">
         <i class="el-icon-document" style="font-size:15px;margin-right:3px;" />
         <p class="item-title" :title="item.title">{{ item.title }}</p>
         <p class="item-time" v-if="!item.showTool">
           {{ item.time | formatDate("yyyy-mm-dd") }}
         </p>
         <p class="item-tool" v-else>
-          <i
-            class="el-icon-delete icon"
-            style="font-size:17px"
-            @click.stop="clickDel(item)"
-          />
+          <i class="el-icon-delete icon" style="font-size:17px" @click.stop="clickDel(item)" />
         </p>
       </li>
     </el-scrollbar>
@@ -79,7 +59,7 @@ export default {
       this.selectIndex = index;
       this.$emit("selectItem", item);
     },
-    clickDel(item) {}
+    clickDel(item) { }
   }
 };
 </script>

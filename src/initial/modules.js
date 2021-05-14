@@ -1,5 +1,5 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+// import Vue from 'vue'
+// import VueRouter from 'vue-router'
 
 // 为Vue应用添加页面间的转场特效
 import vueg from 'vueg'
@@ -348,7 +348,7 @@ import ElementResizeDetectorMaker from "element-resize-detector"
 Vue.prototype.$erd = ElementResizeDetectorMaker()
 
 // 传入实例化后的router，和插件的全局配置,`<router-view>`上添加v-transition="false"，可以禁用动画
-Vue.use(vueg, new Router(), defaultConfig.option)
+Vue.use(vueg, new VueRouter(), defaultConfig.option)
 
 // 引入mavonEditor编辑器
 Vue.use(mavonEditor)

@@ -1,12 +1,6 @@
 <template>
   <div class="back-top" ref="backtop">
-    <el-button
-      :type="backTopOptions.type"
-      :icon="backTopOptions.icon"
-      :circle="backTopOptions.isCircle"
-      class="to-top"
-      @click.native="backTop"
-    >
+    <el-button :type="backTopOptions.type" :icon="backTopOptions.icon" :circle="backTopOptions.isCircle" class="to-top" @click.native="backTop">
       <slot />
     </el-button>
   </div>
@@ -98,13 +92,13 @@ export default {
       e.target.scrollTop >= this.backTopOptions.visibility
         ? (this.$setStyle(backtop, "transform", "scale(1)"),
           this.backTopOptions.isMove &&
-            this.$setStyle(box, "transform", `translate(0, 0)`))
+          this.$setStyle(box, "transform", `translate(0, 0)`))
         : (this.$setStyle(backtop, "transform", "scale(0)"),
           this.backTopOptions.isMove &&
-            this.$setStyle(box,
-              "transform",
-              `translate(${parseInt(this.backTopOptions.right)}px, ${parseInt(this.backTopOptions.bottom)}px)`
-            ));
+          this.$setStyle(box,
+            "transform",
+            `translate(${parseInt(this.backTopOptions.right)}px, ${parseInt(this.backTopOptions.bottom)}px)`
+          ));
       this.$setMemorySes("scrollTop", e.target.scrollTop);
     },
     initialListener() {

@@ -1,7 +1,7 @@
 /**
  * 组件之间的消息总线，用作组件间消息传递
  */
-import Vue from 'vue';
+//import Vue from 'vue';
 
 /**
  *  Vue 实例

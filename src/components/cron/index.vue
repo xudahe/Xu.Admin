@@ -50,12 +50,12 @@ export default {
     value: {
       type: String
     },
-    isResult:{
+    isResult: {
       type: Boolean,
       default: true
     }
   },
-  data () {
+  data() {
     return {
       activeName: 's',
       sVal: '',
@@ -67,32 +67,33 @@ export default {
       yearVal: '',
 
       columns: [
-        { title: ' ', width: '80', key: 'name' }, 
-        { title: ' ', key: 'value', 
+        { title: ' ', width: '80', key: 'name' },
+        {
+          title: ' ', key: 'value',
           render: (h, params) => {
             return h("div", [
               h(
                 "span",
                 {
                   style: {
-                    color: params.row.name == "表达式" ? 'red':''
+                    color: params.row.name == "表达式" ? 'red' : ''
                   }
                 },
                 params.row.value
               )
             ]);
-          } 
+          }
         }
       ]
     }
   },
   watch: {
-    'value' (a, b) {
+    'value'(a, b) {
       this.updateVal()
     }
   },
   computed: {
-    tableData () {
+    tableData() {
       return [
         { name: '秒', value: this.sVal },
         { name: '分', value: this.mVal },
@@ -104,8 +105,7 @@ export default {
         { name: '表达式', value: this.value },
       ]
     },
-    value_ () {
-      
+    value_() {
       if (!this.dVal && !this.weekVal) {
         return ''
       }
@@ -123,7 +123,7 @@ export default {
     },
   },
   methods: {
-    updateVal () {
+    updateVal() {
       if (!this.value) {
         return
       }
@@ -137,7 +137,7 @@ export default {
       this.yearVal = arrays[6] == undefined ? '*' : arrays[6]
     },
   },
-  created () {
+  created() {
     this.updateVal()
   },
   components: {
@@ -152,14 +152,13 @@ export default {
   // padding: 0 10px;
   background: #fff;
   border: 1px solid #dcdfe6;
-  box-shadow: 0 2px 4px 0 rgba(0,0,0,.12), 0 0 6px 0 rgba(0,0,0,.04);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12), 0 0 6px 0 rgba(0, 0, 0, 0.04);
 
   .el-checkbox {
     margin-right: 15px !important;
   }
-  .el-checkbox+.el-checkbox {
+  .el-checkbox + .el-checkbox {
     margin-left: 10px;
   }
 }
-
 </style>

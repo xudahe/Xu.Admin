@@ -1,14 +1,14 @@
 <template>
   <div class="carouselPage3" style="width: 100%;height: 100%;">
-    <pumpinfo></pumpinfo>
+    <pump></pump>
   </div>
 </template>
 
 <script>
-import pumpinfo from "../pump/index1";
+import pump from "../pump/index1";
 export default {
   name: "carouselPage3",
-  components: { pumpinfo },
+  components: { pump },
   data() {
     return {};
   },

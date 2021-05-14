@@ -14,7 +14,7 @@
 
 <template>
   <div id="container" style="width: 100%;height: 100%;">
-    <div class="tag" id="tag">
+    <div class="tag" id="tag" @click="tagClick">
       <span style="color:white;font-size: 10px;padding: 5px">楼宇名称：</span>
       <span style="font-size: 11px;font-weight: bold">XXX大厦</span>
       <p style="padding: 5px;margin-top: -3px;">占地面积：25541平方米</p>
@@ -25,7 +25,7 @@
 <script>
 import * as THREE from "three";
 import Stats from "three/examples/jsm/libs/stats.module.js"; //性能检测插件
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"; // 导入轨道模型控制器
 
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
@@ -33,7 +33,7 @@ import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
 import { MTLLoader } from "three/examples/jsm/loaders/MTLLoader.js";
 
 /**
- *
+ *  threejs 加载模型
  * https://blog.csdn.net/qq_36266612/article/details/89851618
  * https://blog.csdn.net/mmiaochong/article/details/111045265
  * https://blog.csdn.net/qq_37540004/article/details/102862348
@@ -78,6 +78,9 @@ export default {
     this.animate();
   },
   methods: {
+    tagClick() {
+      alert(1)
+    },
     /* 场景 */
     initScene() {
       this.scene = new THREE.Scene();
@@ -90,13 +93,13 @@ export default {
         0.1,
         1000
       );
-      camera.position.set(30, 30, 30);
+      camera.position.set(300, 300, 300);
       camera.lookAt(new THREE.Vector3(-30, 20, 30)); //相机看向哪个坐标
     },
     /* 地面 */
     initMesh() {
       let plane = new THREE.Mesh(
-        new THREE.PlaneGeometry(40, 20),
+        new THREE.PlaneGeometry(140, 70),
         new THREE.MeshLambertMaterial({ color: 0xffffff }) //转换对光源有渲染的材质
       );
       plane.rotation.x = -0.5 * Math.PI;
@@ -186,19 +189,19 @@ export default {
           var mesh = gltf.scene;
 
           console.log(gltf, "gltf");
-          that.scene.add(mesh);
+          // that.scene.add(mesh);
 
-          // let group = new THREE.Group();
-          // group.add(mesh);
+          let group = new THREE.Group();
+          group.add(mesh);
 
-          // let box = new THREE.Box3();
-          // box.setFromObject(group);
+          let box = new THREE.Box3();
+          box.setFromObject(group);
 
-          // let wrapper = new THREE.Object3D();
-          // wrapper.add(group);
-          // wrapper.position.set(100, -300, 120); // 根据自己模型的大小设置位置
+          let wrapper = new THREE.Object3D();
+          wrapper.add(group);
+          wrapper.position.set(0, 0, 0); // 根据自己模型的大小设置位置
 
-          // that.scene.add(wrapper); // 将模型加入到场景中 ! important
+          that.scene.add(wrapper); // 将模型加入到场景中 ! important
 
           // 调用动画
           // that.mixer = new THREE.AnimationMixer(mesh);
@@ -295,7 +298,7 @@ export default {
       divRender();
       function divRender() {
         //计算三维坐标对应的屏幕坐标
-        var position = new THREE.Vector3(0, 5, 0);
+        var position = new THREE.Vector3(100, 150, 120);
         var windowPosition = transPosition(position);
         var left = windowPosition.x;
         var top = windowPosition.y;

@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>china-3D</title>
+  <style>
+    html body {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    #provinceInfo {
+      position: absolute;
+      z-index: 2;
+      background: white;
+      padding: 10px;
+      visibility: hidden;
+      width: 100%;
+      height: 100%;
+    }
+
+    .tag {
+      position: absolute;
+      background-color: rgba(251, 74, 74);
+      border-top-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      opacity: 0.5;
+      font-size: 4px;
+      color: aqua;
+      padding: 1px 1px 1px;
+    }
+
+  </style>
+  <script src="./js/three.js"></script>
+  <script src="./js/OrbitControls.js"></script>
+  <script src="./js/d3-array.v1.min.js"></script>
+  <script src="./js/d3-geo.v1.min.js"></script>
+</head>
+
+<body>
+  <div id="provinceInfo"></div>
+  <div class="tag" id="tag1">
+    <span style="color:white;font-size: 10px;padding: 5px">楼宇名称：</span>
+    <span style="font-size: 11px;font-weight: bold">XXX大厦</span>
+    <p style="padding: 5px;margin-top: -3px;">占地面积：25541平方米</p>
+  </div>
+  <div class="tag" id="tag2">
+    <span style="color:white;font-size: 10px;padding: 5px">楼宇名称：</span>
+    <span style="font-size: 11px;font-weight: bold">YYY厦</span>
+    <p style="padding: 5px;margin-top: -3px;">占地面积：15541平方米</p>
+  </div>
+</body>
+<script>
+  var positionss = [
+    [118.764736, 32.04174],
+    [118.748984, 32.038784],
+  ]
+
+  var projection = d3.geoMercator().center([118.769739, 32.076966]).scale(60000).translate([0, 0]);
+
+  class lineMap {
+    constructor(container) {
+      this.container = container ? container : document.body;
+    }
+
+    init() {
+      this.provinceInfo = document.getElementById('provinceInfo');
+      // 渲染器
+      this.renderer = new THREE.WebGLRenderer();
+      this.renderer.setSize(window.innerWidth, window.innerHeight);
+      this.container.appendChild(this.renderer.domElement);
+
+      // 场景
+      this.scene = new THREE.Scene();
+
+      // 相机 透视相机
+      this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+      this.camera.position.set(0, -70, 150);
+      this.camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+      this.setController(); // 设置控制
+
+      this.setLight(); // 设置灯光
+
+      this.animate();
+
+      this.loadMapData();
+
+      this.initAxes()
+
+      this.setResize(); // 绑定浏览器缩放事件
+
+      this.initContent()
+    }
+
+    initAxes() {
+      var helper = new THREE.AxesHelper(1000);
+      this.scene.add(helper);
+    }
+
+    setResize() {
+      let _this = this;
+      window.addEventListener('resize', function () {
+        _this.renderer.setSize(window.innerWidth, window.innerHeight);
+      })
+    }
+
+    loadMapData() {
+      let _this = this;
+
+      // 加载json文件
+      let loader = new THREE.FileLoader();
+      loader.load('./json/jiansu.json', function (data) {
+        let jsonData = JSON.parse(data);
+        _this.initMap(jsonData);
+      });
+    }
+
+    initMap(chinaJson) {
+      // 建一个空对象存放对象
+      this.map = new THREE.Object3D();
+
+      let _this = this;
+
+      // 墨卡托投影转换
+      // const projection = d3.geoMercator().center([118.769739, 32.066966]).scale(60000).translate([0, 0]);
+
+      chinaJson.features.forEach(elem => {
+        // 定一个省份3D对象：用来存放省份对应的模型和轮廓线
+        const province = new THREE.Object3D();
+        // 每个的 坐标 数组
+        const coordinates = elem.geometry.coordinates;
+        // 循环坐标数组
+        coordinates.forEach(multiPolygon => {
+
+          multiPolygon.forEach(polygon => {
+            // 这里的坐标要做2次使用：1次用来构建模型，1次用来构建轮廓线
+            const shape = new THREE.Shape();
+            const lineMaterial = new THREE.LineBasicMaterial({
+              color: 0xffffff
+            });
+            const lineGeometry = new THREE.Geometry();
+
+            for (let i = 0; i < polygon.length; i++) {
+              const [x, y] = projection(polygon[i]);
+              if (i === 0) {
+                shape.moveTo(x, -y);
+              }
+              shape.lineTo(x, -y);
+              lineGeometry.vertices.push(new THREE.Vector3(x, -y, 4.01));
+            }
+
+            const extrudeSettings = {
+              depth: 4,
+              bevelEnabled: false
+            };
+
+            const geometry = new THREE.ExtrudeGeometry(shape, extrudeSettings);
+            const material = new THREE.MeshBasicMaterial({
+              color: '#02A1E2',
+              transparent: true,
+              opacity: 0.6
+            });
+            const material1 = new THREE.MeshBasicMaterial({
+              color: '#3480C4',
+              transparent: true,
+              opacity: 0.5
+            });
+            /* const material = new THREE.MeshBasicMaterial({ color: '#dedede', transparent: false, opacity: 0.6 });
+            const material1 = new THREE.MeshBasicMaterial({ color: '#dedede', transparent: false, opacity: 0.5 }); */
+            const mesh = new THREE.Mesh(geometry, [material, material1]);
+            const line = new THREE.Line(lineGeometry, lineMaterial);
+            province.add(mesh);
+            province.add(line)
+
+          })
+        })
+
+        // 将geo的属性放到省份模型中
+        province.properties = elem.properties;
+        if (elem.properties.contorid) {
+          const [x, y] = projection(elem.properties.contorid);
+          province.properties._centroid = [x, y];
+        }
+
+        _this.map.add(province);
+
+      })
+
+      this.scene.add(this.map);
+    }
+
+    /* 场景中的内容 */
+    initContent() {
+
+      var dirX = new THREE.Vector3(1, 0, 0);
+      var dirY = new THREE.Vector3(0, 1, 0);
+      var dirZ = new THREE.Vector3(0, 0, 1);
+
+      var origin = new THREE.Vector3(0, 0, 0);
+      var length = 10;
+
+      var arrowHelperX = new THREE.ArrowHelper(dirX, origin, length, 0xff0000);
+      var arrowHelperY = new THREE.ArrowHelper(dirY, origin, length, 0x00ff00);
+      var arrowHelperZ = new THREE.ArrowHelper(dirZ, origin, length, 0x0000ff);
+      this.scene.add(arrowHelperX);
+      this.scene.add(arrowHelperY);
+      this.scene.add(arrowHelperZ);
+
+      /* 原点 */
+      var spriteOrigin = this.makeTextSprite(" vector3(0, 0, 0) ", {
+        fontsize: 20,
+        borderColor: {
+          r: 255,
+          g: 0,
+          b: 0,
+          a: 0.4
+        },
+        /* 边框黑色 */
+        backgroundColor: {
+          r: 255,
+          g: 255,
+          b: 255,
+          a: 0.9
+        } /* 背景颜色 */
+      });
+      spriteOrigin.center = new THREE.Vector2(0, 0);
+      this.scene.add(spriteOrigin);
+      spriteOrigin.position.set(0, -5, 4.01);
+
+      var spriteY = this.makeTextSprite("Y", {
+        fontsize: 20,
+        borderColor: {
+          r: 255,
+          g: 0,
+          b: 0,
+          a: 0.4
+        },
+        /* 边框黑色 */
+        backgroundColor: {
+          r: 255,
+          g: 255,
+          b: 255,
+          a: 0.9
+        } /* 背景颜色 */
+      });
+      spriteY.center = new THREE.Vector2(0, 0);
+      this.scene.add(spriteY);
+      spriteY.position.set(0, 6, 0);
+
+      var spriteX = this.makeTextSprite("X", {
+        fontsize: 20,
+        borderColor: {
+          r: 255,
+          g: 0,
+          b: 0,
+          a: 0.4
+        },
+        /* 边框黑色 */
+        backgroundColor: {
+          r: 255,
+          g: 255,
+          b: 255,
+          a: 0.9
+        } /* 背景颜色 */
+      });
+      spriteX.center = new THREE.Vector2(0, 0);
+      this.scene.add(spriteX);
+      spriteX.position.set(10, -5, 0);
+
+      var spriteZ = this.makeTextSprite("Z", {
+        fontsize: 20,
+        borderColor: {
+          r: 255,
+          g: 0,
+          b: 0,
+          a: 0.4
+        },
+        /* 边框黑色 */
+        backgroundColor: {
+          r: 255,
+          g: 255,
+          b: 255,
+          a: 0.9
+        } /* 背景颜色 */
+      });
+      spriteZ.center = new THREE.Vector2(0, 0);
+      this.scene.add(spriteZ);
+      spriteZ.position.set(0, -5, 0);
+    }
+
+    /* 创建字体精灵 */
+    makeTextSprite(message, parameters) {
+
+      if (parameters === undefined) parameters = {};
+
+      var fontface = parameters.hasOwnProperty("fontface") ?
+        parameters["fontface"] : "Arial";
+
+      /* 字体大小 */
+      var fontsize = parameters.hasOwnProperty("fontsize") ?
+        parameters["fontsize"] : 18;
+
+      /* 边框厚度 */
+      var borderThickness = parameters.hasOwnProperty("borderThickness") ?
+        parameters["borderThickness"] : 4;
+
+      /* 边框颜色 */
+      var borderColor = parameters.hasOwnProperty("borderColor") ?
+        parameters["borderColor"] : {
+          r: 0,
+          g: 0,
+          b: 0,
+          a: 1.0
+        };
+
+      /* 背景颜色 */
+      var backgroundColor = parameters.hasOwnProperty("backgroundColor") ?
+        parameters["backgroundColor"] : {
+          r: 255,
+          g: 255,
+          b: 255,
+          a: 1.0
+        };
+
+      /* 创建画布 */
+      var canvas = document.createElement('canvas');
+      var context = canvas.getContext('2d');
+
+      /* 字体加粗 */
+      context.font = "Bold " + fontsize + "px " + fontface;
+
+      /* 获取文字的大小数据，高度取决于文字的大小 */
+      var metrics = context.measureText(message);
+      var textWidth = metrics.width;
+
+      /* 背景颜色 */
+      context.fillStyle = "rgba(" + backgroundColor.r + "," + backgroundColor.g + "," +
+        backgroundColor.b + "," + backgroundColor.a + ")";
+
+      /* 边框的颜色 */
+      context.strokeStyle = "rgba(" + borderColor.r + "," + borderColor.g + "," +
+        borderColor.b + "," + borderColor.a + ")";
+      context.lineWidth = borderThickness;
+
+      /* 绘制圆角矩形 */
+      this.roundRect(context, borderThickness / 2, borderThickness / 2, textWidth + borderThickness, fontsize * 1.4 +
+        borderThickness, 6);
+
+      /* 字体颜色 */
+      context.fillStyle = "rgba(0, 0, 0, 1.0)";
+      context.fillText(message, borderThickness, fontsize + borderThickness);
+
+      /* 画布内容用于纹理贴图 */
+      var texture = new THREE.Texture(canvas);
+      texture.needsUpdate = true;
+
+      var spriteMaterial = new THREE.SpriteMaterial({
+        map: texture
+      });
+      var sprite = new THREE.Sprite(spriteMaterial);
+
+      console.log(sprite.spriteMaterial);
+
+      /* 缩放比例 */
+      sprite.scale.set(10, 5, 0);
+
+      return sprite;
+
+    }
+    /* 绘制圆角矩形 */
+    roundRect(ctx, x, y, w, h, r) {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.lineTo(x + w - r, y);
+      ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+      ctx.lineTo(x + w, y + h - r);
+      ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+      ctx.lineTo(x + r, y + h);
+      ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+      ctx.lineTo(x, y + r);
+      ctx.quadraticCurveTo(x, y, x + r, y);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+    }
+
+    setLight() {
+      let ambientLight = new THREE.AmbientLight(0xffffff); // 环境光
+      this.scene.add(ambientLight);
+    }
+
+    setController() {
+      this.controller = new THREE.OrbitControls(this.camera, this.renderer.domElement);
+      /* this.controller.enablePan = false; // 禁止右键拖拽
+
+      this.controller.enableZoom = true; // false-禁止右键缩放
+      
+      this.controller.maxDistance = 200; // 最大缩放 适用于 PerspectiveCamera
+      this.controller.minDistance = 50; // 最大缩放
+
+      this.controller.enableRotate = true; // false-禁止旋转 */
+
+      /* this.controller.minZoom = 0.5; // 最小缩放 适用于OrthographicCamera
+      this.controller.maxZoom = 2; // 最大缩放 */
+
+    }
+
+    animate() {
+      requestAnimationFrame(this.animate.bind(this));
+
+      this.renderer.render(this.scene, this.camera);
+
+      divRender(this.camera);
+
+      function divRender(camera) {
+
+        for (let i = 0; i < positionss.length; i++) {
+          const [x, y] = projection(positionss[i])
+
+          // 转化为二维坐标
+          const vector = new THREE.Vector3(x, y, 4.01)
+          const position1 = vector.project(camera)
+
+          let container = document.getElementById("provinceInfo");
+          const left = (vector.x + 1) / 2 * container.clientHeight
+          const top = -(vector.y - 1) / 2 * container.clientWidth
+
+          //设置div屏幕位置
+          let div = document.getElementById("tag" + (i + 1));
+          div.style.display = "";
+          div.style.left = left + "px";
+          div.style.top = top + "px";
+        }
+      }
+
+    }
+  }
+
+</script>
+<script>
+  let line = new lineMap();
+  line.init();
+
+</script>
+
+</html>

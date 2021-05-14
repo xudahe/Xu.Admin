@@ -1,11 +1,7 @@
 <!-- 文件编辑组件 -->
 <template>
   <div class="content-edit">
-    <el-input
-      class="file-title"
-      v-model="currentTitle"
-      placeholder="请输入标题"
-    />
+    <el-input class="file-title" v-model="currentTitle" placeholder="请输入标题" />
     <mavon-editor v-bind="$attrs" v-on="$listeners" class="markdown-wrapper" />
   </div>
 </template>
@@ -28,13 +24,13 @@ export default {
   },
   watch: {
     title: {
-      handler: function(newVal, oldVal) {
+      handler: function (newVal, oldVal) {
         this.currentTitle = newVal;
       },
       deep: true
     },
     currentTitle: {
-      handler: function(newVal, oldVal) {
+      handler: function (newVal, oldVal) {
         this.$emit("update:title", newVal);
       },
       deep: true

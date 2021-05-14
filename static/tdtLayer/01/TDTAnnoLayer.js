@@ -15,7 +15,7 @@ function (declare) {
                     "y": 90
                 },
                 "spatialReference": {
-                    "wkid": 4326
+                    "wkid": 4326    // { "wkid": 4326 }是平面坐标，
                 },
                 "lods": [
                     { "level": 2, "resolution": 0.3515625, "scale": 147748796.52937502 },

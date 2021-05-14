@@ -330,9 +330,8 @@ export default {
 
     this.cookies();
     this.setRefreshCode();
-    this.getWeather();
   },
-  created() {
+  async created() {
     var _self = this;
     document.onkeydown = function (e) {
       var key = window.event.keyCode;
@@ -341,6 +340,8 @@ export default {
         _self.loginSubmit();
       }
     };
+
+    await this.getWeather();
   },
   beforeDestroy() {
     document.onkeydown = undefined;

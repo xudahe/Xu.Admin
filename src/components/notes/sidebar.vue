@@ -10,43 +10,18 @@
       </el-dropdown>
     </div>
 
-    <el-scrollbar
-      class="scrollbar-list"
-      wrap-class="scrollbar-wrapper"
-      :noresize="false"
-    >
-      <el-tree
-        ref="tree"
-        :data="fileData"
-        :props="defaultProps"
-        :default-expand-all="true"
-        :filter-node-method="filterNode"
-        @node-click="handleNodeClick"
-        @node-contextmenu="rightClick"
-        style="background-color: #f5f5f5;"
-        highlight-current
-        node-key="id"
-      >
+    <el-scrollbar class="scrollbar-list" wrap-class="scrollbar-wrapper" :noresize="false">
+      <el-tree ref="tree" :data="fileData" :props="defaultProps" :default-expand-all="true" :filter-node-method="filterNode" @node-click="handleNodeClick" @node-contextmenu="rightClick" style="background-color: #f5f5f5;" highlight-current node-key="id">
         <div class="custom-tree-node" slot-scope="{ node, data }">
           <!-- 编辑状态 -->
           <template v-if="node.isEdit">
-            <el-input
-              v-model="data.fileName"
-              autofocus
-              size="mini"
-              :ref="'slotTreeInput' + node.id"
-              @keyup.enter.native="handleInput(node, data)"
-              @blur.stop="handleInput(node, data)"
-            >
+            <el-input v-model="data.fileName" autofocus size="mini" :ref="'slotTreeInput' + node.id" @keyup.enter.native="handleInput(node, data)" @blur.stop="handleInput(node, data)">
             </el-input>
           </template>
           <!-- 非编辑状态 -->
           <template v-else>
             <span class="tree-lable" :title="node.label">
-              <img
-                src="../../../static/img/file/folder.png"
-                style="width:0.15rem;margin-right: 0.05rem;"
-              />
+              <img src="../../../static/img/file/folder.png" style="width:0.15rem;margin-right: 0.05rem;" />
               {{ node.label }}
             </span>
           </template>
@@ -55,12 +30,7 @@
     </el-scrollbar>
     <!-- 鼠标右键产生的选项 -->
     <div v-show="menuVisible" id="menu" class="rightMenu">
-      <el-menu
-        class="el-menu-vertical rightClickMenu"
-        @select="handleRightSelect"
-        text-color="#303133"
-        active-text-color="#303133"
-      >
+      <el-menu class="el-menu-vertical rightClickMenu" @select="handleRightSelect" text-color="#303133" active-text-color="#303133">
         <el-menu-item index="1" class="menuItem">
           <i class="el-icon-folder-add" style="font-size: 15px;"></i>
           <span slot="title">新建文件夹</span>
@@ -378,8 +348,8 @@ export default {
         node.childNodes.length > 0
           ? node.childNodes
           : _self.fileData.filter(
-              d => d.Level == (data.isDirectory ? node.level - 1 : node.level)
-            );
+            d => d.Level == (data.isDirectory ? node.level - 1 : node.level)
+          );
       let flag = _self.checkLoadlRepeat(_childData, data.fileName);
       if (!flag) {
         _self.$set(node, "isEdit", true);
@@ -395,7 +365,7 @@ export default {
             oldFileName: _self.oldFileName,
             newFileName: data.fileName
           },
-          function(cndata) {
+          function (cndata) {
             if (cndata.success) {
               _self.$successMsg("重命名成功！");
             } else {
@@ -449,8 +419,8 @@ export default {
         node.childNodes.length > 0
           ? node.childNodes
           : _self.fileData.filter(
-              d => d.Level == (data.isDirectory ? node.level - 1 : node.level)
-            );
+            d => d.Level == (data.isDirectory ? node.level - 1 : node.level)
+          );
       _self.checkLoadlRepeat(_childData);
 
       // 参数修改
@@ -517,7 +487,7 @@ export default {
           .then(() => {
             DeletOprate();
           })
-          .catch(() => {});
+          .catch(() => { });
       };
 
       // 判断是否新增： 新增节点直接删除，已存在的节点要二次确认

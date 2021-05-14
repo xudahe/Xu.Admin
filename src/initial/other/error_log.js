@@ -1,4 +1,4 @@
-import Vue from 'vue'
+//import Vue from 'vue'
 import store from "../../vuex/store"
 
 Vue.config.errorHandler = function (err, vm, info) {

@@ -5,24 +5,10 @@
         <sidebar />
       </el-col>
       <el-col :span="5" style="height: 100%;border-right: 1px solid #eaeefb;">
-        <file-list
-          :fileList="fileList"
-          @selectItem="selectItem"
-          @createFile="createFile"
-        />
+        <file-list :fileList="fileList" @selectItem="selectItem" @createFile="createFile" />
       </el-col>
       <el-col :span="14" style="height: 100%;">
-        <file-edit
-          ref="md"
-          v-model="fileItem.content"
-          :title.sync="fileItem.title"
-          :boxShadow="false"
-          :subfield="false"
-          :shortCut="false"
-          @change="onSubmit"
-          @imgAdd="imgAdd"
-          @imgDel="imgDel"
-        />
+        <file-edit ref="md" v-model="fileItem.content" :title.sync="fileItem.title" :boxShadow="false" :subfield="false" :shortCut="false" @change="onSubmit" @imgAdd="imgAdd" @imgDel="imgDel" />
       </el-col>
     </el-row>
   </div>
@@ -170,7 +156,7 @@ export default {
             this.$refs.md.$img2Url(pos, url); //$vm.$img2Url(pos, url);
           }
         })
-        .catch(err => {});
+        .catch(err => { });
     },
     // 删除图片
     imgDel(pos) {

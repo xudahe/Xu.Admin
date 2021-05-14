@@ -1,15 +1,6 @@
 <template>
   <div class="pagination">
-    <el-pagination
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
-      :page-sizes.sync="defaultPageSizes"
-      :pager-count="5"
-      :small="$defaultConfig.paginationSize"
-      :layout="$defaultConfig.paginationLayout"
-      :current-page.sync="currentPage"
-      :total="total"
-    ></el-pagination>
+    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :page-sizes.sync="defaultPageSizes" :pager-count="5" :small="$defaultConfig.paginationSize" :layout="$defaultConfig.paginationLayout" :current-page.sync="currentPage" :total="total"></el-pagination>
   </div>
 </template>
 <script>
@@ -26,7 +17,7 @@ export default {
     },
     getData: {
       type: Function,
-      default: () => {}
+      default: () => { }
     },
     nowPage: {
       type: Number,
@@ -67,16 +58,16 @@ export default {
     // 跳转到第一页
     toFirstPage() {
       this.currentPage = 1
-      this.$emit('handleSizeChange', {'currentPage':this.currentPage,'pageSize':this.pageSize});
+      this.$emit('handleSizeChange', { 'currentPage': this.currentPage, 'pageSize': this.pageSize });
     },
     handleSizeChange(size) {
       this.currentPage = 1
       this.pageSize = size
-      this.$emit('handleSizeChange', {'currentPage':this.currentPage,'pageSize':this.pageSize});
+      this.$emit('handleSizeChange', { 'currentPage': this.currentPage, 'pageSize': this.pageSize });
     },
     handleCurrentChange(page) {
       this.currentPage = page
-      this.$emit('handleCurrentChange', {'currentPage':this.currentPage,'pageSize':this.pageSize});
+      this.$emit('handleCurrentChange', { 'currentPage': this.currentPage, 'pageSize': this.pageSize });
     }
   }
 };
@@ -87,6 +78,6 @@ export default {
   position: relative;
   text-align: right;
   margin-top: 5px;
-}  
+}
 </style>
 

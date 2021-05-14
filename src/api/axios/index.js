@@ -20,7 +20,7 @@
 
 import axios from 'axios' //ajax请求
 import qs from 'qs'
-import Vue from 'vue'
+//import Vue from 'vue'
 
 import store from "@/vuex/store"
 import router from '../../router/index'

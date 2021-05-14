@@ -1,6 +1,5 @@
 <template>
   <div class="picture">
-
   </div>
 </template>
 
@@ -21,4 +20,8 @@ export default {
 </script>
 
 <style scoped>
+.picture {
+  height: 100%;
+  width: 100%;
+}
 </style>

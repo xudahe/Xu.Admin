@@ -273,6 +273,7 @@
   </div>
 </template>
 <script>
+
 export default {
   name: "pumpList",
   props: {
@@ -382,7 +383,7 @@ export default {
       this.selectdatachange(this.selectdata);
     },
     expandlist(indx, item, indev) {
-
+      this.$emit("pumpSelect", item);
     },
     initlistdata(data) {
       if (data.length <= 0) return;

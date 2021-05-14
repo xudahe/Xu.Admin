@@ -24,24 +24,6 @@ export default {
     //   document.getElementById("app").style.height = window.innerHeight + "px";
     // });
 
-    if (window.AMap && window.AMapUI) {
-      let geolocation = location.initMap("map-container"); //定位
-      AMap.event.addListener(geolocation, "complete", function(result) {
-        console.log("定位成功信息：", result);
-      });
-      AMap.event.addListener(geolocation, "error", function(result) {
-        console.log("定位失败错误：", result);
-
-        AMap.plugin("AMap.CitySearch", function() {
-          var citySearch = new AMap.CitySearch();
-          citySearch.getLocalCity(function(status, result) {
-            if (status === "complete" && result.info === "OK") {
-              console.log("通过ip获取当前城市：", result);
-            }
-          });
-        });
-      });
-    }
 
     function checkIE() {
       return (
@@ -64,7 +46,11 @@ export default {
       );
     }
   },
-
+  async created() {
+    if (window.AMap && window.AMapUI) {
+      await location.initMap("map-container"); //获取当前位置
+    }
+  },
   //生命周期函数--实例销毁之前调用
   beforeDestroy() {
     /**

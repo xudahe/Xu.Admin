@@ -1,7 +1,7 @@
 <template>
   <el-dialog :visible.sync="dialogVisible" width="95%" append-to-body>
     <div class="error-box-title" slot="title">
-      <span>错误日志</span> 
+      <span>错误日志</span>
       <el-button @click.native="remove" type="danger" size="mini" icon="el-icon-delete">清空</el-button>
     </div>
     <el-row>
@@ -29,10 +29,7 @@
             </template>
           </el-table-column>
           <div class="empty" slot="empty">
-            <svg-icon
-              class="not-interesting"
-              icon-class="不感兴趣_44"
-            />
+            <svg-icon class="not-interesting" icon-class="不感兴趣_44" />
             <div class="empty-content">
               May heaven never have bug
             </div>
@@ -61,7 +58,7 @@ export default {
     ...mapMutations({
       removeAllErrorLog: 'REMOVE_ALL_ERROR_LOG'
     }),
-    remove(){
+    remove() {
       this.removeAllErrorLog()
       this.dialogVisible = false
     },

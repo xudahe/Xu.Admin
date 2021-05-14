@@ -15,7 +15,7 @@
         </template>
       </Row>
     </div>
-    <div class="mapContent" style="width:100%;height:calc(100% - 0rem);position: relative;">
+    <div class="mapContent" style="width:100%;height:calc(100% - 0.05rem);position: relative;">
       <arcgisMap></arcgisMap>
     </div>
   </div>

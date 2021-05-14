@@ -1,40 +1,24 @@
 <template>
-<section>
-  <el-table ref="table" 
-    element-loading-text="Loading" 
-    :data="dataList" 
-    :height="tableHeight"
-    border fit highlight-current-row 
-    tooltip-effect="dark" 
-    style="width:100%;margin-top: 3px;"
-    :header-cell-style="{background:'#f2f2f2',color:'#606266'}"
-    @row-click="handleRowClick"  
-    @sort-change="handleSortChange" 
-    @selection-change="handleSelectionChange">
+  <section>
+    <el-table ref="table" element-loading-text="Loading" :data="dataList" :height="tableHeight" border fit highlight-current-row tooltip-effect="dark" style="width:100%;margin-top: 3px;" :header-cell-style="{background:'#f2f2f2',color:'#606266'}" @row-click="handleRowClick" @sort-change="handleSortChange" @selection-change="handleSelectionChange">
       <template v-for="(item,index) in tableLabel">
         <el-table-column v-if="item.type" :type="item.type" :key="index"></el-table-column>
-        <el-table-column v-else
-          :width="item.width ? item.width : ''" 
-          :key="index" 
-          :align="item.align ? item.align : 'center'" 
-          :label="item.label"
-          :prop="item.param" 
-          :sortable="item.sortable ? true : false">
-            <template slot-scope="scope">
-    
-              <template  v-if="item.render">
-                <ex-slot :render="item.render" :row="scope.row" :index="scope.$index" :column="item" ></ex-slot>
+        <el-table-column v-else :width="item.width ? item.width : ''" :key="index" :align="item.align ? item.align : 'center'" :label="item.label" :prop="item.param" :sortable="item.sortable ? true : false">
+          <template slot-scope="scope">
+
+            <template v-if="item.render">
+              <ex-slot :render="item.render" :row="scope.row" :index="scope.$index" :column="item"></ex-slot>
+            </template>
+            <template v-else>
+              <template v-if="item.formatter">
+                <span v-html="item.formatter(scope.row)"></span>
               </template>
               <template v-else>
-                  <template v-if="item.formatter">
-                    <span v-html="item.formatter(scope.row)"></span>
-                  </template>
-                  <template v-else>
-                    <span>{{scope.row[item.param]}}</span>
-                  </template>
+                <span>{{scope.row[item.param]}}</span>
               </template>
-
             </template>
+
+          </template>
         </el-table-column>
       </template>
       <el-table-column v-if="tableOption.label" :width="tableOption.width" :label="tableOption.label" align="center" class-name="small-padding fixed-width">
@@ -45,24 +29,15 @@
             </el-button> -->
             <el-button v-if="item.type!='danger'" :key="index" :type="item.type" :icon="item.icon" @click.native="handleButton(item.methods,scope.row,index)" size="mini">
             </el-button>
-            <el-popconfirm v-if="item.type=='danger'"
-              :key="index"
-              confirm-button-text='确定'
-              cancel-button-text='取消'
-              icon="el-icon-error"
-              icon-color="red"
-              title="这条数据确定删除吗？"
-              @onConfirm="handleButton(item.methods,scope.row,index)"
-              @onCancel="()=>{}"
-            >
+            <el-popconfirm v-if="item.type=='danger'" :key="index" confirm-button-text='确定' cancel-button-text='取消' icon="el-icon-error" icon-color="red" title="这条数据确定删除吗？" @onConfirm="handleButton(item.methods,scope.row,index)" @onCancel="()=>{}">
               <el-button slot="reference" :type="item.type" :icon="item.icon" style="margin-right:5px;" size="mini"></el-button>
             </el-popconfirm>
           </template>
         </template>
       </el-table-column>
-  </el-table>
-  <pagination ref="pagination" :now-page.sync="nowPage" :now-size.sync="nowSize" :total="tableData.length"  @handleSizeChange="handleSizeChange" @handleCurrentChange="handleCurrentChange"/>
-</section>
+    </el-table>
+    <pagination ref="pagination" :now-page.sync="nowPage" :now-size.sync="nowSize" :total="tableData.length" @handleSizeChange="handleSizeChange" @handleCurrentChange="handleCurrentChange" />
+  </section>
 </template>
 
 <script>
@@ -76,46 +51,46 @@
 var exSlot = {
   functional: true,
   props: {
-      row: Object,
-      render: Function,
-      index: Number,
-      column: {
-          type: Object,
-          default: null
-      }
+    row: Object,
+    render: Function,
+    index: Number,
+    column: {
+      type: Object,
+      default: null
+    }
   },
   render: (h, data) => {
     const params = {
-        row: data.props.row,
-        index: data.props.index
+      row: data.props.row,
+      index: data.props.index
     }
     if (data.props.column) params.column = data.props.column
-      return data.props.render(h, params)
+    return data.props.render(h, params)
   }
 }
 
 import pagination from "../pagination/index"
 export default {
   name: "e-table",
-  components: { 
+  components: {
     exSlot,
-    pagination 
+    pagination
   },
-  props:{
-    tableData:{
-      type:Array,
+  props: {
+    tableData: {
+      type: Array,
       default: () => {
         return []
       }
     },
-    tableLabel:{
-      type:Array,
+    tableLabel: {
+      type: Array,
       default: () => {
         return []
       }
     },
-    tableOption:{
-      type:Object,
+    tableOption: {
+      type: Object,
       default: () => {
         return {}
       }
@@ -137,47 +112,47 @@ export default {
       tableHeight: 310,
     }
   },
-  computed:{
-      dataList(){
-        return this.tableData.slice((this.currentPage - 1) * this.pageSize, this.currentPage * this.pageSize);
-      },
+  computed: {
+    dataList() {
+      return this.tableData.slice((this.currentPage - 1) * this.pageSize, this.currentPage * this.pageSize);
+    },
   },
   methods: {
-    handleButton(methods,row,index){  //监听按钮事件
-      this.$emit('handleButton',{'methods':methods,'row':row,'index':index})
+    handleButton(methods, row, index) {  //监听按钮事件
+      this.$emit('handleButton', { 'methods': methods, 'row': row, 'index': index })
     },
-    handleSortChange(val){  //当表格的排序条件发生变化的时候会触发该事件
-      this.$emit('handleSortChange',val)
+    handleSortChange(val) {  //当表格的排序条件发生变化的时候会触发该事件
+      this.$emit('handleSortChange', val)
     },
-    handleRowClick(val){  //当某一行被点击时会触发该事件
-      this.$emit('handleRowClick',val)
+    handleRowClick(val) {  //当某一行被点击时会触发该事件
+      this.$emit('handleRowClick', val)
     },
-    handleSelectionChange(val){ //当选择项发生变化时会触发该事件
-      this.$emit('handleSelectionChange',val)
+    handleSelectionChange(val) { //当选择项发生变化时会触发该事件
+      this.$emit('handleSelectionChange', val)
     },
 
-    initialPage(currentPage,pageSize) { //分页初始化
+    initialPage(currentPage, pageSize) { //分页初始化
       this.currentPage = currentPage;
       this.pageSize = pageSize;
     },
     handleSizeChange(val) {
-      this.initialPage(val.currentPage,val.pageSize);
+      this.initialPage(val.currentPage, val.pageSize);
     },
     handleCurrentChange(val) {
-      this.initialPage(val.currentPage,val.pageSize);
+      this.initialPage(val.currentPage, val.pageSize);
     },
-    initialTable(){
+    initialTable() {
       let docm1 = document.getElementsByClassName("el-card")
-      this.tableHeight = docm1 != undefined ? docm1[docm1.length-1].offsetHeight - 90: _this.tableHeight;
+      this.tableHeight = docm1 != undefined ? docm1[docm1.length - 1].offsetHeight - 90 : _this.tableHeight;
     }
   },
-  created(){
+  created() {
     let _this = this;
-    
+
     setTimeout(() => {
       _this.initialTable();
     }, 100);
-    
+
     window.addEventListener("resize", this.initialTable);
   },
   beforeDestroy() {

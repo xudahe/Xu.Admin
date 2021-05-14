@@ -1,4 +1,4 @@
-import Vue from 'vue'
+//import Vue from 'vue'
 // 引入element-ui框架
 import ElementUI from 'element-ui'
 

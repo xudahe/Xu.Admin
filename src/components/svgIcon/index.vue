@@ -1,6 +1,6 @@
 <template>
   <svg :class="svgClass" aria-hidden="true" v-on="$listeners">
-    <use :xlink:href="iconName"/>
+    <use :xlink:href="iconName" />
   </svg>
 </template>
 
@@ -29,10 +29,10 @@ export default {
       }
     },
     styleExternalIcon() {
-        return {
-            mask: `url(${this.iconClass}) no-repeat 50% 50%`,
-            '-webkit-mask': `url(${this.iconClass}) no-repeat 50% 50%`
-        }
+      return {
+        mask: `url(${this.iconClass}) no-repeat 50% 50%`,
+        '-webkit-mask': `url(${this.iconClass}) no-repeat 50% 50%`
+      }
     }
   }
 }
@@ -48,8 +48,8 @@ export default {
   overflow: hidden;
 }
 .svg-external-icon {
-    background-color: currentColor;
-    mask-size: cover!important;
-    display: inline-block;
+  background-color: currentColor;
+  mask-size: cover !important;
+  display: inline-block;
 }
 </style>

@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import Vue from "vue";
+//import Vue from "vue";
 import header1 from "../components/header.vue";
 import NavConfig from "../router/nav.configCompent.yml";
 

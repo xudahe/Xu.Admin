@@ -2566,8 +2566,9 @@ MapControl.showLine2 = function () {
   var line = new esri.geometry.Polyline({
     "paths": [paths]
   });
+  line.spatialReference.wkid = 4326;
   var bglineSymbol = new esri.symbol.SimpleLineSymbol("solid", new dojo.Color([17, 91, 122, 0.4]), 9);
-
+  
   var lineGriphic = new esri.Graphic(line, bglineSymbol);
   MapControl.graphicLayers['gralyr4'].add(lineGriphic);
 
@@ -2615,7 +2616,7 @@ MapControl.Pause = function (value) {
 }
 //轨迹开始
 MapControl.Start2 = function () {
-  MapControl.graphicLayers['gralyr1'].clear();
+  MapControl.graphicLayers['gralyr1'].clear(); //清除轨迹tip框
   MapControl.Pause(false);
   let map = MapControl.map[MapControl.mapId];
 
@@ -2707,6 +2708,7 @@ MapControl.play2 = function (tmpPoints, jindex, numdif) {
         ]
       ]
     });
+    line.spatialReference.wkid = 4326;
     var lineGriphic = new esri.Graphic(line, MapControl.lineSymbol);
     map.getLayer("lineLayer").add(lineGriphic);
 
@@ -2771,6 +2773,52 @@ MapControl.interpolation2 = function (graA, graB, speed) {
   tmp.push(graB); //防止插值出来的最后一个点到不了B点
   return tmp;
 }
+
+
+MapControl.addGPSTextSymbol = function (infoTem, point) {
+  esriLoader.loadModules(["esri/symbols/SimpleLineSymbol",
+    "esri/symbols/SimpleMarkerSymbol",
+    "esri/symbols/SimpleFillSymbol",
+    "esri/symbols/Font",
+    "esri/symbols/TextSymbol",
+    "esri/geometry/Point",
+    "esri/graphic",
+    "dojo/_base/Color",
+    "dojo/dom",
+    "dojo/on",
+    "dojo/domReady!"
+  ]).then(([SimpleLineSymbol, SimpleMarkerSymbol, SimpleFillSymbol, Font, TextSymbol, Point, Graphic, Color, dom, on]) => {
+    MapControl.graphicLayers['gralyr1'].clear();
+    var fontsize = 14;
+    var radius = 6;
+    infoTem = infoTem + "";
+
+    var bglineSymbol = new esri.symbol.SimpleLineSymbol("solid", new dojo.Color([17, 91, 122, 1]), 1);
+    var width = (MapControl.chkstrlen(infoTem)) * 0.6 * (fontsize + 1);
+    var height = fontsize * 1.6;
+
+    //设置背景框的大小
+    var path = "M0" + " " + radius + "L0" + " " + (height - radius) + "Q0" + " " + height + " " + radius + " " + height + "L" + (width - radius) + " " + height + "Q" + width + " " + height + " " + width + " " + (height - radius) + "L" + width + " " + radius + "Q" + width + " " + "0" + " " + (width - radius) + " " + "0L" + radius + " " + "0Q0" + " " + "0" + " " + "0" + " " + radius;
+    var bgSymbol = new esri.symbol.SimpleMarkerSymbol();
+    bgSymbol.setPath(path);
+    bgSymbol.setColor(new dojo.Color([17, 91, 122, 0.7]));
+    bgSymbol.setOutline(bglineSymbol);
+    var size = Math.max(height, width);
+    bgSymbol.setSize(size);
+    bgSymbol.xoffset = 100;
+    bgSymbol.yoffset = 0;
+
+    var bgGraphic = new Graphic(point, bgSymbol);
+    MapControl.graphicLayers['gralyr1'].add(bgGraphic);
+
+    var font = new Font(fontsize + "px", Font.STYLE_NORMAL, Font.VARIANT_NORMAL, Font.WEIGHT_LIGHTER);
+    var textSymbol = new esri.symbol.TextSymbol(infoTem, font.setWeight(esri.symbol.Font.WEIGHT_BOLD), new dojo.Color([122, 122, 122, 1]));
+    textSymbol.setOffset(100, -5);
+    textSymbol.setColor(new dojo.Color([255, 255, 255, 0.7]));
+    var tempGra = new esri.Graphic(point, textSymbol, null, null);
+    MapControl.graphicLayers['gralyr1'].add(tempGra);
+  });
+};
 
 
 MapControl.Angle = function (startx, starty, endx, endy) {

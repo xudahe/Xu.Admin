@@ -1,25 +1,25 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-Vue.use(Router)
+// import Vue from 'vue'
+// import VueRouter from 'vue-router'
+// Vue.use(VueRouter)
 
 import Login from "@/views/login/index"
 import Layout from "@/views/layout/index"
 
 //大屏系统路由
-import bighome from "@/components/bigScreen/view/home"
-import homePage from "@/components/bigScreen/view/homePage"
-import application from "@/components/bigScreen/view/application"
-import platform from "@/components/bigScreen/view/platform"
+const
+  bighome = () => import("@/components/bigScreen/view/home"),
+  homePage = () => import("@/components/bigScreen/view/homePage"),
+  application = () => import("@/components/bigScreen/view/application"),
+  platform = () => import("@/components/bigScreen/view/platform");
 
 //路由懒加载：减少首次加载时从服务器请求的组件，当路由被访问时，再从服务器请求对应组件。
-
 //使用动态的import()语法,不是必须加载的组件使用懒加载
 const
   Home = () => import('@/views/home/index'),
   personal = () => import('@/views/other/personal/index'),
   Error_500 = () => import('@/views/other/error/500'),
   Error_403 = () => import('@/views/other/error/403'),
-  Error_404 = () => import('@/views/other/error/404')
+  Error_404 = () => import('@/views/other/error/404');
 
 //异步挂载的路由
 const operation_routes = getRoutes(require.context('@/views/operation', true, /\.vue$/));
@@ -160,21 +160,44 @@ let defaultRouter = [{
   }
 ]
 
-// 解决ElementUI导航栏中的vue-router在3.0版本以上重复点菜单报错问题
-const originalPush = Router.prototype.push
-Router.prototype.push = function push(location) {
+/**
+ * 重写路由的push和replace方法
+ * 解决，相同路由跳转时，报错
+ * 添加，相同路由跳转时，触发watch (针对el-menu，仅限string方式传参，形如"view?id=5")
+ */
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+  // 这个if语句在跳转相同路径的时候，在路径末尾添加新参数（一些随机数字）
+  // 用来触发watch
+  if (typeof (location) == "string") {
+    var Separator = "&";
+    if (location.indexOf('?') == -1) {
+      Separator = '?';
+    }
+    location = location + Separator + "random=" + Math.random();
+  }
+  // 这个语句用来解决报错
+  // 调用原来的push函数，并捕获异常
   return originalPush.call(this, location).catch(err => err)
 }
 
-const originalReplace = Router.prototype.replace;
-Router.prototype.replace = function replace(location) {
-  return originalReplace.call(this, location).catch(err => err);
+const originalReplace = VueRouter.prototype.replace;
+VueRouter.prototype.replace = function replace(location) {
+  if (typeof (location) == "string") {
+    var Separator = "&";
+    if (location.indexOf('?') == -1) {
+      Separator = '?';
+    }
+    location = location + Separator + "random=" + Math.random();
+  }
+  return originalReplace.call(this, location).catch(err => err)
 };
 
-export default new Router({
+export default new VueRouter({
   // mode: 'history',
   routes: defaultRouter
-})
+});
+
 export {
   defaultRouter,
   addRouter

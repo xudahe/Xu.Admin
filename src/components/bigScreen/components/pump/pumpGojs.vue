@@ -566,6 +566,13 @@ export default {
       var procTaskName = node.data.text;
 
       console.log(procTaskName + " key:" + procTaskId + " Ioc" + procTaskloc);
+      if (this.pumpdata.length > 0) {
+					for (var i = 0; i < this.pumpdata.length; i++) {
+						if (this.pumpdata[i].pumpspaceid == procTaskId) {
+						 return	this.$emit("pumpSelect", this.pumpdata[i]);
+						}
+					}
+				}
     },
     handlerDC(e, obj) {
       //双击事件

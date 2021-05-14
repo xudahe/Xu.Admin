@@ -25,7 +25,7 @@
     background-image: -webkit-linear-gradient(top, #fff 0, #eee 100%);
     height: 35px;
   }
-  
+
   .dialog_btn {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -35,7 +35,7 @@
     -ms-flex-direction: row;
     flex-direction: row;
   }
-  
+
   .dialog_title font {
     font-size: 14px;
     color: #333;
@@ -48,7 +48,7 @@
     -ms-flex-align: center;
     align-items: center;
   }
-  
+
   .gx-scrollbar {
     background: #ffffff;
   }
@@ -69,7 +69,7 @@
     border-radius: 10px;
     background: #ededed;
   }
-  
+
   .diaglogpanel {
     position: absolute;
     top: 35px;
@@ -78,7 +78,7 @@
     left: 0px;
     overflow: auto;
     border-radius: 5px;
-    background-color: rgba(255,255,255,0.8);
+    background-color: rgba(255, 255, 255, 0.8);
     /* opacity:0.5; */
   }
 }
@@ -125,7 +125,7 @@ export default {
       dragPanel.style.top = "100px";
       dragPanel.style.width = "60%";
       dragPanel.style.height = "400px";
-     
+
       this.$store.state.drag_com = "";
       this.$store.state.drag_ref = "";
     },
@@ -133,7 +133,7 @@ export default {
       var dragPanel = document.getElementById("dragPanel");
       let panelname = this.$store.state.drag_com;
       dragPanel.style.top = "100px";
-      
+
       if (panelname == "handsontable") {
         if (dragPanel.style.height == "35px") {
           dragPanel.style.height = "70%";
@@ -154,7 +154,7 @@ export default {
         }
       }
     },
-    retresize(){
+    retresize() {
       var dragPanel = document.getElementById("dragPanel");
       dragPanel.style.top = "100px";
       dragPanel.style.height = "70%";

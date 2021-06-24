@@ -7,11 +7,13 @@
   .box {
     -moz-page-break-inside: avoid;
     -webkit-column-break-inside: avoid;
-    padding: 1em;
-    margin: 1em 0.5em;
+    // padding: 1em;
+    margin: 0.5em;
     break-inside: avoid;
     border: none;
     background-color: #1042e3b3;
+    width: calc(~"20% - 0.5em * 2");
+	  display: inline-block;
   }
 
   .ivu-card-head {
@@ -37,13 +39,13 @@
   }
 
   .box-wrapper {
-    -moz-column-count: 4;
-    -webkit-column-count: 4;
-    -moz-column-gap: 1em;
-    -webkit-column-gap: 1em;
+    // -moz-column-count: 4;
+    // -webkit-column-count: 4;
+    // -moz-column-gap: 1em;
+    // -webkit-column-gap: 1em;
 
-    column-count: 4;
-    column-gap: 1em;
+    // column-count: 4;
+    // column-gap: 1em;
     padding: 0.1rem 0.15rem;
   }
 
@@ -240,9 +242,9 @@
         <Card @click.native="expandlist(key,item)" :dis-hover="true" :class="boxclassfun(item,index,key)" v-for="(item,index,key) in lygpupmlist.showlist" :key="index" :style="firstbox(item,index,key)">
           <div slot="title" style="width: 100%;height: 100%">
             <div class="titlelist" style=" width:65%;display: inline-block;">
-              <div style="height: 100%;display: inline-block;width: 17%;float: left;"><img style="margin-right: 0.2rem;width:100%;" :src=" 'static/img/pump/'+(item.category+item.status)+'.png' " /></div>
+              <div style="height: 100%;display: inline-block;width: 17%;float: left;"><img style="margin-right: 0.2rem;width:100%;margin-top:0.05rem;" :src=" 'static/img/pump/'+(item.category+item.status)+'.png' " /></div>
               <div style="height: 100%;display: inline-block;width: calc(100% - (17% + 2%));">
-                <span style="font-size: 0.14rem;font-weight: 700;display: block;width: 100%;margin-bottom: 0.1rem;">{{item.pumpname}}</span>
+                <span style="font-size: 0.14rem;font-weight: 700;display: block;width: 100%;margin-bottom: 0.05rem;overflow:hidden; text-overflow:ellipsis; white-space: nowrap;" :title="item.pumpname">{{item.pumpname}}</span>
                 <span style="font-size: 0.12rem;font-weight: inherit;display: block;">{{item.timestamp | capitalize}}</span>
               </div>
             </div>
@@ -317,6 +319,7 @@ export default {
   },
   methods: {
     selectdatachange() {
+      debugger
       var olddata = this.tageindex == '全部' ? this.lygpupmlist.alllist : this.lygpupmlist[this.tageindex == '正常' ? '在线' : this.tageindex];
       var list = JSON.parse(JSON.stringify(olddata));
       list = list.filter(item => {
@@ -355,7 +358,6 @@ export default {
       } else {
         return 'static/img/pump/' + srcname + '关.png'
       }
-      return ''
     },
     chagetag(indexstatic) {
       this.tageindex = indexstatic;
@@ -380,12 +382,13 @@ export default {
           }
         }
       }
-      this.selectdatachange(this.selectdata);
+      this.selectdatachange();
     },
     expandlist(indx, item, indev) {
       this.$emit("pumpSelect", item);
     },
     initlistdata(data) {
+      debugger
       if (data.length <= 0) return;
       var _this = this;
       let source = data;
@@ -411,9 +414,7 @@ export default {
         }
       }
 
-      if (_this.tageindex == '全部') _this.lygpupmlist.showlist = source;
-      else _this.lygpupmlist.showlist = _this.lygpupmlist[_this.tageindex == '正常' ? '在线' : _this.tageindex];
-      this.selectdatachange(this.selectdata);
+      this.selectdatachange();
     },
   },
 }

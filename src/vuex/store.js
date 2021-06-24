@@ -15,7 +15,7 @@ const store = new Vuex.Store({
     tokenExpire: null,
 
     //缓存组件，该值是组件中定义的name值，include 名称匹配的组件会被缓存，exclude 名称匹配的组件不被缓存。
-    cachedViews: ["t-gdmap", "t-arcgisMap", "t-tinymce", "t-echartMap"],
+    cachedViews: ["t-gdmap", "t-arcgisMap", "t-tinymce", "t-echartMap", "paper"],
 
     drag_com: "",
     drag_ref: "",

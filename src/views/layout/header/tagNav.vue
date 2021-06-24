@@ -1,17 +1,9 @@
 <template>
   <div class="tags-nav">
-    <div
-      class="btn-con left-btn"
-      v-if="arrowVisible"
-      @click="handleScroll(140)"
-    >
+    <div  class="btn-con left-btn" v-if="arrowVisible" @click="handleScroll(140)">
       <i class="el-icon-arrow-left" />
     </div>
-    <div
-      class="btn-con right-btn"
-      v-if="arrowVisible"
-      @click="handleScroll(-140)"
-    >
+    <div class="btn-con right-btn" v-if="arrowVisible" @click="handleScroll(-140)">
       <i class="el-icon-arrow-right" />
     </div>
     <div
@@ -19,16 +11,8 @@
       ref="scrollOuter"
       @DOMMouseScroll="handlescroll"
       @mousewheel="handlescroll"
-      :style="{
-        left: arrowVisible ? '20px' : '0',
-        right: arrowVisible ? '20px' : '0'
-      }"
-    >
-      <div
-        ref="scrollBody"
-        class="scroll-body"
-        :style="{ left: tagBodyLeft + 'px' }"
-      >
+      :style="{left: arrowVisible ? '20px' : '0', right: arrowVisible ? '20px' : '0' }">
+      <div ref="scrollBody" class="scroll-body" :style="{ left: tagBodyLeft + 'px' }">
         <transition-group name="taglist-moving-animation">
           <el-tag
             v-for="(item, index) in $store.getters.tabnavBox"
@@ -42,8 +26,8 @@
             @click="$router.push({ path: item.path })"
             @contextmenu.native.prevent="openMenu(item, $event, index)"
             style="margin:0 3px; cursor: pointer;display: inline-block;"
-            >{{ item.title }}</el-tag
-          >
+            >{{ item.title }}
+          </el-tag>
         </transition-group>
       </div>
     </div>

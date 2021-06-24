@@ -1161,6 +1161,7 @@ export default {
     };
   },
   methods: {
+    // 点击选中的泵站
     pumpSelect(val) {
       this.showinfo = false
       this.pumpitem = val;

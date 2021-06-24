@@ -223,79 +223,73 @@ export default {
       var _this = this;
       this.$ajax(this.$apiSet.getUserByToken, {
         token: token
-      })
-        .then(res => {
-          if (!res.data.success) {
-            _this.loginError();
-            _this.$errorMsg(res.data.message);
-          } else {
-            let userinfo = res.data.response;
-            window.localStorage.userInfo = JSON.stringify(userinfo);
-
-            if (userinfo.id > 0) {
-              _this.getRoleData(userinfo);
-            }
-          }
-        })
-        .catch(err => {
+      }).then(res => {
+        if (!res.data.success) {
           _this.loginError();
-        });
+          _this.$errorMsg(res.data.message);
+        } else {
+          let userinfo = res.data.response;
+          window.localStorage.userInfo = JSON.stringify(userinfo);
+
+          if (userinfo.id > 0) {
+            _this.getRoleData(userinfo);
+          }
+        }
+      }).catch(err => {
+        _this.loginError();
+      });
     },
     // 获取角色
     getRoleData(userinfo) {
       var _this = this;
       this.$ajax(this.$apiSet.getRoleInfo, {
         ids: userinfo.roleIds
-      })
-        .then(res => {
-          if (!res.data.success) {
-            _this.loginError();
-            _this.$errorMsg(res.data.message);
-          } else {
-            let roleinfo = res.data.response;
-            window.localStorage.roleInfo = JSON.stringify(roleinfo);
-
-            let menuIds = roleinfo.map(item => item.menuIds);
-            if (menuIds.length > 0) {
-              _this.getMenuData(menuIds);
-            }
-          }
-        })
-        .catch(err => {
+      }).then(res => {
+        if (!res.data.success) {
           _this.loginError();
-        });
+          _this.$errorMsg(res.data.message);
+        } else {
+          let roleinfo = res.data.response;
+          window.localStorage.roleInfo = JSON.stringify(roleinfo);
+
+          let menuIds = roleinfo.map(item => item.menuIds);
+          if (menuIds.length > 0) {
+            _this.getMenuData(menuIds);
+          }
+        }
+      }).catch(err => {
+        _this.loginError();
+      });
     },
     // 获取菜单
     getMenuData(menuIds) {
       var _this = this;
       this.$ajax(this.$apiSet.getMenuByIds, {
         ids: menuIds.join(",")
-      })
-        .then(res => {
-          _this.$loading.hideLoading(); //关闭
+      }).then(res => {
+        _this.$loading.hideLoading(); //关闭
 
-          if (!res.data.success) {
-            _this.loginError();
-            _this.$errorMsg(res.data.message);
-          } else {
-            window.localStorage.menuInfo = JSON.stringify(res.data.response);
-            _this.loadName = "登录成功";
-            _this.$router.push({ path: "/home" }); //登录成功之后重定向到首页
-
-            setTimeout(() => {
-              let userinfo = JSON.parse(window.localStorage.userInfo ? window.localStorage.userInfo : null);
-
-              _this.$notify({
-                type: "success",
-                message: `登录成功 \n 欢迎管理员：${userinfo.realName}！Token 将在 ${window.localStorage.expires_in / 60} 分钟后过期！`,
-                duration: 3000
-              });
-            }, 1000);
-          }
-        })
-        .catch(err => {
+        if (!res.data.success) {
           _this.loginError();
-        });
+          _this.$errorMsg(res.data.message);
+        } else {
+          window.localStorage.menuInfo = JSON.stringify(res.data.response);
+          _this.loadName = "登录成功";
+          _this.$router.push({ path: "/home" }); //登录成功之后重定向到首页
+
+          setTimeout(() => {
+            let userinfo = JSON.parse(window.localStorage.userInfo ? window.localStorage.userInfo : null);
+
+            _this.$notify({
+              type: "success",
+              message: `登录成功 \n 欢迎管理员：${userinfo.realName}！Token 将在 ${window.localStorage.expires_in / 60} 分钟后过期！`,
+              duration: 3000
+            });
+          }, 1000);
+        }
+      }).catch(err => {
+        _this.loginError();
+      });
     },
     getWeather() {
       let _this = this;
@@ -306,21 +300,16 @@ export default {
           'Accept-Encoding': 'gzip'
         },
         method: 'get'
-      }).then(
-        res => {
-          if (res) {
-            if (res.data) {
-              var rust = res.data.data;
-              if (rust) {
-                _this.$store.commit("saveWeather", rust); // 保存token过期时间
-              }
+      }).then(res => {
+        if (res) {
+          if (res.data) {
+            var rust = res.data.data;
+            if (rust) {
+              _this.$store.commit("saveWeather", rust); // 保存token过期时间
             }
           }
-        },
-        error => {
-          this.$message.error(error);
         }
-      );
+      }).catch(err => { });
     },
   },
   mounted() {

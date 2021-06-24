@@ -1,5 +1,5 @@
 /**
- * @description 拖拽指令
+ * @description <el-dialog></el-dialog> 拖拽指令
  * 
  * 使用： <el-dialog title="更换头像" :visible.sync="dialogVisible" width="600px" append-to-body v-dialogDrag>
  */

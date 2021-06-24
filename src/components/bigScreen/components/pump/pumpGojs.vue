@@ -1,7 +1,7 @@
 <!-- 中间主体部分 -->
 <template>
   <div class="middlePageDiv" style="width: 100%;height: 100%;">
-    <!-- <Button v-show="allowMove" @click="btnclick">输出画布json</Button> -->
+    <Button v-show="allowMove" @click="btnclick">输出画布json</Button>
     <div id="myDiagram" style="width: 100%;height: 100%;linear-gradient(to bottom, #01109b, #010a6f);">
       <!-- background-image: linear-gradient(to bottom, #023f4b, #02161d); -->
     </div>
@@ -567,12 +567,12 @@ export default {
 
       console.log(procTaskName + " key:" + procTaskId + " Ioc" + procTaskloc);
       if (this.pumpdata.length > 0) {
-					for (var i = 0; i < this.pumpdata.length; i++) {
-						if (this.pumpdata[i].pumpspaceid == procTaskId) {
-						 return	this.$emit("pumpSelect", this.pumpdata[i]);
-						}
-					}
-				}
+        for (var i = 0; i < this.pumpdata.length; i++) {
+          if (this.pumpdata[i].pumpspaceid == procTaskId) {
+            return this.$emit("pumpSelect", this.pumpdata[i]);
+          }
+        }
+      }
     },
     handlerDC(e, obj) {
       //双击事件
@@ -588,75 +588,42 @@ export default {
 
       if (!_this.myDiagram) return;
       newVal.forEach(jjs => {
-        let nodesvalCases = _this.myDiagram.model.findNodeDataForKey(
-          jjs.pumpspaceid + "valCase"
-        );
+        let nodesvalCases = _this.myDiagram.model.findNodeDataForKey(jjs.pumpspaceid + "valCase");
         _this.myDiagram.model.setDataProperty(nodesvalCases, "showVal", "-- m");
-        _this.myDiagram.model.setDataProperty(
-          nodesvalCases,
-          "stroke",
-          _this.valuecolors["离线"].stroke
-        ); //边框
-        _this.myDiagram.model.setDataProperty(
-          nodesvalCases,
-          "fontStroke",
-          _this.valuecolors["离线"].fontStroke
-        ); //底色
-        _this.myDiagram.model.setDataProperty(
-          nodesvalCases,
-          "fillColor",
-          _this.valuecolors["离线"].fillColor
-        ); //底色文字
+        _this.myDiagram.model.setDataProperty(nodesvalCases, "stroke", _this.valuecolors["离线"].stroke); //边框
+        _this.myDiagram.model.setDataProperty(nodesvalCases, "fontStroke", _this.valuecolors["离线"].fontStroke); //底色
+        _this.myDiagram.model.setDataProperty(nodesvalCases, "fillColor", _this.valuecolors["离线"].fillColor); //底色文字
       });
 
       setTimeout(() => {
         for (var i = 0; i < newVal.length; i++) {
           var item = newVal[i];
-          var nodesvalCase = _this.myDiagram.model.findNodeDataForKey(
-            item.pumpspaceid + "valCase"
-          ); //实时值
-          var nodes = _this.myDiagram.model.findNodeDataForKey(
-            item.pumpspaceid
-          ); //节点
+          var nodesvalCase = _this.myDiagram.model.findNodeDataForKey(item.pumpspaceid + "valCase"); //实时值
+          var nodes = _this.myDiagram.model.findNodeDataForKey(item.pumpspaceid); //节点
           if (nodes.key == item.pumpspaceid) {
             _this.myDiagram.model.setDataProperty(nodes, "text", item.pumpname); //泵站名称
           }
-          var liquidlevel =
-            item.liquidlevel == ""
-              ? "--"
-              : parseFloat(item.liquidlevel).toFixed(2);
+          var liquidlevel = item.liquidlevel == "" ? "--" : parseFloat(item.liquidlevel).toFixed(2);
+
           _this.myDiagram.model.setDataProperty(
             nodesvalCase,
             "showVal",
             liquidlevel + " m"
           );
-
           _this.myDiagram.model.setDataProperty(
             nodesvalCase,
             "stroke",
-            _this.valuecolors[
-              liquidlevel != "--" && item.status == "离线"
-                ? "在线"
-                : item.status
-            ].stroke
+            _this.valuecolors[liquidlevel != "--" && item.status == "离线" ? "在线" : item.status].stroke
           ); //边框
           _this.myDiagram.model.setDataProperty(
             nodesvalCase,
             "fontStroke",
-            _this.valuecolors[
-              liquidlevel != "--" && item.status == "离线"
-                ? "在线"
-                : item.status
-            ].fontStroke
+            _this.valuecolors[liquidlevel != "--" && item.status == "离线" ? "在线" : item.status].fontStroke
           ); //底色
           _this.myDiagram.model.setDataProperty(
             nodesvalCase,
             "fillColor",
-            _this.valuecolors[
-              liquidlevel != "--" && item.status == "离线"
-                ? "在线"
-                : item.status
-            ].fillColor
+            _this.valuecolors[liquidlevel != "--" && item.status == "离线" ? "在线" : item.status].fillColor
           ); //底色文字
 
           _this.myDiagram.model.setDataProperty(

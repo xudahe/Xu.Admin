@@ -165,16 +165,14 @@ export default {
       let _this = this;
       this.$ajax(this.$apiSet.getDeptInfo, {
         deptName: this.filters.name
-      })
-        .then(res => {
-          _this.$loading.hideLoading();
-          if (!res.data.success) {
-            _this.$errorMsg(res.data.message)
-          } else {
-            _this.tableData = res.data.response;
-          }
-        })
-        .catch(err => { })
+      }).then(res => {
+        _this.$loading.hideLoading();
+        if (!res.data.success) {
+          _this.$errorMsg(res.data.message)
+        } else {
+          _this.tableData = res.data.response;
+        }
+      }).catch(err => { })
     },
     getUserData() {
       let _this = this;
@@ -185,8 +183,7 @@ export default {
           } else {
             _this.userData = res.data.response;
           }
-        })
-        .catch(err => { })
+        }).catch(err => { })
     },
     handleButton(val) {
       if (val.methods == 'handleEdit') this.handleEdit(val.index, val.row)
@@ -212,8 +209,7 @@ export default {
             _this.searchData();
             _this.$successMsg(res.data.message)
           }
-        })
-          .catch(err => { })
+        }).catch(err => { })
       }).catch(() => { });
     },
     //删除
@@ -228,8 +224,7 @@ export default {
           _this.searchData();
           _this.$successMsg(res.data.message)
         }
-      })
-        .catch(err => { })
+      }).catch(err => { })
     },
     //显示编辑界面
     handleEdit(index, row) {
@@ -267,8 +262,7 @@ export default {
             _this.searchData();
             _this.$successMsg(res.data.message)
           }
-        })
-        .catch(err => { })
+        }).catch(err => { })
     }, 2000),
     refreshData() {
       this.$loading.showLoading()

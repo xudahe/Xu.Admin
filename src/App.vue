@@ -15,6 +15,11 @@ export default {
   data() {
     return {};
   },
+  watch: {
+    $route(to, from) {
+      console.log(to)
+    }
+  },
   mounted() {
     // document.getElementById('app').style.width = window.innerWidth + 'px';
     // document.getElementById('app').style.height = window.innerHeight + 'px';

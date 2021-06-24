@@ -15,7 +15,8 @@ export default {
         examineName: "张三", //考生名称
         score: 0, //分数
         examDuration: 90, //考试时长
-        submissionTime: "2019-11-25 16:30:26", //交卷时间
+        submissionTime: "", //交卷时间
+        readPaperTime: "", //阅卷时间
         //题目集合
         list: [
           {
@@ -206,7 +207,7 @@ export default {
   methods: {
     paperHand(value) {
       this.type = 2;
-      this.submissionTime = this.$formatDate(new Date(), true);
+      this.paperData.submissionTime = this.$formatDate(new Date(), true);
 
       this.paperData.list.forEach(function (item) {
         if (item.examineAnswer == "" || item.examineAnswer.length == 0) {
@@ -228,6 +229,7 @@ export default {
     },
     paperRead(value) {
       this.type = 3;
+      this.paperData.readPaperTime = this.$formatDate(new Date(), true);
 
       let data = value.list.map(item => {
         return item.score;

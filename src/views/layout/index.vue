@@ -13,7 +13,7 @@
           <back-top :options="{ target: '#elmain', isMove: true }" />
         </el-main>
         <!-- <el-footer>
-          <bottom></bottom>
+          <layoutBottom></layoutBottom>
         </el-footer> -->
       </el-container>
     </el-container>
@@ -24,13 +24,13 @@
 <script>
 import layoutAside from "./aside/aside";
 import layoutHeader from "./header/header";
-import bottom from "./footer/bottom";
+import layoutBottom from "./footer/bottom";
 import { isMobile, isSafari } from "@/utils/agent";
 export default {
   name: "layout",
   components: {
     layoutHeader,
-    bottom,
+    layoutBottom,
     layoutAside
   },
   methods: {

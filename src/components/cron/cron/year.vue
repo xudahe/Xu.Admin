@@ -72,7 +72,7 @@ export default {
           this.cycle.start = this.value.split('-')[0]
           this.cycle.end = this.value.split('-')[1]
         }
-      } else if (this.value.indexOf('*') !== -1) { // 1每
+      } else if (this.value.indexOf('*') !== -1) { // 1每秒
         this.type = '1'
       }
     }

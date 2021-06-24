@@ -2,7 +2,7 @@
   <div class="task_manager card_css">
     <el-card class="box-card" shadow="hover">
       <!--工具条-->
-      <v-header icon="md-podium" text="定时任务列表">
+      <v-header icon="md-podium" text="任务调度列表">
         <div slot="content"></div>
         <div style="text-align: right;">
           <!--快速查询字段-->
@@ -89,6 +89,7 @@ export default {
         { label: '触发器类型', param: 'triggerType' },
         { label: '间隔(Cron)', param: 'cron' },
         { label: '执行间隔(秒)', param: 'intervalSecond' },
+        { label: '执行次数', param: 'runTimes' },
         {
           label: '最后执行时间', param: 'performTime', sortable: true, width: '160',
           formatter: row => {
@@ -204,16 +205,14 @@ export default {
 
       this.$ajax(this.$apiSet.getTasksQzInfo, {
         name: this.filters.name
-      })
-        .then(res => {
-          _this.$loading.hideLoading();
-          if (!res.data.success) {
-            _this.$errorMsg(res.data.message)
-          } else {
-            _this.tableData = res.data.response;
-          }
-        })
-        .catch(err => { })
+      }).then(res => {
+        _this.$loading.hideLoading();
+        if (!res.data.success) {
+          _this.$errorMsg(res.data.message)
+        } else {
+          _this.tableData = res.data.response;
+        }
+      }).catch(err => { })
     },
     handleButton(val) {
       if (val.methods == 'handleEdit') this.handleEdit(val.index, val.row)
@@ -240,8 +239,7 @@ export default {
             _this.searchData();
             _this.$successMsg(res.data.message)
           }
-        })
-          .catch(err => { })
+        }).catch(err => { })
       }).catch(() => { });
     },
     //显示编辑界面
@@ -284,8 +282,7 @@ export default {
             _this.searchData();
             _this.$successMsg(res.data.message)
           }
-        })
-        .catch(err => { })
+        }).catch(err => { })
     }, 2000),
     jobStatus(row) {
       let _this = this;
@@ -314,8 +311,7 @@ export default {
           _this.searchData();
           _this.$successMsg(res.data.message)
         }
-      })
-        .catch(err => { })
+      }).catch(err => { })
     },
     handleHistory(index, row) {
       console.info(row.tasksLog)

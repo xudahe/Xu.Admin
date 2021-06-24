@@ -4,22 +4,22 @@
       <div class="UnitDiv UnitDiv_bg6">
         <Row style="margin-top:0.3rem;position:absolute;width:100%;">
           <Col span="8" style="text-align: center;">
-            <i-circle :percent="20" trail-color="#1B566E" stroke-color="#ba9520" :size="80" dashboard>
-              <span class="demo-circle-inner" style="font-size:24px;color:#ba9520">30%</span>
-            </i-circle>
-            <div style="color:#ba9520">未处理</div>
+          <i-circle :percent="20" trail-color="#1B566E" stroke-color="#ba9520" :size="80" dashboard>
+            <span class="demo-circle-inner" style="font-size:24px;color:#ba9520">30%</span>
+          </i-circle>
+          <div style="color:#ba9520">未处理</div>
           </Col>
           <Col span="8" style="text-align: center;">
-            <i-circle :percent="50" trail-color="#1B566E" stroke-color="#37A2DA" :size="80" dashboard>
-              <span class="demo-circle-inner" style="font-size:24px;color:#37A2DA">50%</span>
-            </i-circle>
-            <div style="color:#37A2DA">处理中</div>
+          <i-circle :percent="50" trail-color="#1B566E" stroke-color="#37A2DA" :size="80" dashboard>
+            <span class="demo-circle-inner" style="font-size:24px;color:#37A2DA">50%</span>
+          </i-circle>
+          <div style="color:#37A2DA">处理中</div>
           </Col>
           <Col span="8" style="text-align: center;">
-            <i-circle :percent="80" trail-color="#1B566E" stroke-color="#40dd0f" :size="80" dashboard>
-              <span class="demo-circle-inner" style="font-size:24px;color:#40dd0f">80%</span>
-            </i-circle>
-            <div style="color:#40dd0f">已处理</div>
+          <i-circle :percent="80" trail-color="#1B566E" stroke-color="#40dd0f" :size="80" dashboard>
+            <span class="demo-circle-inner" style="font-size:24px;color:#40dd0f">80%</span>
+          </i-circle>
+          <div style="color:#40dd0f">已处理</div>
           </Col>
         </Row>
       </div>
@@ -52,9 +52,7 @@
                           <TimelineItem>
                             <p class="carousel_length" style="text-align: left;">
                               <span class="carousel_name">巡查道路：</span>
-                              <span class="carousel_value">{{
-                                item.roadsname
-                              }}</span>
+                              <span class="carousel_value">{{item.roadsname }}</span>
                             </p>
                           </TimelineItem>
                         </Timeline>
@@ -130,8 +128,7 @@ export default {
       let wid = document.body.clientWidth; //屏幕宽度
       _this.tempWid = wid * (8 / 24) * 0.9 - 30 - 35 - 30;
 
-      let index = 1,
-        list = this.noticeList;
+      let index = 1, list = this.noticeList;
 
       const timerrt = setInterval(() => {
         if (index - 1 == list.length) {

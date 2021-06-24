@@ -139,6 +139,7 @@ export default {
           score: null,//分数
           examDuration: null,//考试时长(分钟)
           submissionTime: '',//交卷时间
+          readPaperTime: '',  //阅卷时间
           //题目集合
           list: [
             {
@@ -234,20 +235,32 @@ export default {
       switch (type) {
         //交卷
         case 'handPaper':
-          this.disabledAnswer = true
-          this.$emit('paperHand', this.tempDataSource)
+          this.$showMsgBox({
+            msg: `<p>您确定要交卷吗?</p>`,
+            type: 'warning',
+            isHTML: true
+          }).then(() => {
+            this.disabledAnswer = true
+            this.$emit('paperHand', this.tempDataSource)
+          }).catch(() => { });
           break
         //阅卷
         case 'readPaper':
-          this.disabledAnswer = true
-          this.disabledRead = true
-          this.$emit('paperRead', this.tempDataSource)
+          this.$showMsgBox({
+            msg: `<p>您确定阅卷完成吗?</p>`,
+            type: 'warning',
+            isHTML: true
+          }).then(() => {
+            this.disabledAnswer = true
+            this.disabledRead = true
+            this.$emit('paperRead', this.tempDataSource)
+          }).catch(() => { });
           break
-        //阅卷 上一个
+        //阅卷 上一张
         case 'readPaperUpper':
           this.$emit('paperReadUpper')
           break
-        //阅卷 下一个
+        //阅卷 下一张
         case 'readPaperNext':
           this.$emit('paperReadNext')
           break

@@ -175,10 +175,7 @@ export default {
           packages: [
             {
               name: "extend",
-              location:
-                window.location.host +
-                "../../../static/tdtLayer/" +
-                mapconfig.maptype
+              location: window.location.host + "../../../static/tdtLayer/" + mapconfig.maptype
               // location: "http://58.213.48.106/arcgis_js_api/library/3.27/3.27/ncam"
             }
           ]
@@ -288,7 +285,7 @@ export default {
             map.addLayer(graphicLayer5);
             MapControl.graphicLayers["gralyr5"] = graphicLayer5;
 
-            map.on("load", initFunctionality());
+            map.on("load", initFunctionality()); //地图对象加载完成后执行该方法
             map.on("mouse-move", function (event) {
               event.scale = scaleUtils.getScale(map);
               _this.currentscale = {
@@ -297,8 +294,18 @@ export default {
                   y: event.mapPoint.y
                 },
                 scale: event.scale
-              };
-            });
+              }
+            }); //绑定鼠标在地图上移动事件
+            map.on("zoom-end", function (event) {
+              event.scale = scaleUtils.getScale(map);
+              _this.currentscale = {
+                mapPoint: {
+                  x: event.mapPoint.x,
+                  y: event.mapPoint.y
+                },
+                scale: event.scale
+              }
+            });//绑定地图缩放事件
 
             this.map_layer(); //添加轨迹图层
 
@@ -319,10 +326,7 @@ export default {
               MapControl.editToolbar[_this.mapId] = editToolbar;
               MapControl.GeometryService = geometryservice;
 
-              let extent =
-                mapconfig.maptype == "01"
-                  ? mapconfig.extent_01
-                  : mapconfig.extent_02;
+              let extent = mapconfig.maptype == "01" ? mapconfig.extent_01 : mapconfig.extent_02;
               let mapExtent = new esri.geometry.Extent(
                 extent.xmin,
                 extent.ymin,

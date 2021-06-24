@@ -90,8 +90,7 @@ export default {
   watch: {
     // 检测路由变化
     $route(to, from) {
-      var _this = this;
-      // to为跳转之后的路由
+      
       this.ismeunNumLeft = null;
       this.ismeunNumRight = null;
       var menuid = this.$route.query.id

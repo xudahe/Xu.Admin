@@ -193,16 +193,14 @@ export default {
       let _this = this;
       this.$ajax(this.$apiSet.getRoleInfo, {
         roleName: this.filters.name
-      })
-        .then(res => {
-          _this.$loading.hideLoading();
-          if (!res.data.success) {
-            _this.$errorMsg(res.data.message)
-          } else {
-            _this.tableData = res.data.response;
-          }
-        })
-        .catch(err => { })
+      }).then(res => {
+        _this.$loading.hideLoading();
+        if (!res.data.success) {
+          _this.$errorMsg(res.data.message)
+        } else {
+          _this.tableData = res.data.response;
+        }
+      }).catch(err => { })
     },
     getMenuData() {
       let _this = this;
@@ -213,8 +211,7 @@ export default {
           } else {
             _this.menuData = res.data.response;
           }
-        })
-        .catch(err => { })
+        }).catch(err => { })
     },
     handleButton(val) {
       if (val.methods == 'handleEdit') this.handleEdit(val.index, val.row)
@@ -245,8 +242,7 @@ export default {
             _this.searchData();
             _this.$successMsg(res.data.message)
           }
-        })
-          .catch(err => { })
+        }).catch(err => { })
       }).catch(() => { });
     },
     //删除
@@ -261,8 +257,7 @@ export default {
           _this.searchData();
           _this.$successMsg(res.data.message)
         }
-      })
-        .catch(err => { })
+      }).catch(err => { })
     },
     // 初始化菜单选中
     initialMenuCheck(item) {
@@ -274,17 +269,15 @@ export default {
       if (!this.$isNull(item.menuIds)) {
         this.$ajax(this.$apiSet.getMenuInfo, {
           ids: item.menuIds,
-        })
-          .then(res => {
-            if (res.data.success) {
-              this.checkStrictly = true  //重点：给树节点赋值之前 先设置为true
-              this.$nextTick(() => {
-                this.$refs.menutree.setCheckedNodes(res.data.response) //给树节点赋值
-                this.checkStrictly = false //重点： 赋值完成后 设置为false
-              })
-            }
-          })
-          .catch(err => { })
+        }).then(res => {
+          if (res.data.success) {
+            this.checkStrictly = true  //重点：给树节点赋值之前 先设置为true
+            this.$nextTick(() => {
+              this.$refs.menutree.setCheckedNodes(res.data.response) //给树节点赋值
+              this.checkStrictly = false //重点： 赋值完成后 设置为false
+            })
+          }
+        }).catch(err => { })
       }
     },
     nodeclick(data, node) {
@@ -338,8 +331,7 @@ export default {
             else
               _this.$successMsg(res.data.message)
           }
-        })
-        .catch(err => { })
+        }).catch(err => { })
     }, 2000),
     refreshData() {
       let _this = this;

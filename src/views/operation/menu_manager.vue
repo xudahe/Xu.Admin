@@ -212,8 +212,7 @@ export default {
           } else {
             _this.tableData = res.data.response;
           }
-        })
-        .catch(err => { })
+        }).catch(err => { })
     },
     getParentData() {
       let _this = this;
@@ -224,8 +223,7 @@ export default {
           } else {
             _this.parentData = res.data.response.filter(val => val.parentId == null);
           }
-        })
-        .catch(err => { })
+        }).catch(err => { })
     },
     handleButton(val) {
       if (val.methods == 'handleEdit') this.handleEdit(val.index, val.row)
@@ -251,8 +249,7 @@ export default {
             _this.searchData();
             _this.$successMsg(res.data.message)
           }
-        })
-          .catch(err => { })
+        }).catch(err => { })
       }).catch(() => { });
     },
     //删除
@@ -267,8 +264,7 @@ export default {
           _this.searchData();
           _this.$successMsg(res.data.message)
         }
-      })
-        .catch(err => { })
+      }).catch(err => { })
     },
     //显示编辑界面
     handleEdit(index, row) {
@@ -322,8 +318,7 @@ export default {
             _this.getParentData();
             _this.$successMsg(res.data.message)
           }
-        })
-        .catch(err => { })
+        }).catch(err => {})
     }, 2000),
     refreshData() {
       this.$loading.showLoading()

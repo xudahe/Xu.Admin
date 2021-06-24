@@ -61,7 +61,7 @@ export default {
         "#b6d288",
         "#f49586",
         "#bcaf7a"
-      ]
+      ],
     };
   },
   mounted() {
@@ -105,19 +105,42 @@ export default {
       //加载数据
       this.getMoreData();
     },
+    //产生随机数
+    randomNum(min, max) {
+      return Math.floor(Math.random() * (max - min) + min);
+    },
     // 获取数据
     getMoreData() {
-      let moreList = [
-        { id: 1, width: 45, height: 50, imgUrl: "" },
-        { id: 2, width: 45, height: 40, imgUrl: "" },
-        { id: 3, width: 45, height: 55, imgUrl: "" },
-        { id: 4, width: 45, height: 30, imgUrl: "" },
-        { id: 5, width: 45, height: 20, imgUrl: "" },
-        { id: 6, width: 45, height: 20, imgUrl: "" },
-        { id: 7, width: 45, height: 25, imgUrl: "" },
-        { id: 8, width: 45, height: 35, imgUrl: "" },
-        { id: 9, width: 45, height: 45, imgUrl: "" }
-      ];
+      let numbers = [25, 35, 45, 55, 65];
+
+      var requireImg = require.context("../../../static/img/water", false, /\.png$/), arr = [];
+      for (var i = 0; i < requireImg.keys().length; i++) {
+        arr.push(requireImg.keys()[i].substr(2, requireImg.keys()[i].length));
+      }
+
+      let moreList = [];
+      for (let i = 0; i < arr.length; i++) {
+        let imgUrl = require("../../../static/img/water/" + arr[i]);
+
+        moreList.push({
+          id: i + 1,
+          width: 45,
+          height: numbers[this.randomNum(0, numbers.length)],
+          imgUrl: imgUrl
+        })
+      }
+
+      // let moreList = [
+      //   { id: 1, width: 45, height: 50, imgUrl: "" },
+      //   { id: 2, width: 45, height: 40, imgUrl: "" },
+      //   { id: 3, width: 45, height: 55, imgUrl: "" },
+      //   { id: 4, width: 45, height: 30, imgUrl: "" },
+      //   { id: 5, width: 45, height: 20, imgUrl: "" },
+      //   { id: 6, width: 45, height: 20, imgUrl: "" },
+      //   { id: 7, width: 45, height: 25, imgUrl: "" },
+      //   { id: 8, width: 45, height: 35, imgUrl: "" },
+      //   { id: 9, width: 45, height: 45, imgUrl: "" }
+      // ];
 
       if (moreList.length == 0) {
         this.noMore = true;

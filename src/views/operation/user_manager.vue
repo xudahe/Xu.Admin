@@ -213,16 +213,14 @@ export default {
       let _this = this;
       this.$ajax(this.$apiSet.getUserInfo, {
         key: this.filters.name
-      })
-        .then(res => {
-          _this.$loading.hideLoading();
-          if (!res.data.success) {
-            _this.$errorMsg(res.data.message)
-          } else {
-            _this.tableData = res.data.response;
-          }
-        })
-        .catch(err => { })
+      }).then(res => {
+        _this.$loading.hideLoading();
+        if (!res.data.success) {
+          _this.$errorMsg(res.data.message)
+        } else {
+          _this.tableData = res.data.response;
+        }
+      }).catch(err => { })
     },
     getRoleData() {
       let _this = this;
@@ -233,8 +231,7 @@ export default {
           } else {
             _this.roleData = res.data.response;
           }
-        })
-        .catch(err => { })
+        }).catch(err => { })
     },
     handleButton(val) {
       if (val.methods == 'handleEdit') this.handleEdit(val.index, val.row)
@@ -265,8 +262,7 @@ export default {
             _this.searchData();
             _this.$successMsg(res.data.message)
           }
-        })
-          .catch(err => { })
+        }).catch(err => { })
       }).catch(() => { });
     },
     //删除
@@ -281,8 +277,7 @@ export default {
           _this.searchData();
           _this.$successMsg(res.data.message)
         }
-      })
-        .catch(err => { })
+      }).catch(err => { })
     },
     // 初始化角色选中
     initialRoleCheck(item) {
@@ -294,22 +289,18 @@ export default {
       if (!this.$isNull(item.roleIds)) {
         this.$ajax(this.$apiSet.getRoleInfo, {
           ids: item.roleIds,
-        })
-          .then(res => {
-            if (res.data.success) {
-              let ids = res.data.response.map(item => item.id);
+        }).then(res => {
+          if (res.data.success) {
+            let ids = res.data.response.map(item => item.id);
 
-              this.checkStrictly = true  //重点：给树节点赋值之前 先设置为true
-              this.$nextTick(() => {
-                this.$refs.roletree.setCheckedKeys(ids) //给树节点赋值
-                this.checkStrictly = false //重点： 赋值完成后 设置为false
-              })
-            }
-          })
-          .catch(err => { })
+            this.checkStrictly = true  //重点：给树节点赋值之前 先设置为true
+            this.$nextTick(() => {
+              this.$refs.roletree.setCheckedKeys(ids) //给树节点赋值
+              this.checkStrictly = false //重点： 赋值完成后 设置为false
+            })
+          }
+        }).catch(err => { })
       }
-
-
     },
     nodeclick(data, node) {
       node.checked = !(node.checked)
@@ -366,8 +357,7 @@ export default {
             _this.searchData();
             _this.$successMsg(res.data.message)
           }
-        })
-        .catch(err => { })
+        }).catch(err => { })
     }, 2000),
     refreshData() {
       let _this = this;
@@ -378,7 +368,7 @@ export default {
       this.getRoleData();
 
       this.$nextTick(() => {
-        this.$refs.roletree.setCheckedKeys([])
+        this.$refs.roletree.setCheckedKeys([]) //清除选中项
       })
     },
   },

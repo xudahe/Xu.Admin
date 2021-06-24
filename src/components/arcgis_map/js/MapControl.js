@@ -136,7 +136,7 @@ MapControl.setMapZoomOut = function () {
 };
 
 /**
- * 地图漫游
+ * 地图平移
  * @param mapId
  */
 MapControl.setMapPan = function () {
@@ -157,7 +157,24 @@ MapControl.setMapPan = function () {
  */
 MapControl.setMapClear = function (value) {
   if (value !== undefined) {
-
+    if (value == 2) {
+      MapControl.graphicLayers['gralyr4'].clear();
+      MapControl.graphicLayers['gralyr5'].clear();
+    } else if (value == 3) {
+      MapControl.graphicLayers['gralyr3'].clear();
+      MapControl.graphicLayers['gralyr4'].clear();
+    } else if (value == 5) {
+      MapControl.graphicLayers['gralyr5'].clear();
+    } else if (value == 4) {
+      MapControl.graphicLayers['gralyr1'].clear();
+      MapControl.graphicLayers['gralyr2'].clear();
+      MapControl.graphicLayers['gralyr3'].clear();
+      MapControl.graphicLayers['gralyr4'].clear();
+      MapControl.graphicLayers['gralyr5'].clear();
+    } else if (value == 1) {
+      MapControl.graphicLayers['gralyr2'].clear();
+      MapControl.graphicLayers['gralyr3'].clear();
+    }
   } else {
     for (let i = 1; i < 5; i++) {
       let gralyr = MapControl.graphicLayers['gralyr' + i]
@@ -891,8 +908,7 @@ function doMeasure(gra) {
             new dojo.Color([255, 0, 0, 0.25])
           );
           var areasAndLengthParams = new esri.tasks.AreasAndLengthsParameters();
-          areasAndLengthParams.lengthUnit =
-            esri.tasks.GeometryService.UNIT_FOOT;
+          areasAndLengthParams.lengthUnit = esri.tasks.GeometryService.UNIT_FOOT;
           areasAndLengthParams.areaUnit = esri.tasks.GeometryService.UNIT_METER;
           geometryService.simplify([geometry], function (simplifiedGeometries) {
             areasAndLengthParams.polygons = simplifiedGeometries;
@@ -2030,6 +2046,22 @@ MapControl.ShowGeometryBuffer = function (geom, buffer) {
   })
 };
 
+function showPopup(row) {
+  let items = [];
+  for (let item in row) {
+    let value = row[item];
+    items.push({
+      name: item,
+      value: row[item].toFixed(3)
+    });
+  }
+  MapControl.setMapClear(1);
+  let polygon = MapControl.WktToAgs(row.geom);
+  MapControl.showGraphic(polygon, 1.5);
+  let showExtent = polygon.getExtent();
+  MapControl.showInfoWindow(showExtent.getCenter(), items);
+}
+
 //自定义弹出窗口
 MapControl.showInfoWindow = function (mpcenter, listdata, contents) {
   esriLoader.loadModules(["esri/dijit/Popup",
@@ -2064,7 +2096,7 @@ MapControl.showInfoWindow = function (mpcenter, listdata, contents) {
       map.infoWindow.setContent(contents);
     } else {
       // var content = '<div style="color:#333"><p style="color:#fff;position: relative;top: -5px;">详情</p><span class="ivu-badge" style="position: absolute;top:2px;right: 12px; " > <i data-v-394040b0="" class="ivu-icon ivu-icon-ios-close-empty" style="font-size: 26px;color:#FFF;cursor: pointer;"  onclick="closePop()"></i></span>';
-      var content = '<div style="background-color: #fff;overflow:auto;"><table  cellpadding="0" cellspacing="0" border="0"><tbody>'
+      var content = '<div style="background-color: #fff;overflow:auto;width: 100%;height: 100%;"><table  cellpadding="0" cellspacing="0" border="0" style="width: 100%;height: 100%;"><tbody>'
       if (listdata && listdata.length > 0) {
         for (var i = 0; i < listdata.length; i++) {
           if (listdata[i].name.toLowerCase() == "objectid") {
@@ -2253,7 +2285,7 @@ MapControl._showInfoWindow = function (mpcenter, listdata, contents) {
     console.error(err);
   })
 }
-//根据地图比例尺计算容差值返回范围面
+//拾取---根据地图比例尺计算容差值返回范围面
 MapControl.identify = function (isremove) {
   if (MapControl.identifyHandler) MapControl.identifyHandler.remove();
   esriLoader.loadModules(
@@ -2271,8 +2303,10 @@ MapControl.identify = function (isremove) {
       let ymin = y - Resolution * 10
       let ymax = y + Resolution * 10
       let geom = 'POLYGON ((' + xmin + ' ' + ymin + ',' + xmax + ' ' + ymin + ',' + xmax + ' ' + ymax + ',' + xmin + ' ' + ymax + ',' + xmin + ' ' + ymin + '))';
+      let geop = 'POINT(' + x + ' ' + y + ')';
       if (isremove == undefined) MapControl.identifyHandler.remove()
-      bus.$emit('identify', geom);
+      bus.$emit('identify', geom); //返回范围面
+      bus.$emit('identifypoint', geop); //返回点
     });
   }).catch(err => {
     console.error(err);
@@ -2280,7 +2314,7 @@ MapControl.identify = function (isremove) {
 };
 
 //根据地图比例尺计算容差值返回范围面
-MapControl.identifyNew = function () {
+MapControl.identifyNew = function (isremove) {
   esriLoader.loadModules(
     ['esri/geometry/scaleUtils', 'esri/geometry/geometryEngine']).then(
     ([scaleUtils, geometryEngine]) => {
@@ -2290,7 +2324,10 @@ MapControl.identifyNew = function () {
       let Resolution = scale / (PPI / 0.0254)
       MapControl.identifyHandler = map.on("click", function (geo) {
         const buffer = geometryEngine.geodesicBuffer(geo.mapPoint, 5, "meters", false) //缓冲范围5m
+        let x = geo.mapPoint.x
+        let y = geo.mapPoint.y
 
+        //缓冲后转换成范围面
         let geom = ''
         for (var i = 0; i < buffer.rings[0].length; i++) {
           geom = buffer.rings[0][i][0] + ' ' + buffer.rings[0][i][1] + ',' + geom;
@@ -2306,8 +2343,10 @@ MapControl.identifyNew = function () {
         let ymin = extent.ymin;
         let ymax = extent.ymax;
         let geometry = 'POLYGON ((' + xmin + ' ' + ymin + ',' + xmax + ' ' + ymin + ',' + xmax + ' ' + ymax + ',' + xmin + ' ' + ymax + ',' + xmin + ' ' + ymin + '))';
-        MapControl.identifyHandler.remove()
+        let geop = 'POINT(' + x + ' ' + y + ')';
+        if (isremove == undefined) MapControl.identifyHandler.remove()
         bus.$emit('identify', geometry);
+        bus.$emit('identifypoint', geop);
       });
     }
   );
@@ -2568,7 +2607,7 @@ MapControl.showLine2 = function () {
   });
   line.spatialReference.wkid = 4326;
   var bglineSymbol = new esri.symbol.SimpleLineSymbol("solid", new dojo.Color([17, 91, 122, 0.4]), 9);
-  
+
   var lineGriphic = new esri.Graphic(line, bglineSymbol);
   MapControl.graphicLayers['gralyr4'].add(lineGriphic);
 

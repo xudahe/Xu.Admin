@@ -178,7 +178,8 @@ VueRouter.prototype.push = function push(location) {
   }
   // 这个语句用来解决报错
   // 调用原来的push函数，并捕获异常
-  return originalPush.call(this, location).catch(err => err)
+  return originalPush.call(this, location)
+  // return originalPush.call(this, location).catch(err => err)
 }
 
 const originalReplace = VueRouter.prototype.replace;
@@ -190,7 +191,8 @@ VueRouter.prototype.replace = function replace(location) {
     }
     location = location + Separator + "random=" + Math.random();
   }
-  return originalReplace.call(this, location).catch(err => err)
+  return originalReplace.call(this, location)
+  // return originalReplace.call(this, location).catch(err => err)
 };
 
 export default new VueRouter({

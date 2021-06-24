@@ -7,6 +7,10 @@ const LoginModule = {
     url: '/api/Login/RefreshToken',
     method: 'get'
   },
+  getLoginByToken: { //根据Token登录
+    url: '/api/Login/GetLoginByToken',
+    method: 'get'
+  },
 }
 
 const UserModule = {

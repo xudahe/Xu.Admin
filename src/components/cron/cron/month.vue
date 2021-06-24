@@ -103,7 +103,7 @@ export default {
           this.loop.start = this.value.split('/')[0]
           this.loop.end = this.value.split('/')[1]
         }
-      } else if (this.value.indexOf('*') !== -1) { // 1每
+      } else if (this.value.indexOf('*') !== -1) { // 1每秒
         this.type = '1'
       } else { // *
         this.type = '4'

@@ -1,4 +1,5 @@
 {
+  //设置转码规则
   "presets": [
     ["env", {
       "modules": false,
@@ -8,5 +9,6 @@
     }],
     "stage-2"
   ],
+  //设置插件
   "plugins": ["transform-vue-jsx", "transform-runtime"]
 }

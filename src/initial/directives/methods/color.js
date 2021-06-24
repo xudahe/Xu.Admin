@@ -1,3 +1,7 @@
+/**
+ * 自定义一个设置字体颜色的指令
+ */
+
 const vColor = {
   inserted: function (el, binding) {
     const interval = binding.arg ? binding.arg : 1000

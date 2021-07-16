@@ -392,22 +392,32 @@ export default {
         _this.tableheight = height - 150;
       });
     },
+
+    /**
+      * @description 单元格合并
+      * @param {Function} row 
+      * @param {Function} column 
+      * @param {Number} rowIndex 行序号
+      * @param {Number} columnIndex 列序号
+      * @returns {Function}
+      */
     handleSpan({ row, column, rowIndex, columnIndex }) {
       /**
        *  合并和被合并的区别，返回值不是[0,0]的，其内容显示在合并后的单元格中。
        *  返回值是[0,0]的是被合并的单元格，内容相当于删除。
        */
 
+      //合并第1列
       if (columnIndex == 0) {
-        //合并第1列
         //计算合并的行数列数
         let x = row.num == 0 ? 0 : row.num;
         let y = row.num == 0 ? 0 : 1;
         return [x, y];
       }
 
+      //合并第2列
       if (columnIndex == 1) {
-        //合并第2列
+
         //计算合并的行数列数
         let x = row.agenum == 0 ? 0 : row.agenum;
         let y = row.agenum == 0 ? 0 : 1;
@@ -422,6 +432,7 @@ export default {
           return [0, 0];
         }
     },
+    // 数据处理算法，处理后，便于单元格的合并
     assembleData(data) {
       if (data.length == 0) return;
 
@@ -460,19 +471,15 @@ export default {
                 item.面积小计 += data[a].面积小计;
                 item.已出让面积 += data[a].已出让面积;
                 item.未出让面积 += data[a].未出让面积;
-                item.未出让中允许建设用地面积 +=
-                  data[a].未出让中允许建设用地面积;
+                item.未出让中允许建设用地面积 += data[a].未出让中允许建设用地面积;
                 item.待更新面积 += data[a].待更新面积;
-                item.待更新中允许建设用地面积 +=
-                  data[a].待更新中允许建设用地面积;
+                item.待更新中允许建设用地面积 += data[a].待更新中允许建设用地面积;
 
                 data[a].already = 1;
               } else {
                 if (data[a - 1].用地代码 !== "小计") {
-                  item.未出让面积 =
-                    item.未出让面积 != 0 ? item.未出让面积.toFixed(2) : 0;
-                  item.已出让面积 =
-                    item.已出让面积 != 0 ? item.已出让面积.toFixed(2) : 0;
+                  item.未出让面积 = item.未出让面积 != 0 ? item.未出让面积.toFixed(2) : 0;
+                  item.已出让面积 = item.已出让面积 != 0 ? item.已出让面积.toFixed(2) : 0;
                   data.splice(a, 0, item);
                 }
                 break;
@@ -484,11 +491,9 @@ export default {
         }
       }
 
-      item3.未出让面积 =
-        item3.未出让面积 != 0 ? item3.未出让面积.toFixed(2) : 0;
+      item3.未出让面积 = item3.未出让面积 != 0 ? item3.未出让面积.toFixed(2) : 0;
       data.splice(data.length, 0, item3);
 
-      // 数据处理算法，处理后，便于单元格的合并
       for (var i = 0; i < data.length; i++) {
         if (data.小计 === data.用地类别) {
           data[i].i = 2;
@@ -542,15 +547,9 @@ export default {
       columns.forEach((column, index) => {
         const key = column.key;
         if (index === 0) {
-          sums[key] = {
-            key,
-            value: "合计"
-          };
-          return;
+          return sums[key] = { key, value: "合计" };
         }
-        const values = data
-          .filter(item => item.用地代码 != "小计")
-          .map(item => Number(item[key]));
+        const values = data.filter(item => item.用地代码 != "小计").map(item => Number(item[key]));
         if (!values.every(value => isNaN(value))) {
           const v = values.reduce((prev, curr) => {
             const value = Number(curr);
@@ -560,15 +559,9 @@ export default {
               return prev;
             }
           }, 0);
-          sums[key] = {
-            key,
-            value: v.toFixed(2)
-          };
+          sums[key] = { key, value: v.toFixed(2) };
         } else {
-          sums[key] = {
-            key,
-            value: "--"
-          };
+          sums[key] = { key, value: "--" };
         }
       });
 

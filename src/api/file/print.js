@@ -19,9 +19,9 @@ function toPrint(page = "") {
   `
   document.body.appendChild(iframe)
   const doc = iframe.contentWindow.document
-  if((typeof page).toLowerCase() === 'string') {
+  if ((typeof page).toLowerCase() === 'string') {
     doc.write(page)
-  }else {
+  } else {
     doc.body.appendChild(page)
   }
   doc.close()

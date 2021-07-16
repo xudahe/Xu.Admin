@@ -193,6 +193,7 @@ export default {
         case "二级菜单4":
         case "二级菜单5":
         case "二级菜单6":
+        case "二级菜单7":
           this.showLeftMenu = true;
           this.pageWidth = 3.3;
           this.mapadding = '0 0 0 0.05rem';
@@ -266,9 +267,10 @@ export default {
       let children = [
         { id: 1, classname: "test1", menuname: "二级菜单1", img: "", systemid: 32, },
         { id: 2, classname: "waterStation", menuname: "二级菜单6", img: "", systemid: 32, },
-        { id: 3, classname: "test4", menuname: "二级菜单3", img: "", systemid: 32, },
-        { id: 3, classname: "test2", menuname: "二级菜单4", img: "", systemid: 32, },
-        { id: 3, classname: "test3", menuname: "二级菜单5", img: "", systemid: 32, },
+        { id: 3, classname: "test5", menuname: "二级菜单3", img: "", systemid: 32, },
+        { id: 4, classname: "test2", menuname: "二级菜单4", img: "", systemid: 32, },
+        { id: 5, classname: "test3", menuname: "二级菜单5", img: "", systemid: 32, },
+        { id: 7, classname: "test4", menuname: "二级菜单7", img: "", systemid: 32, },
       ]
       for (let l = 0; l < children.length; l++) {
         _this.menuData.push({

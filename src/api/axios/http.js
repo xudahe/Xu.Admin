@@ -1,3 +1,5 @@
+import store from "@/vuex/store"
+
 export default {
   install(Vue) {
     Vue.prototype.$xhr_ajax = function (options) {
@@ -26,11 +28,14 @@ export default {
       var open = function (xhr, type, url, async) {
         xhr.open(type, url, async);
       };
+      /*请求结束断开*/
       var send = function (xhr, msg) {
         xhr.send(msg);
       };
       var setHeaders = function (xhr, headers) {
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.setRequestHeader("Authorization", "Bearer " + store.state.token);
+        // xhr.responseType = "blob"; //可以将`xhr.responseType`设置为"blob" 或 "arrayBuffer"
         if (!headers) {
           return false;
         }

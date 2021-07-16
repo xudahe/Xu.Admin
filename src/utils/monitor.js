@@ -1,6 +1,7 @@
 /**
  * @description 数据采集
  * @description 链接：https://juejin.im/post/6844903998412029959#heading-2
+ * @description 白屏时间: const whiteScreen = new Date() - window.performance.timing.navigationStart;
  */
 
 function monitorInit() {
@@ -83,7 +84,7 @@ function monitorInit() {
     const performance = {
       // 重定向耗时
       redirect: timing.redirectEnd - timing.redirectStart,
-      // 白屏时间
+      // 白屏时间。
       whiteScreen: whiteScreen,
       // DOM 渲染耗时
       dom: timing.domComplete - timing.domLoading,

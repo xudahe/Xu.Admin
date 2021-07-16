@@ -99,6 +99,7 @@
 <template>
   <div class="map-content" :id="mapId" style="position: relative;border-radius: 0.1rem;">
     <bottombar :datasource="currentscale"></bottombar>
+    <component  :is="current_com" :ref="current_ref"></component>
 
     <div class="app-right-bottom">
       <div id="mapType">
@@ -108,9 +109,9 @@
         <div class="mapTypeCard earth" id="wu2" @click="getLayer('wu2')" title="影像">
           <span>影像</span>
         </div>
-        <div class="mapTypeCard threeD" id="wu3" @click="getLayer('wu3')" title="三维">
+        <!-- <div class="mapTypeCard threeD" id="wu3" @click="getLayer('wu3')" title="三维">
           <span>三维</span>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -142,7 +143,10 @@ export default {
   },
   data() {
     return {
-      currentscale: {}
+      currentscale: {},
+
+      current_com: "",
+      current_ref: "",
     };
   },
   watch: {
@@ -260,6 +264,13 @@ export default {
             veranno.id = "tdtAnnoLayer";
             map.addLayer(veranno);
 
+            let navToolbar = new esri.toolbars.Navigation(map);
+            let drawToolbar = new esri.toolbars.Draw(map);
+            let editToolbar = new esri.toolbars.Edit(map);
+            const geometryservice = new esri.tasks.GeometryService(
+              mapconfig.GeometryService
+            );
+
             var graphicLayer1 = new esri.layers.GraphicsLayer();
             graphicLayer1.id = "graphicLayer1";
             map.addLayer(graphicLayer1);
@@ -309,16 +320,9 @@ export default {
 
             this.map_layer(); //添加轨迹图层
 
-            let navToolbar = new esri.toolbars.Navigation(map);
-            let drawToolbar = new esri.toolbars.Draw(map);
-            let editToolbar = new esri.toolbars.Edit(map);
-            const geometryservice = new esri.tasks.GeometryService(
-              mapconfig.GeometryService
-            );
-
             function initFunctionality() {
               _this.$store.state.map.mapload = true;
-
+              
               MapControl.map[_this.mapId] = map;
               MapControl.isLoad[_this.mapId] = true;
               MapControl.navToolbar[_this.mapId] = navToolbar;

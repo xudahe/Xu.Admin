@@ -70,7 +70,7 @@ var centerPoint;
  * @param mapId
  */
 MapControl.setMapFull = function () {
-  let map = MapControl.map.mapbox;
+  let map = MapControl.map[MapControl.mapId];
   let extent = mapconfig.extent;
 
   esriLoader.loadModules(
@@ -85,7 +85,7 @@ MapControl.setMapFull = function () {
       );
       map.setExtent(mapExtent);
 
-      var navToolbar = MapControl.navToolbar.mapbox;
+      var navToolbar = MapControl.navToolbar[MapControl.mapId];
       navToolbar.deactivate();
     }
   ).catch(err => {
@@ -93,7 +93,7 @@ MapControl.setMapFull = function () {
   })
 };
 MapControl.RefreshExtend = function () {
-  let map = MapControl.map.mapbox;
+  let map = MapControl.map[MapControl.mapId];
   //  let cPoint = map.extent.getCenter();
   let extent = map.extent;
   let mapExtent = new esri.geometry.Extent(
@@ -105,18 +105,16 @@ MapControl.RefreshExtend = function () {
   );
   map.setExtent(mapExtent);
 };
+
 /**
  * 地图放大
  * @param mapId
  */
 MapControl.setMapZoomIn = function () {
-  esriLoader.loadModules(
-    ['esri/map', 'esri/toolbars/navigation']).then(
-    ([Map, Navigation]) => {
-      var navToolbar = MapControl.navToolbar.mapbox;
-      navToolbar.activate(esri.toolbars.Navigation.ZOOM_IN);
-    }
-  ).catch(err => {
+  esriLoader.loadModules(['esri/map', 'esri/toolbars/navigation']).then(([Map, Navigation]) => {
+    var navToolbar = MapControl.navToolbar[MapControl.mapId];
+    navToolbar.activate(esri.toolbars.Navigation.ZOOM_IN);
+  }).catch(err => {
     console.error(err);
   })
 };
@@ -126,13 +124,12 @@ MapControl.setMapZoomIn = function () {
  * @param mapId
  */
 MapControl.setMapZoomOut = function () {
-  esriLoader.loadModules(
-    ['esri/map', 'esri/toolbars/navigation']).then(
-    ([Map, Navigation]) => {
-      var navToolbar = MapControl.navToolbar.mapbox;
-      navToolbar.activate(esri.toolbars.Navigation.ZOOM_OUT);
-    }
-  );
+  esriLoader.loadModules(['esri/map', 'esri/toolbars/navigation']).then(([Map, Navigation]) => {
+    var navToolbar = MapControl.navToolbar[MapControl.mapId];
+    navToolbar.activate(esri.toolbars.Navigation.ZOOM_OUT);
+  }).catch(err => {
+    console.error(err);
+  })
 };
 
 /**
@@ -140,13 +137,49 @@ MapControl.setMapZoomOut = function () {
  * @param mapId
  */
 MapControl.setMapPan = function () {
-  esriLoader.loadModules(
-    ['esri/map', 'esri/toolbars/navigation']).then(
-    ([Map, Navigation]) => {
-      var navToolbar = MapControl.navToolbar.mapbox;
-      navToolbar.activate(esri.toolbars.Navigation.PAN);
-    }
-  ).catch(err => {
+  esriLoader.loadModules(['esri/map', 'esri/toolbars/navigation']).then(([Map, Navigation]) => {
+    var navToolbar = MapControl.navToolbar[MapControl.mapId];
+    navToolbar.activate(esri.toolbars.Navigation.PAN);
+  }).catch(err => {
+    console.error(err);
+  })
+};
+
+/**
+ * 上一视图
+ * @param mapId
+ */
+MapControl.setMapZoomToPrev = function () {
+  esriLoader.loadModules(['esri/map', 'esri/toolbars/navigation']).then(([Map, Navigation]) => {
+    var navToolbar = MapControl.navToolbar[MapControl.mapId];
+    navToolbar.zoomToPrevExtent();
+  }).catch(err => {
+    console.error(err);
+  })
+};
+
+/**
+ * 下一视图
+ * @param mapId
+ */
+MapControl.setMapZoomToNext = function () {
+  esriLoader.loadModules(['esri/map', 'esri/toolbars/navigation']).then(([Map, Navigation]) => {
+    var navToolbar = MapControl.navToolbar[MapControl.mapId];
+    navToolbar.zoomToNextExtent();
+  }).catch(err => {
+    console.error(err);
+  })
+};
+
+/**
+ * 全图显示
+ * @param mapId
+ */
+MapControl.setMapZoomToFull = function () {
+  esriLoader.loadModules(['esri/map', 'esri/toolbars/navigation']).then(([Map, Navigation]) => {
+    var navToolbar = MapControl.navToolbar[MapControl.mapId];
+    navToolbar.zoomToFullExtent();
+  }).catch(err => {
     console.error(err);
   })
 };
@@ -156,6 +189,7 @@ MapControl.setMapPan = function () {
  * @param mapId
  */
 MapControl.setMapClear = function (value) {
+  let map = MapControl.map[MapControl.mapId];
   if (value !== undefined) {
     if (value == 2) {
       MapControl.graphicLayers['gralyr4'].clear();
@@ -185,6 +219,17 @@ MapControl.setMapClear = function (value) {
         gralyr.onClick = function (val) {};
       }
     }
+
+    if (map.getLayer("lineLayer") != undefined) {
+      map.getLayer("lineLayer").clear();
+    }
+    if (map.getLayer("carLayer") != undefined) {
+      map.getLayer("carLayer").clear();
+    }
+  }
+
+  if (MapControl.map[MapControl.mapId] && MapControl.map[MapControl.mapId].graphics != undefined) {
+    MapControl.map[MapControl.mapId].graphics.clear();
   }
 
   if (doSpaceDrawEventHandler !== undefined) {
@@ -205,29 +250,52 @@ MapControl.setMapClear = function (value) {
   if (doAreasAndLengthsCompleteHandler !== undefined) {
     doAreasAndLengthsCompleteHandler.remove();
   }
-  let toolbar = MapControl.drawToolbar.mapbox;
+
+  let toolbar = MapControl.drawToolbar[MapControl.mapId];
   if (toolbar) {
     toolbar.deactivate();
   }
-  let editbar = MapControl.editToolbar.mapbox;
+  let editbar = MapControl.editToolbar[MapControl.mapId];
   if (editbar) {
     editbar.deactivate();
+  }
+  if (map) {
+    map.infoWindow.hide();
   }
   //if (MapControl.identifyHandler) {
   //  MapControl.identifyHandler.remove();
   //}
 };
+
+/**
+ * 移除identify点击事件
+ */
 MapControl.identifyHandlerRemove = function () {
   if (MapControl.identifyHandler) {
     MapControl.identifyHandler.remove();
   }
 }
+
+//定位
+MapControl.PointTo = function (x, y) {
+  esriLoader.loadModules(['esri/map', 'esri/geometry/Point']).then(([Map, Point]) => {
+    let map = MapControl.map[MapControl.mapId];
+    // var xMin = parseFloat(x) - 0.005;
+    // var yMin = parseFloat(y) - 0.005;
+    // var xMax = parseFloat(x) + 0.005;
+    // var yMax = parseFloat(y) + 0.005;
+    // var showExtent = new esri.geometry.Extent(xMin, yMin, xMax, yMax, map.spatialReference);
+    // map.setExtent(showExtent.expand(0.1));
+    map.centerAndZoom(new Point(x, y), 7);
+  })
+}
+
 /**
  *加载服务
  *@param mapId item
  */
 MapControl.addservice = function (item) {
-  let map = MapControl.map.mapbox;
+  let map = MapControl.map[MapControl.mapId];
   if (item.ISADD == 'true') {
     if (item.type == 'tiled') {
       let titleLayer = new esri.layers.ArcGISTiledMapServiceLayer(item.url);
@@ -251,10 +319,10 @@ MapControl.addservice = function (item) {
 };
 
 /**
- *获取地图服务
+ *获取地图服务以及打开的图层服务
  */
 MapControl.GetMapLayers = function () {
-  let map = MapControl.map.mapbox;
+  let map = MapControl.map[MapControl.mapId];
   return map.layerIds;
 
   // var layerInfo = [];
@@ -268,7 +336,7 @@ MapControl.GetMapLayers = function () {
  *改变地图服务顺序
  */
 MapControl.changeLayer = function (item, newIndex) {
-  let map = MapControl.map.mapbox;
+  let map = MapControl.map[MapControl.mapId];
   let allcount = map.layerIds.length;
   var selLyr = map.getLayer(item.serviceurl);
   if (selLyr) {
@@ -286,7 +354,7 @@ MapControl.showGraphic = function (geo, issolid, gralyr, isshowExtent, color) {
   esriLoader.loadModules(
     ['esri/geometry/Point', 'esri/geometry/Polyline', 'esri/geometry/Polygon']).then(
     ([Point, Polyline, Polygon]) => {
-      let map = MapControl.map.mapbox;
+      let map = MapControl.map[MapControl.mapId];
       var symbol;
       var showExtent;
       switch (geo.type) {
@@ -368,7 +436,7 @@ MapControl.showExtent = function (geo, iscal) {
     ['esri/geometry/Point', 'esri/geometry/Polyline', 'esri/geometry/Polygon']).then(
     ([Point, Polyline, Polygon]) => {
       //MapControl.graphicLayers['gralyr1'].clear();
-      let map = MapControl.map.mapbox;
+      let map = MapControl.map[MapControl.mapId];
       var symbol;
       var showExtent;
       if (geo.type == undefined) return;
@@ -409,8 +477,28 @@ MapControl.showExtent = function (geo, iscal) {
   })
 };
 
+//返回范围面的中心点
+MapControl.getCenterByPolygon = function (geometry) {
+  let polygon = MapControl.WktToAgs(geometry);
+  return polygon.getExtent().getCenter()
+};
+
+//当前视角内地图的四角范围
+MapControl.getMapPolygon = function () {
+  const map = MapControl.map[MapControl.mapId];
+  let extent = map.extent;
+
+  var lb = extent.xmin + " " + extent.ymin;
+  var lt = extent.xmin + " " + extent.ymax;
+  var rt = extent.xmax + " " + extent.ymax;
+  var rb = extent.xmax + " " + extent.ymin;
+
+  let geometry = 'POLYGON ((' + lb + "," + lt + "," + rt + "," + rb + "," + lb + '))';
+  bus.$emit('getMapPolygon', geometry);
+};
+
 MapControl.SetExtent = function (x, y) {
-  let map = MapControl.map.mapbox;
+  let map = MapControl.map[MapControl.mapId];
   //  let cPoint = map.extent.getCenter(); //地图中心点
   let extent = map.extent;
   let mapExtent = new esri.geometry.Extent(
@@ -476,7 +564,7 @@ MapControl.mapDraw = function (drawtype, isClear) {
   if (doSpaceDrawEventHandler != undefined) {
     doSpaceDrawEventHandler.remove();
   }
-  let toolbar = MapControl.drawToolbar.mapbox;
+  let toolbar = MapControl.drawToolbar[MapControl.mapId];
   doSpaceDrawEventHandler = toolbar.on('draw-end', doSpaceDraw);
 
   if (drawtype == 'point') {
@@ -504,12 +592,15 @@ MapControl.clearmapDraw = function () {
   }
 };
 
+MapControl.doSpaceDraw = function (gra) {
+  doSpaceDraw(gra);
+}
+
 function doSpaceDraw(gra) {
-  let map = MapControl.map;
   if (doSpaceDrawEventHandler !== undefined) {
     doSpaceDrawEventHandler.remove();
   }
-  let toolbar = MapControl.drawToolbar.mapbox;
+  let toolbar = MapControl.drawToolbar[MapControl.mapId];
   toolbar.deactivate();
   //根据图形的类型定义显示样式
   var geo = gra.geometry;
@@ -563,26 +654,7 @@ function doSpaceDraw(gra) {
         ),
         new dojo.Color([255, 140, 0, 0.1])
       );
-      geom =
-        geo.xmin +
-        ' ' +
-        geo.ymin +
-        ',' +
-        geo.xmax +
-        ' ' +
-        geo.ymin +
-        ',' +
-        geo.xmax +
-        ' ' +
-        geo.ymax +
-        ',' +
-        geo.xmin +
-        ' ' +
-        geo.ymax +
-        ',' +
-        geo.xmin +
-        ' ' +
-        geo.ymin;
+      geom = geo.xmin + ' ' + geo.ymin + ',' + geo.xmax + ' ' + geo.ymin + ',' + geo.xmax + ' ' + geo.ymax + ',' + geo.xmin + ' ' + geo.ymax + ',' + geo.xmin + ' ' + geo.ymin;
       geom = 'POLYGON ((' + geom + '))';
       break;
   }
@@ -593,6 +665,7 @@ function doSpaceDraw(gra) {
   });
   var tempGra = new esri.Graphic(geo, symbol, null, null);
   MapControl.graphicLayers['gralyr1'].add(tempGra);
+  bus.$emit('mapTempGra', tempGra);
 }
 
 
@@ -600,7 +673,7 @@ MapControl.DrawTool = function (drawtype) {
   if (doSpaceDrawEventHandler != undefined) {
     doSpaceDrawEventHandler.remove();
   }
-  let toolbar = MapControl.drawToolbar.mapbox;
+  let toolbar = MapControl.drawToolbar[MapControl.mapId];
   doSpaceDrawEventHandler = toolbar.on('draw-end', getGeoms);
 
   if (drawtype == 'point') {
@@ -624,7 +697,7 @@ MapControl.DrawTool = function (drawtype) {
         "esri/tasks/IdentifyParameters"
       ])
       .then(([IdentifyTask, IdentifyParameters]) => {
-        let map = MapControl.map.mapbox;
+        let map = MapControl.map[MapControl.mapId];
         let geo = gra.geometry;
         let symbol = new esri.symbol.SimpleFillSymbol(
           esri.symbol.SimpleFillSymbol.STYLE_SOLID,
@@ -650,11 +723,7 @@ MapControl.DrawTool = function (drawtype) {
           identifyTask.execute(identifyParams, results => {
             if (results.length > 0) {
               for (let i = 0; i < results.length; i++) {
-                MapControl.showGraphic(
-                  results[i].feature.geometry,
-                  undefined,
-                  "gralyr6"
-                );
+                MapControl.showGraphic(results[i].feature.geometry, undefined, "gralyr6");
               }
             }
 
@@ -665,26 +734,7 @@ MapControl.DrawTool = function (drawtype) {
               geom = MapControl.AgsToWkt(geo);
               break;
             case 'extent':
-              geom =
-                geo.xmin +
-                ' ' +
-                geo.ymin +
-                ',' +
-                geo.xmax +
-                ' ' +
-                geo.ymin +
-                ',' +
-                geo.xmax +
-                ' ' +
-                geo.ymax +
-                ',' +
-                geo.xmin +
-                ' ' +
-                geo.ymax +
-                ',' +
-                geo.xmin +
-                ' ' +
-                geo.ymin;
+              geom = geo.xmin + ' ' + geo.ymin + ',' + geo.xmax + ' ' + geo.ymin + ',' + geo.xmax + ' ' + geo.ymax + ',' + geo.xmin + ' ' + geo.ymax + ',' + geo.xmin + ' ' + geo.ymin;
               geom = 'POLYGON ((' + geom + '))';
               break;
           }
@@ -705,13 +755,13 @@ MapControl.GetPoint = function (drawtype) {
     doSpaceDrawEventHandler.remove();
   }
 
-  let toolbar = MapControl.drawToolbar.mapbox;
+  let toolbar = MapControl.drawToolbar[MapControl.mapId];
   doSpaceDrawEventHandler = toolbar.on('draw-end', function (gra) {
     let map = MapControl.map;
     if (doSpaceDrawEventHandler != undefined) {
       doSpaceDrawEventHandler.remove();
     }
-    let toolbar = MapControl.drawToolbar.mapbox;
+    let toolbar = MapControl.drawToolbar[MapControl.mapId];
     toolbar.deactivate();
     var geo = gra.geometry;
     var symbol;
@@ -746,9 +796,9 @@ MapControl.Draw = function (drawtype) {
     doSpaceDrawEventHandler.remove();
   }
 
-  let toolbar = MapControl.drawToolbar.mapbox;
+  let toolbar = MapControl.drawToolbar[MapControl.mapId];
   doSpaceDrawEventHandler = toolbar.on('draw-end', function (gra) {
-    let map = MapControl.map.mapbox;
+    let map = MapControl.map[MapControl.mapId];
     if (doSpaceDrawEventHandler != undefined) {
       doSpaceDrawEventHandler.remove();
     }
@@ -780,7 +830,7 @@ MapControl.Draw = function (drawtype) {
  *wkt转化成arcgis对象
  */
 MapControl.WktToAgs = function (wkt, spatialReference) {
-  let map = MapControl.map.mapbox;
+  let map = MapControl.map[MapControl.mapId];
   var geo;
   if (wkt.indexOf('POINT') >= 0)
     geo = transformUtils.WktToPoint(wkt, spatialReference ? spatialReference : map.spatialReference);
@@ -800,7 +850,7 @@ MapControl.WktToAgs = function (wkt, spatialReference) {
  *arcgis对象wkt
  */
 MapControl.AgsToWkt = function (ags) {
-  let map = MapControl.map.mapbox;
+  let map = MapControl.map[MapControl.mapId];
   var geo = ags;
   if (geo.type == 'point') {
     geo = transformUtils.PointToWKT(geo);
@@ -816,8 +866,8 @@ MapControl.AgsToWkt = function (ags) {
  *标注
  */
 MapControl.AddMarker = function (name) {
-  let map = MapControl.map.mapbox;
-  let toolbar = MapControl.drawToolbar.mapbox;
+  let map = MapControl.map[MapControl.mapId];
+  let toolbar = MapControl.drawToolbar[MapControl.mapId];
   toolbar.activate(esri.toolbars.Draw.POINT);
   MapControl.graphicLayers['gralyr1'].clear();
   if (domapOnclickEventHandler != undefined) {
@@ -874,7 +924,7 @@ MapControl.MeasureDraw = function (type) {
   if (domapOnclickEventHandler != undefined) {
     domapOnclickEventHandler.remove();
   }
-  let toolbar = MapControl.drawToolbar.mapbox;
+  let toolbar = MapControl.drawToolbar[MapControl.mapId];
   let geometryService = MapControl.GeometryService;
   doMeasureEventHandler = toolbar.on('draw-end', doMeasure);
   if (type == 'polyline') {
@@ -889,8 +939,8 @@ MapControl.MeasureDraw = function (type) {
 
 //量算
 function doMeasure(gra) {
-  let map = MapControl.map.mapbox;
-  let toolbar = MapControl.drawToolbar.mapbox;
+  let map = MapControl.map[MapControl.mapId];
+  let toolbar = MapControl.drawToolbar[MapControl.mapId];
   let geometryService = MapControl.GeometryService;
   var geometry = gra.geometry;
   esriLoader.loadModules(
@@ -930,12 +980,12 @@ function doMeasure(gra) {
 var doonLengthsComplete;
 
 function setupCustomTool(name) {
-  let toolbar = MapControl.drawToolbar.mapbox;
+  let toolbar = MapControl.drawToolbar[MapControl.mapId];
   if (domapOnclickEventHandler !== undefined) {
     domapOnclickEventHandler.remove();
   }
   if (name == 'polyline') {
-    let map = MapControl.map.mapbox;
+    let map = MapControl.map[MapControl.mapId];
     domapOnclickEventHandler = map.on('click', MapclickHandler);
     map.on('dbclick', stopMeasure);
   }
@@ -949,7 +999,7 @@ function stopMeasure() {
 }
 
 function MapclickHandler(e) {
-  let map = MapControl.map.mapbox;
+  let map = MapControl.map[MapControl.mapId];
   let geometryService = MapControl.GeometryService;
   var pt = new esri.geometry.Point(
     e.mapPoint.x,
@@ -1005,8 +1055,8 @@ function MapclickHandler(e) {
 }
 
 function outputDistance(evtObj) {
-  let map = MapControl.map.mapbox;
-  let toolbar = MapControl.drawToolbar.mapbox;
+  let map = MapControl.map[MapControl.mapId];
+  let toolbar = MapControl.drawToolbar[MapControl.mapId];
   if (doLengthsCompleteHandler != undefined) {
     //doLengthsCompleteHandler.remove();
     dojo.disconnect(doLengthsCompleteHandler);
@@ -1050,8 +1100,8 @@ function outputAreaAndLength(result) {
   if (doAreasAndLengthsCompleteHandler != undefined) {
     doAreasAndLengthsCompleteHandler.remove();
   }
-  let map = MapControl.map.mapbox;
-  let toolbar = MapControl.drawToolbar.mapbox;
+  let map = MapControl.map[MapControl.mapId];
+  let toolbar = MapControl.drawToolbar[MapControl.mapId];
   var area;
   var areaValue = result.areas[0];
   if (areaValue >= 1000000) {
@@ -1080,7 +1130,7 @@ MapControl.SetLayerVisible = function (uservisibleLayers) {
   esriLoader.loadModules(
     ['esri/map', 'esri/layers/ArcGISDynamicMapServiceLayer']).then(
     ([Map, ArcGISDynamicMapServiceLayer]) => {
-      let map = MapControl.map.mapbox;
+      let map = MapControl.map[MapControl.mapId];
       if (uservisibleLayers) {
         for (var sitem in uservisibleLayers) {
           if (uservisibleLayers[sitem].serviceurl) {
@@ -1118,7 +1168,7 @@ MapControl.SetLayerload = function (uservisibleLayers) {
       'esri/layers/ArcGISTiledMapServiceLayer'
     ]).then(
     ([Map, ArcGISDynamicMapServiceLayer, ArcGISTiledMapServiceLayer]) => {
-      let map = MapControl.map.mapbox;
+      let map = MapControl.map[MapControl.mapId];
       if (uservisibleLayers) {
         for (var sitem in uservisibleLayers) {
           var sublay = map.getLayer(uservisibleLayers[sitem].serviceurl);
@@ -1161,7 +1211,7 @@ MapControl.SetLayerbaseload = function (uservisibleLayers) {
   esriLoader.loadModules(
     ['esri/map', 'esri/layers/ArcGISTiledMapServiceLayer', 'esri/layers/ArcGISDynamicMapServiceLayer']).then(
     ([Map, ArcGISTiledMapServiceLayer, ArcGISDynamicMapServiceLayer]) => {
-      let map = MapControl.map.mapbox;
+      let map = MapControl.map[MapControl.mapId];
       console.log(uservisibleLayers)
       if (!uservisibleLayers) return;
       uservisibleLayers.forEach(element => {
@@ -1186,9 +1236,17 @@ MapControl.SetLayerbaseload = function (uservisibleLayers) {
   })
 };
 
+/*根据图层ID编号，将图层从地图中移除*/
+MapControl.RemoveLayerByLyrID = function (tempLyrId) {
+  let map = MapControl.map[MapControl.mapId];
+  if (typeof map.getLayer(tempLyrId) !== "undefined") {
+    map.removeLayer(map.getLayer(tempLyrId));
+  }
+};
+
 /*批量图层移除*/
 MapControl.RemoveLayerVisible = function (uservisibleLayers) {
-  let map = MapControl.map.mapbox;
+  let map = MapControl.map[MapControl.mapId];
   if (uservisibleLayers) {
     for (var sitem in uservisibleLayers) {
       if (uservisibleLayers[sitem].serviceurl) {
@@ -1223,7 +1281,7 @@ MapControl.transparency = function (uservisibleLayers) {
       'dojo/domReady!'
     ]).then(
     ([Map, on, dom, basefx, ArcGISTiledMapServiceLayer, Extent]) => {
-      let map = MapControl.map.mapbox;
+      let map = MapControl.map[MapControl.mapId];
       var colorfullbasemap = map.getLayer(uservisibleLayers.serverurl);
       var graybasemapdiv = colorfullbasemap.getNode();
       basefx
@@ -1243,7 +1301,7 @@ MapControl.transparency = function (uservisibleLayers) {
 
 /*地图上弹出框*/
 MapControl.topup = function (event) {
-  var map = MapControl.map.mapbox;
+  var map = MapControl.map[MapControl.mapId];
   /*弹出框*/
   /*调整弹出框的大小*/
   if (event.resize) {
@@ -1343,7 +1401,7 @@ MapControl.screenshots = function (uservisibleLayers) {
       template.layout = 'MAP_ONLY';
       template.preserveScale = false;
       var params = new PrintParameters();
-      params.map = MapControl.map.mapbox;
+      params.map = MapControl.map[MapControl.mapId];
       params.template = template;
       printTask.execute(params, function (evt) {
         window.open(evt.url, '_blank');
@@ -1359,7 +1417,7 @@ MapControl.SetLayerVisibleByProperty = function (uservisibleLayers) {
   esriLoader.loadModules(
     ['esri/map', 'esri/layers/ArcGISDynamicMapServiceLayer']).then(
     ([Map, ArcGISDynamicMapServiceLayer]) => {
-      let map = MapControl.map.mapbox;
+      let map = MapControl.map[MapControl.mapId];
       try {
         if (uservisibleLayers) {
           if (uservisibleLayers.SERVERURL) {
@@ -1396,7 +1454,7 @@ MapControl.PostionToPolygon = function (geo) {
   esriLoader.loadModules(
       ['esri/geometry/Point', 'esri/geometry/Polyline', 'esri/geometry/Polygon'])
     .then(([Point, Polyline, Polygon]) => {
-      let map = MapControl.map.mapbox;
+      let map = MapControl.map[MapControl.mapId];
       var esrgeo = new Polygon(geo);
       var showExtent = esrgeo.getExtent();
       if (showExtent != undefined) {
@@ -1526,7 +1584,7 @@ MapControl.GetTxtSymbols2Polygon = function (geo, num, X, Y, icon) {
   esriLoader.loadModules(
     ['esri/geometry/Point', 'esri/geometry/Polyline', 'esri/geometry/Polygon']).then(([Point, Polyline, Polygon]) => {
     //MapControl.graphicLayers['gralyr1'].clear();
-    let map = MapControl.map.mapbox;
+    let map = MapControl.map[MapControl.mapId];
     var symbol;
     var showExtent;
     if (geo) {
@@ -1626,7 +1684,7 @@ MapControl.GetTxtSymbols2Polygon = function (geo, num, X, Y, icon) {
   } */
 
 MapControl.addGraphic = function ($graphic) {
-  let map = MapControl.map.mapbox;
+  let map = MapControl.map[MapControl.mapId];
   let geometry = $graphic.geometry;
   let symbol = $graphic.symbol;
   switch (geometry.type) {
@@ -1783,8 +1841,8 @@ MapControl.MenuForGraphics = function () {
       MenuItem,
       MenuSeparator
     ]) => {
-      let map = MapControl.map.mapbox;
-      let editbar = MapControl.editToolbar.mapbox;
+      let map = MapControl.map[MapControl.mapId];
+      let editbar = MapControl.editToolbar[MapControl.mapId];
       let ctxMenuForMap = new Menu({
         onOpen: function (box) {
           if (editbar) {
@@ -1814,7 +1872,7 @@ MapControl.AddPop = function (graphic, template) {
       'dojo/domReady!'
     ]).then(
     ([Popup, PopupTemplate, InfoTemplate, domConstruct, dom, on, domAttr]) => {
-      let map = MapControl.map.mapbox;
+      let map = MapControl.map[MapControl.mapId];
       var infoTemplate = new InfoTemplate();
 
       infoTemplate.setTitle('巡查人员');
@@ -1865,7 +1923,7 @@ MapControl.CreatGraphicsLayerWithMTip = function (
       on,
       domAttr
     ]) => {
-      let map = MapControl.map.mapbox;
+      let map = MapControl.map[MapControl.mapId];
       let data = info;
       var customGraphics = map.getLayer('customGraphics');
       if (customGraphics) {
@@ -1939,7 +1997,7 @@ MapControl.CreatGraphicsLayerWithMTip = function (
 };
 
 MapControl.closePopups = function () {
-  let map = MapControl.map.mapbox;
+  let map = MapControl.map[MapControl.mapId];
   var tempLength = map.infoWindow.openPopups.length;
   for (var i = 0; i < tempLength; i++) {
     map.infoWindow.openPopups[i].hide();
@@ -1992,7 +2050,7 @@ MapControl.mergepolygon = function (geometrystr) {
 //绘制缓冲半径
 MapControl.ShowGeometryBuffer = function (geom, buffer) {
   var distance = buffer;
-  var map = MapControl.map.mapbox;
+  var map = MapControl.map[MapControl.mapId];
   esriLoader.loadModules(
     [
       'esri/tasks/BufferParameters',
@@ -2080,7 +2138,7 @@ MapControl.showInfoWindow = function (mpcenter, listdata, contents) {
   ]).then(([Popup, graphics, InfoWinow, graphic, Point, InfoTemplate, SimpleFillSymbol, SimpleLineSymbol, Color,
     domConstruct, dom, on, domAttr
   ]) => {
-    let map = MapControl.map.mapbox;
+    let map = MapControl.map[MapControl.mapId];
 
     // var highlightSymbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID,
     //   new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID,
@@ -2205,7 +2263,7 @@ MapControl._showInfoWindow = function (mpcenter, listdata, contents) {
   ]).then(([Popup, graphics, InfoWinow, graphic, Point, InfoTemplate, SimpleFillSymbol, SimpleLineSymbol, Color,
     domConstruct, dom, on, domAttr
   ]) => {
-    let map = MapControl.map.mapbox;
+    let map = MapControl.map[MapControl.mapId];
     map.infoWindow.setTitle('详情');
     if (contents && contents != '') {
       map.infoWindow.setContent(contents);
@@ -2249,8 +2307,9 @@ MapControl._showInfoWindow = function (mpcenter, listdata, contents) {
         );
       })
     }
+
     var cPoint = new esri.geometry.Point(mpcenter.x, mpcenter.y, map.spatialReference);
-    var loc = map.toScreen(cPoint);
+    var loc = map.toScreen(cPoint); //地理坐标转屏幕坐标(toScreen方法)
     map.infoWindow.show(cPoint);
     map.centerAt(cPoint);
     var x = document.getElementsByName('hlmonitoringTab');
@@ -2285,13 +2344,12 @@ MapControl._showInfoWindow = function (mpcenter, listdata, contents) {
     console.error(err);
   })
 }
+
 //拾取---根据地图比例尺计算容差值返回范围面
 MapControl.identify = function (isremove) {
   if (MapControl.identifyHandler) MapControl.identifyHandler.remove();
-  esriLoader.loadModules(
-    ['esri/geometry/scaleUtils']).then((
-    [scaleUtils]) => {
-    const map = MapControl.map.mapbox;
+  esriLoader.loadModules(['esri/geometry/scaleUtils']).then(([scaleUtils]) => {
+    const map = MapControl.map[MapControl.mapId];
     const scale = scaleUtils.getScale(map);
     const PPI = 96
     let Resolution = scale / (PPI / 0.0254)
@@ -2380,7 +2438,7 @@ MapControl.multipolygonExtent = function (geolist) {
     }
   }
   if (geolist.length > 0) {
-    let map = MapControl.map.mapbox;
+    let map = MapControl.map[MapControl.mapId];
     var xMin = parseFloat(minX) - 300;
     var yMin = parseFloat(minY) - 300;
     var xMax = parseFloat(maxX) + 300;
@@ -2402,7 +2460,7 @@ MapControl.identifypoint = function () {
   esriLoader.loadModules(
       ['esri/geometry/scaleUtils']).then(
       ([scaleUtils]) => {
-        const map = MapControl.map.mapbox;
+        const map = MapControl.map[MapControl.mapId];
         const scale = scaleUtils.getScale(map);
         const PPI = 96
         let Resolution = scale / (PPI / 0.0254)
@@ -2430,7 +2488,7 @@ MapControl.identifyAllServices = function (_this) {
       "esri/tasks/IdentifyParameters"
     ])
     .then(([IdentifyTask, IdentifyParameters]) => {
-      let map = MapControl.map.mapbox;
+      let map = MapControl.map[MapControl.mapId];
       var identifyParams = new esri.tasks.IdentifyParameters();
       _this.$store.state.identifyvalue = [];
       MapControl.identifyHandler = map.on("click", function (geo) {

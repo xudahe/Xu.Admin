@@ -43,7 +43,7 @@ export default {
         "hashchange",
         e => {
           var currentPath = window.location.hash.slice(1);
-          if (this.$route.path !== currentPath) {
+          if (currentPath!="" && this.$route.path !== currentPath) {
             this.$router.push(currentPath);
           }
         },
@@ -53,7 +53,7 @@ export default {
   },
   async created() {
     if (window.AMap && window.AMapUI) {
-      await location.initMap("map-container"); //获取当前位置
+      await location.initMap("map-container"); //获取当前客户端位置
     }
   },
   //生命周期函数--实例销毁之前调用

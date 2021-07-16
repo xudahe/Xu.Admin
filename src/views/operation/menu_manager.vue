@@ -8,7 +8,7 @@
           <!--快速查询字段-->
           <el-input v-model="filters.name" style="width:160px;padding-right: 5px;" placeholder="菜单名称"></el-input>
           <!--快速查询字段-->
-          <el-select v-model="filters.parentId" style="width:160px !important;padding-right: 5px;" placeholder="父级菜单" filterable clearable>
+          <el-select v-model="filters.parentId" style="width:160px !important;padding-right: 5px;" placeholder="父级菜单" filterable clearable @change="searchData">
             <el-option v-for="(item,index) in parentData" :key="index" :label="item.menuName" :value="item.id"></el-option>
           </el-select>
           <!--操作按钮组-->
@@ -87,7 +87,7 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click.native="formVisible = false">取消</el-button>
-        <el-button type="primary" @click.native="handleSubmit">提交</el-button>
+        <el-button type="primary" @click.native="handleSubmit" :loading="logining">提交</el-button>
       </div>
     </el-dialog>
 
@@ -101,6 +101,8 @@ export default {
   name: 'menu_manager',
   data() {
     return {
+      logining: false,
+
       filters: {
         name: "",
         parentId: "",
@@ -221,7 +223,8 @@ export default {
           if (!res.data.success) {
             _this.$errorMsg(res.data.message)
           } else {
-            _this.parentData = res.data.response.filter(val => val.parentId == null);
+            let data = res.data.response;
+            _this.parentData = data.length > 0 ? [] : data.filter(val => val.parentId == null);
           }
         }).catch(err => { })
     },
@@ -296,20 +299,28 @@ export default {
       this.menuForm.icon = name;
     },
     handleSubmit: debounce(function () {
-      if (this.menuForm.className.slice(0, 1) != "/") {
-        this.menuForm.className = "/" + this.menuForm.className;
-      }
+      let _this = this;
+
       this.menuForm.icon = "el-icon-edit-outline"; //图标暂时写死
 
       if (this.$isNull(this.menuForm.className))
         return this.$warnMsg("组件名称不能为空！")
       if (this.$isNull(this.menuForm.menuName))
         return this.$warnMsg("菜单名称不能为空！")
+      if (this.$isNull(this.menuForm.index))
+        return this.$warnMsg("加载序号不能为空！")
+
+      if (this.menuForm.className.slice(0, 1) != "/") {
+        this.menuForm.className = "/" + this.menuForm.className;
+      }
 
       let apiUrl = this.formTitle == '编辑' ? this.$apiSet.putMenu : this.$apiSet.postMenu;
-      let _this = this;
+
+      this.logining = true;
       this.$ajax(apiUrl, this.menuForm)
         .then(res => {
+          this.logining = false;
+
           if (!res.data.success) {
             _this.$errorMsg(res.data.message)
           } else {
@@ -318,8 +329,10 @@ export default {
             _this.getParentData();
             _this.$successMsg(res.data.message)
           }
-        }).catch(err => {})
-    }, 2000),
+        }).catch(err => {
+          this.logining = false;
+        })
+    }, 1000),
     refreshData() {
       this.$loading.showLoading()
       this.searchData();

@@ -283,7 +283,7 @@ export default {
             _this.$successMsg(res.data.message)
           }
         }).catch(err => { })
-    }, 2000),
+    }, 1000),
     jobStatus(row) {
       let _this = this;
       let apiUrl = "", state = "";

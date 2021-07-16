@@ -319,7 +319,6 @@ export default {
   },
   methods: {
     selectdatachange() {
-      debugger
       var olddata = this.tageindex == '全部' ? this.lygpupmlist.alllist : this.lygpupmlist[this.tageindex == '正常' ? '在线' : this.tageindex];
       var list = JSON.parse(JSON.stringify(olddata));
       list = list.filter(item => {
@@ -388,7 +387,6 @@ export default {
       this.$emit("pumpSelect", item);
     },
     initlistdata(data) {
-      debugger
       if (data.length <= 0) return;
       var _this = this;
       let source = data;

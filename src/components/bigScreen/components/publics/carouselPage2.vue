@@ -31,7 +31,9 @@
       </div>
     </div>
     <!-- 中间 -->
-    <div id="circleMiddle" style="height: 100%;width: 50%;float: left;"></div>
+    <div id="circleMiddle" style="height: 100%;width: 50%;float: left;">
+      <middle></middle>
+    </div>
     <!-- 右侧 -->
     <div id="circleRight" style="height: 100%;width: 25%;float: left;" class="fade-in-left2">
       <div class="UnitFrame fade-in-left1" style="height: 33.3%;float: left;width: 100%;">
@@ -65,9 +67,12 @@
   </div>
 </template>
 <script>
+
+import middle from "../carouselPage2/middle";
+
 export default {
   name: "carouselPage2",
-  components: {},
+  components: { middle },
   data() {
     return {
       time: null

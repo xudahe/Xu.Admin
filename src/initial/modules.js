@@ -87,7 +87,8 @@ import exportFile from '@/api/file/export_file'
 import defaultConfig from '@/global/js/config'
 
 import {
-  isNull
+  isNull,
+  isNum
 } from '@/utils/validate'
 
 /**
@@ -340,6 +341,7 @@ Vue.prototype.$defaultConfig = defaultConfig
  * @description 检验
  */
 Vue.prototype.$isNull = isNull //非空验证
+Vue.prototype.$isNum = isNum //数字验证
 
 /**
  * @description 全局element-resize-detector监听DOM元素

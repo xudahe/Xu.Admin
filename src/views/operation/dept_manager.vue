@@ -263,7 +263,7 @@ export default {
             _this.$successMsg(res.data.message)
           }
         }).catch(err => { })
-    }, 2000),
+    }, 1000),
     refreshData() {
       this.$loading.showLoading()
       this.searchData();

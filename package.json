@@ -43,7 +43,7 @@
     "vueg": "^1.4.5",
     "vuex": "^3.0.1",
     "webpack-dev-server": "^2.6.1",
-    "xlsx": "^0.11.10"
+    "xlsx": "^0.17.0"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
